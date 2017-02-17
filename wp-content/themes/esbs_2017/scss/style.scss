@@ -1,0 +1,20 @@
+@import 'base/intro';
+@import "base/reset";
+@import "base/font";
+@import "base/color";
+@import "base/functions";
+@import "base/tools";
+@import "advanced/header";
+@import "advanced/footer";
+@import "advanced/content";
+@import "advanced/elementor";
+@import "advanced/tmp_default";
+
+body {
+    font-family: $avenir;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+    color: $black;
+    background-color: $gray;
+}
