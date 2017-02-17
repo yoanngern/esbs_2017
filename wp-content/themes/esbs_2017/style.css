@@ -500,40 +500,40 @@ a.elementor-button {
   letter-spacing: 0.1em; }
 
 .avenir {
-  font-family: "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
+  font-family: "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif !important; }
 
 .avenir-i {
-  font-family: "AvenirLTStd-BookOblique", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
+  font-family: "AvenirLTStd-BookOblique", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif !important; }
 
 .avenir-med {
-  font-family: "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
+  font-family: "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif !important; }
 
 .avenir-med-i {
-  font-family: "AvenirLTStd-MediumOblique", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
+  font-family: "AvenirLTStd-MediumOblique", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif !important; }
 
 .avenir-blk {
-  font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
+  font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif !important; }
 
 .avenir-blk-i {
-  font-family: "AvenirLTStd-BlackOblique", "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
+  font-family: "AvenirLTStd-BlackOblique", "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif !important; }
 
-.dido {
-  font-family: "DidotLTStd-Roman", times, serif; }
+.dido h1, .dido h2, .dido h3, .dido h4, .dido h5, .dido h6, .dido p {
+  font-family: "DidotLTStd-Roman", times, serif !important; }
 
-.dido-i {
-  font-family: "DidotLTStd-Italic", "DidotLTStd-Roman", times, serif; }
+.dido-i h1, .dido-i h2, .dido-i h3, .dido-i h4, .dido-i h5, .dido-i h6, .dido-i p {
+  font-family: "DidotLTStd-Italic", "DidotLTStd-Roman", times, serif !important; }
 
-.dido-orn {
-  font-family: "DidotLTStd-Ornaments", "DidotLTStd-Roman", times, serif; }
+.dido-orn h1, .dido-orn h2, .dido-orn h3, .dido-orn h4, .dido-orn h5, .dido-orn h6, .dido-orn p {
+  font-family: "DidotLTStd-Ornaments", "DidotLTStd-Roman", times, serif !important; }
 
-.dido-bold {
-  font-family: "DidotLTStd-Bold", "DidotLTStd-Roman", times, serif; }
+.dido-bold h1, .dido-bold h2, .dido-bold h3, .dido-bold h4, .dido-bold h5, .dido-bold h6, .dido-bold p {
+  font-family: "DidotLTStd-Bold", "DidotLTStd-Roman", times, serif !important; }
 
-.dido-bold-i {
-  font-family: "DidotLTStd-BoldItalic", "DidotLTStd-Bold", "DidotLTStd-Roman", times, serif; }
+.dido-bold-i h1, .dido-bold-i h2, .dido-bold-i h3, .dido-bold-i h4, .dido-bold-i h5, .dido-bold-i h6, .dido-bold-i p {
+  font-family: "DidotLTStd-BoldItalic", "DidotLTStd-Bold", "DidotLTStd-Roman", times, serif !important; }
 
-.dido-head {
-  font-family: "DidotLTStd-Headline", "DidotLTStd-Roman", times, serif; }
+.dido-head h1, .dido-head h2, .dido-head h3, .dido-head h4, .dido-head h5, .dido-head h6, .dido-head p {
+  font-family: "DidotLTStd-Headline", "DidotLTStd-Roman", times, serif !important; }
 
 body.page-template-default #content article.title {
   min-height: 500px;

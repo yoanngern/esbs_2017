@@ -6,51 +6,64 @@ a.elementor-button {
 }
 
 .avenir {
-    font-family: $avenir;
+    font-family: $avenir !important;
 }
 
 .avenir-i {
-    font-family: $avenir-i;
+    font-family: $avenir-i !important;
 }
 
 .avenir-med {
-    font-family: $avenir-med;
+    font-family: $avenir-med !important;
 }
 
 .avenir-med-i {
-    font-family: $avenir-med-i;
+    font-family: $avenir-med-i !important;
 }
 
 .avenir-blk {
-    font-family: $avenir-blk;
+    font-family: $avenir-blk !important;
 }
 
 .avenir-blk-i {
-    font-family: $avenir-blk-i;
+    font-family: $avenir-blk-i !important;
 }
 
 .dido {
-    font-family: $dido;
+    h1, h2, h3, h4, h5, h6, p {
+
+        font-family: $dido !important;
+    }
 }
 
 .dido-i {
-    font-family: $dido-i;
+    h1, h2, h3, h4, h5, h6, p {
+        font-family: $dido-i !important;
+    }
 }
 
 .dido-orn {
-    font-family: $dido-orn;
+    h1, h2, h3, h4, h5, h6, p {
+        font-family: $dido-orn !important;
+    }
 }
 
 .dido-bold {
-    font-family: $dido-bold;
+    h1, h2, h3, h4, h5, h6, p {
+        font-family: $dido-bold !important;
+    }
 }
 
 .dido-bold-i {
-    font-family: $dido-bold-i;
+    h1, h2, h3, h4, h5, h6, p {
+        font-family: $dido-bold-i !important;
+    }
 }
 
 .dido-head {
-    font-family: $dido-head;
+    h1, h2, h3, h4, h5, h6, p {
+        font-family: $dido-head !important;
+    }
 }
 
 
