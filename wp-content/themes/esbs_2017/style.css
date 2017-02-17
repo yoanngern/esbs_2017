@@ -645,7 +645,8 @@ body.page-template-default #content article.title {
     text-align: center;
     max-width: 600px;
     margin: 40px auto;
-    line-height: 2.6em; }
+    line-height: 2.6em;
+    text-transform: uppercase; }
   body.page-template-default #content article.title div.button {
     margin-bottom: 30px; }
     body.page-template-default #content article.title div.button a.button {
@@ -694,25 +695,55 @@ body.page-template-default #content div.platter article.content-page {
       letter-spacing: 0.18em;
       line-height: 1.8em; }
   body.page-template-default #content div.platter article.content-page div.content {
-    margin: 80px auto 20px;
-    -webkit-column-count: 2;
-    /* Chrome, Safari, Opera */
-    -moz-column-count: 2;
-    /* Firefox */
-    column-count: 2;
-    -webkit-column-gap: 110px;
-    /* Chrome, Safari, Opera */
-    -moz-column-gap: 110px;
-    /* Firefox */
-    column-gap: 110px;
-    -webkit-column-span: all;
-    /* Chrome, Safari, Opera */
-    column-span: all; }
+    margin: 80px auto 20px; }
+    body.page-template-default #content div.platter article.content-page div.content div.col2 {
+      margin-bottom: 60px;
+      -webkit-column-count: 2;
+      /* Chrome, Safari, Opera */
+      -moz-column-count: 2;
+      /* Firefox */
+      column-count: 2;
+      -webkit-column-gap: 110px;
+      /* Chrome, Safari, Opera */
+      -moz-column-gap: 110px;
+      /* Firefox */
+      column-gap: 110px;
+      -webkit-column-span: all;
+      /* Chrome, Safari, Opera */
+      column-span: all; }
+    body.page-template-default #content div.platter article.content-page div.content h2, body.page-template-default #content div.platter article.content-page div.content h3 {
+      font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
+      letter-spacing: 0.1em;
+      line-height: 1.5em;
+      font-size: 1.2em;
+      margin: 30px 0 10px; }
+    body.page-template-default #content div.platter article.content-page div.content h4 {
+      font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      line-height: 1.5em;
+      font-size: 0.8em;
+      margin: 25px 0 10px; }
+    body.page-template-default #content div.platter article.content-page div.content ul, body.page-template-default #content div.platter article.content-page div.content ol {
+      margin-bottom: 30px;
+      padding-left: 30px; }
+      body.page-template-default #content div.platter article.content-page div.content ul li, body.page-template-default #content div.platter article.content-page div.content ol li {
+        font-family: "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
+        letter-spacing: 0.1em;
+        line-height: 1.5em;
+        margin: 0 0 15px;
+        padding-left: 5px; }
     body.page-template-default #content div.platter article.content-page div.content p {
       font-family: "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
       letter-spacing: 0.1em;
       line-height: 1.5em;
       margin: 0 0 30px; }
+      body.page-template-default #content div.platter article.content-page div.content p a {
+        color: #867332; }
+        body.page-template-default #content div.platter article.content-page div.content p a:hover {
+          color: #d3b963; }
+      body.page-template-default #content div.platter article.content-page div.content p em {
+        font-family: "AvenirLTStd-MediumOblique", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
 
 body.page-template-default #content div.platter div.footer_button {
   text-align: center;
@@ -737,7 +768,7 @@ body.page-template-default #content div.platter div.footer_button {
 @media only screen and (max-width: 870px) {
   body.page-template-default #content div.platter article.content-page div.lead {
     width: 70%; }
-  body.page-template-default #content div.platter article.content-page div.content {
+  body.page-template-default #content div.platter article.content-page div.content div.col2 {
     -webkit-column-gap: 50px;
     /* Chrome, Safari, Opera */
     -moz-column-gap: 50px;
@@ -759,12 +790,13 @@ body.page-template-default #content div.platter div.footer_button {
     body.page-template-default #content div.platter article.content-page div.lead {
       width: 100%; }
     body.page-template-default #content div.platter article.content-page div.content {
-      margin-top: 0px;
-      -webkit-column-count: 1;
-      /* Chrome, Safari, Opera */
-      -moz-column-count: 1;
-      /* Firefox */
-      column-count: 1; } }
+      margin-top: 0; }
+      body.page-template-default #content div.platter article.content-page div.content div.col2 {
+        -webkit-column-count: 1;
+        /* Chrome, Safari, Opera */
+        -moz-column-count: 1;
+        /* Firefox */
+        column-count: 1; } }
 
 body {
   font-family: "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
