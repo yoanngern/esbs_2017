@@ -499,6 +499,42 @@ a.elementor-button {
   text-transform: uppercase;
   letter-spacing: 0.1em; }
 
+.avenir {
+  font-family: "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
+
+.avenir-i {
+  font-family: "AvenirLTStd-BookOblique", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
+
+.avenir-med {
+  font-family: "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
+
+.avenir-med-i {
+  font-family: "AvenirLTStd-MediumOblique", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
+
+.avenir-blk {
+  font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
+
+.avenir-blk-i {
+  font-family: "AvenirLTStd-BlackOblique", "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
+
+.dido {
+  font-family: "DidotLTStd-Roman", times, serif; }
+
+.dido-i {
+  font-family: "DidotLTStd-Italic", "DidotLTStd-Roman", times, serif; }
+
+.dido-orn {
+  font-family: "DidotLTStd-Ornaments", "DidotLTStd-Roman", times, serif; }
+
+.dido-bold {
+  font-family: "DidotLTStd-Bold", "DidotLTStd-Roman", times, serif; }
+
+.dido-bold-i {
+  font-family: "DidotLTStd-BoldItalic", "DidotLTStd-Bold", "DidotLTStd-Roman", times, serif; }
+
+.dido-head {
+  font-family: "DidotLTStd-Headline", "DidotLTStd-Roman", times, serif; }
+
 body.page-template-default #content article.title {
   min-height: 500px;
   height: 70vh;
