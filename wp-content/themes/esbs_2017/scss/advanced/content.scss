@@ -6,7 +6,7 @@
     div.platter {
         max-width: 1440px;
         margin: 0 auto;
-        padding: 100px 20px;
+        padding: 20px 20px;
         position: relative;
 
         article.content-page {
@@ -15,10 +15,6 @@
             padding: 40px 4%;
             max-width: 960px;
             margin: 0 auto;
-
-            h1, h2, h3, h4, h5, h6, p {
-                max-width: 768px;
-            }
 
             h1 {
                 font-size: 1.6em;

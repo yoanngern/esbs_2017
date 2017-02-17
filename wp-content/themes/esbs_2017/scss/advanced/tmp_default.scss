@@ -3,34 +3,212 @@ body.page-template-default {
     #content {
 
         article.title {
-            min-height: 500px;
-            height: 70vh;
+            min-height: 70vh;
+            height: 100%;
             background-position: center center;
             background-repeat: no-repeat;
             background-size: cover;
             padding-top: 55px;
             text-align: center;
+            position: relative;
+            border-bottom: 5px solid $gold;
 
-            div.logo {
-
+            a.logo {
+                width: 180px;
+                height: 120px;
+                margin: 5vh auto 0;
+                display: block;
+                background-image: url('images/logo_esbs_white.png');
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: contain;
             }
 
-            h1 p {
-                color: $white;
-                font-family: $avenir-blk;
-                font-size: 1.7em;
-                letter-spacing: 0.3em;
-                text-align: center;
-                max-width: 600px;
-                margin: 0 auto;
-                line-height: 2.6em;
+            h1 {
+                margin: 40px 0;
+                p {
+                    color: $white;
+                    font-family: $avenir-blk;
+                    font-size: 1.7em;
+                    letter-spacing: 0.3em;
+                    text-align: center;
+                    max-width: 600px;
+                    margin: 0 auto;
+                    line-height: 2.6em;
+                }
             }
 
-            a.button {
-                color: $white;
+            div.button {
+                margin-bottom: 30px;
+
+                a.button {
+                    color: $white;
+                    text-align: center;
+                    display: inline-block;
+                    margin-top: 20px;
+                    font-family: $dido-i;
+                    font-size: 1.5em;
+                    line-height: 1.6em;
+                    padding: 15px 30px 8px;
+                    border-width: 2px;
+                    letter-spacing: 0.15em;
+                    transition: all 100ms ease;
+
+                    &:hover {
+                        background-color: $gold;
+                        color: $gray;
+                    }
+
+                }
             }
+
         }
 
+        div.platter {
+
+            article.content-page {
+                margin-bottom: 60px;
+
+                h1 {
+                    background-image: url('images/arc.png');
+                    background-size: contain;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    text-align: center;
+                    line-height: 130px;
+                    color: $gold_dark;
+                    font-family: $avenir-blk;
+                    font-size: 1.7em;
+                    letter-spacing: 0.35em;
+                    min-height: 215px;
+                    margin: 0 0 40px;
+                }
+
+                div.lead {
+                    text-align: center;
+                    max-width: 640px;
+                    margin: 20px auto 40px;
+                    width: 50%;
+
+                    p {
+                        font-family: $avenir-blk;
+                        letter-spacing: 0.18em;
+                        line-height: 1.8em;
+                    }
+                }
+
+                div.content {
+                    margin: 80px auto 20px;
+
+                    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+                    -moz-column-count: 2; /* Firefox */
+                    column-count: 2;
+
+                    -webkit-column-gap: 110px; /* Chrome, Safari, Opera */
+                    -moz-column-gap: 110px; /* Firefox */
+                    column-gap: 110px;
+
+                    -webkit-column-span: all; /* Chrome, Safari, Opera */
+                    column-span: all;
+
+                    p {
+                        font-family: $avenir-med;
+                        letter-spacing: 0.1em;
+                        line-height: 1.5em;
+                        margin: 0 0 30px;
+
+                    }
+                }
+            }
+
+            div.footer_button {
+                text-align: center;
+                margin: 0 0 60px;
+                a.button {
+                    color: $gold-dark;
+                    border-color: $gold_dark;
+                    text-align: center;
+                    display: inline-block;
+                    margin-top: 20px;
+                    font-family: $avenir-blk;
+                    font-size: 1.5em;
+                    line-height: 1.6em;
+                    padding: 12px 30px 8px;
+                    border-width: 2px;
+                    letter-spacing: 0.19em;
+                    transition: all 100ms ease;
+
+                    &:hover {
+                        background-color: $gold_dark;
+                        color: $white;
+                    }
+
+                }
+            }
+
+
+        }
+
+    }
+
+    @media only screen and (max-width: 870px) {
+        #content {
+            div.platter {
+                article.content-page {
+                    div.lead {
+                        width: 70%;
+                    }
+
+
+                    div.content {
+                        -webkit-column-gap: 50px; /* Chrome, Safari, Opera */
+                        -moz-column-gap: 50px; /* Firefox */
+                        column-gap: 50px;
+                    }
+                }
+            }
+
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        #content {
+
+            article.title {
+                h1 {
+                    p {
+                        font-size: 1.5em;
+                        line-height: 1.5em;
+                        width: 90%;
+
+                    }
+                }
+            }
+
+            div.platter {
+                article.content-page {
+                    padding-top: 0;
+                    padding-bottom: 20px;
+                    margin-bottom: 20px;
+
+                    h1 {
+                        line-height: 150px;
+                        margin-bottom: 0;
+                    }
+
+                    div.lead {
+                        width: 100%;
+                    }
+
+                    div.content {
+                        -webkit-column-count: 1; /* Chrome, Safari, Opera */
+                        -moz-column-count: 1; /* Firefox */
+                        column-count: 1;
+                    }
+                }
+            }
+
+        }
     }
 
 }

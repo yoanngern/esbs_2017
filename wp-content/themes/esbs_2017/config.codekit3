@@ -321,37 +321,13 @@
 		"oAP": "\/header.php",
 		"oF": 0
 		},
-	"\/images\/amsterdam\/Amsterdam_Slide.jpg": {
-		"ft": 16384,
-		"iS": 793700,
-		"oA": 0,
-		"oAP": "\/images\/amsterdam\/Amsterdam_Slide.jpg",
-		"oF": 0,
-		"opt": 0
-		},
-	"\/images\/amsterdam\/header_bg.jpg": {
-		"ft": 16384,
-		"iS": 415390,
-		"oA": 0,
-		"oAP": "\/images\/amsterdam\/header_bg.jpg",
-		"oF": 0,
-		"opt": 0
-		},
-	"\/images\/amsterdam\/header_title.png": {
+	"\/images\/arc.png": {
 		"ft": 32768,
-		"iS": 70124,
+		"iS": 337178,
 		"oA": 0,
-		"oAP": "\/images\/amsterdam\/header_title.png",
+		"oAP": "\/images\/arc.png",
 		"oF": 0,
-		"opt": 0
-		},
-	"\/images\/amsterdam\/thumb.jpg": {
-		"ft": 16384,
-		"iS": 782262,
-		"oA": 0,
-		"oAP": "\/images\/amsterdam\/thumb.jpg",
-		"oF": 0,
-		"opt": 0
+		"opt": 1
 		},
 	"\/images\/arrow_down.png": {
 		"ft": 32768,

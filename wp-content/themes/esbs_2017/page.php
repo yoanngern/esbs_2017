@@ -24,7 +24,9 @@
 
 				?>
 
-				<a class="button" href="<?php echo get_field( 'button_link' ); ?>"><?php echo $button_text; ?></a>
+				<div class="button"><a class="button"
+				                       href="<?php echo get_field( 'button_link' ); ?>"><?php echo $button_text; ?></a>
+				</div>
 
 			<?php endif; ?>
 
@@ -39,15 +41,45 @@
 		while ( have_posts() ) : the_post(); ?> <!--Because the_content() works only inside a WP Loop -->
 			<article class="content-page">
 				<?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
-				<?php the_content(); ?> <!-- Page Content -->
+
+				<?php if ( get_field( 'lead_paragraph' ) ):
+
+					echo '<div class="lead">' . get_field( 'lead_paragraph' ) . '</div>';
+
+				endif; ?>
+
+
+				<?php
+				echo '<div class="content">';
+				the_content();
+				echo '</div>';
+				?> <!-- Page Content -->
 
 			</article><!-- .entry-content-page -->
+
+			<?php if ( get_field( 'footer_button_link' ) ):
+
+				if ( get_field( 'footer_button_label' ) ) {
+					$button_text = get_field( 'footer_button_label' );
+				} else {
+					$button_text = get_field( 'footer_button_link' );
+				}
+
+				?>
+
+				<div class="footer_button"><a class="button"
+				                       href="<?php echo get_field( 'footer_button_link' ); ?>"><?php echo $button_text; ?></a>
+				</div>
+
+			<?php endif; ?>
 
 
 			<?php
 		endwhile; //resetting the page loop
 		wp_reset_query(); //resetting the page query
 		?>
+
+
 
 	</div>
 

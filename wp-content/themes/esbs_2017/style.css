@@ -483,15 +483,13 @@ footer {
   #content div.platter {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 100px 20px;
+    padding: 20px 20px;
     position: relative; }
     #content div.platter article.content-page {
       min-height: 350px;
       padding: 40px 4%;
       max-width: 960px;
       margin: 0 auto; }
-      #content div.platter article.content-page h1, #content div.platter article.content-page h2, #content div.platter article.content-page h3, #content div.platter article.content-page h4, #content div.platter article.content-page h5, #content div.platter article.content-page h6, #content div.platter article.content-page p {
-        max-width: 768px; }
       #content div.platter article.content-page h1 {
         font-size: 1.6em;
         text-transform: uppercase;
@@ -534,6 +532,53 @@ a.elementor-button {
   text-transform: uppercase;
   letter-spacing: 0.1em; }
 
+#home_title h1 {
+  text-align: center;
+  font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
+  color: #d3b963;
+  font-size: 33px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase; }
+  #home_title h1 span {
+    font-family: "DidotLTStd-Italic", "DidotLTStd-Roman", times, serif;
+    letter-spacing: 0.1em; }
+
+.elementor-column-gap-default > .elementor-row > .elementor-column.full_width div {
+  padding: 0; }
+
+#hot_news {
+  width: 100%;
+  background-color: #d3b963;
+  color: #FFFFFF;
+  display: block;
+  text-align: center;
+  transition: all 300ms ease; }
+  #hot_news:hover {
+    background-color: #333333; }
+  #hot_news h2 {
+    font-size: 2.2em;
+    font-family: "DidotLTStd-Roman", times, serif;
+    line-height: 2em;
+    padding-top: 30px; }
+  #hot_news h1 {
+    font-size: 2.2em;
+    font-family: "DidotLTStd-Bold", "DidotLTStd-Roman", times, serif;
+    line-height: 2.2em;
+    text-transform: uppercase;
+    padding-bottom: 30px; }
+
+@media only screen and (max-width: 767px) {
+  #home_title h1 {
+    text-align: center;
+    font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
+    color: #d3b963;
+    font-size: 18px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase; }
+    #home_title h1 span {
+      font-family: "DidotLTStd-Italic", "DidotLTStd-Roman", times, serif;
+      letter-spacing: 0.1em; } }
+
 .avenir h1, .avenir h2, .avenir h3, .avenir h4, .avenir h5, .avenir h6, .avenir p, .avenir a {
   font-family: "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif !important; }
 
@@ -571,24 +616,148 @@ a.elementor-button {
   font-family: "DidotLTStd-Headline", "DidotLTStd-Roman", times, serif !important; }
 
 body.page-template-default #content article.title {
-  min-height: 500px;
-  height: 70vh;
+  min-height: 70vh;
+  height: 100%;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 55px;
-  text-align: center; }
-  body.page-template-default #content article.title h1 p {
-    color: #FFFFFF;
+  text-align: center;
+  position: relative;
+  border-bottom: 5px solid #d3b963; }
+  body.page-template-default #content article.title a.logo {
+    width: 180px;
+    height: 120px;
+    margin: 5vh auto 0;
+    display: block;
+    background-image: url("images/logo_esbs_white.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain; }
+  body.page-template-default #content article.title h1 {
+    margin: 40px 0; }
+    body.page-template-default #content article.title h1 p {
+      color: #FFFFFF;
+      font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
+      font-size: 1.7em;
+      letter-spacing: 0.3em;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 2.6em; }
+  body.page-template-default #content article.title div.button {
+    margin-bottom: 30px; }
+    body.page-template-default #content article.title div.button a.button {
+      color: #FFFFFF;
+      text-align: center;
+      display: inline-block;
+      margin-top: 20px;
+      font-family: "DidotLTStd-Italic", "DidotLTStd-Roman", times, serif;
+      font-size: 1.5em;
+      line-height: 1.6em;
+      padding: 15px 30px 8px;
+      border-width: 2px;
+      letter-spacing: 0.15em;
+      transition: all 100ms ease; }
+      body.page-template-default #content article.title div.button a.button:hover {
+        background-color: #d3b963;
+        color: #333333; }
+
+body.page-template-default #content div.platter article.content-page {
+  margin-bottom: 60px; }
+  body.page-template-default #content div.platter article.content-page h1 {
+    background-image: url("images/arc.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    line-height: 130px;
+    color: #867332;
     font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
     font-size: 1.7em;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.35em;
+    min-height: 215px;
+    margin: 0 0 40px; }
+  body.page-template-default #content div.platter article.content-page div.lead {
     text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 2.6em; }
-  body.page-template-default #content article.title a.button {
-    color: #FFFFFF; }
+    max-width: 640px;
+    margin: 20px auto 40px;
+    width: 50%; }
+    body.page-template-default #content div.platter article.content-page div.lead p {
+      font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
+      letter-spacing: 0.18em;
+      line-height: 1.8em; }
+  body.page-template-default #content div.platter article.content-page div.content {
+    margin: 80px auto 20px;
+    -webkit-column-count: 2;
+    /* Chrome, Safari, Opera */
+    -moz-column-count: 2;
+    /* Firefox */
+    column-count: 2;
+    -webkit-column-gap: 110px;
+    /* Chrome, Safari, Opera */
+    -moz-column-gap: 110px;
+    /* Firefox */
+    column-gap: 110px;
+    -webkit-column-span: all;
+    /* Chrome, Safari, Opera */
+    column-span: all; }
+    body.page-template-default #content div.platter article.content-page div.content p {
+      font-family: "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
+      letter-spacing: 0.1em;
+      line-height: 1.5em;
+      margin: 0 0 30px; }
+
+body.page-template-default #content div.platter div.footer_button {
+  text-align: center;
+  margin: 0 0 60px; }
+  body.page-template-default #content div.platter div.footer_button a.button {
+    color: #867332;
+    border-color: #867332;
+    text-align: center;
+    display: inline-block;
+    margin-top: 20px;
+    font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
+    font-size: 1.5em;
+    line-height: 1.6em;
+    padding: 12px 30px 8px;
+    border-width: 2px;
+    letter-spacing: 0.19em;
+    transition: all 100ms ease; }
+    body.page-template-default #content div.platter div.footer_button a.button:hover {
+      background-color: #867332;
+      color: #FFFFFF; }
+
+@media only screen and (max-width: 870px) {
+  body.page-template-default #content div.platter article.content-page div.lead {
+    width: 70%; }
+  body.page-template-default #content div.platter article.content-page div.content {
+    -webkit-column-gap: 50px;
+    /* Chrome, Safari, Opera */
+    -moz-column-gap: 50px;
+    /* Firefox */
+    column-gap: 50px; } }
+
+@media only screen and (max-width: 767px) {
+  body.page-template-default #content article.title h1 p {
+    font-size: 1.5em;
+    line-height: 1.5em;
+    width: 90%; }
+  body.page-template-default #content div.platter article.content-page {
+    padding-top: 0;
+    padding-bottom: 20px;
+    margin-bottom: 20px; }
+    body.page-template-default #content div.platter article.content-page h1 {
+      line-height: 150px;
+      margin-bottom: 0; }
+    body.page-template-default #content div.platter article.content-page div.lead {
+      width: 100%; }
+    body.page-template-default #content div.platter article.content-page div.content {
+      -webkit-column-count: 1;
+      /* Chrome, Safari, Opera */
+      -moz-column-count: 1;
+      /* Firefox */
+      column-count: 1; } }
 
 body {
   font-family: "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
