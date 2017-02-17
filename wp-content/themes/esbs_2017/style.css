@@ -142,25 +142,62 @@ body > header {
       font-size: 0.9em; }
       body > header div > ul li a:hover {
         color: #d3b963; }
-  @media only screen and (max-width: 640px) {
+  body > header #burger {
+    display: none;
+    width: 30px;
+    height: 25px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-image: url("images/burger.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 12px 10px 0 0;
+    z-index: 1000; }
+    body > header #burger.open {
+      background-image: url("images/burger_close.png"); }
+    body > header #burger a:hover {
+      background-color: transparent; }
+  @media only screen and (max-width: 1300px) {
+    body > header div {
+      text-align: left; } }
+  @media only screen and (max-width: 1150px) {
     body > header #simple_logo {
       top: 20px;
       left: 4%;
       width: 80px;
       height: 30px; }
     body > header #burger {
-      right: 4%;
-      top: 10px; }
-    body > header div {
-      display: none; }
-      body > header div ul {
-        right: 0;
-        max-width: inherit;
-        position: absolute;
-        bottom: inherit;
-        height: auto; }
-        body > header div ul li a {
-          padding-left: 10px; } }
+      right: 2%;
+      top: 10px;
+      display: block; }
+    body > header div > ul {
+      display: none;
+      background-color: #333333;
+      margin: 10px 10% 0; }
+      body > header div > ul > li {
+        width: 25%;
+        float: left;
+        text-align: center; }
+        body > header div > ul > li:last-of-type {
+          position: relative;
+          background-color: #333333; }
+          body > header div > ul > li:last-of-type a:hover {
+            color: #d3b963; }
+      body > header div > ul.show {
+        display: block; }
+        body > header div > ul.show ul {
+          display: none; } }
+  @media only screen and (max-width: 1000px) {
+    body > header div > ul > li {
+      width: 33%; } }
+  @media only screen and (max-width: 800px) {
+    body > header div > ul > li {
+      width: 50%; } }
+  @media only screen and (max-width: 550px) {
+    body > header div > ul > li {
+      width: 100%; } }
 
 /*
 body > header {
@@ -488,8 +525,6 @@ a.button {
   display: inline-block; }
 
 @media only screen and (max-width: 767px) {
-  body > header {
-    background-color: transparent; }
   #content div.platter {
     padding: 40px 4%; } }
 
@@ -499,40 +534,40 @@ a.elementor-button {
   text-transform: uppercase;
   letter-spacing: 0.1em; }
 
-.avenir {
+.avenir h1, .avenir h2, .avenir h3, .avenir h4, .avenir h5, .avenir h6, .avenir p, .avenir a {
   font-family: "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif !important; }
 
-.avenir-i {
+.avenir-i h1, .avenir-i h2, .avenir-i h3, .avenir-i h4, .avenir-i h5, .avenir-i h6, .avenir-i p, .avenir-i a {
   font-family: "AvenirLTStd-BookOblique", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif !important; }
 
-.avenir-med {
+.avenir-med h1, .avenir-med h2, .avenir-med h3, .avenir-med h4, .avenir-med h5, .avenir-med h6, .avenir-med p, .avenir-med a {
   font-family: "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif !important; }
 
-.avenir-med-i {
+.avenir-med-i h1, .avenir-med-i h2, .avenir-med-i h3, .avenir-med-i h4, .avenir-med-i h5, .avenir-med-i h6, .avenir-med-i p, .avenir-med-i a {
   font-family: "AvenirLTStd-MediumOblique", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif !important; }
 
-.avenir-blk {
+.avenir-blk h1, .avenir-blk h2, .avenir-blk h3, .avenir-blk h4, .avenir-blk h5, .avenir-blk h6, .avenir-blk p, .avenir-blk a {
   font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif !important; }
 
-.avenir-blk-i {
+.avenir-blk-i h1, .avenir-blk-i h2, .avenir-blk-i h3, .avenir-blk-i h4, .avenir-blk-i h5, .avenir-blk-i h6, .avenir-blk-i p, .avenir-blk-i a {
   font-family: "AvenirLTStd-BlackOblique", "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif !important; }
 
-.dido h1, .dido h2, .dido h3, .dido h4, .dido h5, .dido h6, .dido p {
+.dido h1, .dido h2, .dido h3, .dido h4, .dido h5, .dido h6, .dido p, .dido a {
   font-family: "DidotLTStd-Roman", times, serif !important; }
 
-.dido-i h1, .dido-i h2, .dido-i h3, .dido-i h4, .dido-i h5, .dido-i h6, .dido-i p {
+.dido-i h1, .dido-i h2, .dido-i h3, .dido-i h4, .dido-i h5, .dido-i h6, .dido-i p, .dido-i a {
   font-family: "DidotLTStd-Italic", "DidotLTStd-Roman", times, serif !important; }
 
-.dido-orn h1, .dido-orn h2, .dido-orn h3, .dido-orn h4, .dido-orn h5, .dido-orn h6, .dido-orn p {
+.dido-orn h1, .dido-orn h2, .dido-orn h3, .dido-orn h4, .dido-orn h5, .dido-orn h6, .dido-orn p, .dido-orn a {
   font-family: "DidotLTStd-Ornaments", "DidotLTStd-Roman", times, serif !important; }
 
-.dido-bold h1, .dido-bold h2, .dido-bold h3, .dido-bold h4, .dido-bold h5, .dido-bold h6, .dido-bold p {
+.dido-bold h1, .dido-bold h2, .dido-bold h3, .dido-bold h4, .dido-bold h5, .dido-bold h6, .dido-bold p, .dido-bold a {
   font-family: "DidotLTStd-Bold", "DidotLTStd-Roman", times, serif !important; }
 
-.dido-bold-i h1, .dido-bold-i h2, .dido-bold-i h3, .dido-bold-i h4, .dido-bold-i h5, .dido-bold-i h6, .dido-bold-i p {
+.dido-bold-i h1, .dido-bold-i h2, .dido-bold-i h3, .dido-bold-i h4, .dido-bold-i h5, .dido-bold-i h6, .dido-bold-i p, .dido-bold-i a {
   font-family: "DidotLTStd-BoldItalic", "DidotLTStd-Bold", "DidotLTStd-Roman", times, serif !important; }
 
-.dido-head h1, .dido-head h2, .dido-head h3, .dido-head h4, .dido-head h5, .dido-head h6, .dido-head p {
+.dido-head h1, .dido-head h2, .dido-head h3, .dido-head h4, .dido-head h5, .dido-head h6, .dido-head p, .dido-head a {
   font-family: "DidotLTStd-Headline", "DidotLTStd-Roman", times, serif !important; }
 
 body.page-template-default #content article.title {

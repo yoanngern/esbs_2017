@@ -405,6 +405,22 @@
 		"plM": 3758088159,
 		"prP": 0
 		},
+	"\/images\/burger.png": {
+		"ft": 32768,
+		"iS": 132,
+		"oA": 0,
+		"oAP": "\/images\/burger.png",
+		"oF": 0,
+		"opt": 1
+		},
+	"\/images\/burger_close.png": {
+		"ft": 32768,
+		"iS": 776,
+		"oA": 0,
+		"oAP": "\/images\/burger_close.png",
+		"oF": 0,
+		"opt": 1
+		},
 	"\/images\/burger_white.png": {
 		"ft": 32768,
 		"iS": 144,

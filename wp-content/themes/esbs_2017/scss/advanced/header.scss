@@ -13,7 +13,6 @@ body > header {
     background-color: $gray;
 
     div {
-        //max-width: 1280px;
         margin: 0 auto;
         text-align: center;
 
@@ -74,12 +73,43 @@ body > header {
                         color: $gold;
                     }
                 }
+
             }
 
         }
     }
 
-    @media only screen and (max-width: 640px) {
+    #burger {
+        display: none;
+        width: 30px;
+        height: 25px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-image: url('images/burger.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        margin: 12px 10px 0 0;
+        z-index: 1000;
+
+        &.open {
+            background-image: url('images/burger_close.png');
+        }
+
+        a:hover {
+            background-color: transparent;
+        }
+    }
+
+    @media only screen and (max-width: 1300px) {
+
+        div {
+            text-align: left;
+        }
+    }
+
+    @media only screen and (max-width: 1150px) {
 
         #simple_logo {
             top: 20px;
@@ -89,22 +119,78 @@ body > header {
         }
 
         #burger {
-            right: 4%;
+            right: 2%;
             top: 10px;
+            display: block;
+
         }
 
         div {
-            display: none;
 
-            ul {
-                right: 0;
-                max-width: inherit;
-                position: absolute;
-                bottom: inherit;
-                height: auto;
+            & > ul {
+                display: none;
+                background-color: $gray;
+                margin: 10px 10% 0;
+
+                & > li {
+                    width: 25%;
+                    float: left;
+                    text-align: center;
+
+                    &:last-of-type {
+                        position: relative;
+                        background-color: $gray;
+
+                        a {
+                            &:hover {
+                                color: $gold;
+                            }
+                        }
+                    }
+                }
+
+                &.show {
+                    display: block;
+
+                    ul {
+                        display: none;
+                    }
+                }
 
                 li a {
-                    padding-left: 10px;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 1000px) {
+        div {
+
+            & > ul {
+                & > li {
+                    width: 33%;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 800px) {
+        div {
+
+            & > ul {
+                & > li {
+                    width: 50%;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 550px) {
+        div {
+
+            & > ul {
+                & > li {
+                    width: 100%;
                 }
             }
         }
