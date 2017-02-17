@@ -32,6 +32,10 @@
 
 		</article>
 
+	<?php else: ?>
+
+		<div class="spacer"></div>
+
 	<?php endif; ?>
 
 	<div class="platter">

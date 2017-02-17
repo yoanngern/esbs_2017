@@ -698,6 +698,11 @@ body.page-template-default #content article.title div.button a.button:hover {
   background-color: #d3b963;
   color: #333333; }
 
+body.page-template-default #content div.spacer {
+  padding-top: 60px;
+  background-color: #FFFFFF;
+  display: block; }
+
 body.page-template-default #content div.platter article.content-page {
   margin-bottom: 60px; }
 
@@ -797,6 +802,7 @@ body.page-template-default #content div.platter div.footer_button a.button:hover
   body.page-template-default #content div.platter article.content-page div.lead {
     width: 100%; }
   body.page-template-default #content div.platter article.content-page div.content {
+    margin-top: 0px;
     -webkit-column-count: 1;
     /* Chrome, Safari, Opera */
     -moz-column-count: 1;

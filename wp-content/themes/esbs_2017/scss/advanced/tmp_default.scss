@@ -62,6 +62,12 @@ body.page-template-default {
 
         }
 
+        div.spacer {
+            padding-top: 60px;
+            background-color: $white;
+            display: block;
+        }
+
         div.platter {
 
             article.content-page {
@@ -195,6 +201,7 @@ body.page-template-default {
                     }
 
                     div.content {
+                        margin-top: 0px;
                         -webkit-column-count: 1; /* Chrome, Safari, Opera */
                         -moz-column-count: 1; /* Firefox */
                         column-count: 1;
