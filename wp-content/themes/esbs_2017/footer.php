@@ -5,7 +5,7 @@
 
 	<a href="/" id="logo_footer"></a>
 
-	<p><em>Europe shall be saved</em><br/>
+	<p><em>ESBS Fundation</em><br/>
 		Route du Flon 28, 1610 Oron, Switzerland<br/>
 		<a href="mailto:contact@esbs.org">contact@esbs.org</a></p>
 
