@@ -146,6 +146,7 @@ body > header div > ul li a {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   text-decoration: none;
+  -webkit-transition: all 100ms ease;
   transition: all 100ms ease;
   cursor: pointer;
   font-size: 0.9em; }
@@ -575,6 +576,7 @@ a.elementor-button {
   color: #FFFFFF;
   display: block;
   text-align: center;
+  -webkit-transition: all 300ms ease;
   transition: all 300ms ease; }
 
 #hot_news:hover {
@@ -686,6 +688,7 @@ body.page-template-default #content article.title div.button a.button {
   padding: 15px 30px 8px;
   border-width: 2px;
   letter-spacing: 0.15em;
+  -webkit-transition: all 100ms ease;
   transition: all 100ms ease; }
 
 body.page-template-default #content article.title div.button a.button:hover {
@@ -734,7 +737,8 @@ body.page-template-default #content div.platter article.content-page div.content
   column-gap: 110px;
   -webkit-column-span: all;
   /* Chrome, Safari, Opera */
-  column-span: all; }
+  -moz-column-span: all;
+       column-span: all; }
 
 body.page-template-default #content div.platter article.content-page div.content p {
   font-family: "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
@@ -758,6 +762,7 @@ body.page-template-default #content div.platter div.footer_button a.button {
   padding: 12px 30px 8px;
   border-width: 2px;
   letter-spacing: 0.19em;
+  -webkit-transition: all 100ms ease;
   transition: all 100ms ease; }
 
 body.page-template-default #content div.platter div.footer_button a.button:hover {
@@ -777,7 +782,7 @@ body.page-template-default #content div.platter div.footer_button a.button:hover
 @media only screen and (max-width: 767px) {
   body.page-template-default #content article.title h1 {
     font-size: 1.2em;
-    line-height: 1.8em;
+    line-height: 2em;
     width: 90%; }
   body.page-template-default #content div.platter article.content-page {
     padding-top: 0;
