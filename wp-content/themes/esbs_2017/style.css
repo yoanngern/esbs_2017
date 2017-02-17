@@ -738,8 +738,8 @@ body.page-template-default #content div.platter div.footer_button {
 
 @media only screen and (max-width: 767px) {
   body.page-template-default #content article.title h1 {
-    font-size: 1em;
-    line-height: 1.6em;
+    font-size: 1.2em;
+    line-height: 1.8em;
     width: 90%; }
   body.page-template-default #content div.platter article.content-page {
     padding-top: 0;
