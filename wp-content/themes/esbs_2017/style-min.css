@@ -186,13 +186,14 @@ body > header #burger a:hover {
     height: 30px; }
   body > header #burger {
     right: 2%;
-    top: 10px;
+    top: 0;
     display: block; }
   body > header div > ul {
-    display: none;
     background-color: #333333;
-    margin: 10px 10% 0; }
+    padding: 0 10% 0;
+    height: 48px; }
   body > header div > ul > li {
+    display: none;
     width: 25%;
     float: left;
     text-align: center; }
@@ -202,6 +203,8 @@ body > header #burger a:hover {
   body > header div > ul > li:last-of-type a:hover {
     color: #d3b963; }
   body > header div > ul.show {
+    display: block; }
+  body > header div > ul.show > li {
     display: block; }
   body > header div > ul.show ul {
     display: none; } }
@@ -782,7 +785,7 @@ body.page-template-default #content div.platter div.footer_button a.button:hover
 @media only screen and (max-width: 767px) {
   body.page-template-default #content article.title h1 {
     font-size: 1.2em;
-    line-height: 2em;
+    line-height: 2.2em;
     width: 90%; }
   body.page-template-default #content div.platter article.content-page {
     padding-top: 0;

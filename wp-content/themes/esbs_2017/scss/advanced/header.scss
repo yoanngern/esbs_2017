@@ -120,7 +120,7 @@ body > header {
 
         #burger {
             right: 2%;
-            top: 10px;
+            top: 0;
             display: block;
 
         }
@@ -128,11 +128,13 @@ body > header {
         div {
 
             & > ul {
-                display: none;
+                //display: none;
                 background-color: $gray;
-                margin: 10px 10% 0;
+                padding: 0 10% 0;
+                height: 48px;
 
                 & > li {
+                    display: none;
                     width: 25%;
                     float: left;
                     text-align: center;
@@ -151,6 +153,10 @@ body > header {
 
                 &.show {
                     display: block;
+
+                    & > li {
+                        display: block;
+                    }
 
                     ul {
                         display: none;
