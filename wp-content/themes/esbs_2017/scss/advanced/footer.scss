@@ -16,4 +16,22 @@ footer {
         margin: 40px auto;
     }
 
+    p {
+        color: darken($white, 30);
+        margin-bottom: 30px;
+        line-height: 1.6em;
+
+        em {
+            font-family: $avenir-blk;
+        }
+
+        a {
+            color: darken($white, 30);
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
 }

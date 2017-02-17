@@ -499,6 +499,21 @@ footer #logo_footer {
   background-size: contain;
   margin: 40px auto; }
 
+footer p {
+  color: #b3b2b2;
+  margin-bottom: 30px;
+  line-height: 1.6em; }
+
+footer p em {
+  font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
+
+footer p a {
+  color: #b3b2b2;
+  text-decoration: none; }
+
+footer p a:hover {
+  text-decoration: underline; }
+
 #content {
   margin: 0;
   min-height: 300px;
