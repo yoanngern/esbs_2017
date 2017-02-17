@@ -25,17 +25,15 @@ body.page-template-default {
             }
 
             h1 {
-                margin: 40px 0;
-                p {
-                    color: $white;
-                    font-family: $avenir-blk;
-                    font-size: 1.7em;
-                    letter-spacing: 0.3em;
-                    text-align: center;
-                    max-width: 600px;
-                    margin: 0 auto;
-                    line-height: 2.6em;
-                }
+                color: $white;
+                font-family: $avenir-blk;
+                font-size: 1.7em;
+                letter-spacing: 0.3em;
+                text-align: center;
+                max-width: 600px;
+                margin: 40px auto;
+                line-height: 2.6em;
+
             }
 
             div.button {
@@ -146,7 +144,6 @@ body.page-template-default {
                 }
             }
 
-
         }
 
     }
@@ -158,7 +155,6 @@ body.page-template-default {
                     div.lead {
                         width: 70%;
                     }
-
 
                     div.content {
                         -webkit-column-gap: 50px; /* Chrome, Safari, Opera */
@@ -176,12 +172,10 @@ body.page-template-default {
 
             article.title {
                 h1 {
-                    p {
-                        font-size: 1.5em;
-                        line-height: 1.5em;
-                        width: 90%;
+                    font-size: 1em;
+                    line-height: 1.6em;
+                    width: 90%;
 
-                    }
                 }
             }
 
