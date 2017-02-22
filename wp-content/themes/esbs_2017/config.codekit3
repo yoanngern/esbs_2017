@@ -321,6 +321,22 @@
 		"oAP": "\/header.php",
 		"oF": 0
 		},
+	"\/images\/android-icon-144x144.png": {
+		"ft": 32768,
+		"iS": 4841,
+		"oA": 0,
+		"oAP": "\/images\/android-icon-144x144.png",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/images\/android-icon-192x192.png": {
+		"ft": 32768,
+		"iS": 10264,
+		"oA": 0,
+		"oAP": "\/images\/android-icon-192x192.png",
+		"oF": 0,
+		"opt": 0
+		},
 	"\/images\/android-icon-36x36.png": {
 		"ft": 32768,
 		"iS": 1782,
@@ -337,11 +353,51 @@
 		"oF": 0,
 		"opt": 0
 		},
+	"\/images\/android-icon-72x72.png": {
+		"ft": 32768,
+		"iS": 3203,
+		"oA": 0,
+		"oAP": "\/images\/android-icon-72x72.png",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/images\/android-icon-96x96.png": {
+		"ft": 32768,
+		"iS": 3699,
+		"oA": 0,
+		"oAP": "\/images\/android-icon-96x96.png",
+		"oF": 0,
+		"opt": 0
+		},
 	"\/images\/apple-icon-57x57.png": {
 		"ft": 32768,
-		"iS": 1778,
+		"iS": 1619,
 		"oA": 0,
 		"oAP": "\/images\/apple-icon-57x57.png",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/images\/apple-icon-60x60.png": {
+		"ft": 32768,
+		"iS": 2545,
+		"oA": 0,
+		"oAP": "\/images\/apple-icon-60x60.png",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/images\/apple-icon-72x72.png": {
+		"ft": 32768,
+		"iS": 2773,
+		"oA": 0,
+		"oAP": "\/images\/apple-icon-72x72.png",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/images\/apple-icon-76x76.png": {
+		"ft": 32768,
+		"iS": 2765,
+		"oA": 0,
+		"oAP": "\/images\/apple-icon-76x76.png",
 		"oF": 0,
 		"opt": 0
 		},
@@ -459,6 +515,14 @@
 		"oF": 0,
 		"opt": 0
 		},
+	"\/images\/favicon-96x96.png": {
+		"ft": 32768,
+		"iS": 3699,
+		"oA": 0,
+		"oAP": "\/images\/favicon-96x96.png",
+		"oF": 0,
+		"opt": 0
+		},
 	"\/images\/favicon.ico": {
 		"ft": 8192,
 		"oA": 2,
@@ -552,6 +616,38 @@
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
+		},
+	"\/images\/ms-icon-144x144.png": {
+		"ft": 32768,
+		"iS": 9389,
+		"oA": 0,
+		"oAP": "\/images\/ms-icon-144x144.png",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/images\/ms-icon-150x150.png": {
+		"ft": 32768,
+		"iS": 9851,
+		"oA": 0,
+		"oAP": "\/images\/ms-icon-150x150.png",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/images\/ms-icon-310x310.png": {
+		"ft": 32768,
+		"iS": 24641,
+		"oA": 0,
+		"oAP": "\/images\/ms-icon-310x310.png",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/images\/ms-icon-70x70.png": {
+		"ft": 32768,
+		"iS": 3110,
+		"oA": 0,
+		"oAP": "\/images\/ms-icon-70x70.png",
+		"oF": 0,
+		"opt": 0
 		},
 	"\/index.php": {
 		"ft": 8192,
