@@ -321,6 +321,30 @@
 		"oAP": "\/header.php",
 		"oF": 0
 		},
+	"\/images\/android-icon-36x36.png": {
+		"ft": 32768,
+		"iS": 1782,
+		"oA": 0,
+		"oAP": "\/images\/android-icon-36x36.png",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/images\/android-icon-48x48.png": {
+		"ft": 32768,
+		"iS": 1828,
+		"oA": 0,
+		"oAP": "\/images\/android-icon-48x48.png",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/images\/apple-icon-57x57.png": {
+		"ft": 32768,
+		"iS": 1778,
+		"oA": 0,
+		"oAP": "\/images\/apple-icon-57x57.png",
+		"oF": 0,
+		"opt": 0
+		},
 	"\/images\/arc.png": {
 		"ft": 32768,
 		"iS": 337178,
@@ -381,6 +405,12 @@
 		"plM": 3758088159,
 		"prP": 0
 		},
+	"\/images\/browserconfig.xml": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/images\/browserconfig.xml",
+		"oF": 0
+		},
 	"\/images\/burger.png": {
 		"ft": 32768,
 		"iS": 132,
@@ -412,6 +442,28 @@
 		"oAP": "\/images\/close_blue.png",
 		"oF": 0,
 		"opt": 0
+		},
+	"\/images\/favicon-16x16.png": {
+		"ft": 32768,
+		"iS": 1359,
+		"oA": 0,
+		"oAP": "\/images\/favicon-16x16.png",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/images\/favicon-32x32.png": {
+		"ft": 32768,
+		"iS": 1784,
+		"oA": 0,
+		"oAP": "\/images\/favicon-32x32.png",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/images\/favicon.ico": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/images\/favicon.ico",
+		"oF": 0
 		},
 	"\/images\/header_red.jpg": {
 		"ft": 16384,
@@ -492,6 +544,14 @@
 		"oAP": "\/images\/logo_simple.png",
 		"oF": 0,
 		"opt": 0
+		},
+	"\/images\/manifest.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "\/images\/manifest-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
 		},
 	"\/index.php": {
 		"ft": 8192,
