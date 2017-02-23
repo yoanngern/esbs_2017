@@ -369,6 +369,14 @@
 		"oF": 0,
 		"opt": 0
 		},
+	"\/images\/apple-icon-114x114.png": {
+		"ft": 32768,
+		"iS": 4499,
+		"oA": 0,
+		"oAP": "\/images\/apple-icon-114x114.png",
+		"oF": 0,
+		"opt": 0
+		},
 	"\/images\/apple-icon-57x57.png": {
 		"ft": 32768,
 		"iS": 1619,
@@ -496,6 +504,14 @@
 		"iS": 741,
 		"oA": 0,
 		"oAP": "\/images\/close_blue.png",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/images\/facebook_default_home.png": {
+		"ft": 32768,
+		"iS": 1019659,
+		"oA": 0,
+		"oAP": "\/images\/facebook_default_home.png",
 		"oF": 0,
 		"opt": 0
 		},
