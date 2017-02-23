@@ -24,7 +24,7 @@ add_action( 'init', 'register_my_menu' );
 add_theme_support( 'post-thumbnails' );
 
 add_image_size( 'banner', 1440, 670, true );
-add_image_size( '1080p', 1920, 1080, true );
+add_image_size( 'full_hd', 1920, 1080, true );
 
 
 function get_attachment_url_by_slug( $slug ) {
