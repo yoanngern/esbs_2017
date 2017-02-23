@@ -34,6 +34,11 @@
     <meta name="theme-color" content="#ffffff">
 
 
+    <meta property="og:title"              content="Europe Shall Be Saved" />
+    <meta property="og:description"        content="Together for 100 millions souls. One movement of people from all backgrounds to see the Gospel of Jesus-Christ change Europe." />
+    <meta property="og:image"              content="http://esbs.org/wp-content/themes/esbs_2017/images/faecbook_default_home.png" />
+
+
 	<?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	<?php endif; ?>
