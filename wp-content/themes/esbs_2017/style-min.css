@@ -558,10 +558,11 @@ p {
 a.button {
   border: 1px solid #d3b963;
   text-align: center;
-  padding: 5px 15px;
+  padding: 10px 15px 5px 15px;
   text-decoration: none;
   text-transform: uppercase;
-  display: inline-block; }
+  display: inline-block;
+  margin-right: 20px; }
 
 @media only screen and (max-width: 767px) {
   #content div.platter {
@@ -579,7 +580,8 @@ a.elementor-button {
   color: #d3b963;
   font-size: 41px;
   letter-spacing: 0.18em;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  line-height: 2em; }
 
 #home_title h1 span {
   font-family: "DidotLTStd-Italic", "DidotLTStd-Roman", times, serif;
