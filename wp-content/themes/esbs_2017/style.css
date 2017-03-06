@@ -547,7 +547,7 @@ a.elementor-button {
   text-transform: uppercase;
   letter-spacing: 0.1em; }
 
-#home_title h1 {
+#home_title h1.new {
   text-align: center;
   font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
   color: #d3b963;
@@ -555,7 +555,7 @@ a.elementor-button {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   line-height: 1.4em; }
-  #home_title h1 span {
+  #home_title h1.new span {
     font-family: "DidotLTStd-Italic", "DidotLTStd-Roman", times, serif;
     letter-spacing: 0.1em; }
 
