@@ -6,7 +6,7 @@
 
 	if ( is_single() ):
 
-		$bg = get_field_or_parent( 'thumb' );
+		$bg = get_field_or_parent( 'thumb', get_the_ID() );
 		$title = get_the_title();
 		$subtitle = "";
 		$link = "";
