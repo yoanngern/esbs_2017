@@ -20,7 +20,7 @@
 
             <div class="dark"></div>
 
-            <a class="logo" href="<?php echo pll_home_url(); ?>/blog"></a>
+            <a class="logo" href="<?php echo pll_home_url(); ?>blog"></a>
 
             <div class="text">
                 <h1><?php echo $title; ?></h1>
