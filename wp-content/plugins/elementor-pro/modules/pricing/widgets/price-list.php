@@ -389,16 +389,31 @@ class Price_List extends Widget_Base {
 		return sprintf( '<img src="%s" alt="%s" />', $image_src, $item['title'] );
 	}
 
-	private function render_item_header( $url ) {
+	private function render_item_header( $item ) {
+		$url = $item['link']['url'];
+
+		$item_id = $item['_id'];
+
 		if ( $url ) {
-			return '<li><a href="' . $url . '" class="elementor-price-list-item">';
+			$unique_link_id = 'item-link-' . $item_id;
+
+			$this->add_render_attribute( $unique_link_id, [
+				'href' => $url,
+				'class' => 'elementor-price-list-item',
+			] );
+
+			if ( $item['link']['is_external'] ) {
+				$this->add_render_attribute( $unique_link_id, 'target', '_blank' );
+			}
+
+			return '<li><a ' . $this->get_render_attribute_string( $unique_link_id ) . '>';
 		} else {
 			return '<li class="elementor-price-list-item">';
 		}
 	}
 
-	private function render_item_footer( $with_url ) {
-		if ( $with_url ) {
+	private function render_item_footer( $item ) {
+		if ( $item['link']['url'] ) {
 			return '</a></li>';
 		} else {
 			return '</li>';
@@ -411,7 +426,7 @@ class Price_List extends Widget_Base {
 		echo '<ul class="elementor-price-list">';
 
 		foreach ( $instance['price_list'] as $item ) {
-			echo $this->render_item_header( $item['link']['url'] );
+			echo $this->render_item_header( $item );
 
 			if ( ! empty( $item['image']['url'] ) ) {
 				echo '<div class="elementor-price-list-image">' . $this->render_image( $item, $instance ) . '</div>';
@@ -430,7 +445,7 @@ class Price_List extends Widget_Base {
 			echo '<p class="elementor-price-list-description">' . $item['item_description'] . '</p>';
 			echo '</div>'; // end text
 
-			echo $this->render_item_footer( ! empty( $item['link']['url'] ) );
+			echo $this->render_item_footer( $item );
 
 		} ?>
 		<?php

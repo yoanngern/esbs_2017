@@ -49,6 +49,25 @@ class Products extends Widget_Base {
 
 	protected function _register_controls() {
 		$this->start_controls_section(
+			'section_layout',
+			[
+				'label' => __( 'Layout', 'elementor-pro' ),
+				'tab' => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'posts_per_page',
+			[
+				'label' => __( 'Products Count', 'elementor-pro' ),
+				'type' => Controls_Manager::NUMBER,
+				'default' => '4',
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
 			'section_filter',
 			[
 				'label' => __( 'Query', 'elementor-pro' ),
@@ -105,25 +124,6 @@ class Products extends Widget_Base {
 					'asc'  => __( 'ASC', 'elementor-pro' ),
 					'desc' => __( 'DESC', 'elementor-pro' ),
 				],
-			]
-		);
-
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'section_layout',
-			[
-				'label' => __( 'Layout', 'elementor-pro' ),
-				'tab' => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'posts_per_page',
-			[
-				'label' => __( 'Products Count', 'elementor-pro' ),
-				'type' => Controls_Manager::NUMBER,
-				'default' => '4',
 			]
 		);
 

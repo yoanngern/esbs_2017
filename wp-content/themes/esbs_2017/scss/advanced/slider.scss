@@ -1,0 +1,31 @@
+#slider {
+    position: relative;
+
+    & > article {
+        display: none;
+
+        &.current {
+            display: block;
+        }
+    }
+
+    div.bullets {
+        position: absolute;
+        bottom: 25px;
+        width: 100%;
+        text-align: center;
+
+        a {
+            display: inline-block;
+            background-color: rgba($white, 0.7);
+            width: 9px;
+            height: 9px;
+            @include border-radius(9px);
+            margin: 5px;
+
+            &.current {
+                background-color: $gold-light;
+            }
+        }
+    }
+}

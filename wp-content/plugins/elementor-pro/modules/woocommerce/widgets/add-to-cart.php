@@ -3,6 +3,7 @@ namespace ElementorPro\Modules\Woocommerce\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Widget_Button;
+use ElementorPro\Modules\PanelPostsControl\Module;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -42,7 +43,7 @@ class Add_To_Cart extends Widget_Button {
 			'product_id',
 			[
 				'label' => __( 'Product', 'elementor-pro' ),
-				'type' => Controls_Manager::SELECT2,
+				'type' => Module::QUERY_CONTROL_ID,
 				'post_type' => '',
 				'options' => [],
 				'label_block' => true,

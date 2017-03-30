@@ -5,10 +5,10 @@
 
 	<?php if ( get_field( 'background' ) ): ?>
 
-		<article class="title"
-		         style="background-image: url('<?php echo get_field( 'background' )['sizes']['banner']; ?>')">
+        <article class="title"
+                 style="background-image: url('<?php echo get_field( 'background' )['sizes']['banner']; ?>')">
 
-			<a class="logo" href="/"></a>
+            <a class="logo" href="/"></a>
 
 			<?php if ( get_field( 'title' ) ):
 				echo "<h1>" . get_field( 'title' ) . "</h1>";
@@ -24,26 +24,26 @@
 
 				?>
 
-				<div class="button"><a class="button"
-				                       href="<?php echo get_field( 'button_link' ); ?>"><?php echo $button_text; ?></a>
-				</div>
+                <div class="button"><a class="button"
+                                       href="<?php echo get_field( 'button_link' ); ?>"><?php echo $button_text; ?></a>
+                </div>
 
 			<?php endif; ?>
 
-		</article>
+        </article>
 
 	<?php else: ?>
 
-		<div class="spacer"></div>
+        <div class="spacer"></div>
 
 	<?php endif; ?>
 
-	<div class="platter">
+    <div class="platter">
 
 		<?php
 		// TO SHOW THE PAGE CONTENTS
 		while ( have_posts() ) : the_post(); ?> <!--Because the_content() works only inside a WP Loop -->
-			<article class="content-page">
+            <article class="content-page">
 				<?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
 
 				<?php if ( get_field( 'lead_paragraph' ) ):
@@ -59,7 +59,7 @@
 				echo '</div>';
 				?> <!-- Page Content -->
 
-			</article><!-- .entry-content-page -->
+            </article><!-- .entry-content-page -->
 
 			<?php if ( get_field( 'footer_button_link' ) ):
 
@@ -71,9 +71,9 @@
 
 				?>
 
-				<div class="footer_button"><a class="button"
-				                       href="<?php echo get_field( 'footer_button_link' ); ?>"><?php echo $button_text; ?></a>
-				</div>
+                <div class="footer_button"><a class="button"
+                                              href="<?php echo get_field( 'footer_button_link' ); ?>"><?php echo $button_text; ?></a>
+                </div>
 
 			<?php endif; ?>
 
@@ -84,8 +84,11 @@
 		?>
 
 
+    </div>
 
-	</div>
+	<?php if ( get_field('blogroll') ) {
+		get_template_part( 'template-parts/blog/blogroll' );
+	} ?>
 
 
 </section>

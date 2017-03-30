@@ -9,6 +9,8 @@
 @import "advanced/content";
 @import "advanced/elementor";
 @import "advanced/tmp_default";
+@import "advanced/blog";
+@import "advanced/slider";
 
 body {
     font-family: $avenir;
@@ -17,4 +19,45 @@ body {
     padding: 0;
     color: $black;
     background-color: $gray;
+
+    &.black {
+        background-color: $black;
+    }
+
+    div.dark {
+        width: 100%;
+        background-color: rgba(#000, 0.15);
+        height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: block;
+    }
+
+    div.footer_button {
+        text-align: center;
+        margin: 0 0 60px;
+        a.button {
+            color: $gold-dark;
+            border-color: $gold_dark;
+            text-align: center;
+            display: inline-block;
+            margin-top: 20px;
+            font-family: $avenir-blk;
+            font-size: 1.5em;
+            line-height: 1.6em;
+            padding: 12px 30px 8px;
+            border-width: 2px;
+            letter-spacing: 0.19em;
+            transition: all 100ms ease;
+
+            &:hover {
+                background-color: $gold_dark;
+                color: $white;
+            }
+
+        }
+    }
 }

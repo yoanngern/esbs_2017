@@ -547,6 +547,16 @@
 		"opt": 0,
 		"q": 100
 		},
+	"\/images\/dropdown.png": {
+		"ft": 32768,
+		"iS": 561,
+		"l": 1,
+		"oA": 0,
+		"oAP": "\/images\/dropdown.png",
+		"oF": 0,
+		"opt": 1,
+		"q": 100
+		},
 	"\/images\/facebook_default_home.png": {
 		"ft": 32768,
 		"iS": 1019659,
@@ -608,6 +618,66 @@
 		"l": 1,
 		"oA": 0,
 		"oAP": "\/images\/header_title_aimg.png",
+		"oF": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"\/images\/icon_business.png": {
+		"ft": 32768,
+		"iS": 15460,
+		"l": 1,
+		"oA": 0,
+		"oAP": "\/images\/icon_business.png",
+		"oF": 0,
+		"opt": 1,
+		"q": 100
+		},
+	"\/images\/icon_church.png": {
+		"ft": 32768,
+		"iS": 9766,
+		"l": 1,
+		"oA": 0,
+		"oAP": "\/images\/icon_church.png",
+		"oF": 0,
+		"opt": 1,
+		"q": 100
+		},
+	"\/images\/icon_church_planting.png": {
+		"ft": 32768,
+		"iS": 7893,
+		"l": 1,
+		"oA": 0,
+		"oAP": "\/images\/icon_church_planting.png",
+		"oF": 0,
+		"opt": 1,
+		"q": 100
+		},
+	"\/images\/icon_intercessor.png": {
+		"ft": 32768,
+		"iS": 9669,
+		"l": 1,
+		"oA": 0,
+		"oAP": "\/images\/icon_intercessor.png",
+		"oF": 0,
+		"opt": 1,
+		"q": 100
+		},
+	"\/images\/icon_outreach.png": {
+		"ft": 32768,
+		"iS": 5312,
+		"l": 1,
+		"oA": 0,
+		"oAP": "\/images\/icon_outreach.png",
+		"oF": 0,
+		"opt": 1,
+		"q": 100
+		},
+	"\/images\/left.png": {
+		"ft": 32768,
+		"iS": 1398,
+		"l": 1,
+		"oA": 0,
+		"oAP": "\/images\/left.png",
 		"oF": 0,
 		"opt": 0,
 		"q": 100
@@ -740,6 +810,26 @@
 		"opt": 0,
 		"q": 100
 		},
+	"\/images\/right.png": {
+		"ft": 32768,
+		"iS": 1294,
+		"l": 1,
+		"oA": 0,
+		"oAP": "\/images\/right.png",
+		"oF": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"\/images\/search.png": {
+		"ft": 32768,
+		"iS": 851,
+		"l": 1,
+		"oA": 0,
+		"oAP": "\/images\/search.png",
+		"oF": 0,
+		"opt": 0,
+		"q": 100
+		},
 	"\/index.php": {
 		"ft": 8192,
 		"oA": 2,
@@ -776,11 +866,11 @@
 		},
 	"\/js\/main.js": {
 		"ft": 64,
-		"mi": 1,
+		"mi": 0,
 		"oA": 0,
 		"oAP": "\/js\/main.min.js",
 		"oF": 2,
-		"sC": 1,
+		"sC": 0,
 		"tS": 0
 		},
 	"\/js\/main.min.js": {
@@ -3336,6 +3426,19 @@
 		"oAP": "\/scss\/advanced\/.sass-cache\/be572fa12770979464d0839fc375968a7ffd17c4\/header.scssc",
 		"oF": 0
 		},
+	"\/scss\/advanced\/blog.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/css\/blog.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/scss\/advanced\/content.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -3384,6 +3487,19 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/scss\/css\/header.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/advanced\/slider.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/css\/slider.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
@@ -3492,6 +3608,16 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/css\/slider.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/scss\/css\/slider-min.css",
+		"oF": 0,
+		"oS": 0
+		},
 	"\/scss\/style.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -3524,6 +3650,48 @@
 		"oAP": "\/style-min.css",
 		"oF": 0,
 		"oS": 0
+		},
+	"\/template-parts\/blog\/blogroll.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/blog\/blogroll.php",
+		"oF": 0
+		},
+	"\/template-parts\/blog\/index.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/blog\/index.php",
+		"oF": 0
+		},
+	"\/template-parts\/blog\/list.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/blog\/list.php",
+		"oF": 0
+		},
+	"\/template-parts\/blog\/none.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/blog\/none.php",
+		"oF": 0
+		},
+	"\/template-parts\/blog\/related_posts.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/blog\/related_posts.php",
+		"oF": 0
+		},
+	"\/template-parts\/blog\/single.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/blog\/single.php",
+		"oF": 0
+		},
+	"\/template-parts\/blog\/slider.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/blog\/slider.php",
+		"oF": 0
 		}
 	},
 "hooks": [
@@ -4888,7 +5056,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http:\/\/dev.esbs.org",
+	"externalServerAddress": "http:\/\/esbs.org",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",

@@ -86,6 +86,7 @@ class Price_Table extends Widget_Base {
 					'real' => 'R$ ' . _x( 'Real', 'Currency Symbol', 'elementor-pro' ),
 					'ruble' => '&#8381; ' . _x( 'Ruble', 'Currency Symbol', 'elementor-pro' ),
 					'rupee' => '&#8360; ' . _x( 'Rupee', 'Currency Symbol', 'elementor-pro' ),
+					'indian_rupee' => '&#8377; ' . _x( 'Rupee (Indian)', 'Currency Symbol', 'elementor-pro' ),
 					'shekel' => '&#8362; ' . _x( 'Shekel', 'Currency Symbol', 'elementor-pro' ),
 					'yen' => '&#165; ' . _x( 'Yen/Yuan', 'Currency Symbol', 'elementor-pro' ),
 					'won' => '&#8361; ' . _x( 'Won', 'Currency Symbol', 'elementor-pro' ),
@@ -1337,6 +1338,7 @@ class Price_Table extends Widget_Base {
 			'peseta' => '&#8359',
 			'lira' => '&#8356;',
 			'rupee' => '&#8360;',
+			'indian_rupee' => '&#8377;',
 			'real' => 'R$',
 			'krona' => 'kr',
 		];
@@ -1489,6 +1491,7 @@ class Price_Table extends Widget_Base {
 				peseta: '&#8359;',
 				lira: '&#8356;',
 				rupee: '&#8360;',
+				indian_rupee: '&#8377;',
 				real: 'R$',
 				krona: 'kr'
 			};

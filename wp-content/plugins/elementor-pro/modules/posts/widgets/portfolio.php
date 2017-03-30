@@ -38,9 +38,13 @@ class Portfolio extends Widget_Base {
 		return [ 'pro-elements' ];
 	}
 
+	public function get_script_depends() {
+		return [ 'imagesloaded' ];
+	}
+
 	public function on_import( $element ) {
-		if ( ! get_post_type_object( $element['settings']['post_type'] ) ) {
-			$element['settings']['post_type'] = 'post';
+		if ( ! get_post_type_object( $element['settings']['posts_post_type'] ) ) {
+			$element['settings']['posts_post_type'] = 'post';
 		}
 
 		return $element;
@@ -60,72 +64,6 @@ class Portfolio extends Widget_Base {
 	}
 
 	private function register_query_section_controls() {
-		$this->start_controls_section(
-			'section_query',
-			[
-				'label' => __( 'Query', 'elementor-pro' ),
-				'tab' => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Posts::get_type(),
-			[
-				'name' => 'posts',
-				'label' => __( 'Posts', 'elementor-pro' ),
-			]
-		);
-
-		$this->add_control(
-			'advanced',
-			[
-				'label' => __( 'Advanced', 'elementor-pro' ),
-				'type' => Controls_Manager::HEADING,
-			]
-		);
-
-		$this->add_control(
-			'orderby',
-			[
-				'label' => __( 'Order By', 'elementor-pro' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'post_date',
-				'options' => [
-					'post_date' => __( 'Date', 'elementor-pro' ),
-					'post_title' => __( 'Title', 'elementor-pro' ),
-					'menu_order' => __( 'Menu Order', 'elementor-pro' ),
-					'rand' => __( 'Random', 'elementor-pro' ),
-				],
-			]
-		);
-
-		$this->add_control(
-			'order',
-			[
-				'label' => __( 'Order', 'elementor-pro' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'desc',
-				'options' => [
-					'asc' => __( 'ASC', 'elementor-pro' ),
-					'desc' => __( 'DESC', 'elementor-pro' ),
-				],
-			]
-		);
-
-		$this->add_control(
-			'offset',
-			[
-				'label' => __( 'Offset', 'elementor-pro' ),
-				'type' => Controls_Manager::NUMBER,
-				'default' => 0,
-				'condition' => [
-					'post_type!' => 'by_id',
-				],
-			]
-		);
-
-		$this->end_controls_section();
-
 		$this->start_controls_section(
 			'section_layout',
 			[
@@ -156,7 +94,7 @@ class Portfolio extends Widget_Base {
 		$this->add_control(
 			'posts_per_page',
 			[
-				'label' => __( 'Posts Count', 'elementor-pro' ),
+				'label' => __( 'Posts Per Page', 'elementor-pro' ),
 				'type' => Controls_Manager::NUMBER,
 				'default' => 3,
 			]
@@ -231,6 +169,72 @@ class Portfolio extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
+			'section_query',
+			[
+				'label' => __( 'Query', 'elementor-pro' ),
+				'tab' => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Posts::get_type(),
+			[
+				'name' => 'posts',
+				'label' => __( 'Posts', 'elementor-pro' ),
+			]
+		);
+
+		$this->add_control(
+			'advanced',
+			[
+				'label' => __( 'Advanced', 'elementor-pro' ),
+				'type' => Controls_Manager::HEADING,
+			]
+		);
+
+		$this->add_control(
+			'orderby',
+			[
+				'label' => __( 'Order By', 'elementor-pro' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'post_date',
+				'options' => [
+					'post_date' => __( 'Date', 'elementor-pro' ),
+					'post_title' => __( 'Title', 'elementor-pro' ),
+					'menu_order' => __( 'Menu Order', 'elementor-pro' ),
+					'rand' => __( 'Random', 'elementor-pro' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'order',
+			[
+				'label' => __( 'Order', 'elementor-pro' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'desc',
+				'options' => [
+					'asc' => __( 'ASC', 'elementor-pro' ),
+					'desc' => __( 'DESC', 'elementor-pro' ),
+				],
+			]
+		);
+
+		$this->add_control(
+			'offset',
+			[
+				'label' => __( 'Offset', 'elementor-pro' ),
+				'type' => Controls_Manager::NUMBER,
+				'default' => 0,
+				'condition' => [
+					'posts_post_type!' => 'by_id',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
 			'filter_bar',
 			[
 				'label' => __( 'Filter Bar', 'elementor-pro' ),
@@ -289,9 +293,9 @@ class Portfolio extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-portfolio' => 'margin: 0 -{{SIZE}}px',
-					'(desktop){{WRAPPER}} .elementor-portfolio-item' => 'flex-basis: calc( 100% / {{columns.SIZE}} ); border: {{SIZE}}px solid transparent',
-					'(tablet){{WRAPPER}} .elementor-portfolio-item' => 'flex-basis: calc( 100% / {{columns_tablet.SIZE}} ); border: {{SIZE}}px solid transparent',
-					'(mobile){{WRAPPER}} .elementor-portfolio-item' => 'flex-basis: calc( 100% / {{columns_mobile.SIZE}} ); border: {{SIZE}}px solid transparent',
+					'(desktop){{WRAPPER}} .elementor-portfolio-item' => 'width: calc( 100% / {{columns.SIZE}} ); border: {{SIZE}}px solid transparent',
+					'(tablet){{WRAPPER}} .elementor-portfolio-item' => 'width: calc( 100% / {{columns_tablet.SIZE}} ); border: {{SIZE}}px solid transparent',
+					'(mobile){{WRAPPER}} .elementor-portfolio-item' => 'width: calc( 100% / {{columns_mobile.SIZE}} ); border: {{SIZE}}px solid transparent',
 				],
 			]
 		);
@@ -545,9 +549,9 @@ class Portfolio extends Widget_Base {
 		$options = [
 			'itemGap' => $settings['item_gap']['size'],
 			'itemRatio' => $settings['item_ratio']['size'],
-			'cols' => $settings['columns'],
-			'colsTablet' => $settings['columns_tablet'],
-			'colsMobile' => $settings['columns_mobile'],
+			'columns' => $settings['columns'],
+			'columns_tablet' => $settings['columns_tablet'],
+			'columns_mobile' => $settings['columns_mobile'],
 		];
 
 		return $options;
@@ -573,7 +577,7 @@ class Portfolio extends Widget_Base {
 		<ul class="elementor-portfolio__filters">
 			<li class="elementor-portfolio__filter elementor-active" data-filter="__all"><?php echo __( 'All', 'elementor-pro' ); ?></li>
 			<?php foreach ( $terms as $term ) { ?>
-				<li class="elementor-portfolio__filter" data-filter="<?php echo $term->slug; ?>"><?php echo $term->name; ?></li>
+				<li class="elementor-portfolio__filter" data-filter="<?php echo $term->term_id; ?>"><?php echo $term->name; ?></li>
 			<?php } ?>
 		</ul>
 		<?php
@@ -620,7 +624,7 @@ class Portfolio extends Widget_Base {
 		$classes = [];
 
 		foreach ( $post->tags as $tag ) {
-			$classes[] = 'elementor-filter-' . $tag->slug;
+			$classes[] = 'elementor-filter-' . $tag->term_id;
 		}
 		?>
 		<article class="elementor-portfolio-item <?php echo esc_attr( implode( ' ', $classes ) ); ?>">
@@ -652,7 +656,7 @@ class Portfolio extends Widget_Base {
 			$this->render_filter_menu();
 		}
 		?>
-		<div class="elementor-portfolio" data-portfolio-options="<?php echo esc_attr( wp_json_encode( $this->get_portfolio_js_options() ) ); ?>">
+		<div class="elementor-portfolio elementor-posts-container" data-portfolio-options="<?php echo esc_attr( wp_json_encode( $this->get_portfolio_js_options() ) ); ?>">
 		<?php
 	}
 

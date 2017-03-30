@@ -1,4 +1,4 @@
-/*! elementor-pro - v1.1.2 - 05-02-2017 */
+/*! elementor-pro - v1.2.4 - 21-03-2017 */
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var handlers = {
 	form: require( 'modules/forms/assets/js/frontend/frontend' ),
@@ -102,9 +102,10 @@ module.exports = function() {
 module.exports = function( $scope, $ ) {
 	var $form = $scope.find( '.elementor-form' );
 
-	$form.on( 'submit', function() {
-		var $submitButton = $form.find( '[type="submit"]' ),
-			submitButtonHTML = $submitButton.html();
+	$form.on( 'submit', function( event ) {
+		event.preventDefault();
+
+		var $submitButton = $form.find( '[type="submit"]' );
 
 		if ( $form.hasClass( 'elementor-form-waiting' ) ) {
 			return false;
@@ -118,7 +119,8 @@ module.exports = function( $scope, $ ) {
 
 		$submitButton
 			.attr( 'disabled', 'disabled' )
-			.html( '<i class="fa fa-spinner fa-spin"></i> ' + submitButtonHTML );
+			.find( '> span' )
+			.prepend( '<span class="elementor-button-text elementor-form-spinner"><i class="fa fa-spinner fa-spin"></i>&nbsp;</span>' );
 
 		$form
 			.find( '.elementor-message' )
@@ -149,8 +151,9 @@ module.exports = function( $scope, $ ) {
 			contentType: false,
 			success: function( response, status ) {
 				$submitButton
-					.html( submitButtonHTML )
-					.removeAttr( 'disabled' );
+					.removeAttr( 'disabled' )
+					.find( '.elementor-form-spinner' )
+					.remove();
 
 				$form
 					.animate( {
@@ -170,6 +173,7 @@ module.exports = function( $scope, $ ) {
 					}
 					$form.append( '<div class="elementor-message elementor-message-danger" role="alert">' + response.data.message + '</div>' );
 				} else {
+					$form.trigger( 'submit_success' );
 					$form.trigger( 'reset' );
 
 					if ( '' !== response.data.message ) {
@@ -197,8 +201,6 @@ module.exports = function( $scope, $ ) {
 				$form.trigger( 'error' );
 			}
 		} );
-
-		return false;
 	} );
 };
 
@@ -277,6 +279,23 @@ module.exports = function() {
 			imageRatio = image.naturalHeight / image.naturalWidth;
 
 		$imageParent.toggleClass( settings.classes.fitHeight, imageRatio < imageParentRatio );
+	};
+
+	this.setColsCountSettings = function( settings ) {
+		var currentDeviceMode = elementorFrontend.getCurrentDeviceMode();
+
+		switch ( currentDeviceMode ) {
+			case 'mobile':
+				settings.colsCount = settings.columns_mobile;
+				break;
+			case 'tablet':
+				settings.colsCount = settings.columns_tablet;
+				break;
+			default:
+				settings.colsCount = settings.columns;
+		}
+
+		settings.colsCount = +settings.colsCount;
 	};
 
 	init();
@@ -424,27 +443,8 @@ var Portfolio = function( $element, settings, $ ) {
 		} );
 	};
 
-	var setColsCountSettings = function() {
-		var currentDeviceMode = getComputedStyle( elements.$container[ 0 ], ':after' ).content.replace( /"/g, '' );
-
-		switch ( currentDeviceMode ) {
-			case 'mobile':
-				settings.colsCount = settings.colsMobile;
-				break;
-			case 'tablet':
-				settings.colsCount = settings.colsTablet;
-				break;
-			default:
-				settings.colsCount = settings.cols;
-		}
-
-		settings.colsCount = +settings.colsCount;
-	};
-
 	var activeFilterButton = function( filter ) {
-		var $button = elements.$filterButtons.filter( function() {
-			return this.dataset.filter === filter;
-		} );
+		var $button = elements.$filterButtons.filter( '[data-filter="' + filter + '"]' );
 
 		elements.$filterButtons.removeClass( settings.classes.active );
 
@@ -463,8 +463,8 @@ var Portfolio = function( $element, settings, $ ) {
 		setFilter( $( this ).data( 'filter' ) );
 	};
 
-	var onWindowResize = function() {
-		setColsCountSettings();
+	var refreshGrid = function() {
+		elementorProFrontend.modules.posts.setColsCountSettings( settings );
 
 		arrangeGrid();
 	};
@@ -493,11 +493,17 @@ var Portfolio = function( $element, settings, $ ) {
 	var bindEvents = function() {
 		elements.$filterButtons.on( 'click', onFilterButtonClick );
 
-		elementorFrontend.addListenerOnce( $element.data( 'model-cid' ), 'resize', onWindowResize );
+		var uniqueIdentifier = $element.data( 'model-cid' );
+
+		elementorFrontend.addListenerOnce( uniqueIdentifier, 'resize', refreshGrid );
+
+		if ( elementorFrontend.isEditMode() ) {
+			elementorFrontend.addListenerOnce( uniqueIdentifier, 'change:portfolio:item_ratio', refreshGrid, elementor.channels.editor );
+		}
 	};
 
 	var run = function() {
-		setColsCountSettings();
+		elementorProFrontend.modules.posts.setColsCountSettings( settings );
 
 		setFilter( '__all' );
 
@@ -529,13 +535,12 @@ module.exports = function( $scope, $ ) {
 };
 
 },{}],9:[function(require,module,exports){
-var ImageRatio = function( $element, $ ) {
-	var settings = {};
+var Posts = function( $element, $ ) {
+	var settings = {},
+		elements = {};
 
 	var fitPostsImage = function() {
-		var $posts = $element.find( settings.selectors.post );
-
-		$posts.each( function() {
+		elements.$posts.each( function() {
 			var $post = $( this ),
 				$image = $post.find( settings.selectors.postThumbnailImage );
 
@@ -547,29 +552,111 @@ var ImageRatio = function( $element, $ ) {
 		} );
 	};
 
+	var runMasonry = function() {
+		elementorProFrontend.modules.posts.setColsCountSettings( settings );
+
+		elements.$posts.css( 'transform', 'translateY(0)' );
+
+		if ( ! settings.classic_masonry || settings.colsCount < 2 ) {
+			elements.$postsContainer
+				.height( '' )
+				.removeClass( settings.classes.masonry );
+
+			return;
+		}
+
+		elements.$postsContainer.addClass( settings.classes.masonry );
+
+		var heights = [];
+
+		elements.$posts.each( function( index ) {
+			var row = Math.floor( index / settings.colsCount ),
+				indexAtRow = index % settings.colsCount,
+				$post = $( this ),
+				itemPosition = $post.position(),
+				itemHeight = $post.outerHeight();
+
+			if ( row ) {
+				$post.css( 'transform', 'translateY(-' + ( itemPosition.top - heights[ indexAtRow ] ) + 'px)' );
+
+				heights[ indexAtRow ] += itemHeight;
+			} else {
+				heights.push( itemHeight );
+			}
+		} );
+
+		elements.$postsContainer.height( Math.max.apply( Math, heights ) );
+	};
+
+	var initMasonry = function() {
+		// TODO: Implement `imagesLoaded` also in frontend
+		if ( elementorFrontend.isEditMode() ) {
+			elements.$posts.imagesLoaded().always( runMasonry );
+		} else {
+			runMasonry();
+		}
+	};
+
 	var onWindowResize = function() {
 		fitPostsImage();
+
+		runMasonry();
 	};
 
 	var initSettings = function() {
 		settings.selectors = {
-			postsContainer: '.elementor-posts',
+			postsContainer: '.elementor-posts-container',
 			post: '.elementor-post',
 			postThumbnail: '.elementor-post__thumbnail',
 			postThumbnailImage: '.elementor-post__thumbnail img'
 		};
+
+		settings.classes = {
+			masonry: 'elementor-posts-masonry'
+		};
+	};
+
+	var initElements = function() {
+		elements.$postsContainer = $element.find( settings.selectors.postsContainer );
+
+		elements.$posts = $element.find( settings.selectors.post );
+
+		$.extend( settings, elements.$postsContainer.data( 'options' ) );
 	};
 
 	var bindEvents = function() {
-		elementorFrontend.addListenerOnce( $element.data( 'model-cid' ), 'resize', onWindowResize );
+		var uniqueIdentifier = $element.data( 'model-cid' );
+
+		elementorFrontend.addListenerOnce( uniqueIdentifier, 'resize', onWindowResize );
+
+		if ( elementorFrontend.isEditMode() ) {
+			elementorFrontend.addListenerOnce( uniqueIdentifier, 'change:posts', function( controlView, elementView ) {
+				var controlName = controlView.model.get( 'name' ),
+					elementSettings = elementView.model.get( 'settings' );
+
+				if ( undefined !== settings[ controlName ] ) {
+					settings[ controlName ] = elementSettings.get( controlName );
+				}
+
+				runMasonry();
+
+				if ( /^classic_(item_ratio|masonry)/.test( controlName ) ) {
+					fitPostsImage();
+				}
+			}, elementor.channels.editor );
+		}
 	};
 
 	var run = function() {
 		fitPostsImage();
+
+		initMasonry();
 	};
 
 	var init = function() {
 		initSettings();
+
+		initElements();
 
 		bindEvents();
 
@@ -580,7 +667,7 @@ var ImageRatio = function( $element, $ ) {
 };
 
 module.exports = function( $scope, $ ) {
-	new ImageRatio( $scope, $ );
+	new Posts( $scope, $ );
 };
 
 },{}],10:[function(require,module,exports){

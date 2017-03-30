@@ -48,8 +48,10 @@ class Module extends Module_Base {
 	public function add_templates_localize_data( $settings ) {
 		$templates_manager = ElementorPlugin::instance()->templates_manager;
 
-		$widget_templates = array_filter( $templates_manager->get_source( 'local' )->get_items(), function( $template ) {
-			return 'local' === $template['source'] && self::TEMPLATE_TYPE === $template['type'];
+		$widgets_types = ElementorPlugin::instance()->widgets_manager->get_widget_types();
+
+		$widget_templates = array_filter( $templates_manager->get_source( 'local' )->get_items(), function( $template ) use ( $widgets_types ) {
+			return ! empty( $template['widgetType'] ) && ! empty( $widgets_types[ $template['widgetType'] ] );
 		} );
 
 		$widget_templates_content = [];

@@ -57,7 +57,7 @@ class Module extends Module_Base {
 			[
 				'raw'     => __( 'Use "selector" to target wrapper element. Examples:<br>selector {color: red;} // For main element<br>selector .child-element {margin: 10px;} // For child element<br>.my-class {text-align: center;} // Or use any custom selector', 'elementor-pro' ),
 				'type'    => Controls_Manager::RAW_HTML,
-				'classes' => 'elementor-descriptor',
+				'content_classes' => 'elementor-descriptor',
 			]
 		);
 
@@ -96,7 +96,7 @@ class Module extends Module_Base {
 		$css = str_replace( 'selector', $post_css->get_element_unique_selector( $element ), $css );
 
 		// Add a css comment
-		$css = sprintf( '/* Start custom CSS for %s, class: %s */', $element->get_title(), $element->get_unique_selector() ) . $css . '/* End custom CSS */';
+		$css = sprintf( '/* Start custom CSS for %s, class: %s */', $element->get_name(), $element->get_unique_selector() ) . $css . '/* End custom CSS */';
 
 		$post_css->get_stylesheet()->add_raw_css( $css );
 	}

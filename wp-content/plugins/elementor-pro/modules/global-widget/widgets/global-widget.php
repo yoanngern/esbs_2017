@@ -21,6 +21,14 @@ class Global_Widget extends Widget_Base {
 				'template_id' => $data['templateID'],
 			] );
 
+			if ( is_wp_error( $template_content ) ) {
+				throw new \Exception( $template_content->get_error_message() );
+			}
+
+			if ( ! $template_content ) {
+				throw new \Exception( 'Template content not found.' );
+			}
+
 			$data['settings'] = $template_content[0]['settings'];
 		}
 
@@ -51,6 +59,14 @@ class Global_Widget extends Widget_Base {
 
 	public function get_name() {
 		return 'global';
+	}
+
+	public function get_script_depends() {
+		if ( $this->is_type_instance() ) {
+			return [];
+		}
+
+		return $this->get_original_element_instance()->get_script_depends();
 	}
 
 	public function get_controls( $control_id = null ) {

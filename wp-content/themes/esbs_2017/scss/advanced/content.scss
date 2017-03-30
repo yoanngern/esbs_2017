@@ -3,6 +3,10 @@
     min-height: 300px;
     background-color: $white;
 
+    &.hide {
+        display: none !important;
+    }
+
     div.platter {
         max-width: 1440px;
         margin: 0 auto;

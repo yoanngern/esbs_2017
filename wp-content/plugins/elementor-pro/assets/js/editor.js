@@ -1,4 +1,4 @@
-/*! elementor-pro - v1.1.2 - 05-02-2017 */
+/*! elementor-pro - v1.2.4 - 21-03-2017 */
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var EditorModule = function() {
 	var self = this;
@@ -35,20 +35,20 @@ var ElementorPro = Marionette.Application.extend( {
 	initModules: function() {
 		var PanelPostsControl = require( 'modules/panel-posts-control/assets/js/editor' ),
 			Forms = require( 'modules/forms/assets/js/editor' ),
-			Posts = require( 'modules/posts/assets/js/editor/editor' ),
 			Library = require( 'modules/library/assets/js/editor' ),
 			CustomCSS = require( 'modules/custom-css/assets/js/editor' ),
 			Slides = require( 'modules/slides/assets/js/editor' ),
-			GlobalWidget = require( 'modules/global-widget/assets/js/editor/editor' );
+			GlobalWidget = require( 'modules/global-widget/assets/js/editor/editor' ),
+			FlipBox = require( 'modules/flip-box/assets/js/editor/editor' );
 
 		this.modules = {
 			panelPostsControl: new PanelPostsControl(),
-			posts: new Posts(),
 			forms: new Forms(),
 			library: new Library(),
 			customCSS: new CustomCSS(),
 			slides: new Slides(),
-			globalWidget: new GlobalWidget()
+			globalWidget: new GlobalWidget(),
+			flipBox: new FlipBox()
 		};
 	},
 
@@ -85,7 +85,7 @@ window.elementorPro = new ElementorPro();
 
 elementorPro.start();
 
-},{"modules/custom-css/assets/js/editor":3,"modules/forms/assets/js/editor":5,"modules/global-widget/assets/js/editor/editor":7,"modules/library/assets/js/editor":13,"modules/panel-posts-control/assets/js/editor":15,"modules/posts/assets/js/editor/editor":17,"modules/slides/assets/js/editor":18}],3:[function(require,module,exports){
+},{"modules/custom-css/assets/js/editor":3,"modules/flip-box/assets/js/editor/editor":5,"modules/forms/assets/js/editor":6,"modules/global-widget/assets/js/editor/editor":8,"modules/library/assets/js/editor":14,"modules/panel-posts-control/assets/js/editor":16,"modules/slides/assets/js/editor":18}],3:[function(require,module,exports){
 var EditorModule = require( 'elementor-pro/editor/editor-module' );
 
 module.exports = EditorModule.extend( {
@@ -121,13 +121,46 @@ module.exports = function() {
 var EditorModule = require( 'elementor-pro/editor/editor-module' );
 
 module.exports = EditorModule.extend( {
+	onElementorInit: function() {
+		elementor.channels.editor.on( 'section:activated', this.onSectionActivated );
+	},
+
+	onSectionActivated: function( sectionName, editor ) {
+		var editedElement = editor.getOption( 'editedElementView' );
+
+		if ( 'flip-box' !== editedElement.model.get( 'widgetType' ) ) {
+			return;
+		}
+
+		var isSideBSection = -1 !== [ 'section_side_b_content', 'section_style_b' ].indexOf( sectionName );
+
+		editedElement.$el.toggleClass( 'elementor-flip-box--flipped', isSideBSection );
+
+		var $backLayer = editedElement.$el.find( '.elementor-flip-box__back' );
+
+		if ( isSideBSection ) {
+            $backLayer.css( 'transition', 'none' );
+		}
+
+		if ( ! isSideBSection ) {
+			setTimeout( function() {
+				$backLayer.css( 'transition', '' );
+			}, 10 );
+		}
+	}
+} );
+
+},{"elementor-pro/editor/editor-module":1}],6:[function(require,module,exports){
+var EditorModule = require( 'elementor-pro/editor/editor-module' );
+
+module.exports = EditorModule.extend( {
 	onElementorPreviewLoaded: function() {
 		var ReplyToField = require( './editor/reply-to-field' );
 		this.replyToField = new ReplyToField();
 	}
 } );
 
-},{"./editor/reply-to-field":6,"elementor-pro/editor/editor-module":1}],6:[function(require,module,exports){
+},{"./editor/reply-to-field":7,"elementor-pro/editor/editor-module":1}],7:[function(require,module,exports){
 module.exports = function() {
 	var editor,
 		editedModel,
@@ -214,7 +247,7 @@ module.exports = function() {
 	init();
 };
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var EditorModule = require( 'elementor-pro/editor/editor-module' );
 
 module.exports =  EditorModule.extend( {
@@ -408,7 +441,7 @@ module.exports =  EditorModule.extend( {
 	}
 } );
 
-},{"./global-templates-view":8,"./panel-page":10,"./widget-model":11,"./widget-view":12,"elementor-pro/editor/editor-module":1}],8:[function(require,module,exports){
+},{"./global-templates-view":9,"./panel-page":11,"./widget-model":12,"./widget-view":13,"elementor-pro/editor/editor-module":1}],9:[function(require,module,exports){
 module.exports = elementor.modules.templateLibrary.ElementsCollectionView.extend( {
 	id: 'elementor-global-templates',
 
@@ -423,7 +456,7 @@ module.exports = elementor.modules.templateLibrary.ElementsCollectionView.extend
 	onFilterEmpty: function() {}
 } );
 
-},{"./no-templates":9}],9:[function(require,module,exports){
+},{"./no-templates":10}],10:[function(require,module,exports){
 module.exports = Marionette.ItemView.extend( {
 	template: '#tmpl-elementor-panel-global-widget-no-templates',
 
@@ -440,7 +473,7 @@ module.exports = Marionette.ItemView.extend( {
 	}
 } );
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 
 module.exports = Marionette.ItemView.extend( {
 	id: 'elementor-panel-global-widget',
@@ -526,7 +559,7 @@ module.exports = Marionette.ItemView.extend( {
 	}
 } );
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports = elementor.modules.element.Model.extend( {
 	initialize: function() {
 		this.set( { widgetType: 'global' }, { silent: true } );
@@ -548,7 +581,7 @@ module.exports = elementor.modules.element.Model.extend( {
 	}
 } );
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var WidgetView = elementor.modules.WidgetView,
 	GlobalWidgetView;
 
@@ -631,7 +664,7 @@ GlobalWidgetView = WidgetView.extend( {
 
 module.exports = GlobalWidgetView;
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 var EditorModule = require( 'elementor-pro/editor/editor-module' );
 
 module.exports = EditorModule.extend( {
@@ -641,7 +674,7 @@ module.exports = EditorModule.extend( {
 	}
 } );
 
-},{"./editor/edit-button":14,"elementor-pro/editor/editor-module":1}],14:[function(require,module,exports){
+},{"./editor/edit-button":15,"elementor-pro/editor/editor-module":1}],15:[function(require,module,exports){
 module.exports = function() {
 	var self = this;
 
@@ -692,86 +725,31 @@ module.exports = function() {
 	self.init();
 };
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 var EditorModule = require( 'elementor-pro/editor/editor-module' );
 
 module.exports = EditorModule.extend( {
 	onElementorPreviewLoaded: function() {
-		var PanelPostsControl = require( './editor/panel-posts-control' );
-		this.panelPostsControl = new PanelPostsControl();
+		elementor.addControlView( 'Query', require( './editor/query-control' ) );
 	}
 } );
 
+},{"./editor/query-control":17,"elementor-pro/editor/editor-module":1}],17:[function(require,module,exports){
+module.exports = elementor.modules.controls.Select2.extend( {
+	isTitlesReceived: false,
 
-},{"./editor/panel-posts-control":16,"elementor-pro/editor/editor-module":1}],16:[function(require,module,exports){
-module.exports = function() {
-	var self = this;
+	getSelect2Options: function() {
+		var self = this;
 
-	self.onPanelShow = function(  panel ) {
-		var filters = panel.getCurrentPageView().children.filter( function( view ) {
-			return ( ! _.isEmpty( view.model.get( 'filter_type' ) ) );
-		} );
-
-		if ( ! filters.length ) {
-			return;
-		}
-
-		var controlsWithValues = {};
-
-		_.each( filters, function( view ) {
-			self.setInputAjaxSettings( view );
-
-			var value = view.getControlValue();
-
-			if ( value ) {
-				view.$el.find( '.elementor-control-title' ).append( ' <i class="fa fa-spin fa-circle-o-notch "></i>' );
-				view.$el.find( '.elementor-control-input-wrapper' ).css( 'pointer-events', 'none' );
-
-				controlsWithValues[ view.model.cid ] = {
-					filter_type: view.model.get( 'filter_type' ),
-					object_type: view.model.get( 'object_type' ),
-					value: value
-				};
-			}
-		} );
-
-		if ( ! _.isEmpty( controlsWithValues ) ) {
-			self.getControlsValues( controlsWithValues );
-		}
-	};
-
-	self.getControlsValues = function( controlsWithValues ) {
-		var request = elementorPro.ajax.send( 'panel_posts_control_filters_values', {
-			data: {
-				views: controlsWithValues
-			}
-		});
-
-		request.then( function( data ) {
-			var posts = data.data;
-
-			_.each( posts, function( post, cid ) {
-				var view = elementor.getPanelView().getCurrentPageView().children.findByModelCid( cid );
-
-				view.model.set( 'options', post );
-
-				view.render();
-
-				self.setInputAjaxSettings( view );
-			} );
-		});
-	};
-
-	self.setInputAjaxSettings = function( view ) {
-		view.$el.find( 'select' ).select2({
+		return {
 			ajax: {
 				transport: function( params, success, failure ) {
 
 					var data = {
-							q: params.data.q,
-							filter_type: view.model.get( 'filter_type' ),
-							object_type: view.model.get( 'object_type' )
-						};
+						q: params.data.q,
+						filter_type: self.model.get( 'filter_type' ),
+						object_type: self.model.get( 'object_type' )
+					};
 
 					return elementorPro.ajax.send( 'panel_posts_control_filter_autocomplete', {
 						data: data,
@@ -791,32 +769,45 @@ module.exports = function() {
 				return markup;
 			},
 			minimumInputLength: 2
-		} );
-	};
-
-	self.init = function() {
-		elementor.hooks.addAction( 'panel/open_editor/widget', self.onPanelShow );
-	};
-
-	self.init();
-};
-
-},{}],17:[function(require,module,exports){
-var EditorModule = require( 'elementor-pro/editor/editor-module' );
-
-module.exports = EditorModule.extend( {
-	onRatioControlChanged: function() {
-		// HACK: re-calc the images ratio
-		Backbone.$( elementorFrontend.getScopeWindow() ).trigger( 'resize' );
+		};
 	},
 
-	onElementorInit: function() {
-		elementor.hooks.addAction( 'panel/editor/element/posts/classic_item_ratio/changed', this.onRatioControlChanged );
-		elementor.hooks.addAction( 'panel/editor/element/portfolio/item_ratio/changed', this.onRatioControlChanged );
+	getValueTitles: function() {
+		var self = this,
+			value = self.getControlValue(),
+			filterType = self.model.get( 'filter_type' );
+
+		if ( ! value || ! filterType ) {
+			return;
+		}
+
+		var data = {
+			filter_type: filterType,
+			object_type: self.model.get( 'object_type' ),
+			value: value
+		};
+
+		var request = elementorPro.ajax.send( 'panel_posts_control_value_titles', { data: data });
+
+		request.then( function( response ) {
+			self.isTitlesReceived = true;
+
+			self.model.set( 'options', response.data );
+
+			self.render();
+		});
+	},
+
+	onReady: function() {
+		elementor.modules.controls.Select2.prototype.onReady.apply( this, arguments );
+
+		if ( ! this.isTitlesReceived ) {
+			this.getValueTitles();
+		}
 	}
 } );
 
-},{"elementor-pro/editor/editor-module":1}],18:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 var EditorModule = require( 'elementor-pro/editor/editor-module' );
 
 module.exports = EditorModule.extend( {

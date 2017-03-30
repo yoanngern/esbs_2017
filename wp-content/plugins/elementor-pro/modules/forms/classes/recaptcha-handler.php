@@ -77,11 +77,11 @@ class Recaptcha_Handler {
 	}
 
 	public function register_scripts() {
-		wp_register_script( 'recaptcha-api', 'https://www.google.com/recaptcha/api.js?render=explicit', [], false, false );
+		wp_register_script( 'elementor-recaptcha-api', 'https://www.google.com/recaptcha/api.js?render=explicit', [], false, false );
 	}
 
 	public function enqueue_scripts() {
-		wp_enqueue_script( 'recaptcha-api' );
+		wp_enqueue_script( 'elementor-recaptcha-api' );
 	}
 
 	public function filter_record_fields( $record ) {

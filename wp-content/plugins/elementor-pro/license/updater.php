@@ -128,25 +128,25 @@ class Updater {
 		if ( empty( $api_request_transient ) ) {
 			$api_response = API::get_version();
 
-			$_data = new \stdClass();
+			$api_request_transient = new \stdClass();
 
-			$_data->name = 'Elementor Pro';
-			$_data->slug = $this->plugin_slug;
-			$_data->author = '<a href="https://elementor.com/">Elementor.com</a>';
-			$_data->homepage = 'https://elementor.com/';
+			$api_request_transient->name = 'Elementor Pro';
+			$api_request_transient->slug = $this->plugin_slug;
+			$api_request_transient->author = '<a href="https://elementor.com/">Elementor.com</a>';
+			$api_request_transient->homepage = 'https://elementor.com/';
 
-			$_data->version = $api_response['new_version'];
-			$_data->last_updated = $api_response['last_updated'];
-			$_data->download_link = $api_response['download_link'];
-			$_data->banners = [
+			$api_request_transient->version = $api_response['new_version'];
+			$api_request_transient->last_updated = $api_response['last_updated'];
+			$api_request_transient->download_link = $api_response['download_link'];
+			$api_request_transient->banners = [
 				'high' => 'https://ps.w.org/elementor/assets/banner-1544x500.png?rev=1494133',
 				'low' => 'https://ps.w.org/elementor/assets/banner-1544x500.png?rev=1494133',
 			];
 
-			$_data->sections = unserialize( $api_response['sections'] );
+			$api_request_transient->sections = unserialize( $api_response['sections'] );
 
 			//Expires in 1 day
-			set_site_transient( $cache_key, $_data, DAY_IN_SECONDS );
+			set_site_transient( $cache_key, $api_request_transient, DAY_IN_SECONDS );
 		}
 
 		$_data = $api_request_transient;

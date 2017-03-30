@@ -31,6 +31,7 @@ final class Manager {
 			'posts',
 			'forms',
 			'pricing',
+			'flip-box',
 			'countdown',
 			'custom-css',
 			'slides',

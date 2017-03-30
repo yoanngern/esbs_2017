@@ -4,6 +4,10 @@ footer {
     display: block;
     position: relative;
 
+    &.hide {
+        display: none;
+    }
+
     #logo_footer {
         display: inline-block;
         width: 180px;

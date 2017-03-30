@@ -3,6 +3,7 @@ namespace ElementorPro\Modules\PanelPostsControl\Controls;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Base;
+use ElementorPro\Modules\PanelPostsControl\Module;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -47,6 +48,7 @@ class Group_Control_Posts extends Group_Control_Base {
 		$post_types = self::get_post_types( $args );
 
 		$post_types_options = $post_types;
+
 		$post_types_options['by_id'] = _x( 'Manual Selection', 'Posts Query Control', 'elementor-pro' );
 
 		if ( ! in_array( 'post_type', $args['exclude_controls'] ) ) {
@@ -59,7 +61,7 @@ class Group_Control_Posts extends Group_Control_Base {
 
 			$controls['posts_ids'] = [
 				'label' => _x( 'Search & Select', 'Posts Query Control', 'elementor-pro' ),
-				'type' => Controls_Manager::SELECT2,
+				'type' => Module::QUERY_CONTROL_ID,
 				'post_type' => '',
 				'options' => [],
 				'label_block' => true,
@@ -86,23 +88,28 @@ class Group_Control_Posts extends Group_Control_Base {
 			foreach ( $taxonomies as $taxonomy => $object ) {
 				$taxonomy_args = [
 					'label' => $object->label,
-					'type' => Controls_Manager::SELECT2,
+					'type' => Module::QUERY_CONTROL_ID,
 					'label_block' => true,
 					'multiple' => true,
 					'object_type' => $taxonomy,
+					'options' => [],
 					'condition' => [
 						'post_type' => $object->object_type,
 					],
 				];
 
 				$count = wp_count_terms( $taxonomy );
+
 				$options = [];
 
 				// For large websites, use Ajax to search
 				if ( $count > self::INLINE_MAX_RESULTS ) {
+					$taxonomy_args['type'] = Module::QUERY_CONTROL_ID;
+
 					$taxonomy_args['filter_type'] = 'taxonomy';
-					$taxonomy_args['options'] = [];
 				} else {
+					$taxonomy_args['type'] = Controls_Manager::SELECT2;
+
 					$terms = get_terms( $taxonomy );
 
 					foreach ( $terms as $term ) {
@@ -119,10 +126,10 @@ class Group_Control_Posts extends Group_Control_Base {
 		if ( ! in_array( 'authors', $args['exclude_controls'] ) ) {
 			$author_args = [
 				'label' => _x( 'Author', 'Posts Query Control', 'elementor-pro' ),
-				'type' => Controls_Manager::SELECT2,
 				'label_block' => true,
 				'multiple' => true,
 				'default' => [],
+				'options' => [],
 				'condition' => [
 					'post_type!' => 'by_id',
 				],
@@ -132,9 +139,12 @@ class Group_Control_Posts extends Group_Control_Base {
 
 			// For large websites, use Ajax to search
 			if ( $user_query->get_total() > self::INLINE_MAX_RESULTS ) {
+				$author_args['type'] = Module::QUERY_CONTROL_ID;
+
 				$author_args['filter_type'] = 'author';
-				$author_args['options'] = [];
 			} else {
+				$author_args['type'] = Controls_Manager::SELECT2;
+
 				$author_args['options'] = $this->get_authors();
 			}
 

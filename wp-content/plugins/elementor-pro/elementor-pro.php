@@ -4,7 +4,7 @@
  * Description: Elementor Pro adds new features to the Elementor Page Builder plugin. Control your conversions, your user engagement, your entire website, from one page builder.
  * Plugin URI: https://elementor.com/
  * Author: Elementor.com
- * Version: 1.1.2
+ * Version: 1.2.4
  * Author URI: https://elementor.com/
  *
  * Text Domain: elementor-pro
@@ -12,7 +12,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-define( 'ELEMENTOR_PRO_VERSION', '1.2.0' );
+define( 'ELEMENTOR_PRO_VERSION', '1.2.4' );
 
 define( 'ELEMENTOR_PRO__FILE__', __FILE__ );
 define( 'ELEMENTOR_PRO_PLUGIN_BASE', plugin_basename( ELEMENTOR_PRO__FILE__ ) );
@@ -37,10 +37,15 @@ function elementor_pro_load_plugin() {
 		return;
 	}
 
-	$elementor_version_required = '1.1.2';
+	$elementor_version_required = '1.2.0';
 	if ( ! version_compare( ELEMENTOR_VERSION, $elementor_version_required, '>=' ) ) {
 		add_action( 'admin_notices', 'elementor_pro_fail_load_out_of_date' );
 		return;
+	}
+
+	$elementor_version_recommendation = '1.3.0';
+	if ( ! version_compare( ELEMENTOR_VERSION, $elementor_version_recommendation, '>=' ) ) {
+		add_action( 'admin_notices', 'elementor_pro_admin_notice_upgrade_recommendation' );
 	}
 
 	require( ELEMENTOR_PRO_PATH . 'plugin.php' );
@@ -94,6 +99,20 @@ function elementor_pro_fail_load_out_of_date() {
 
 	$upgrade_link = wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' ) . $file_path, 'upgrade-plugin_' . $file_path );
 	$message = '<p>' . __( 'Elementor Pro not working because you are using an old version of Elementor.', 'elementor-pro' ) . '</p>';
+	$message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $upgrade_link, __( 'Update Elementor Now', 'elementor-pro' ) ) . '</p>';
+
+	echo '<div class="error">' . $message . '</div>';
+}
+
+function elementor_pro_admin_notice_upgrade_recommendation() {
+	if ( ! current_user_can( 'update_plugins' ) ) {
+		return;
+	}
+
+	$file_path = 'elementor/elementor.php';
+
+	$upgrade_link = wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' ) . $file_path, 'upgrade-plugin_' . $file_path );
+	$message = '<p>' . __( 'A new version of Elementor is available. For better performance and compatibility of Elementor Pro, we recommend updating to the latest version.', 'elementor-pro' ) . '</p>';
 	$message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $upgrade_link, __( 'Update Elementor Now', 'elementor-pro' ) ) . '</p>';
 
 	echo '<div class="error">' . $message . '</div>';

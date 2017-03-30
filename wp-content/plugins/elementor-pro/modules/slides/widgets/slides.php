@@ -27,6 +27,10 @@ class Slides extends Widget_Base {
 		return [ 'pro-elements' ];
 	}
 
+	public function get_script_depends() {
+		return [ 'imagesloaded', 'jquery-slick'];
+	}
+
 	public static function get_button_sizes() {
 		return [
 			'xs' => __( 'Extra Small', 'elementor-pro' ),
@@ -54,11 +58,11 @@ class Slides extends Widget_Base {
 		$repeater->add_control(
 			'background_color',
 			[
-				'label' => __( 'Background Color', 'elementor-pro' ),
+				'label' => __( 'Color', 'elementor-pro' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#bbbbbb',
 				'selectors' => [
-					'{{WRAPPER}} {{CURRENT_ITEM}} .slick-slide-inner' => 'background-color: {{VALUE}}',
+					'{{WRAPPER}} {{CURRENT_ITEM}} .slick-slide-bg' => 'background-color: {{VALUE}}',
 				],
 			]
 		);
@@ -66,10 +70,10 @@ class Slides extends Widget_Base {
 		$repeater->add_control(
 			'background_image',
 			[
-				'label' => _x( 'Background Image', 'Background Control', 'elementor-pro' ),
+				'label' => _x( 'Image', 'Background Control', 'elementor-pro' ),
 				'type' => Controls_Manager::MEDIA,
 				'selectors' => [
-					'{{WRAPPER}} {{CURRENT_ITEM}} .slick-slide-inner' => 'background-image: url({{URL}})',
+					'{{WRAPPER}} {{CURRENT_ITEM}} .slick-slide-bg' => 'background-image: url({{URL}})',
 				],
 			]
 		);
@@ -77,20 +81,65 @@ class Slides extends Widget_Base {
 		$repeater->add_control(
 			'background_size',
 			[
-				'label' => _x( 'Background Size', 'Background Control', 'elementor-pro' ),
+				'label' => _x( 'Size', 'Background Control', 'elementor-pro' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'cover',
 				'options' => [
 					'cover' => _x( 'Cover', 'Background Control', 'elementor-pro' ),
+					'contain' => _x( 'Contain', 'Background Control', 'elementor-pro' ),
 					'auto' => _x( 'Auto', 'Background Control', 'elementor-pro' ),
 				],
 				'selectors' => [
-					'{{WRAPPER}} {{CURRENT_ITEM}} .slick-slide-inner' => 'background-size: {{VALUE}}',
+					'{{WRAPPER}} {{CURRENT_ITEM}} .slick-slide-bg' => 'background-size: {{VALUE}}',
 				],
 				'conditions' => [
 					'terms' => [
 						[
 							'name' => 'background_image[url]',
+							'operator' => '!=',
+							'value' => '',
+						],
+					],
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'background_ken_burns',
+			[
+				'label' => __( 'Ken Burns Effect', 'elementor-pro' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'elementor-pro' ),
+				'label_off' => __( 'No', 'elementor-pro' ),
+				'return_value' => 'yes',
+				'default' => '',
+				'separator' => 'before',
+				'conditions' => [
+					'terms' => [
+						[
+							'name' => 'background_image[url]',
+							'operator' => '!=',
+							'value' => '',
+						],
+					],
+				],
+			]
+		);
+
+		$repeater->add_control(
+			'zoom_direction',
+			[
+				'label' => __( 'Zoom Direction', 'elementor-pro' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'in',
+				'options' => [
+					'in' => __( 'In', 'elementor-pro' ),
+					'out' => __( 'Out', 'elementor-pro' ),
+				],
+				'conditions' => [
+					'terms' => [
+						[
+							'name' => 'background_ken_burns',
 							'operator' => '!=',
 							'value' => '',
 						],
@@ -372,19 +421,19 @@ class Slides extends Widget_Base {
 				'default' => [
 					[
 						'heading' => __( 'Slide 1 Heading', 'elementor-pro' ),
-						'description' => __( 'I am slide content. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'elementor-pro' ),
+						'description' => __( 'Click edit button to change this text. Lorem ipsum dolor sit amet consectetur adipiscing elit dolor', 'elementor-pro' ),
 						'button_text' => __( 'Click Here', 'elementor-pro' ),
 						'background_color' => '#833ca3',
 					],
 					[
 						'heading' => __( 'Slide 2 Heading', 'elementor-pro' ),
-						'description' => __( 'I am slide content. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'elementor-pro' ),
+						'description' => __( 'Click edit button to change this text. Lorem ipsum dolor sit amet consectetur adipiscing elit dolor', 'elementor-pro' ),
 						'button_text' => __( 'Click Here', 'elementor-pro' ),
 						'background_color' => '#4054b2',
 					],
 					[
 						'heading' => __( 'Slide 3 Heading', 'elementor-pro' ),
-						'description' => __( 'I am slide content. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'elementor-pro' ),
+						'description' => __( 'Click edit button to change this text. Lorem ipsum dolor sit amet consectetur adipiscing elit dolor', 'elementor-pro' ),
 						'button_text' => __( 'Click Here', 'elementor-pro' ),
 						'background_color' => '#1abc9c',
 					],
@@ -415,7 +464,7 @@ class Slides extends Widget_Base {
 				],
 				'size_units' => [ 'px', 'vh', 'em' ],
 				'selectors' => [
-					'{{WRAPPER}} .slick-slide-inner' => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .slick-slide' => 'height: {{SIZE}}{{UNIT}};',
 				],
 				'separator' => 'before',
 			]
@@ -473,11 +522,14 @@ class Slides extends Widget_Base {
 		$this->add_control(
 			'autoplay_speed',
 			[
-				'label' => __( 'Autoplay Speed (ms)', 'elementor-pro' ),
+				'label' => __( 'Autoplay Speed', 'elementor-pro' ),
 				'type' => Controls_Manager::NUMBER,
 				'default' => 5000,
 				'condition' => [
 					'autoplay' => 'yes',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .slick-slide-bg' => 'animation-duration: calc({{VALUE}}ms*1.2); transition-duration: calc({{VALUE}}ms)',
 				],
 			]
 		);
@@ -680,7 +732,7 @@ class Slides extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .slick-slide-inner .elementor-slide-heading' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}} .slick-slide-inner .elementor-slide-heading:not(:last-child)' => 'margin-bottom: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
@@ -729,7 +781,7 @@ class Slides extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .slick-slide-inner .elementor-slide-description' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}} .slick-slide-inner .elementor-slide-description:not(:last-child)' => 'margin-bottom: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
@@ -793,6 +845,7 @@ class Slides extends Widget_Base {
 				'name' => 'button_typography',
 				'label' => __( 'Typography', 'elementor-pro' ),
 				'selector' => '{{WRAPPER}} .elementor-slide-button',
+				'scheme' => Scheme_Typography::TYPOGRAPHY_4,
 			]
 		);
 
@@ -904,6 +957,8 @@ class Slides extends Widget_Base {
 				],
 			]
 		);
+
+		$this->end_controls_tab();
 
 		$this->end_controls_tabs();
 
@@ -1101,8 +1156,14 @@ class Slides extends Widget_Base {
 				$slide_html .= '<' . $btn_element . ' ' . $btn_attributes . ' ' . $this->get_render_attribute_string( 'button' ) . '>' . $slide['button_text'] . '</' . $btn_element . '>';
 			}
 
+			$ken_class = '';
+
+			if ( '' != $slide['background_ken_burns'] ) {
+				$ken_class = ' elementor-ken-' . $slide['zoom_direction'];
+			}
+
 			$slide_html .= '</div>';
-			$slide_html = '<' . $slide_element . ' ' . $slide_attributes . ' class="slick-slide-inner">' . $slide_html . '</' . $slide_element . '>';
+			$slide_html = '<div class="slick-slide-bg' . $ken_class . '"></div><' . $slide_element . ' ' . $slide_attributes . ' class="slick-slide-inner">' . $slide_html . '</' . $slide_element . '>';
 			$slides[] = '<div class="elementor-repeater-item-' . $slide['_id'] . '">' . $slide_html . '</div>';
 			$slide_count++;
 		}
@@ -1189,11 +1250,20 @@ class Slides extends Widget_Base {
 			if ( showDots ) {
 				var dotsClass = 'slick-dots-' + settings.dots_position;
 			}
+
 		#>
 		<div class="elementor-slides-wrapper elementor-slick-slider" dir="{{ direction }}">
 			<div data-slider_options="{{ sliderOptionsStr }}" class="elementor-slides {{ dotsClass }} {{ arrowsClass }}" data-animation="{{ settings.content_animation }}">
 				<# _.each( settings.slides, function( slide ) { #>
 					<div class="elementor-repeater-item-{{ slide._id }}">
+						<#
+						var kenClass = '';
+
+						if ( '' != slide.background_ken_burns ) {
+							kenClass = ' elementor-ken-' + slide.zoom_direction;
+						}
+						#>
+						<div class="slick-slide-bg{{ kenClass }}"></div>
 						<div class="slick-slide-inner">
 								<# if ( 'yes' === slide.background_overlay ) { #>
 							<div class="elementor-background-overlay"></div>

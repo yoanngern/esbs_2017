@@ -172,31 +172,6 @@ body.page-template-default {
                 }
             }
 
-            div.footer_button {
-                text-align: center;
-                margin: 0 0 60px;
-                a.button {
-                    color: $gold-dark;
-                    border-color: $gold_dark;
-                    text-align: center;
-                    display: inline-block;
-                    margin-top: 20px;
-                    font-family: $avenir-blk;
-                    font-size: 1.5em;
-                    line-height: 1.6em;
-                    padding: 12px 30px 8px;
-                    border-width: 2px;
-                    letter-spacing: 0.19em;
-                    transition: all 100ms ease;
-
-                    &:hover {
-                        background-color: $gold_dark;
-                        color: $white;
-                    }
-
-                }
-            }
-
         }
 
     }

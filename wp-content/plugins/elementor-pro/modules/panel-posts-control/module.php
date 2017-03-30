@@ -4,10 +4,13 @@ namespace ElementorPro\Modules\PanelPostsControl;
 use Elementor\Plugin;
 use ElementorPro\Base\Module_Base;
 use ElementorPro\Modules\PanelPostsControl\Controls\Group_Control_Posts;
+use ElementorPro\Modules\PanelPostsControl\Controls\Query;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Module extends Module_Base {
+
+	const QUERY_CONTROL_ID = 'query';
 
 	public function __construct() {
 		parent::__construct();
@@ -33,28 +36,28 @@ class Module extends Module_Base {
 		if ( 'taxonomy' === $_POST['filter_type'] ) {
 			$query_params = [
 				'taxonomy' => $_POST['object_type'],
-				'search'   => $_POST['q'],
+				'search' => $_POST['q'],
 			];
 
 			$terms = get_terms( $query_params );
 
 			foreach ( $terms as $term ) {
 				$results[] = [
-					'id'   => $term->term_id,
+					'id' => $term->term_id,
 					'text' => $term->name,
 				];
 			}
 		} elseif ( 'by_id' === $_POST['filter_type'] ) {
 			$query_params = [
 				'post_type' => $_POST['object_type'],
-				's'         => $_POST['q'],
+				's' => $_POST['q'],
 			];
 
 			$query = new \WP_Query( $query_params );
 
 			foreach ( $query->posts as $post ) {
 				$results[] = [
-					'id'   => $post->ID,
+					'id' => $post->ID,
 					'text' => $post->post_title,
 				];
 			}
@@ -66,7 +69,7 @@ class Module extends Module_Base {
 					'ID',
 					'display_name',
 				],
-				'search'   => '*' . $_POST['q'] . '*',
+				'search' => '*' . $_POST['q'] . '*',
 				'search_columns' => [
 					'user_login',
 					'user_nicename',
@@ -77,7 +80,7 @@ class Module extends Module_Base {
 
 			foreach ( $user_query->get_results() as $author ) {
 				$results[] = [
-					'id'   => $author->ID,
+					'id' => $author->ID,
 					'text' => $author->display_name,
 				];
 			}
@@ -90,57 +93,63 @@ class Module extends Module_Base {
 		);
 	}
 
-	public function ajax_posts_filters_values() {
+	public function ajax_posts_control_value_titles() {
 		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'elementor-editing' ) ) {
 			wp_send_json_error( new \WP_Error( 'token_expired' ) );
 		}
 
+		$ids = (array) $_POST['value'];
+
 		$results = [];
 
-		foreach ( $_POST['views'] as $view_cid => $data ) {
+		if ( 'taxonomy' === $_POST['filter_type'] ) {
 
-			if ( 'taxonomy' === $data['filter_type'] ) {
+			$terms = get_terms(
+				[
+					'include' => $ids,
+				]
+			);
 
-				$terms = get_terms(
-					[
-						'include' => $data['value'],
-					]
-				);
+			foreach ( $terms as $term ) {
+				$results[ $term->term_id ] = $term->name;
+			}
+		} elseif ( 'by_id' === $_POST['filter_type'] ) {
+			$query = new \WP_Query(
+				[
+					'post_type' => 'any',
+					'post__in' => $ids,
+				]
+			);
 
-				foreach ( $terms as $term ) {
-					$results[ $view_cid ][ $term->term_id ] = $term->name;
-				}
-			} elseif ( 'by_id' === $data['filter_type'] ) {
-				$query = new \WP_Query(
-					[
-						'post_type' => 'any',
-						'post__in'  => is_array( $data['value'] ) ? $data['value'] : [ $data['value'] ],
-					]
-				);
+			foreach ( $query->posts as $post ) {
+				$results[ $post->ID ] = $post->post_title;
+			}
+		} elseif ( 'author' === $_POST['filter_type'] ) {
+			$query_params = [
+				'who' => 'authors',
+				'has_published_posts' => true,
+				'fields' => [
+					'ID',
+					'display_name',
+				],
+				'include' => $ids,
+			];
 
-				foreach ( $query->posts as $post ) {
-					$results[ $view_cid ][ $post->ID ] = $post->post_title;
-				}
-			} elseif ( 'author' === $data['filter_type'] ) {
-				$query_params = [
-					'who' => 'authors',
-					'has_published_posts' => true,
-					'fields' => [
-						'ID',
-						'display_name',
-					],
-					'include'   => $data['value'],
-				];
+			$user_query = new \WP_User_Query( $query_params );
 
-				$user_query = new \WP_User_Query( $query_params );
-
-				foreach ( $user_query->get_results() as $author ) {
-					$results[ $view_cid ][ $author->ID ] = $author->display_name;
-				}
+			foreach ( $user_query->get_results() as $author ) {
+				$results[ $author->ID ] = $author->display_name;
 			}
 		}
 
 		wp_send_json_success( $results );
+	}
+
+	public function register_controls() {
+		$controls_manager = Plugin::instance()->controls_manager;
+
+		$controls_manager->add_group_control( Group_Control_Posts::get_type(), new Group_Control_Posts() );
+		$controls_manager->register_control( self::QUERY_CONTROL_ID, new Query() );
 	}
 
 	public static function get_query_args( $control_id, $settings ) {
@@ -170,13 +179,20 @@ class Module extends Module_Base {
 
 			if ( empty( $query_args['post__in'] ) ) {
 				// If no selection - return an empty query
-				$query_args['post__in'] = [ -1 ];
+				$query_args['post__in'] = [ - 1 ];
 			}
 		} else {
 			$query_args['post_type'] = $post_type;
 			$query_args['posts_per_page'] = $settings['posts_per_page'];
 			$query_args['tax_query'] = [];
-			$query_args['offset'] = $settings['offset'];
+
+			if ( 0 < $settings['offset'] ) {
+				/**
+				 * Due to a wordpress bug, the offset will be set later, in $this->fix_query_offset()
+				 * @see https://codex.wordpress.org/Making_Custom_Queries_using_Offset_and_Pagination
+				 */
+				$query_args['offset_to_fix'] = $settings['offset'];
+			}
 
 			$taxonomies = get_object_taxonomies( $post_type, 'objects' );
 
@@ -186,8 +202,8 @@ class Module extends Module_Base {
 				if ( ! empty( $settings[ $setting_key ] ) ) {
 					$query_args['tax_query'][] = [
 						'taxonomy' => $object->name,
-						'field'    => 'terms_ids',
-						'terms'    => $settings[ $setting_key ],
+						'field' => 'terms_ids',
+						'terms' => $settings[ $setting_key ],
 					];
 				}
 			}
@@ -200,9 +216,35 @@ class Module extends Module_Base {
 		return $query_args;
 	}
 
+	/**
+	 * @param \WP_Query $query
+	 */
+	function fix_query_offset( &$query ) {
+		if ( ! empty( $query->query_vars['offset_to_fix'] ) ) {
+			$query->query_vars['offset'] = $query->query_vars['offset_to_fix'] + ( ( $query->query_vars['paged'] -1 ) * $query->query_vars['posts_per_page'] );
+		}
+	}
+
+	function fix_query_found_posts( $found_posts, $query ) {
+		$offset_to_fix = $query->get( 'fix_pagination_offset' );
+
+		if ( $offset_to_fix ) {
+			$found_posts -= $offset_to_fix;
+		}
+
+		return $found_posts;
+	}
+
+
 	protected function add_actions() {
 		add_action( 'wp_ajax_elementor_pro_panel_posts_control_filter_autocomplete', [ $this, 'ajax_posts_filter_autocomplete' ] );
-		add_action( 'wp_ajax_elementor_pro_panel_posts_control_filters_values', [ $this, 'ajax_posts_filters_values' ] );
-		Plugin::instance()->controls_manager->add_group_control( Group_Control_Posts::get_type(), new Group_Control_Posts() );
+		add_action( 'wp_ajax_elementor_pro_panel_posts_control_value_titles', [ $this, 'ajax_posts_control_value_titles' ] );
+		add_action( 'elementor/controls/controls_registered', [ $this, 'register_controls' ] );
+
+		/**
+		 * @see https://codex.wordpress.org/Making_Custom_Queries_using_Offset_and_Pagination
+		 */
+		add_action( 'pre_get_posts', [ $this, 'fix_query_offset' ], 1 );
+		add_filter( 'found_posts', [ $this, 'fix_query_found_posts' ], 1, 2 );
 	}
 }

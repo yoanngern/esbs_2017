@@ -845,7 +845,7 @@ class Form extends Widget_Base {
 				'label' => __( 'Text Color', 'elementor-pro' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .elementor-field-group > label' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .elementor-field-group > label, {{WRAPPER}} .elementor-field-subgroup label' => 'color: {{VALUE}};',
 				],
 				'scheme' => [
 					'type' => Scheme_Color::get_type(),
@@ -901,7 +901,7 @@ class Form extends Widget_Base {
 				'label' => __( 'Text Color', 'elementor-pro' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .elementor-field-group .elementor-field, {{WRAPPER}} .elementor-field-subgroup' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .elementor-field-group .elementor-field' => 'color: {{VALUE}};',
 				],
 				'scheme' => [
 					'type' => Scheme_Color::get_type(),
@@ -914,7 +914,7 @@ class Form extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'field_typography',
-				'selector' => '{{WRAPPER}} .elementor-field-group .elementor-field',
+				'selector' => '{{WRAPPER}} .elementor-field-group .elementor-field, {{WRAPPER}} .elementor-field-subgroup label',
 				'scheme' => Scheme_Typography::TYPOGRAPHY_3,
 			]
 		);
@@ -1102,6 +1102,9 @@ class Form extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .elementor-button:hover' => 'border-color: {{VALUE}};',
+				],
+				'condition' => [
+					'button_border_border!' => '',
 				],
 			]
 		);

@@ -98,7 +98,6 @@ class Widgets_Manager {
 	}
 
 	private function _require_files() {
-		require_once ELEMENTOR_PATH . 'includes/base/element-base.php';
 		require ELEMENTOR_PATH . 'includes/base/widget-base.php';
 	}
 
@@ -164,7 +163,7 @@ class Widgets_Manager {
 		// Override the global $post for the render
 		$GLOBALS['post'] = get_post( (int) $_POST['post_id'] );
 
-		$data = json_decode( stripslashes( html_entity_decode( $_POST['data'] ) ), true );
+		$data = json_decode( stripslashes( $_POST['data'] ), true );
 
 		// Start buffering
 		ob_start();
@@ -201,7 +200,7 @@ class Widgets_Manager {
 			$_POST['data'] = [];
 		}
 
-		$data = json_decode( stripslashes( html_entity_decode( $_POST['data'] ) ), true );
+		$data = json_decode( stripslashes( $_POST['data'] ), true );
 
 		$element_data = [
 			'elType' => 'widget',
@@ -224,6 +223,26 @@ class Widgets_Manager {
 	public function render_widgets_content() {
 		foreach ( $this->get_widget_types() as $widget ) {
 			$widget->print_template();
+		}
+	}
+
+	public function get_widgets_frontend_settings_keys() {
+		$keys = [];
+
+		foreach ( $this->get_widget_types() as $widget_type_name => $widget_type ) {
+			$widget_type_keys = $widget_type->get_frontend_settings_keys();
+
+			if ( $widget_type_keys ) {
+				$keys[ $widget_type_name ] = $widget_type_keys;
+			}
+		}
+
+		return $keys;
+	}
+
+	public function enqueue_widgets_scripts() {
+		foreach ( $this->get_widget_types() as $widget ) {
+			$widget->enqueue_scripts();
 		}
 	}
 

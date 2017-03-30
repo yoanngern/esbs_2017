@@ -1,9 +1,9 @@
 === Elementor Page Builder ===
 Contributors: pojo.me, KingYes, ariel.k, jzaltzberg, mati1000, pojosh, yehudah
-Tags: page builder, editor, elementor, builder, visual editor, front-end editor, design, drag and drop builder, front-end builder, landing page, page builder plugin, site builder, template builder, visual builder, website builder, wysiwyg
-Requires at least: 4.4
+Tags: page builder, editor, elementor, builder, visual editor, design, drag and drop, landing page, visual builder, wysiwyg, maintenance mode, coming soon, under construction,
+Requires at least: 4.5
 Tested up to: 4.7
-Stable tag: 1.2.3
+Stable tag: 1.4.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +15,7 @@ https://www.youtube.com/watch?v=kB4U67tiQLA
 
 It's about time for a live page builder, with no limits of design. A page builder that delivers high-end page designs and advanced capabilities, never before seen on WordPress.
 
-It's time for **Elementor Page Builder**.
+It's time for **[Elementor Page Builder](https://elementor.com/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme)**.
 
 = Faster. Much faster. =
 Instant reaction was a key feature we wanted to achieve. Instant drag & drop, instant live edit, instant page load. The speed of Elementor is not matched by any other page builder, free or paid. This makes the interface fun and easy to work with, as well as reduces the time it takes to design.
@@ -88,7 +88,7 @@ We have created an extensive [API documentation](https://github.com/pojome/eleme
 - [Japanese](https://translate.wordpress.org/locale/ja/default/wp-plugins/elementor) - (ja)
 - [Portuguese (Portugal)](https://translate.wordpress.org/locale/pt/default/wp-plugins/elementor) - (pt_PT)
 - [Portuguese (Brazil)](https://translate.wordpress.org/locale/pt-br/default/wp-plugins/elementor) - (pt_BR)
-- [Swedish](https://translate.wordpress.org/locale/he/default/wp-plugins/elementor) - (sv_SE)
+- [Swedish](https://translate.wordpress.org/locale/se/default/wp-plugins/elementor) - (sv_SE)
 - [Polish](https://translate.wordpress.org/locale/pl/default/wp-plugins/elementor) - (pl_PL)
 - [Persian](https://translate.wordpress.org/locale/fa/default/wp-plugins/elementor) - (fa_IR)
 - [Hebrew](https://translate.wordpress.org/locale/he/default/wp-plugins/elementor) - (he_IL)
@@ -115,7 +115,7 @@ You can also add a new language via [translate.wordpress.org](https://translate.
 
 = Minimum Requirements =
 
-* WordPress 4.4 or greater
+* WordPress 4.5 or greater
 * PHP version 5.4 or greater
 * MySQL version 5.0 or greater
 
@@ -161,17 +161,86 @@ Yeah! Elementor enables to seamlessly build RTL pages as well as other translate
 
 **My site is working with WordPress 2.6, will Elementor work for me?**
 
-No. Elementor supports WordPress 4.4 or greater, and is compatible with PHP 5.4 or greater. We recommend your host supports PHP version 5.6 or greater and MySQL version 5.6 or greater.
+No. Elementor supports WordPress 4.5 or greater, and is compatible with PHP 5.4 or greater. We recommend your host supports PHP version 5.6 or greater and MySQL version 5.6 or greater.
 
 == Screenshots ==
 
 1. **Drag & Drop.** Our instant drag & drop lets you easily place every element anywhere on the page.
-2. **Resize Columns.** Set the column width exactly how you want it by dragging its corner left and right.
+2. **Visual Resize Control.** Customize the various elements of the page. Resizing images, changing column sizes and much more.
 3. **Truly Live Edit.** Changes on the page are displayed in realtime. No need to press update or preview.
 4. **Template Library.** Save your pages or sections as templates, so you can easily reuse them again, or choose one of our beautiful pre-designed templates.
 5. **Responsive Design.** Create custom settings for desktop, tablet & mobile by switching between devices.
+6. **Revision History.** Switch between earlier versions of your page design, so your design process is backed up, every step of the way.
+7. **Shape Divider.** Choose from a wide array of shape dividers and separate your sections in endless ways, that until now were simply not possible.
 
 == Changelog ==
+
+= 1.4.0 - 28.03.2017 =
+* New! - Canvas: Native Blank Page Template. No header, no footer, just Elementor
+* New! - Maintenance Mode for Under Contraction and Coming Soon page
+* New! - Page Settings: Choose Page Template, Change Status, Edit / Hide Page Title ([#632](https://github.com/pojome/elementor/issues/632), [#447](https://github.com/pojome/elementor/issues/447))
+* New! - Page Style: Padding and Background Color, Image or Gradient
+* New! - Drop Cap option for Text Editor widget
+* New! - Added Debug box in the System Info screen, to keep a record of recent error messages in the editor
+* New! - Added more icons to Social Icons widget: Yelp, Xing, Email, Shopping Cart and Whatsapp ([#1462](https://github.com/pojome/elementor/issues/1462), [#1463](https://github.com/pojome/elementor/issues/1463), [#1471](https://github.com/pojome/elementor/issues/1471), [#1481](https://github.com/pojome/elementor/issues/1481))
+* Tweak! - Added hover style and animation for Social Icons widget ([#426](https://github.com/pojome/elementor/issues/426), [#1472](https://github.com/pojome/elementor/issues/1472))
+* Fix! - Duplicate repeater field with switcher control ([#1442](https://github.com/pojome/elementor/issues/1442), [#1472](https://github.com/pojome/elementor/issues/1472))
+* Fix! - Google Font family with spacing
+* Fix! - Custom image size in some situations ([Topic](https://wordpress.org/support/topic/insider-elementor-editor-error-500-admin-ajax/))
+* Fix! - Smooth scrolling for anchor links, now limited only to links with `.elementor-element` or `.elementor-menu-anchor` classes
+
+= 1.3.5 - 20.03.2017 =
+* Tweak! - Minimum WP version is now v4.5
+* Fix! - Shape divider glitch on some screen widths
+* Fix! - Shape divider flip bug in safari browser
+* Fix! - Conflict with jQuery FitVids plugin ([Topic](https://wordpress.org/support/topic/video-lightbox-4/))
+* Fix! - Generated CSS-file breakpoint for tablet - changed from 1023px to 1024px ([#1454](https://github.com/pojome/elementor/issues/1454))
+* Fix! - Close HTML `div` for Alert widget
+
+= 1.3.4 - 14.03.2017 =
+* Tweak! - Added more hooks for handling styles & scripts ([Topic](https://wordpress.org/support/topic/is-there-way-to-remove-google-font-link/))
+* Tweak! - Added Swiper library for future widgets
+* Fix! - Added Revision History for all Elementor-enabled CPTs
+* Fix! - Shapes for RTL direction
+* Fix! - Issue with images not loading in some situations
+* Fix! - Click on arrow icon in select field
+
+= 1.3.3 - 08.03.2017 =
+* Fix! - Negative shape rotation in front-end ([#1438](https://github.com/pojome/elementor/issues/1438))
+* Fix! - Error with anchor links with an invalid target ([Topic](https://wordpress.org/support/topic/popup-maker-not-working-on-elementor-1-3-2-pages/))
+* Fix! - Alignment issue in Icon List widget
+
+= 1.3.2 - 07.03.2017 =
+* Tweak! - Added Bring to Front option for shape divider
+* Fix! - Normalize template data in some situations ([#1432](https://github.com/pojome/elementor/issues/1432))
+* Fix! - Removed shapes handler JS from front-end
+* Fix! - Added support for shapes on Edge browser ([#1427](https://github.com/pojome/elementor/issues/1427))
+* Fix! - Shapes glitch on some screen width
+
+= 1.3.1 - 07.03.2017 =
+* Fix! - Insert or embed template in the editor ([#1426](https://github.com/pojome/elementor/issues/1426), [#1425](https://github.com/pojome/elementor/issues/1425))
+* Fix! - Imported templates were not saved correctly ([Topic](https://wordpress.org/support/topic/new-version-not-loading-2/))
+* Fix! - Comparing default values for array or multiple controls 
+
+= 1.3.0 - 06.03.2017 =
+* New! - Added Shape Divider to sections
+* New! - Added Lightbox for video widget ([#741](https://github.com/pojome/elementor/issues/741))
+* New! - Added new social icons for Slideshare, Vkontakte & Tripadvisor
+* New! - Print JS file just when is needed, by new method `Widget::get_script_depends()` ([Code Reference](https://github.com/pojome/elementor-hello-world/blob/5d37a45a9419ecb825e1706eb83689dfa0b252f8/widgets/hello-world.php#L34-L42))
+* Tweak! - Improved Icon List widget by adding: line-up, divider and space between options ([#822](https://github.com/pojome/elementor/issues/822))
+* Tweak! - Added box shadow control for Button widget ([#1357](https://github.com/pojome/elementor/issues/1357))
+* Tweak! - Don't use `html_entity_decode` on json posted data (Improving JSON format for saving Data by deprecated `html_entity_decode`)
+* Tweak! - Element-ID as anchor has no smooth scroll - Added ability to pass element id to selectors ([#1333](https://github.com/pojome/elementor/issues/1333))
+* Fix! - Added margin top property in `.elementor-inner` class for better handling with fixed headers
+
+= 1.2.4 - 28.02.2017 =
+* Tweak! - Improved embed google fonts in the front-end
+* Tweak! - Added selector in Button widget to override custom style in some themes ([#1285](https://github.com/pojome/elementor/issues/1285))
+* Tweak! - Load unminified color-picker.js file when `SCRIPT_DEBUG` is `true` ([#1364](https://github.com/pojome/elementor/issues/1364))
+* Fix! - Bug when dragging a column from a single-column section to another section ([#1346](https://github.com/pojome/elementor/issues/1346))
+* Fix! - Reduced padding for Progress Bar widget in mobile ([#1358](https://github.com/pojome/elementor/issues/1358))
+* Fix! - Descriptor field style in the repeater field
+* Fix! - Alt key for some keyboard input sources ([#1328](https://github.com/pojome/elementor/issues/1328))
 
 = 1.2.3 - 14.02.2017 =
 * Fix! - Typography group data render ([Topic](https://wordpress.org/support/topic/erro-after-upgrading-to-version-1-2-2/))

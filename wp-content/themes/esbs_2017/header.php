@@ -2,10 +2,19 @@
 <html <?php language_attributes(); ?> class="no-js">
 <head>
 
-    <title><?php echo get_bloginfo( 'title' ); ?></title>
+	<?php
 
+	if ( is_single() ):
+		echo "<title>" . get_the_title() . "</title>";
 
-    <meta name="description" content="<?php echo get_bloginfo( 'description' ); ?>">
+		if ( get_the_excerpt() ): ?>
+            <meta name="Description" content="<?php echo strip_tags( get_the_excerpt() ); ?>"/>
+		<?php endif;
+	else:
+		echo "<title>" . get_bloginfo( 'title' ) . "</title>";
+		echo '<meta name="description" content="' . get_bloginfo( 'description' ) . '">';
+	endif; ?>
+
 
     <meta charset="<?php bloginfo( 'charset' ); ?>">
 
@@ -50,8 +59,8 @@
 	<?php if ( get_field( 'fb_title' ) ):
 		$meta_fb_title = get_field( 'fb_title' );
 	else:
-        $meta_fb_title = "Europe Shall Be Saved";
-    endif; ?>
+		$meta_fb_title = "Europe Shall Be Saved";
+	endif; ?>
 
 	<?php if ( get_field( 'fb_desc' ) ):
 		$meta_fb_desc = get_field( 'fb_desc' );
@@ -109,10 +118,34 @@
 
     <a href="/" id="simple_logo"></a>
 
+    <div id="language">
+        <a id="open_lang" href="#"><?php echo pll_current_language( 'name' ) ?></a>
+        <select name="lang_switch" id="lang_switch">
+			<?php
+			$languages = pll_the_languages( array( 'raw' => 1 ) );
+
+			foreach ( $languages as $lang ) : ?>
+
+                <option <?php
+				if ( $lang['current_lang'] ) {
+					echo 'selected="selected"';
+				}
+
+				?> id="<?php echo $lang['slug'] ?>"
+                   value="<?php echo $lang['url'] ?>"><?php echo $lang['name'] ?></option>
+
+			<?php endforeach;
+
+			?>
+        </select>
+    </div>
+
 	<?php
+
 	wp_nav_menu( array(
 		'theme_location' => 'principal'
 	) );
+
 	?>
 
     <a href="/" id="burger"></a>
