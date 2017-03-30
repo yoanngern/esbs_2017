@@ -127,10 +127,10 @@ body > header div > ul > li a {
   padding: 0 15px;
   display: block; }
 
-body > header div > ul > li:hover.menu-item-type-post_type ul {
+body > header div > ul > li:hover.icons ul {
   display: block; }
 
-body > header div > ul > li.menu-item-type-post_type ul {
+body > header div > ul > li.icons ul {
   display: none;
   position: absolute;
   background-color: #e6e5e5;
@@ -138,23 +138,25 @@ body > header div > ul > li.menu-item-type-post_type ul {
   text-align: center;
   right: 0;
   -webkit-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
   padding-top: 40px;
   padding-bottom: 30px; }
 
-body > header div > ul > li.menu-item-type-post_type ul li {
+body > header div > ul > li.icons ul li {
   list-style: none;
   display: inline-block;
   margin: 0 20px;
   vertical-align: top; }
 
-body > header div > ul > li.menu-item-type-post_type ul li div.icon {
+body > header div > ul > li.icons ul li div.icon {
   display: block;
   width: 50px;
   height: 50px;
   background-color: red; }
 
-body > header div > ul > li.menu-item-type-post_type ul li a {
+body > header div > ul > li.icons ul li a {
   line-height: 1.3em;
   font-family: "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
   font-size: 0.8em;
@@ -164,7 +166,7 @@ body > header div > ul > li.menu-item-type-post_type ul li a {
   overflow: hidden;
   vertical-align: top; }
 
-body > header div > ul > li.menu-item-type-post_type ul li a::before {
+body > header div > ul > li.icons ul li a::before {
   display: block;
   content: '';
   background-repeat: no-repeat;
@@ -173,25 +175,25 @@ body > header div > ul > li.menu-item-type-post_type ul li a::before {
   height: 100px;
   margin-bottom: 10px; }
 
-body > header div > ul > li.menu-item-type-post_type ul li a:hover::before {
+body > header div > ul > li.icons ul li a:hover::before {
   opacity: 0.8; }
 
-body > header div > ul > li.menu-item-type-post_type ul li.current-menu-item a {
+body > header div > ul > li.icons ul li.current-menu-item a {
   color: #867332; }
 
-body > header div > ul > li.menu-item-type-post_type ul li.icon-intercessor a::before {
+body > header div > ul > li.icons ul li.icon-intercessor a::before {
   background-image: url("images/icon_intercessor.png"); }
 
-body > header div > ul > li.menu-item-type-post_type ul li.icon-outreach a::before {
+body > header div > ul > li.icons ul li.icon-outreach a::before {
   background-image: url("images/icon_outreach.png"); }
 
-body > header div > ul > li.menu-item-type-post_type ul li.icon-church a::before {
+body > header div > ul > li.icons ul li.icon-church a::before {
   background-image: url("images/icon_church.png"); }
 
-body > header div > ul > li.menu-item-type-post_type ul li.icon-church_planting a::before {
+body > header div > ul > li.icons ul li.icon-church_planting a::before {
   background-image: url("images/icon_church_planting.png"); }
 
-body > header div > ul > li.menu-item-type-post_type ul li.icon-business a::before {
+body > header div > ul > li.icons ul li.icon-business a::before {
   background-image: url("images/icon_business.png"); }
 
 body > header div > ul > li:last-of-type {
@@ -251,7 +253,6 @@ body > header div > ul li a {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   text-decoration: none;
-  -webkit-transition: all 100ms ease;
   transition: all 100ms ease;
   cursor: pointer;
   font-size: 0.9em; }
@@ -335,7 +336,6 @@ body > header #burger a:hover {
     padding: 48px 3% 0;
     overflow: hidden;
     display: block;
-    -webkit-transition: all 200ms ease;
     transition: all 200ms ease;
     text-align: left;
     z-index: 10;
@@ -362,25 +362,25 @@ body > header #burger a:hover {
     display: none;
     position: relative;
     width: 100%; }
-  body > header div > ul > li.menu-item-type-post_type ul {
+  body > header div > ul > li.icons ul {
     display: block;
     position: relative;
     padding: 0;
     background: none;
     margin: 0 auto 20px; }
-  body > header div > ul > li.menu-item-type-post_type ul li {
+  body > header div > ul > li.icons ul li {
     text-align: center;
     margin: 5px auto;
     display: block; }
-  body > header div > ul > li.menu-item-type-post_type ul li.current_page_item a, body > header div > ul > li.menu-item-type-post_type ul li.current-menu-item a {
+  body > header div > ul > li.icons ul li.current_page_item a, body > header div > ul > li.icons ul li.current-menu-item a {
     color: #FFE591; }
-  body > header div > ul > li.menu-item-type-post_type ul li a {
+  body > header div > ul > li.icons ul li a {
     color: #FFFFFF;
     width: auto;
     line-height: 28px; }
-  body > header div > ul > li.menu-item-type-post_type ul li a:hover {
+  body > header div > ul > li.icons ul li a:hover {
     color: #d3b963; }
-  body > header div > ul > li.menu-item-type-post_type ul li a::before {
+  body > header div > ul > li.icons ul li a::before {
     display: none; }
   body > header div > ul.show {
     bottom: 0;
@@ -523,7 +523,6 @@ a.elementor-button {
   color: #FFFFFF;
   display: block;
   text-align: center;
-  -webkit-transition: all 300ms ease;
   transition: all 300ms ease; }
 
 #hot_news:hover {
@@ -636,7 +635,6 @@ body.page-template-default #content article.title div.button a.button {
   padding: 15px 30px 8px;
   border-width: 2px;
   letter-spacing: 0.15em;
-  -webkit-transition: all 100ms ease;
   transition: all 100ms ease; }
 
 body.page-template-default #content article.title div.button a.button:hover {
@@ -693,8 +691,7 @@ body.page-template-default #content div.platter article.content-page div.content
   column-gap: 110px;
   -webkit-column-span: all;
   /* Chrome, Safari, Opera */
-  -moz-column-span: all;
-       column-span: all; }
+  column-span: all; }
 
 body.page-template-default #content div.platter article.content-page div.content h2, body.page-template-default #content div.platter article.content-page div.content h3 {
   font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
@@ -876,7 +873,6 @@ section#content section.related_posts article.title div.text a.button {
   letter-spacing: 0.4em;
   line-height: 1.4em;
   padding: 8px 25px 6px;
-  -webkit-transition: all 150ms ease;
   transition: all 150ms ease; }
 
 section#content.blog section.title > article div.text a.button:hover,
@@ -924,7 +920,6 @@ section#content section.related_posts .platter header div#categories span#curren
   font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
   color: #d3b963;
   cursor: pointer;
-  -webkit-transition: all 100ms ease;
   transition: all 100ms ease; }
 
 section#content.blog .platter header div#categories span#current_act:hover,
@@ -1026,7 +1021,6 @@ section#content section.related_posts .platter .list article.post figure {
 section#content.blog .platter .list article.post figure img,
 section#content section.related_posts .platter .list article.post figure img {
   width: 100%;
-  -webkit-transition: all 100ms ease;
   transition: all 100ms ease; }
 
 section#content.blog .platter .list article.post figure img:hover,
@@ -1053,7 +1047,6 @@ section#content section.related_posts .platter .list article.post ul li a {
   font-family: "DidotLTStd-Italic", "DidotLTStd-Roman", times, serif;
   color: #333333;
   text-decoration: none;
-  -webkit-transition: all 100ms ease;
   transition: all 100ms ease; }
 
 section#content.blog .platter .list article.post ul li a:hover,
@@ -1075,7 +1068,6 @@ section#content section.related_posts .platter .list article.post h2 a {
   line-height: 1.4em;
   letter-spacing: 0.07em;
   font-size: 1.15em;
-  -webkit-transition: all 200ms ease;
   transition: all 200ms ease; }
 
 section#content.blog .platter .list article.post h2 a:hover,
@@ -1117,7 +1109,6 @@ section#content section.related_posts .platter .list article.post div.button a.b
   padding: 4px 0 0 0;
   width: 40%;
   border-width: 1.5px;
-  -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
   margin: 0; }
 
@@ -1168,7 +1159,6 @@ section#content.blog .platter > article a,
 section#content section.related_posts .platter > article a {
   color: #d3b963;
   text-decoration: none;
-  -webkit-transition: all 200ms ease;
   transition: all 200ms ease; }
 
 section#content.blog .platter > article a:hover,
@@ -1285,7 +1275,6 @@ section#content section.related_posts .nav_top a {
   display: inline-block;
   background-size: contain;
   padding-top: 4px;
-  -webkit-transition: all 100ms ease;
   transition: all 100ms ease; }
 
 section#content.blog .nav_bottom a:hover,
@@ -1462,6 +1451,10 @@ section#content section.related_posts .platter .list article.post h2::after {
   background-color: rgba(255, 255, 255, 0.7);
   width: 9px;
   height: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  -ms-border-radius: 9px;
+  -o-border-radius: 9px;
   border-radius: 9px;
   margin: 5px; }
 
@@ -1506,7 +1499,6 @@ body div.footer_button a.button {
   padding: 12px 30px 8px;
   border-width: 2px;
   letter-spacing: 0.19em;
-  -webkit-transition: all 100ms ease;
   transition: all 100ms ease; }
 
 body div.footer_button a.button:hover {

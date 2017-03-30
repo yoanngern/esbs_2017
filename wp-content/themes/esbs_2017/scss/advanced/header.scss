@@ -35,12 +35,12 @@ body > header {
 
                 &:hover {
 
-                    &.menu-item-type-post_type ul {
+                    &.icons  ul {
                         display: block;
                     }
                 }
 
-                &.menu-item-type-post_type ul {
+                &.icons ul {
                     display: none;
                     position: absolute;
                     background-color: lighten($gray, 70);
@@ -53,6 +53,7 @@ body > header {
                     transition: 0.3s ease-in-out;
                     padding-top: 40px;
                     padding-bottom: 30px;
+
 
                     li {
                         list-style: none;
@@ -371,7 +372,8 @@ body > header {
                         width: 100%;
                     }
 
-                    &.menu-item-type-post_type ul {
+
+                    &.icons ul {
                         display: block;
                         position: relative;
                         padding: 0;
