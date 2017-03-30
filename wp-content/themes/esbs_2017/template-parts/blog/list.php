@@ -6,7 +6,7 @@
         <figure>
             <a href="<?php echo esc_url( get_permalink() ) ?>">
 
-                <img src="<?php echo get_field_or_parent('thumb')['sizes']['blog'] ?>" alt="">
+                <img src="<?php echo get_field_or_parent('thumb', get_the_ID())['sizes']['blog'] ?>" alt="">
             </a>
         </figure>
 
