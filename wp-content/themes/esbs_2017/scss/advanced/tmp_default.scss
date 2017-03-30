@@ -40,6 +40,7 @@ body.page-template-default {
             div.button {
                 margin-bottom: 30px;
 
+
                 a.button {
                     color: $white;
                     text-align: center;
@@ -52,6 +53,7 @@ body.page-template-default {
                     border-width: 2px;
                     letter-spacing: 0.15em;
                     transition: all 100ms ease;
+                    margin-right: 0;
 
                     &:hover {
                         background-color: $gold;

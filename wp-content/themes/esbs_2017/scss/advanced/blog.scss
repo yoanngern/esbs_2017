@@ -89,6 +89,7 @@ section#content section.related_posts {
                 line-height: 1.4em;
                 padding: 8px 25px 6px;
                 transition: all 150ms ease;
+                margin-right: 0;
 
                 &:hover {
                     background-color: $white;
@@ -556,7 +557,7 @@ section#content section.related_posts {
                 top: inherit;
 
                 h1 {
-                    font-size: 1.6em;
+                    font-size: 1.5em;
                 }
             }
         }
@@ -595,6 +596,19 @@ section#content section.related_posts {
 
                 article.post {
                     width: 100%;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 360px) {
+        article.title,
+        section.title article {
+
+            div.text {
+
+                h1 {
+                    font-size: 1.3em;
                 }
             }
         }

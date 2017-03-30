@@ -637,7 +637,8 @@ body.page-template-default #content article.title div.button a.button {
   border-width: 2px;
   letter-spacing: 0.15em;
   -webkit-transition: all 100ms ease;
-  transition: all 100ms ease; }
+  transition: all 100ms ease;
+  margin-right: 0; }
 
 body.page-template-default #content article.title div.button a.button:hover {
   background-color: #d3b963;
@@ -877,7 +878,8 @@ section#content section.related_posts article.title div.text a.button {
   line-height: 1.4em;
   padding: 8px 25px 6px;
   -webkit-transition: all 150ms ease;
-  transition: all 150ms ease; }
+  transition: all 150ms ease;
+  margin-right: 0; }
 
 section#content.blog section.title > article div.text a.button:hover,
 section#content.blog article.title div.text a.button:hover,
@@ -1356,7 +1358,7 @@ section#content section.related_posts .nav_top .alignright a {
   section#content.blog section.title article div.text h1,
   section#content section.related_posts article.title div.text h1,
   section#content section.related_posts section.title article div.text h1 {
-    font-size: 1.6em; }
+    font-size: 1.5em; }
   section#content.blog article.title,
   section#content section.related_posts article.title {
     min-height: 300px;
@@ -1386,6 +1388,13 @@ section#content section.related_posts .nav_top .alignright a {
   section#content.blog .platter .list article.post,
   section#content section.related_posts .platter .list article.post {
     width: 100%; } }
+
+@media only screen and (max-width: 360px) {
+  section#content.blog article.title div.text h1,
+  section#content.blog section.title article div.text h1,
+  section#content section.related_posts article.title div.text h1,
+  section#content section.related_posts section.title article div.text h1 {
+    font-size: 1.3em; } }
 
 section#content section.related_posts {
   background-color: #ececec;
