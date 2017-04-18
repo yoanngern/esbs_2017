@@ -110,7 +110,41 @@ body > header {
   left: 0;
   right: 0;
   top: 0;
-  background-color: #333333; }
+  background-color: #333333;
+  /*
+    @media only screen and (max-width: 1000px) {
+        div.principal-nav div {
+
+            & > ul {
+                & > li {
+                    width: 33%;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 800px) {
+        div.principal-nav div {
+
+            & > ul {
+                & > li {
+                    width: 50%;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 550px) {
+        div.principal-nav div {
+
+            & > ul {
+                & > li {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    */ }
   body > header #language {
     display: none; }
   body > header div.private-nav {
@@ -334,7 +368,7 @@ body > header {
         body > header div.principal-nav div > ul > li:last-of-type {
           margin-bottom: 68px; }
         body > header div.principal-nav div > ul > li {
-          width: 25%;
+          width: 100%;
           margin: 5px auto;
           display: block;
           text-align: center; }
@@ -375,15 +409,6 @@ body > header {
           position: absolute; }
           body > header div.principal-nav div > ul.show > li.pll-parent-menu-item {
             display: none; } }
-  @media only screen and (max-width: 1000px) {
-    body > header div.principal-nav div > ul > li {
-      width: 33%; } }
-  @media only screen and (max-width: 800px) {
-    body > header div.principal-nav div > ul > li {
-      width: 50%; } }
-  @media only screen and (max-width: 550px) {
-    body > header div.principal-nav div > ul > li {
-      width: 100%; } }
 
 footer {
   text-align: center;

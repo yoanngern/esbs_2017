@@ -385,7 +385,7 @@ body > header {
                     }
 
                     & > li {
-                        width: 25%;
+                        width: 100%;
                         margin: 5px auto;
                         display: block;
                         text-align: center;
@@ -465,6 +465,7 @@ body > header {
         }
     }
 
+    /*
     @media only screen and (max-width: 1000px) {
         div.principal-nav div {
 
@@ -497,4 +498,5 @@ body > header {
             }
         }
     }
+    */
 }
