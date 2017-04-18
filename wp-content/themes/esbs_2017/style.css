@@ -113,113 +113,130 @@ body > header {
   background-color: #333333; }
   body > header #language {
     display: none; }
-  body > header div {
+  body > header div.private-nav {
+    width: 100%;
+    background-color: #262626; }
+    body > header div.private-nav ul li {
+      display: inline-block;
+      list-style: none; }
+      body > header div.private-nav ul li a {
+        line-height: 30px;
+        color: #999999;
+        text-decoration: none;
+        font-size: 0.8em;
+        padding: 0 0 0 15px;
+        letter-spacing: 0.08em; }
+        body > header div.private-nav ul li a:hover {
+          color: #d3b963; }
+  body > header div.principal-nav div {
     margin: 0 auto;
     text-align: center; }
-    body > header div > ul > li {
+    body > header div.principal-nav div > ul > li {
       display: inline-block; }
-      body > header div > ul > li a {
+      body > header div.principal-nav div > ul > li a {
         line-height: 55px;
         padding: 0 15px;
         display: block; }
-      body > header div > ul > li:hover.icons ul {
-        display: block; }
-      body > header div > ul > li.icons ul {
-        display: none;
+      body > header div.principal-nav div > ul > li:hover.icons ul {
+        max-height: 500px; }
+      body > header div.principal-nav div > ul > li.icons ul {
         position: absolute;
         background-color: #e6e5e5;
         left: 0;
         text-align: center;
         right: 0;
-        -webkit-transition: 0.3s ease-in-out;
-        -o-transition: 0.3s ease-in-out;
-        -moz-transition: 0.3s ease-in-out;
-        transition: 0.3s ease-in-out;
-        padding-top: 40px;
-        padding-bottom: 30px; }
-        body > header div > ul > li.icons ul li {
+        -webkit-transition: 0.4s ease-in-out;
+        -o-transition: 0.4s ease-in-out;
+        -moz-transition: 0.4s ease-in-out;
+        transition: 0.4s ease-in-out;
+        padding-top: 0;
+        max-height: 0;
+        overflow: hidden; }
+        body > header div.principal-nav div > ul > li.icons ul li {
           list-style: none;
           display: inline-block;
-          margin: 0 20px;
-          vertical-align: top; }
-          body > header div > ul > li.icons ul li div.icon {
+          margin: 20px 10px;
+          vertical-align: top;
+          position: relative; }
+          body > header div.principal-nav div > ul > li.icons ul li div.icon {
             display: block;
             width: 50px;
             height: 50px;
             background-color: red; }
-          body > header div > ul > li.icons ul li a {
+          body > header div.principal-nav div > ul > li.icons ul li a {
             line-height: 1.3em;
             font-family: "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
-            font-size: 0.8em;
+            font-size: 0.7em;
             color: #333333;
             display: block;
-            width: 120px;
+            width: 100px;
             overflow: hidden;
-            vertical-align: top; }
-            body > header div > ul > li.icons ul li a::before {
+            vertical-align: top;
+            padding: 0; }
+            body > header div.principal-nav div > ul > li.icons ul li a::before {
               display: block;
               content: '';
               background-repeat: no-repeat;
               background-size: contain;
               background-position: center;
-              height: 100px;
+              height: 70px;
               margin-bottom: 10px; }
-            body > header div > ul > li.icons ul li a:hover::before {
+            body > header div.principal-nav div > ul > li.icons ul li a:hover::before {
               opacity: 0.8; }
-          body > header div > ul > li.icons ul li.current-menu-item a {
+          body > header div.principal-nav div > ul > li.icons ul li.current-menu-item a {
             color: #867332; }
-          body > header div > ul > li.icons ul li.icon-default a::before {
+          body > header div.principal-nav div > ul > li.icons ul li.icon-default a::before {
             background-image: url("images/icon_default.png"); }
-          body > header div > ul > li.icons ul li.icon-intercessor a::before {
+          body > header div.principal-nav div > ul > li.icons ul li.icon-intercessor a::before {
             background-image: url("images/icon_intercessor.png"); }
-          body > header div > ul > li.icons ul li.icon-outreach a::before {
+          body > header div.principal-nav div > ul > li.icons ul li.icon-outreach a::before {
             background-image: url("images/icon_outreach.png"); }
-          body > header div > ul > li.icons ul li.icon-church a::before {
+          body > header div.principal-nav div > ul > li.icons ul li.icon-church a::before {
             background-image: url("images/icon_church.png"); }
-          body > header div > ul > li.icons ul li.icon-church_planting a::before {
+          body > header div.principal-nav div > ul > li.icons ul li.icon-church_planting a::before {
             background-image: url("images/icon_church_planting.png"); }
-          body > header div > ul > li.icons ul li.icon-business a::before {
+          body > header div.principal-nav div > ul > li.icons ul li.icon-business a::before {
             background-image: url("images/icon_business.png"); }
-      body > header div > ul > li:last-of-type {
+      body > header div.principal-nav div > ul > li:last-of-type {
         background-color: #d3b963;
         position: absolute;
         right: 0; }
-        body > header div > ul > li:last-of-type a {
+        body > header div.principal-nav div > ul > li:last-of-type a {
           padding: 0 35px; }
-          body > header div > ul > li:last-of-type a:hover {
+          body > header div.principal-nav div > ul > li:last-of-type a:hover {
             color: #333333; }
-      body > header div > ul > li.pll-parent-menu-item {
+      body > header div.principal-nav div > ul > li.pll-parent-menu-item {
         position: absolute;
         left: 0; }
-        body > header div > ul > li.pll-parent-menu-item a {
+        body > header div.principal-nav div > ul > li.pll-parent-menu-item a {
           padding: 0 15px;
           color: #999999; }
-          body > header div > ul > li.pll-parent-menu-item a:hover {
+          body > header div.principal-nav div > ul > li.pll-parent-menu-item a:hover {
             color: #d3b963; }
-        body > header div > ul > li.pll-parent-menu-item ul {
+        body > header div.principal-nav div > ul > li.pll-parent-menu-item ul {
           display: none;
-          top: 0;
-          width: 100%;
+          width: 0;
           background-color: #333333;
           position: fixed;
           text-align: left;
           left: 0;
           right: 0; }
-          body > header div > ul > li.pll-parent-menu-item ul li {
+          body > header div.principal-nav div > ul > li.pll-parent-menu-item ul li {
             display: inline-block;
             position: relative; }
-            body > header div > ul > li.pll-parent-menu-item ul li.current-lang {
+            body > header div.principal-nav div > ul > li.pll-parent-menu-item ul li.current-lang {
               float: left; }
-        body > header div > ul > li.pll-parent-menu-item:hover ul {
+        body > header div.principal-nav div > ul > li.pll-parent-menu-item:hover ul {
           height: auto;
-          display: block; }
-        body > header div > ul > li.pll-parent-menu-item:hover > a {
+          display: block;
+          width: 100%; }
+        body > header div.principal-nav div > ul > li.pll-parent-menu-item:hover > a {
           display: none; }
-    body > header div > ul li.current-menu-item > a, body > header div > ul li.current-page-ancestor > a, body > header div > ul li.current-menu-ancestor > a, body > header div > ul li.current_page_parent > a {
+    body > header div.principal-nav div > ul li.current-menu-item > a, body > header div.principal-nav div > ul li.current-page-ancestor > a, body > header div.principal-nav div > ul li.current-menu-ancestor > a, body > header div.principal-nav div > ul li.current_page_parent > a {
       color: #FFE591; }
-    body > header div > ul li.current-menu-item:last-of-type a, body > header div > ul li.current-page-ancestor:last-of-type a, body > header div > ul li.current-menu-ancestor:last-of-type a, body > header div > ul li.current_page_parent:last-of-type a {
+    body > header div.principal-nav div > ul li.current-menu-item:last-of-type a, body > header div.principal-nav div > ul li.current-page-ancestor:last-of-type a, body > header div.principal-nav div > ul li.current-menu-ancestor:last-of-type a, body > header div.principal-nav div > ul li.current_page_parent:last-of-type a {
       color: #FFFFFF; }
-    body > header div > ul li a {
+    body > header div.principal-nav div > ul li a {
       color: #FFFFFF;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -227,7 +244,7 @@ body > header {
       transition: all 100ms ease;
       cursor: pointer;
       font-size: 0.9em; }
-      body > header div > ul li a:hover {
+      body > header div.principal-nav div > ul li a:hover {
         color: #d3b963; }
   body > header #burger {
     display: none;
@@ -247,6 +264,8 @@ body > header {
     body > header #burger a:hover {
       background-color: transparent; }
   @media only screen and (max-width: 1064px) {
+    body > header div.private-nav {
+      display: none; }
     body > header #language {
       display: block;
       position: absolute;
@@ -294,10 +313,10 @@ body > header {
       top: 0;
       display: block;
       z-index: 100; }
-    body > header div {
+    body > header div.principal-nav div {
       position: relative;
       z-index: 0; }
-      body > header div > ul {
+      body > header div.principal-nav div > ul {
         background-color: #333333;
         padding: 48px 3% 0;
         overflow: hidden;
@@ -309,61 +328,61 @@ body > header {
         top: 0;
         left: 0;
         right: 0; }
-        body > header div > ul li a {
+        body > header div.principal-nav div > ul li a {
           font-size: 1.4em;
           line-height: 48px; }
-        body > header div > ul > li:last-of-type {
+        body > header div.principal-nav div > ul > li:last-of-type {
           margin-bottom: 68px; }
-        body > header div > ul > li {
+        body > header div.principal-nav div > ul > li {
           width: 25%;
           margin: 5px auto;
           display: block;
           text-align: center; }
-          body > header div > ul > li:last-of-type {
+          body > header div.principal-nav div > ul > li:last-of-type {
             position: relative;
             background-color: #333333; }
-            body > header div > ul > li:last-of-type a:hover {
+            body > header div.principal-nav div > ul > li:last-of-type a:hover {
               color: #d3b963; }
-          body > header div > ul > li.pll-parent-menu-item {
+          body > header div.principal-nav div > ul > li.pll-parent-menu-item {
             display: none;
             position: relative;
             width: 100%; }
-          body > header div > ul > li.icons ul {
+          body > header div.principal-nav div > ul > li.icons ul {
             display: block;
             position: relative;
             padding: 0;
             background: none;
             margin: 0 auto 20px; }
-            body > header div > ul > li.icons ul li {
+            body > header div.principal-nav div > ul > li.icons ul li {
               text-align: center;
               margin: 5px auto;
               display: block; }
-              body > header div > ul > li.icons ul li.current_page_item a, body > header div > ul > li.icons ul li.current-menu-item a {
+              body > header div.principal-nav div > ul > li.icons ul li.current_page_item a, body > header div.principal-nav div > ul > li.icons ul li.current-menu-item a {
                 color: #FFE591; }
-              body > header div > ul > li.icons ul li a {
+              body > header div.principal-nav div > ul > li.icons ul li a {
                 color: #FFFFFF;
                 width: auto;
                 line-height: 28px; }
-                body > header div > ul > li.icons ul li a:hover {
+                body > header div.principal-nav div > ul > li.icons ul li a:hover {
                   color: #d3b963; }
-                body > header div > ul > li.icons ul li a::before {
+                body > header div.principal-nav div > ul > li.icons ul li a::before {
                   display: none; }
-        body > header div > ul.show {
+        body > header div.principal-nav div > ul.show {
           bottom: 0;
           height: 100vh;
           overflow: scroll;
           padding-bottom: 48px;
           position: absolute; }
-          body > header div > ul.show > li.pll-parent-menu-item {
+          body > header div.principal-nav div > ul.show > li.pll-parent-menu-item {
             display: none; } }
   @media only screen and (max-width: 1000px) {
-    body > header div > ul > li {
+    body > header div.principal-nav div > ul > li {
       width: 33%; } }
   @media only screen and (max-width: 800px) {
-    body > header div > ul > li {
+    body > header div.principal-nav div > ul > li {
       width: 50%; } }
   @media only screen and (max-width: 550px) {
-    body > header div > ul > li {
+    body > header div.principal-nav div > ul > li {
       width: 100%; } }
 
 footer {

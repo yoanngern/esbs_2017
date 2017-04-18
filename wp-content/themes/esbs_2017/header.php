@@ -116,6 +116,21 @@
 
 <header>
 
+	<?php
+
+	if ( is_user_logged_in() ) : ?>
+
+        <div class="private-nav">
+
+			<?php
+			wp_nav_menu( array(
+				'theme_location' => 'admin'
+			) );
+			?>
+
+        </div>
+	<?php endif; ?>
+
     <a href="/" id="simple_logo"></a>
 
     <div id="language">
@@ -140,13 +155,15 @@
         </select>
     </div>
 
-	<?php
+    <div class="principal-nav">
+		<?php
 
-	wp_nav_menu( array(
-		'theme_location' => 'principal'
-	) );
+		wp_nav_menu( array(
+			'theme_location' => 'principal'
+		) );
 
-	?>
+		?>
+    </div>
 
     <a href="/" id="burger"></a>
 

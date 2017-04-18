@@ -16,216 +16,247 @@ body > header {
         display: none;
     }
 
-    div {
-        margin: 0 auto;
-        text-align: center;
+    div.private-nav {
+        width: 100%;
+        background-color: darken($black, 5);
 
-        & > ul {
+        ul {
 
-            & > li {
+            li {
                 display: inline-block;
-                //position: relative;
+                list-style: none;
 
                 a {
-                    line-height: 55px;
-                    padding: 0 15px;
-                    display: block;
+                    line-height: 30px;
+                    color: lighten($gray, 40);
+                    text-decoration: none;
+                    font-size: 0.8em;
+                    padding: 0 0 0 15px;
+                    letter-spacing: 0.08em;
 
-                }
-
-                &:hover {
-
-                    &.icons  ul {
-                        display: block;
+                    &:hover {
+                        color: $gold;
                     }
+
                 }
+            }
+        }
+    }
 
-                &.icons ul {
-                    display: none;
-                    position: absolute;
-                    background-color: lighten($gray, 70);
-                    left: 0;
-                    text-align: center;
-                    right: 0;
-                    -webkit-transition: 0.3s ease-in-out;
-                    -o-transition: 0.3s ease-in-out;
-                    -moz-transition: 0.3s ease-in-out;
-                    transition: 0.3s ease-in-out;
-                    padding-top: 40px;
-                    padding-bottom: 30px;
+    div.principal-nav {
 
+        div {
+            margin: 0 auto;
+            text-align: center;
 
-                    li {
-                        list-style: none;
-                        display: inline-block;
-                        margin: 0 20px;
-                        vertical-align: top;
+            & > ul {
 
-                        div.icon {
-                            display: block;
-                            width: 50px;
-                            height: 50px;
-                            background-color: red;
+                & > li {
+                    display: inline-block;
+
+                    a {
+                        line-height: 55px;
+                        padding: 0 15px;
+                        display: block;
+
+                    }
+
+                    &:hover {
+
+                        &.icons ul {
+                            max-height: 500px;
                         }
+                    }
 
-                        a {
-                            line-height: 1.3em;
-                            font-family: $avenir-med;
-                            font-size: 0.8em;
-                            color: $black;
-                            display: block;
-                            width: 120px;
-                            overflow: hidden;
+                    &.icons ul {
+                        position: absolute;
+                        background-color: lighten($gray, 70);
+                        left: 0;
+                        text-align: center;
+                        right: 0;
+                        -webkit-transition: 0.4s ease-in-out;
+                        -o-transition: 0.4s ease-in-out;
+                        -moz-transition: 0.4s ease-in-out;
+                        transition: 0.4s ease-in-out;
+                        padding-top: 0;
+                        max-height: 0;
+                        overflow: hidden;
+
+                        li {
+                            list-style: none;
+                            display: inline-block;
+                            margin: 20px 10px;
                             vertical-align: top;
+                            position: relative;
 
-                            &::before {
+                            div.icon {
                                 display: block;
-                                content: '';
-                                background-repeat: no-repeat;
-                                background-size: contain;
-                                background-position: center;
-                                height: 100px;
-                                margin-bottom: 10px;
+                                width: 50px;
+                                height: 50px;
+                                background-color: red;
                             }
 
-                            &:hover {
+                            a {
+                                line-height: 1.3em;
+                                font-family: $avenir-med;
+                                font-size: 0.7em;
+                                color: $black;
+                                display: block;
+                                width: 100px;
+                                overflow: hidden;
+                                vertical-align: top;
+                                padding: 0;
+
                                 &::before {
-                                    opacity: 0.8;
+                                    display: block;
+                                    content: '';
+                                    background-repeat: no-repeat;
+                                    background-size: contain;
+                                    background-position: center;
+                                    height: 70px;
+                                    margin-bottom: 10px;
+                                }
+
+                                &:hover {
+                                    &::before {
+                                        opacity: 0.8;
+                                    }
+                                }
+                            }
+
+                            &.current-menu-item {
+                                a {
+                                    color: $gold_dark;
+                                }
+                            }
+
+                            &.icon-default a::before {
+                                background-image: url('images/icon_default.png');
+                            }
+
+                            &.icon-intercessor a::before {
+                                background-image: url('images/icon_intercessor.png');
+                            }
+
+                            &.icon-outreach a::before {
+                                background-image: url('images/icon_outreach.png');
+                            }
+
+                            &.icon-church a::before {
+                                background-image: url('images/icon_church.png');
+                            }
+
+                            &.icon-church_planting a::before {
+                                background-image: url('images/icon_church_planting.png');
+                            }
+
+                            &.icon-business a::before {
+                                background-image: url('images/icon_business.png');
+                            }
+                        }
+                    }
+
+                    &:last-of-type {
+                        background-color: $gold;
+                        position: absolute;
+                        right: 0;
+
+                        a {
+                            padding: 0 35px;
+
+                            &:hover {
+                                color: $gray;
+                            }
+                        }
+                    }
+
+                    &.pll-parent-menu-item {
+                        position: absolute;
+                        left: 0;
+
+                        a {
+                            padding: 0 15px;
+                            color: lighten($gray, 40);
+
+                            &:hover {
+                                color: $gold;
+                            }
+                        }
+
+                        & > a {
+                            //display: none;
+                        }
+
+                        ul {
+                            display: none;
+                            //top: 0;
+                            width: 0;
+                            background-color: $black;
+                            position: fixed;
+                            text-align: left;
+                            left: 0;
+                            right: 0;
+
+                            li {
+                                display: inline-block;
+                                position: relative;
+
+                                &.current-lang {
+                                    float: left;
                                 }
                             }
                         }
 
-                        &.current-menu-item {
-                            a {
-                                color: $gold_dark;
+                        &:hover {
+
+                            ul {
+                                height: auto;
+                                display: block;
+                                width: 100%;
+                            }
+
+                            & > a {
+                                display: none;
                             }
                         }
-
-                        &.icon-default a::before {
-                            background-image: url('images/icon_default.png');
-                        }
-
-                        &.icon-intercessor a::before {
-                            background-image: url('images/icon_intercessor.png');
-                        }
-
-                        &.icon-outreach a::before {
-                            background-image: url('images/icon_outreach.png');
-                        }
-
-                        &.icon-church a::before {
-                            background-image: url('images/icon_church.png');
-                        }
-
-                        &.icon-church_planting a::before {
-                            background-image: url('images/icon_church_planting.png');
-                        }
-
-                        &.icon-business a::before {
-                            background-image: url('images/icon_business.png');
-                        }
                     }
                 }
 
-                &:last-of-type {
-                    background-color: $gold;
-                    position: absolute;
-                    right: 0;
+                li {
 
-                    a {
-                        padding: 0 35px;
+                    &.current-menu-item,
+                    &.current-page-ancestor,
+                    &.current-menu-ancestor,
+                    &.current_page_parent {
+                        & > a {
+                            color: $gold_light;
 
-                        &:hover {
-                            color: $gray;
+                        }
+
+                        &:last-of-type {
+                            a {
+                                color: $white;
+                            }
                         }
                     }
-                }
-
-                &.pll-parent-menu-item {
-                    position: absolute;
-                    left: 0;
 
                     a {
-                        padding: 0 15px;
-                        color: lighten($gray, 40);
+                        color: $white;
+                        letter-spacing: 0.2em;
+                        text-transform: uppercase;
+                        text-decoration: none;
+                        transition: all 100ms ease;
+                        cursor: pointer;
+                        font-size: 0.9em;
 
                         &:hover {
                             color: $gold;
                         }
                     }
 
-                    & > a {
-                        //display: none;
-                    }
-
-                    ul {
-                        display: none;
-                        top: 0;
-                        width: 100%;
-                        background-color: $black;
-                        position: fixed;
-                        text-align: left;
-                        left: 0;
-                        right: 0;
-
-                        li {
-                            display: inline-block;
-                            position: relative;
-
-                            &.current-lang {
-                                float: left;
-                            }
-                        }
-                    }
-
-                    &:hover {
-
-                        ul {
-                            height: auto;
-                            display: block;
-                        }
-
-                        & > a {
-                            display: none;
-                        }
-                    }
-                }
-            }
-
-            li {
-
-                &.current-menu-item,
-                &.current-page-ancestor,
-                &.current-menu-ancestor,
-                &.current_page_parent {
-                    & > a {
-                        color: $gold_light;
-
-                    }
-
-                    &:last-of-type {
-                        a {
-                            color: $white;
-                        }
-                    }
-                }
-
-                a {
-                    color: $white;
-                    letter-spacing: 0.2em;
-                    text-transform: uppercase;
-                    text-decoration: none;
-                    transition: all 100ms ease;
-                    cursor: pointer;
-                    font-size: 0.9em;
-
-                    &:hover {
-                        color: $gold;
-                    }
                 }
 
             }
-
         }
     }
 
@@ -260,6 +291,10 @@ body > header {
     }
 
     @media only screen and (max-width: 1064px) {
+
+        div.private-nav {
+            display: none;
+        }
 
         #language {
             display: block;
@@ -323,117 +358,117 @@ body > header {
             z-index: 100;
         }
 
-        div {
-            position: relative;
-            z-index: 0;
+        div.principal-nav {
+            div {
+                position: relative;
+                z-index: 0;
 
-            & > ul {
-                background-color: $gray;
-                padding: 48px 3% 0;
-                overflow: hidden;
-                display: block;
-                transition: all 200ms ease;
-                text-align: left;
-                z-index:10;
-                //position: absolute;
-                height: 0;
-                top: 0;
-                left: 0;
-                right: 0;
-
-
-                li a {
-                    font-size: 1.4em;
-                    line-height: 48px;
-                }
-
-                & > li:last-of-type {
-                    margin-bottom: 68px;
-                }
-
-                & > li {
-                    width: 25%;
-                    margin: 5px auto;
+                & > ul {
+                    background-color: $gray;
+                    padding: 48px 3% 0;
+                    overflow: hidden;
                     display: block;
-                    text-align: center;
+                    transition: all 200ms ease;
+                    text-align: left;
+                    z-index: 10;
+                    //position: absolute;
+                    height: 0;
+                    top: 0;
+                    left: 0;
+                    right: 0;
 
-                    &:last-of-type {
-                        position: relative;
-                        background-color: $gray;
-
-                        a {
-                            &:hover {
-                                color: $gold;
-                            }
-                        }
+                    li a {
+                        font-size: 1.4em;
+                        line-height: 48px;
                     }
 
-                    &.pll-parent-menu-item {
-                        display: none;
-                        position: relative;
-                        width: 100%;
+                    & > li:last-of-type {
+                        margin-bottom: 68px;
                     }
 
-
-                    &.icons ul {
+                    & > li {
+                        width: 25%;
+                        margin: 5px auto;
                         display: block;
-                        position: relative;
-                        padding: 0;
-                        background: none;
-                        margin: 0 auto 20px;
+                        text-align: center;
 
-                        li {
-                            text-align: center;
-                            margin: 5px auto;
-                            display: block;
-
-                            &.current_page_item,
-                            &.current-menu-item {
-                                a {
-                                    color: $gold-light;
-                                }
-                            }
+                        &:last-of-type {
+                            position: relative;
+                            background-color: $gray;
 
                             a {
-                                color: $white;
-                                width: auto;
-                                line-height: 28px;
-
                                 &:hover {
                                     color: $gold;
                                 }
-
-                                &::before {
-                                    display: none;
-                                }
                             }
                         }
-                    }
-
-                }
-
-                &.show {
-                    //display: block;
-                    bottom: 0;
-                    height: 100vh;
-                    overflow: scroll;
-                    padding-bottom: 48px;
-                    position: absolute;
-
-                    & > li {
 
                         &.pll-parent-menu-item {
                             display: none;
+                            position: relative;
+                            width: 100%;
                         }
+
+                        &.icons ul {
+                            display: block;
+                            position: relative;
+                            padding: 0;
+                            background: none;
+                            margin: 0 auto 20px;
+
+                            li {
+                                text-align: center;
+                                margin: 5px auto;
+                                display: block;
+
+                                &.current_page_item,
+                                &.current-menu-item {
+                                    a {
+                                        color: $gold-light;
+                                    }
+                                }
+
+                                a {
+                                    color: $white;
+                                    width: auto;
+                                    line-height: 28px;
+
+                                    &:hover {
+                                        color: $gold;
+                                    }
+
+                                    &::before {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+
                     }
 
+                    &.show {
+                        //display: block;
+                        bottom: 0;
+                        height: 100vh;
+                        overflow: scroll;
+                        padding-bottom: 48px;
+                        position: absolute;
+
+                        & > li {
+
+                            &.pll-parent-menu-item {
+                                display: none;
+                            }
+                        }
+
+                    }
                 }
             }
         }
     }
 
     @media only screen and (max-width: 1000px) {
-        div {
+        div.principal-nav div {
 
             & > ul {
                 & > li {
@@ -444,7 +479,7 @@ body > header {
     }
 
     @media only screen and (max-width: 800px) {
-        div {
+        div.principal-nav div {
 
             & > ul {
                 & > li {
@@ -455,7 +490,7 @@ body > header {
     }
 
     @media only screen and (max-width: 550px) {
-        div {
+        div.principal-nav div {
 
             & > ul {
                 & > li {

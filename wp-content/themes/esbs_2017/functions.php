@@ -15,6 +15,7 @@ add_action( 'wp_enqueue_scripts', 'themeslug_enqueue_script' );
 
 function register_my_menu() {
 	register_nav_menu( 'principal', __( 'Menu principal', 'esbs_2017' ) );
+	register_nav_menu( 'admin', __( 'Menu admin', 'esbs_2017' ) );
 }
 
 add_action( 'init', 'register_my_menu' );
