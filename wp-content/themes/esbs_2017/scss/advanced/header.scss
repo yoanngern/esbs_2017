@@ -93,7 +93,6 @@ body > header {
                                     opacity: 0.8;
                                 }
                             }
-
                         }
 
                         &.current-menu-item {
@@ -102,9 +101,12 @@ body > header {
                             }
                         }
 
+                        &.icon-default a::before {
+                            background-image: url('images/icon_default.png');
+                        }
+
                         &.icon-intercessor a::before {
                             background-image: url('images/icon_intercessor.png');
-
                         }
 
                         &.icon-outreach a::before {

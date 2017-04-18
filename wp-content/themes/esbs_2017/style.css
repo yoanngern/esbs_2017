@@ -168,6 +168,8 @@ body > header {
               opacity: 0.8; }
           body > header div > ul > li.icons ul li.current-menu-item a {
             color: #867332; }
+          body > header div > ul > li.icons ul li.icon-default a::before {
+            background-image: url("images/icon_default.png"); }
           body > header div > ul > li.icons ul li.icon-intercessor a::before {
             background-image: url("images/icon_intercessor.png"); }
           body > header div > ul > li.icons ul li.icon-outreach a::before {
