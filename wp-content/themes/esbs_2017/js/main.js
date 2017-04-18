@@ -61,8 +61,6 @@ $(document).ready(function () {
     });
 
 
-
-
     $("#content.blog header #search_input").blur(function (event) {
         event.preventDefault();
 
@@ -111,6 +109,29 @@ $(document).ready(function () {
 
         $("#slider .bullets a[data-slide=" + id + "]").addClass("current");
         $("#slider > article[data-slide=" + id + "]").addClass("current");
+
+    });
+
+
+    $("header div.principal-nav div > ul > li.menu-item-has-children").on("touchstart", function () {
+
+
+
+        if ($(this).hasClass("open")) {
+            return;
+
+        } else {
+            event.preventDefault();
+
+            var parent = $(this).parent();
+
+            $("> li", parent).each(function () {
+                $(this).removeClass("open");
+            });
+
+            $(this).addClass("open");
+        }
+
 
     });
 

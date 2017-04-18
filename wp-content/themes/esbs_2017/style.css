@@ -171,7 +171,7 @@ body > header {
         line-height: 55px;
         padding: 0 15px;
         display: block; }
-      body > header div.principal-nav div > ul > li:hover.icons ul {
+      body > header div.principal-nav div > ul > li.open.icons ul, body > header div.principal-nav div > ul > li:hover.icons ul {
         max-height: 500px; }
       body > header div.principal-nav div > ul > li.icons ul {
         position: absolute;
