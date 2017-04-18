@@ -232,9 +232,9 @@ body > header {
           width: 100%; }
         body > header div.principal-nav div > ul > li.pll-parent-menu-item:hover > a {
           display: none; }
-    body > header div.principal-nav div > ul li.current-menu-item > a, body > header div.principal-nav div > ul li.current-menu-ancestor > a, body > header div.principal-nav div > ul li.current_page_parent > a {
+    body > header div.principal-nav div > ul li.current-menu-item > a, body > header div.principal-nav div > ul li.current-page-ancestor > a {
       color: #FFE591; }
-    body > header div.principal-nav div > ul li.current-menu-item:last-of-type a, body > header div.principal-nav div > ul li.current-menu-ancestor:last-of-type a, body > header div.principal-nav div > ul li.current_page_parent:last-of-type a {
+    body > header div.principal-nav div > ul li.current-menu-item:last-of-type a, body > header div.principal-nav div > ul li.current-page-ancestor:last-of-type a {
       color: #FFFFFF; }
     body > header div.principal-nav div > ul li a {
       color: #FFFFFF;
