@@ -120,6 +120,7 @@ $(document).ready(function () {
         if ($(this).hasClass("open")) {
             return;
 
+
         } else {
             event.preventDefault();
 

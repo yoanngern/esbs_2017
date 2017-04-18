@@ -404,7 +404,9 @@ body > header {
         body > header div.principal-nav div > ul.show {
           bottom: 0;
           height: 100vh;
-          overflow: scroll;
+          overflow-y: scroll;
+          /* has to be scroll, not auto */
+          -webkit-overflow-scrolling: touch;
           padding-bottom: 48px;
           position: absolute; }
           body > header div.principal-nav div > ul.show > li.pll-parent-menu-item {
