@@ -649,6 +649,50 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/images\/icon_1_4.png": {
+		"ft": 32768,
+		"iS": 7009,
+		"oA": 0,
+		"oAP": "\/images\/icon_1_4.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_2_4.png": {
+		"ft": 32768,
+		"iS": 7884,
+		"oA": 0,
+		"oAP": "\/images\/icon_2_4.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_3_4.png": {
+		"ft": 32768,
+		"iS": 7203,
+		"oA": 0,
+		"oAP": "\/images\/icon_3_4.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_4_4.png": {
+		"ft": 32768,
+		"iS": 7620,
+		"oA": 0,
+		"oAP": "\/images\/icon_4_4.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"\/images\/icon_business.png": {
 		"ft": 32768,
 		"iS": 15460,
@@ -693,6 +737,39 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/images\/icon_discipleship.png": {
+		"ft": 32768,
+		"iS": 15725,
+		"oA": 0,
+		"oAP": "\/images\/icon_discipleship.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_east.png": {
+		"ft": 32768,
+		"iS": 9663,
+		"oA": 0,
+		"oAP": "\/images\/icon_east.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_events.png": {
+		"ft": 32768,
+		"iS": 6027,
+		"oA": 0,
+		"oAP": "\/images\/icon_events.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"\/images\/icon_intercessor.png": {
 		"ft": 32768,
 		"iS": 9669,
@@ -704,6 +781,17 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/images\/icon_north.png": {
+		"ft": 32768,
+		"iS": 10841,
+		"oA": 0,
+		"oAP": "\/images\/icon_north.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"\/images\/icon_outreach.png": {
 		"ft": 32768,
 		"iS": 5312,
@@ -712,6 +800,61 @@
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_prayer.png": {
+		"ft": 32768,
+		"iS": 7729,
+		"oA": 0,
+		"oAP": "\/images\/icon_prayer.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_regions.png": {
+		"ft": 32768,
+		"iS": 10617,
+		"oA": 0,
+		"oAP": "\/images\/icon_regions.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_south.png": {
+		"ft": 32768,
+		"iS": 10414,
+		"oA": 0,
+		"oAP": "\/images\/icon_south.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_spheres.png": {
+		"ft": 32768,
+		"iS": 15573,
+		"oA": 0,
+		"oAP": "\/images\/icon_spheres.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_west.png": {
+		"ft": 32768,
+		"iS": 10337,
+		"oA": 0,
+		"oAP": "\/images\/icon_west.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
 		"oT": 1,
 		"q": 100
 		},

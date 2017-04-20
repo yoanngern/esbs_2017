@@ -131,31 +131,67 @@ body > header {
                                 }
                             }
 
-                            &.icon-default a::before {
-                                background-image: url('images/icon_default.png');
+                            &.icon_1_4 a::before {
+                                background-image: url('images/icon_1_4.png');
                             }
-
-                            &.icon-intercessor a::before {
-                                background-image: url('images/icon_intercessor.png');
+                            &.icon_2_4 a::before {
+                                background-image: url('images/icon_2_4.png');
                             }
-
-                            &.icon-outreach a::before {
-                                background-image: url('images/icon_outreach.png');
+                            &.icon_3_4 a::before {
+                                background-image: url('images/icon_3_4.png');
                             }
-
-                            &.icon-church a::before {
-                                background-image: url('images/icon_church.png');
+                            &.icon_4_4 a::before {
+                                background-image: url('images/icon_4_4.png');
                             }
-
-                            &.icon-church_planting a::before {
-                                background-image: url('images/icon_church_planting.png');
-                            }
-
-                            &.icon-business a::before {
+                            &.icon_business a::before {
                                 background-image: url('images/icon_business.png');
                             }
+                            &.icon_church_planting a::before {
+                                background-image: url('images/icon_church_planting.png');
+                            }
+                            &.icon_church a::before {
+                                background-image: url('images/icon_church.png');
+                            }
+                            &.icon_default a::before {
+                                background-image: url('images/icon_default.png');
+                            }
+                            &.icon_discipleship a::before {
+                                background-image: url('images/icon_discipleship.png');
+                            }
+                            &.icon_east a::before {
+                                background-image: url('images/icon_east.png');
+                            }
+                            &.icon_events a::before {
+                                background-image: url('images/icon_events.png');
+                            }
+                            &.icon_intercessor a::before {
+                                background-image: url('images/icon_intercessor.png');
+                            }
+                            &.icon_north a::before {
+                                background-image: url('images/icon_north.png');
+                            }
+                            &.icon_outreach a::before {
+                                background-image: url('images/icon_outreach.png');
+                            }
+                            &.icon_prayer a::before {
+                                background-image: url('images/icon_prayer.png');
+                            }
+                            &.icon_regions a::before {
+                                background-image: url('images/icon_regions.png');
+                            }
+                            &.icon_south a::before {
+                                background-image: url('images/icon_south.png');
+                            }
+                            &.icon_spheres a::before {
+                                background-image: url('images/icon_spheres.png');
+                            }
+                            &.icon_west a::before {
+                                background-image: url('images/icon_west.png');
+                            }
+
                         }
                     }
+
 
                     &:last-of-type {
                         background-color: $gold;
