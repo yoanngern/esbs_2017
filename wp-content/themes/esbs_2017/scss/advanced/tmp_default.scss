@@ -40,7 +40,6 @@ body.page-template-default {
             div.button {
                 margin-bottom: 30px;
 
-
                 a.button {
                     color: $white;
                     text-align: center;
@@ -120,6 +119,17 @@ body.page-template-default {
 
                         -webkit-column-span: all; /* Chrome, Safari, Opera */
                         column-span: all;
+                    }
+
+                    div.col_fixed {
+                        vertical-align: top;
+                        display: table;
+
+                        div.col {
+                            display: inline-block;
+                            width: 50%;
+                            float: left;
+                        }
                     }
 
                     h2, h3 {
