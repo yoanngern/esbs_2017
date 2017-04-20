@@ -122,13 +122,12 @@ body.page-template-default {
                     }
 
                     div.col_fixed {
-                        vertical-align: top;
                         display: table;
 
                         div.col {
                             display: inline-block;
                             width: 47%;
-                            float: left;
+                            vertical-align: top;
 
                             &:nth-of-type(2n) {
                                 padding-left: 3%;
