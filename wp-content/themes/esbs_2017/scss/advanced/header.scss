@@ -179,6 +179,10 @@ body > header {
                                 background-image: url('images/icon_intercessor.png');
                             }
 
+                            &.icon-issues a::before {
+                                background-image: url('images/icon_issues.png');
+                            }
+
                             &.icon-north a::before {
                                 background-image: url('images/icon_north.png');
                             }

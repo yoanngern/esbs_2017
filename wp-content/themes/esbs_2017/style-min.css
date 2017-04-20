@@ -270,6 +270,9 @@ body > header div.principal-nav div > ul > li.icons ul li.icon-events a::before 
 body > header div.principal-nav div > ul > li.icons ul li.icon-intercessor a::before {
   background-image: url("images/icon_intercessor.png"); }
 
+body > header div.principal-nav div > ul > li.icons ul li.icon-issues a::before {
+  background-image: url("images/icon_issues.png"); }
+
 body > header div.principal-nav div > ul > li.icons ul li.icon-north a::before {
   background-image: url("images/icon_north.png"); }
 
