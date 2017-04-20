@@ -805,8 +805,14 @@ body.page-template-default #content div.platter article.content-page div.content
 
 body.page-template-default #content div.platter article.content-page div.content div.col_fixed div.col {
   display: inline-block;
-  width: 50%;
+  width: 47%;
   float: left; }
+
+body.page-template-default #content div.platter article.content-page div.content div.col_fixed div.col:nth-of-type(2n) {
+  padding-left: 3%; }
+
+body.page-template-default #content div.platter article.content-page div.content div.col_fixed div.col:nth-of-type(2n+1) {
+  padding-right: 3%; }
 
 body.page-template-default #content div.platter article.content-page div.content h2, body.page-template-default #content div.platter article.content-page div.content h3 {
   font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;

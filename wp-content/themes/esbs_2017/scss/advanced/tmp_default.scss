@@ -127,8 +127,16 @@ body.page-template-default {
 
                         div.col {
                             display: inline-block;
-                            width: 50%;
+                            width: 47%;
                             float: left;
+
+                            &:nth-of-type(2n) {
+                                padding-left: 3%;
+                            }
+
+                            &:nth-of-type(2n+1) {
+                                padding-right: 3%;
+                            }
                         }
                     }
 
