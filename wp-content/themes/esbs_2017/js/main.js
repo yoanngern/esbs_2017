@@ -116,7 +116,6 @@ $(document).ready(function () {
     $("header div.principal-nav div > ul > li.menu-item-has-children").on("touchstart", function () {
 
 
-
         if ($(this).hasClass("open")) {
             return;
 

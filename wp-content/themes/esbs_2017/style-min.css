@@ -337,6 +337,16 @@ body > header #burger.open {
 body > header #burger a:hover {
   background-color: transparent; }
 
+@media only screen and (max-width: 1450px) {
+  body > header div.principal-nav div {
+    text-align: left; } }
+
+@media only screen and (max-width: 1300px) {
+  body > header div.principal-nav div > ul li a {
+    font-size: 0.8em;
+    line-height: 45px;
+    padding: 0 12px; } }
+
 @media only screen and (max-width: 1064px) {
   body > header div.private-nav {
     display: none; }
@@ -407,7 +417,7 @@ body > header #burger a:hover {
     font-size: 1.4em;
     line-height: 48px; }
   body > header div.principal-nav div > ul > li:last-of-type {
-    margin-bottom: 68px; }
+    margin-bottom: px; }
   body > header div.principal-nav div > ul > li {
     width: 100%;
     margin: 5px auto;

@@ -282,10 +282,25 @@ body > header {
         }
     }
 
+    @media only screen and (max-width: 1450px) {
+
+        div.principal-nav div {
+            text-align: left;
+        }
+    }
+
     @media only screen and (max-width: 1300px) {
 
-        div {
-            // text-align: left;
+        div.principal-nav div {
+            & > ul {
+                li {
+                    a {
+                        font-size: 0.8em;
+                        line-height: 45px;
+                        padding: 0 12px;
+                    }
+                }
+            }
         }
     }
 
@@ -382,7 +397,7 @@ body > header {
                     }
 
                     & > li:last-of-type {
-                        margin-bottom: 68px;
+                        margin-bottom: px;
                     }
 
                     & > li {
