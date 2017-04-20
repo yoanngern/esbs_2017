@@ -639,6 +639,18 @@ body.page-template-default #content article.title {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain; }
+  body.page-template-default #content article.title div.title {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    margin: 120px auto 0;
+    z-index: 0;
+    top: 45%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    white-space: normal;
+    display: block; }
   body.page-template-default #content article.title h1 {
     color: #FFFFFF;
     font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
@@ -667,6 +679,14 @@ body.page-template-default #content article.title {
       body.page-template-default #content article.title div.button a.button:hover {
         background-color: #d3b963;
         color: #333333; }
+  @media only screen and (max-height: 700px) {
+    body.page-template-default #content article.title div.title {
+      top: inherit;
+      position: relative;
+      -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+      transform: translateY(0);
+      margin-top: 20px; } }
 
 body.page-template-default #content div.spacer {
   padding-top: 60px;

@@ -24,6 +24,20 @@ body.page-template-default {
                 background-size: contain;
             }
 
+            div.title {
+                position: absolute;
+                left: 0;
+                width: 100%;
+                margin: 120px auto 0;
+                z-index: 0;
+                top: 45%;
+                -webkit-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+                white-space: normal;
+                display: block;
+            }
+
             h1 {
                 color: $white;
                 font-family: $avenir-blk;
@@ -59,6 +73,17 @@ body.page-template-default {
                         color: $gray;
                     }
 
+                }
+            }
+
+            @media only screen and (max-height: 700px) {
+                div.title {
+                    top: inherit;
+                    position: relative;
+                    -webkit-transform: translateY(0);
+                    -ms-transform: translateY(0);
+                    transform: translateY(0);
+                    margin-top: 20px;
                 }
             }
 

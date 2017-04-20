@@ -7,28 +7,32 @@
 
         <article class="title"
                  style="background-image: url('<?php echo get_field( 'background' )['sizes']['banner']; ?>')">
-
             <a class="logo" href="/"></a>
+            <div class="title">
 
-			<?php if ( get_field( 'title' ) ):
-				echo "<h1>" . get_field( 'title' ) . "</h1>";
-			endif; ?>
 
-			<?php if ( get_field( 'button_link' ) ):
 
-				if ( get_field( 'button_label' ) ) {
-					$button_text = get_field( 'button_label' );
-				} else {
-					$button_text = get_field( 'button_link' );
-				}
+				<?php if ( get_field( 'title' ) ):
+					echo "<h1>" . get_field( 'title' ) . "</h1>";
+				endif; ?>
 
-				?>
+				<?php if ( get_field( 'button_link' ) ):
 
-                <div class="button"><a class="button"
-                                       href="<?php echo get_field( 'button_link' ); ?>"><?php echo $button_text; ?></a>
-                </div>
+					if ( get_field( 'button_label' ) ) {
+						$button_text = get_field( 'button_label' );
+					} else {
+						$button_text = get_field( 'button_link' );
+					}
 
-			<?php endif; ?>
+					?>
+
+                    <div class="button"><a class="button"
+                                           href="<?php echo get_field( 'button_link' ); ?>"><?php echo $button_text; ?></a>
+                    </div>
+
+				<?php endif; ?>
+
+            </div>
 
         </article>
 
@@ -86,7 +90,7 @@
 
     </div>
 
-	<?php if ( get_field('blogroll') ) {
+	<?php if ( get_field( 'blogroll' ) ) {
 		get_template_part( 'template-parts/blog/blogroll' );
 	} ?>
 
