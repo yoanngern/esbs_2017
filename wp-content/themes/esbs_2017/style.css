@@ -456,7 +456,7 @@ footer {
   footer.hide {
     display: none; }
   footer #logo_footer {
-    display: inline-block;
+    display: block;
     width: 180px;
     height: 120px;
     position: relative;
@@ -465,6 +465,18 @@ footer {
     background-repeat: no-repeat;
     background-size: contain;
     margin: 40px auto; }
+  footer a.button {
+    display: inline-block;
+    margin: 0 0 30px;
+    border: 1px solid #b3b2b2;
+    color: #b3b2b2;
+    -webkit-transition: 0.3s ease-in-out;
+    -o-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out; }
+    footer a.button:hover {
+      border: 1px solid #FFFFFF;
+      color: #FFFFFF; }
   footer p {
     color: #b3b2b2;
     margin-bottom: 30px;
@@ -738,7 +750,7 @@ body.page-template-default #content div.platter article.content-page {
       display: table; }
       body.page-template-default #content div.platter article.content-page div.content div.col_fixed div.col {
         display: inline-block;
-        width: 47%;
+        width: 46%;
         vertical-align: top; }
         body.page-template-default #content div.platter article.content-page div.content div.col_fixed div.col:nth-of-type(2n) {
           padding-left: 3%; }
