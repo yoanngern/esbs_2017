@@ -211,6 +211,24 @@ body > header {
                                 background-image: url('images/icon_west.png');
                             }
 
+                            &.icon-vision a::before {
+                                background-image: url('images/icon_vision.png');
+                            }
+
+                            &.icon-resources a::before {
+                                background-image: url('images/icon_resources.png');
+                            }
+
+                            &.icon-values a::before {
+                                background-image: url('images/icon_values.png');
+                            }
+
+                            &.icon-thumbs_up a::before {
+                                background-image: url('images/icon_thumbs_up.png');
+                            }
+
+
+
                         }
                     }
 

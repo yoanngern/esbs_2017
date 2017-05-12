@@ -259,6 +259,14 @@ body > header {
             background-image: url("images/icon_spheres.png"); }
           body > header div.principal-nav div > ul > li.icons ul li.icon-west a::before {
             background-image: url("images/icon_west.png"); }
+          body > header div.principal-nav div > ul > li.icons ul li.icon-vision a::before {
+            background-image: url("images/icon_vision.png"); }
+          body > header div.principal-nav div > ul > li.icons ul li.icon-resources a::before {
+            background-image: url("images/icon_resources.png"); }
+          body > header div.principal-nav div > ul > li.icons ul li.icon-values a::before {
+            background-image: url("images/icon_values.png"); }
+          body > header div.principal-nav div > ul > li.icons ul li.icon-thumbs_up a::before {
+            background-image: url("images/icon_thumbs_up.png"); }
       body > header div.principal-nav div > ul > li:last-of-type {
         background-color: #d3b963;
         position: absolute;
@@ -708,7 +716,7 @@ body.page-template-default #content div.spacer {
 body.page-template-default #content div.platter article.content-page {
   margin-bottom: 60px; }
   body.page-template-default #content div.platter article.content-page h1 {
-    background-image: url("images/arc.png");
+    background-image: url("images/arcs.png");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;

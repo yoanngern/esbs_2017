@@ -442,14 +442,14 @@
 		"oT": 1,
 		"q": 100
 		},
-	"\/images\/arc.png": {
+	"\/images\/arcs.png": {
 		"ft": 32768,
-		"iS": 337178,
+		"iS": 139987,
 		"oA": 0,
-		"oAP": "\/images\/arc.png",
+		"oAP": "\/images\/arcs.png",
 		"oF": 0,
 		"oIPL": 0,
-		"opt": 1,
+		"opt": 0,
 		"oT": 1,
 		"q": 100
 		},
@@ -836,6 +836,17 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/images\/icon_resources.png": {
+		"ft": 32768,
+		"iS": 4907,
+		"oA": 0,
+		"oAP": "\/images\/icon_resources.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"\/images\/icon_south.png": {
 		"ft": 32768,
 		"iS": 10414,
@@ -852,6 +863,39 @@
 		"iS": 15573,
 		"oA": 0,
 		"oAP": "\/images\/icon_spheres.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_thumbs_up.png": {
+		"ft": 32768,
+		"iS": 7694,
+		"oA": 0,
+		"oAP": "\/images\/icon_thumbs_up.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_values.png": {
+		"ft": 32768,
+		"iS": 8686,
+		"oA": 0,
+		"oAP": "\/images\/icon_values.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_vision.png": {
+		"ft": 32768,
+		"iS": 3535,
+		"oA": 0,
+		"oAP": "\/images\/icon_vision.png",
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 0,
