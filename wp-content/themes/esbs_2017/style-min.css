@@ -592,6 +592,31 @@ footer p a:hover {
   padding-bottom: 10px;
   color: #d3b963; }
 
+#content div.platter > article blockquote {
+  margin: 40px 30px;
+  text-align: center; }
+
+#content div.platter > article blockquote::before, #content div.platter > article blockquote::after {
+  height: 1px;
+  width: 80px;
+  content: " ";
+  margin: 0 auto;
+  display: block;
+  background-color: #867332; }
+
+#content div.platter > article blockquote::before {
+  margin-bottom: 18px; }
+
+#content div.platter > article blockquote::after {
+  margin-top: 18px; }
+
+#content div.platter > article blockquote p {
+  color: #867332;
+  font-family: "DidotLTStd-Italic", "DidotLTStd-Roman", times, serif;
+  font-size: 1.3em;
+  line-height: 1.6em;
+  letter-spacing: 0.1em; }
+
 .page-template-default #content {
   display: block;
   padding: 0; }
@@ -1379,37 +1404,6 @@ section#content section.related_posts .platter > article ul li ol li,
 section#content section.related_posts .platter > article ol li ul li,
 section#content section.related_posts .platter > article ol li ol li {
   padding: 2px 0 4px 0; }
-
-section#content.blog .platter > article blockquote,
-section#content section.related_posts .platter > article blockquote {
-  margin: 40px 30px;
-  text-align: center; }
-
-section#content.blog .platter > article blockquote::before, section#content.blog .platter > article blockquote::after,
-section#content section.related_posts .platter > article blockquote::before,
-section#content section.related_posts .platter > article blockquote::after {
-  height: 1px;
-  width: 80px;
-  content: " ";
-  margin: 0 auto;
-  display: block;
-  background-color: #867332; }
-
-section#content.blog .platter > article blockquote::before,
-section#content section.related_posts .platter > article blockquote::before {
-  margin-bottom: 18px; }
-
-section#content.blog .platter > article blockquote::after,
-section#content section.related_posts .platter > article blockquote::after {
-  margin-top: 18px; }
-
-section#content.blog .platter > article blockquote p,
-section#content section.related_posts .platter > article blockquote p {
-  color: #867332;
-  font-family: "DidotLTStd-Italic", "DidotLTStd-Roman", times, serif;
-  font-size: 1.3em;
-  line-height: 1.6em;
-  letter-spacing: 0.1em; }
 
 section#content.blog .platter > article.none,
 section#content section.related_posts .platter > article.none {

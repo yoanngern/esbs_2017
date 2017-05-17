@@ -32,6 +32,41 @@
             p {
 
             }
+
+        }
+
+        & > article {
+            blockquote {
+                margin: 40px 30px;
+                text-align: center;
+
+                &::before,
+                &::after {
+                    height: 1px;
+                    width: 80px;
+                    content: " ";
+                    margin: 0 auto;
+                    display: block;
+                    background-color: $gold_dark;
+                }
+
+                &::before {
+                    margin-bottom: 18px;
+                }
+
+                &::after {
+                    margin-top: 18px;
+                }
+
+                p {
+                    color: $gold-dark;
+                    font-family: $dido-i;
+                    font-size: 1.3em;
+                    line-height: 1.6em;
+                    letter-spacing: 0.1em;
+
+                }
+            }
         }
     }
 }
