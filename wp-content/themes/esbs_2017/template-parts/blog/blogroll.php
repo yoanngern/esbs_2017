@@ -1,24 +1,30 @@
-<section class="related_posts">
+<?php
 
-    <div class="platter">
-        <h1><?php echo pll_e( 'See more about this theme' ); ?></h1>
+$posts = wp_get_recent_posts( array(
+	'numberposts'      => 3,
+	'offset'           => 0,
+	'category'         => get_field( 'blogroll' ),
+	'orderby'          => 'post_date',
+	'order'            => 'DESC',
+	'post_type'        => 'post',
+	'suppress_filters' => true
+), OBJECT );
+
+if ( $posts != null ) :
+
+	?>
+
+    <section class="related_posts">
+
+        <div class="platter">
+            <h1><?php echo pll_e( 'See more about this theme' ); ?></h1>
 
 
-		<?php
+			<?php
 
-		$posts = wp_get_recent_posts( array(
-			'numberposts'      => 3,
-			'offset'           => 0,
-			'category'         => get_field( 'blogroll' ),
-			'orderby'          => 'post_date',
-			'order'            => 'DESC',
-			'post_type'        => 'post',
-			'suppress_filters' => true
-		), OBJECT );
 
-		echo '<div class="list nb_' . sizeof( $posts ) . '">';
+			echo '<div class="list nb_' . sizeof( $posts ) . '">';
 
-		if ( $posts != null ) :
 
 			foreach ( $posts as $curr_post ) :
 
@@ -47,12 +53,15 @@
 
 			<?php endforeach;
 
-		endif;
 
-		echo '</div>';
+			echo '</div>';
 
-		?>
+			?>
 
-    </div>
+        </div>
 
-</section>
+    </section>
+
+	<?php
+endif;
+?>
