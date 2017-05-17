@@ -3884,7 +3884,7 @@
 		"oA": 0,
 		"oAP": "\/scss\/..\/style.css",
 		"oF": 2,
-		"oS": 0,
+		"oS": 3,
 		"uL": 1
 		},
 	"\/style-min.css": {
@@ -3902,10 +3902,10 @@
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "\/style-min.css",
-		"oF": 0,
-		"oS": 0
+		"oF": 1,
+		"oS": 3
 		},
 	"\/template-parts\/blog\/blogroll.php": {
 		"ft": 8192,
