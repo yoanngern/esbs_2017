@@ -213,7 +213,19 @@ body.page-template-default {
                         }
 
                     }
+
+                    blockquote {
+
+                        p {
+                            color: $gold-dark;
+                            font-family: $dido-i;
+                            max-width: 600px;
+                            margin: 0 auto 30px;
+
+                        }
+                    }
                 }
+
             }
 
         }

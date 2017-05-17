@@ -817,6 +817,11 @@ body.page-template-default #content div.platter article.content-page {
           color: #d3b963; }
       body.page-template-default #content div.platter article.content-page div.content p em {
         font-family: "AvenirLTStd-MediumOblique", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif; }
+    body.page-template-default #content div.platter article.content-page div.content blockquote p {
+      color: #867332;
+      font-family: "DidotLTStd-Italic", "DidotLTStd-Roman", times, serif;
+      max-width: 600px;
+      margin: 0 auto 30px; }
 
 @media only screen and (max-width: 870px) {
   body.page-template-default #content div.platter article.content-page div.lead {
@@ -1235,6 +1240,10 @@ section#content section.related_posts .platter {
           section#content section.related_posts .platter > article ol li ul li,
           section#content section.related_posts .platter > article ol li ol li {
             padding: 2px 0 4px 0; }
+    section#content.blog .platter > article blockquote p,
+    section#content section.related_posts .platter > article blockquote p {
+      font-size: 1.3em;
+      line-height: 1.6em; }
     section#content.blog .platter > article.none,
     section#content section.related_posts .platter > article.none {
       width: 100%;
