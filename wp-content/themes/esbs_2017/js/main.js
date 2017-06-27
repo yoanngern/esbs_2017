@@ -14,19 +14,15 @@ $(document).ready(function () {
 
     });
 
+
     $("body").on("click", ".join_link", function (event) {
         event.preventDefault();
-        $("#mc_embed_signup").toggleClass("visible");
 
-        if ($(".join_link a").text() == "Join") {
-
-            $(".join_link a").text("Close");
-
-        } else {
-            $(".join_link a").text("Join");
-        }
+        toggleForm();
 
     });
+
+
 
     $("#content.blog header").on("click", "#current_act", function (event) {
         event.preventDefault();
@@ -181,6 +177,26 @@ var openSelect = function (selector) {
     }
     if (!worked) { // unknown browser / error
         alert("It didn't worked in your browser.");
+    }
+}
+
+function toggleForm() {
+    $("#mc_embed_signup").toggleClass("visible");
+
+    var button = $(".join_link a");
+
+    if(button.data("text") == undefined) {
+        button.attr('data-text', button.text());
+    }
+
+    if (button.text() == button.data("text")) {
+
+        button.text("Close");
+        button.addClass("close");
+
+    } else {
+        button.text(button.data("text"));
+        button.removeClass("close");
     }
 }
 

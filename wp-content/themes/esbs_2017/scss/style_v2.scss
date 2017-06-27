@@ -21,6 +21,10 @@ body {
     color: $black;
     background-color: $gray;
 
+    &.logged-in {
+        padding-top: 30px;
+    }
+
     &.black {
         background-color: $black;
     }

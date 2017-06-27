@@ -242,6 +242,10 @@ body > header {
                             padding: 0 35px;
                             transition: all 300ms ease;
 
+                            &.close {
+                                background-color: lighten($gray, 20);
+                            }
+
                             &:hover {
                                 color: $gray;
                             }

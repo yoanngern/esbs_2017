@@ -1,3 +1,9 @@
+body.logged-in {
+    #mc_embed_signup {
+        padding-top: 30px;
+    }
+}
+
 #mc_embed_signup {
 
     //display: none;
@@ -61,8 +67,6 @@
                 }
             }
 
-
-
             &.indicates-required {
                 margin: 0 0 20px;
                 text-align: right;
@@ -113,7 +117,6 @@
                 &.mc-field-group {
                     margin-top: 40px;
                 }
-
 
                 &.checkbox {
                     margin-bottom: 20px;
