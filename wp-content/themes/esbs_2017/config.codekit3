@@ -869,6 +869,17 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/images\/icon_teams.png": {
+		"ft": 32768,
+		"iS": 8741,
+		"oA": 0,
+		"oAP": "\/images\/icon_teams.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"\/images\/icon_thumbs_up.png": {
 		"ft": 32768,
 		"iS": 7694,

@@ -227,6 +227,10 @@ body > header {
                                 background-image: url('images/icon_thumbs_up.png');
                             }
 
+                            &.icon-teams a::before {
+                                background-image: url('images/icon_teams.png');
+                            }
+
 
 
                         }
