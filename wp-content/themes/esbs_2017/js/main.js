@@ -14,12 +14,39 @@ $(document).ready(function () {
 
     });
 
+    $("body > header").on("click", ".join_link", function (event) {
+        event.preventDefault();
+        $("#mc_embed_signup").toggleClass("visible");
+
+        if ($(".join_link a").text() == "Join") {
+
+            $(".join_link a").text("Close");
+
+        } else {
+            $(".join_link a").text("Join");
+        }
+
+    });
+
     $("#content.blog header").on("click", "#current_act", function (event) {
         event.preventDefault();
         $("#content.blog header select").toggleClass("show");
         $("#content.blog header #current_act").hide();
 
         openSelect("#content.blog header select");
+    });
+
+    $("#mc_embed_signup").on("click", "input.show_optional", function (event) {
+
+
+        if($("#mc_embed_signup input.show_optional").is(":checked")) {
+            $("#mc_embed_signup fieldset.optional_fields").addClass("visible");
+        } else {
+            $("#mc_embed_signup fieldset.optional_fields").removeClass("visible");
+        }
+
+
+
     });
 
 

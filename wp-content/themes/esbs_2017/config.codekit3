@@ -7,7 +7,7 @@
 		"uuidString": "35FCC746-D50B-47EC-8292-55E51DFD872E"
 		}
 	],
-"creatorBuild": "25813",
+"creatorBuild": "25849",
 "files": {
 	"\/404.php": {
 		"ft": 8192,
@@ -3812,6 +3812,19 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/base\/_form.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/css\/_form.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/scss\/base\/_functions.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -3907,6 +3920,16 @@
 		"oF": 1,
 		"oS": 3
 		},
+	"\/style_v2.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/style_v2-min.css",
+		"oF": 0,
+		"oS": 0
+		},
 	"\/template-parts\/blog\/blogroll.php": {
 		"ft": 8192,
 		"oA": 2,
@@ -3947,6 +3970,12 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/blog\/slider.php",
+		"oF": 0
+		},
+	"\/template-parts\/form\/simple.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/form\/simple.php",
 		"oF": 0
 		}
 	},
@@ -5894,6 +5923,7 @@
 		},
 	"languageDefaultsUserDefined": [
 		],
+	"overrideExternalServerCSS": 0,
 	"previewPathAddition": "",
 	"skippedFoldersString": "log, _logs, logs, _cache, cache, \/storage\/framework\/sessions, node_modules",
 	"sourceFolderName": "source",

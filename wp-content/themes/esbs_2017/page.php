@@ -97,6 +97,8 @@
 
 </section>
 
+<?php get_template_part( 'template-parts/form/simple' ); ?>
+
 
 <?php get_footer(); ?>
 
