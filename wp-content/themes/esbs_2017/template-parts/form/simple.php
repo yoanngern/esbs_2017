@@ -7,7 +7,7 @@
           novalidate>
         <div id="mc_embed_signup_scroll">
             <h1>Join this movement</h1>
-            <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+            <div class="indicates-required"><span class="asterisk">*</span> required</div>
 
             <div class="mc-field-group">
                 <label for="mce-EMAIL">Email Address <span class="asterisk">*</span>
