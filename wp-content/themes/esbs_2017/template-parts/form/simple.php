@@ -1,8 +1,12 @@
 <div id="mc_embed_signup">
+
+
+
     <form action="//europe-shall-be-saved.us14.list-manage.com/subscribe/post?u=c60044849e7354db163f217a2&amp;id=18a65a07d4"
           method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
           novalidate>
         <div id="mc_embed_signup_scroll">
+            <h1>Join this movement</h1>
             <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
 
             <div class="mc-field-group">
