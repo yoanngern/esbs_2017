@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     });
 
-    $("body > header").on("click", ".join_link", function (event) {
+    $("body").on("click", ".join_link", function (event) {
         event.preventDefault();
         $("#mc_embed_signup").toggleClass("visible");
 
