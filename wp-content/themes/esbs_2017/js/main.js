@@ -5,12 +5,14 @@ $(document).ready(function () {
 
     $("body > header").on("click", "#burger", function (event) {
         event.preventDefault();
-        $("body > header ul").toggleClass("show");
-        $("body > header #burger").toggleClass("open");
 
-        $("body > #content").toggleClass("hide");
-        $("body > footer").toggleClass("hide");
-        $("body").toggleClass("black");
+        console.log($("body > header #burger"));
+
+        if ($("body > header #burger").hasClass("open")) {
+            closeNav();
+        } else {
+            openNav();
+        }
 
     });
 
@@ -21,7 +23,6 @@ $(document).ready(function () {
         toggleForm();
 
     });
-
 
 
     $("#content.blog header").on("click", "#current_act", function (event) {
@@ -35,12 +36,11 @@ $(document).ready(function () {
     $("#mc_embed_signup").on("click", "input.show_optional", function (event) {
 
 
-        if($("#mc_embed_signup input.show_optional").is(":checked")) {
+        if ($("#mc_embed_signup input.show_optional").is(":checked")) {
             $("#mc_embed_signup fieldset.optional_fields").addClass("visible");
         } else {
             $("#mc_embed_signup fieldset.optional_fields").removeClass("visible");
         }
-
 
 
     });
@@ -180,14 +180,53 @@ var openSelect = function (selector) {
     }
 }
 
-function toggleForm() {
-    $("#mc_embed_signup").toggleClass("visible");
 
+function openNav() {
+
+    console.log("test");
+
+
+    $("body > header ul").addClass("show");
+    $("body > header #burger").addClass("open");
+
+    $("body > #content").addClass("hide");
+    $("body > footer").addClass("hide");
+    $("body").addClass("black");
+
+    closeForm()
+}
+
+
+function closeNav() {
+
+
+    $("body > header ul").removeClass("show");
+    $("body > header #burger").removeClass("open");
+
+    $("body > #content").removeClass("hide");
+    $("body > footer").removeClass("hide");
+    $("body").removeClass("black");
+}
+
+function closeForm() {
+    $("#mc_embed_signup").removeClass("visible");
+
+    var button = $("body > header .join_link a");
+    button.text(button.data("text"));
+    button.removeClass("close");
+}
+
+
+function toggleForm() {
+
+    $("#mc_embed_signup").toggleClass("visible");
     $("#mc_embed_signup input.email").focus();
+
+    closeNav();
 
     var button = $("body > header .join_link a");
 
-    if(button.data("text") == undefined) {
+    if (button.data("text") == undefined) {
         button.attr('data-text', button.text());
     }
 
