@@ -6,10 +6,12 @@ $(document).ready(function () {
     $("body > header").on("click", "#burger", function (event) {
         event.preventDefault();
 
-        console.log($("body > header #burger"));
+
 
         if ($("body > header #burger").hasClass("open")) {
             closeNav();
+
+            closeForm();
         } else {
             openNav();
         }
@@ -193,12 +195,13 @@ function openNav() {
     $("body > footer").addClass("hide");
     $("body").addClass("black");
 
-    closeForm()
+    closeForm();
 }
 
 
 function closeNav() {
 
+    console.log("test");
 
     $("body > header ul").removeClass("show");
     $("body > header #burger").removeClass("open");
@@ -234,6 +237,8 @@ function toggleForm() {
 
         button.text("Close");
         button.addClass("close");
+
+        $("body > header #burger").addClass("open");
 
     } else {
         button.text(button.data("text"));
