@@ -1,7 +1,7 @@
 <div id="mc_embed_signup">
     <form action="//europe-shall-be-saved.us14.list-manage.com/subscribe/post?u=c60044849e7354db163f217a2&amp;id=18a65a07d4"
           method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-          target="_blank" novalidate>
+          novalidate>
         <div id="mc_embed_signup_scroll">
             <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
 
@@ -24,7 +24,8 @@
             </div>
 
             <div class="checkbox input-group">
-                <input name="show" type="checkbox" class="show_optional" value="1" id="show_opt"><label for="show_opt">I want to give my regional information</label>
+                <input name="show" type="checkbox" class="show_optional" value="1" id="show_opt"><label for="show_opt">I
+                    want to give my regional information</label>
             </div>
 
             <fieldset class="optional_fields">
