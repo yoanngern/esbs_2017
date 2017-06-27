@@ -172,6 +172,9 @@ body.logged-in {
                 cursor: pointer;
                 width: 100%;
                 line-height: 25px;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
 
                 &:hover {
                     color: $black;
