@@ -5,8 +5,7 @@ body.logged-in {
 }
 
 #mc_embed_signup {
-
-    //display: none;
+    scroll-behavior: smooth;
     position: fixed;
     overflow: scroll;
     overflow-y: scroll;

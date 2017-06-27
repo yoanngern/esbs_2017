@@ -26,9 +26,38 @@ a.elementor-button {
     }
 }
 
+#join_link {
+    display: none;
+    height: auto;
+    width: 100%;
+    background-color: $gold;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 1em;
+    font-family: $avenir-blk;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    box-shadow: 0 10px 20px darken($gold-dark, 30);
+    z-index: 100;
 
+    div {
+        padding: 0;
+    }
 
+    a {
+        display: block;
+        width: 100%;
+        color: $white;
+        line-height: 38px;
+        padding: 5px 0;
+        margin: 0;
+    }
 
+}
 
 #hot_news {
     width: 100%;
@@ -60,6 +89,9 @@ a.elementor-button {
 
 @media only screen and (max-width: 767px) {
 
+    #join_link {
+        display: block;
+    }
 
     #home_title h1 {
         text-align: center;
