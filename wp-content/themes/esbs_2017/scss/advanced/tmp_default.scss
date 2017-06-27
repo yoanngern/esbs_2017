@@ -106,13 +106,13 @@ body.page-template-default {
                     background-position: center;
                     background-repeat: no-repeat;
                     text-align: center;
-                    line-height: 130px;
                     color: $gold_dark;
                     font-family: $avenir-blk;
                     font-size: 1.7em;
                     letter-spacing: 0.35em;
                     min-height: 215px;
                     margin: 0 0 40px;
+                    padding-top: 40px;
                 }
 
                 div.lead {
@@ -271,7 +271,7 @@ body.page-template-default {
                     margin-bottom: 20px;
 
                     h1 {
-                        line-height: 150px;
+                        padding-top: 80px;
                         margin-bottom: 0;
                     }
 
