@@ -824,12 +824,14 @@ section.elementor-slider {
     section.elementor-slider div.content div.page.nb_slide-4 {
       display: none; } }
   @media only screen and (max-width: 780px) {
-    section.elementor-slider div.content div.page.nb_slide-1 {
-      display: inline-block; }
-    section.elementor-slider div.content div.page.nb_slide-2,
-    section.elementor-slider div.content div.page.nb_slide-3,
-    section.elementor-slider div.content div.page.nb_slide-4 {
-      display: none; } }
+    section.elementor-slider {
+      font-size: 0.9em; }
+      section.elementor-slider div.content div.page.nb_slide-1 {
+        display: inline-block; }
+      section.elementor-slider div.content div.page.nb_slide-2,
+      section.elementor-slider div.content div.page.nb_slide-3,
+      section.elementor-slider div.content div.page.nb_slide-4 {
+        display: none; } }
   @media only screen and (max-width: 400px) {
     section.elementor-slider {
       max-width: 85%; }
