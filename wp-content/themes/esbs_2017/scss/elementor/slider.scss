@@ -205,5 +205,20 @@ section.elementor-slider {
 
     }
 
+    @media only screen and (max-width: 400px) {
+        max-width: 85%;
+
+        div.nav {
+
+            &#prev {
+                left: -30px;
+            }
+
+            &#next {
+                right: -30px;
+            }
+        }
+    }
+
 }
 
