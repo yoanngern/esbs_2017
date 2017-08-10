@@ -1,24 +1,38 @@
-/*! elementor-pro - v1.2.4 - 21-03-2017 */
+/*! elementor-pro - v1.5.8 - 25-07-2017 */
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var handlers = {
-	form: require( 'modules/forms/assets/js/frontend/frontend' ),
-	countdown: require( 'modules/countdown/assets/js/frontend/frontend' ),
-	posts: require( 'modules/posts/assets/js/frontend/frontend' ),
-	slides: require( 'modules/slides/assets/js/frontend/frontend' )
+var ElementorProFrontend = function( $ ) {
+	var self = this;
+
+	this.config = ElementorProFrontendConfig;
+
+	this.modules = {};
+
+	var handlers = {
+		form: require( 'modules/forms/assets/js/frontend/frontend' ),
+		countdown: require( 'modules/countdown/assets/js/frontend/frontend' ),
+		posts: require( 'modules/posts/assets/js/frontend/frontend' ),
+		slides: require( 'modules/slides/assets/js/frontend/frontend' ),
+        share_buttons: require( 'modules/share-buttons/assets/js/frontend/frontend' )
+	};
+
+	var initModules = function() {
+		self.modules = {};
+
+		$.each( handlers, function( moduleName ) {
+			self.modules[ moduleName ] = new this( $ );
+		} );
+	};
+
+	this.init = function() {
+		$( window ).on( 'elementor/frontend/init', initModules );
+	};
+
+	this.init();
 };
 
-window.elementorProFrontend = {
-	config: ElementorProFrontendConfig,
-	modules: {}
-};
+window.elementorProFrontend = new ElementorProFrontend( jQuery );
 
-jQuery( function( $ ) {
-	$.each( handlers, function( moduleName ) {
-		elementorProFrontend.modules[ moduleName ] = new this( $ );
-	} );
-} );
-
-},{"modules/countdown/assets/js/frontend/frontend":2,"modules/forms/assets/js/frontend/frontend":4,"modules/posts/assets/js/frontend/frontend":7,"modules/slides/assets/js/frontend/frontend":10}],2:[function(require,module,exports){
+},{"modules/countdown/assets/js/frontend/frontend":2,"modules/forms/assets/js/frontend/frontend":4,"modules/posts/assets/js/frontend/frontend":9,"modules/share-buttons/assets/js/frontend/frontend":13,"modules/slides/assets/js/frontend/frontend":15}],2:[function(require,module,exports){
 module.exports = function() {
 	elementorFrontend.hooks.addAction( 'frontend/element_ready/countdown.default', require( './handlers/countdown' ) );
 };
@@ -95,32 +109,77 @@ module.exports = function( $scope, $ ) {
 },{}],4:[function(require,module,exports){
 module.exports = function() {
 	elementorFrontend.hooks.addAction( 'frontend/element_ready/form.default', require( './handlers/form' ) );
+	elementorFrontend.hooks.addAction( 'frontend/element_ready/subscribe.default', require( './handlers/form' ) );
+
 	elementorFrontend.hooks.addAction( 'frontend/element_ready/form.default', require( './handlers/recaptcha' ) );
 };
 
-},{"./handlers/form":5,"./handlers/recaptcha":6}],5:[function(require,module,exports){
-module.exports = function( $scope, $ ) {
-	var $form = $scope.find( '.elementor-form' );
+},{"./handlers/form":7,"./handlers/recaptcha":8}],5:[function(require,module,exports){
+module.exports = elementorFrontend.Module.extend( {
+	getDefaultSettings: function() {
+		return {
+			selectors: {
+				form: '.elementor-form'
+			}
+		};
+	},
 
-	$form.on( 'submit', function( event ) {
-		event.preventDefault();
+	getDefaultElements: function() {
+		var selectors = this.getSettings( 'selectors' ),
+			elements = {};
 
-		var $submitButton = $form.find( '[type="submit"]' );
+		elements.$form = this.$element.find( selectors.form );
 
-		if ( $form.hasClass( 'elementor-form-waiting' ) ) {
-			return false;
+		return elements;
+	},
+
+	bindEvents: function() {
+		this.elements.$form.on( 'form_destruct', this.handleSubmit );
+	},
+
+	handleSubmit: function( event, response ) {
+		if ( 'undefined' !== typeof response.data.redirect_url ) {
+			location.href = response.data.redirect_url;
 		}
+	}
+} );
+
+},{}],6:[function(require,module,exports){
+module.exports = elementorFrontend.Module.extend( {
+
+	getDefaultSettings: function() {
+		return {
+			selectors: {
+				form: '.elementor-form',
+				submitButton: '[type="submit"]'
+			},
+			action: 'elementor_pro_forms_send_form',
+			ajaxUrl: elementorProFrontend.config.ajaxurl
+		};
+	},
+
+	getDefaultElements: function() {
+		var selectors = this.getSettings( 'selectors' ),
+			elements = {};
+
+		elements.$form = this.$element.find( selectors.form );
+		elements.$submitButton = elements.$form.find( selectors.submitButton );
+
+		return elements;
+	},
+
+	bindEvents: function() {
+		this.elements.$form.on( 'submit', this.handleSubmit );
+	},
+
+	beforeSend: function() {
+		var $form = this.elements.$form;
 
 		$form
 			.animate( {
 				opacity: '0.45'
 			}, 500 )
 			.addClass( 'elementor-form-waiting' );
-
-		$submitButton
-			.attr( 'disabled', 'disabled' )
-			.find( '> span' )
-			.prepend( '<span class="elementor-button-text elementor-form-spinner"><i class="fa fa-spinner fa-spin"></i>&nbsp;</span>' );
 
 		$form
 			.find( '.elementor-message' )
@@ -138,94 +197,137 @@ module.exports = function( $scope, $ ) {
 			.end()
 			.find( ':input' ).attr( 'aria-invalid', 'false' );
 
-		var formData = new FormData( $form[ 0 ] );
-		formData.append( 'action', 'elementor_pro_forms_send_form' );
+		this.elements.$submitButton
+			.attr( 'disabled', 'disabled' )
+			.find( '> span' )
+			.prepend( '<span class="elementor-button-text elementor-form-spinner"><i class="fa fa-spinner fa-spin"></i>&nbsp;</span>' );
+
+	},
+
+	getFormData: function() {
+		var formData = new FormData( this.elements.$form[ 0 ] );
+		formData.append( 'action', this.getSettings( 'action' ) );
 		formData.append( 'referrer', location.toString() );
 
-		$.ajax( {
-			url: elementorProFrontend.config.ajaxurl,
+		return formData;
+	},
+
+	onSuccess: function( response, status ) {
+		var $form = this.elements.$form;
+
+		this.elements.$submitButton
+				.removeAttr( 'disabled' )
+				.find( '.elementor-form-spinner' )
+				.remove();
+
+		$form
+			.animate( {
+				opacity: '1'
+			}, 100 )
+			.removeClass( 'elementor-form-waiting' );
+
+			if ( ! response.success ) {
+				if ( response.data.errors ) {
+					jQuery.each( response.data.errors, function( key, title ) {
+						$form
+							.find( '#form-field-' + key )
+							.parent()
+							.addClass( 'elementor-error' )
+							.append( '<span class="elementor-message elementor-message-danger elementor-help-inline elementor-form-help-inline" role="alert">' + title + '</span>' )
+							.find( ':input' ).attr( 'aria-invalid', 'true' );
+					} );
+
+					$form.trigger( 'error' );
+				}
+				$form.append( '<div class="elementor-message elementor-message-danger" role="alert">' + response.data.message + '</div>' );
+			} else {
+				$form.trigger( 'submit_success', response.data );
+
+				// For actions like redirect page
+				$form.trigger( 'form_destruct', response.data );
+
+				$form.trigger( 'reset' );
+
+				if ( 'undefined' !== typeof response.data.message && '' !== response.data.message ) {
+					$form.append( '<div class="elementor-message elementor-message-success" role="alert">' + response.data.message + '</div>' );
+				}
+			}
+	},
+
+	onError: function( xhr, desc ) {
+		var $form = this.elements.$form;
+
+		$form.append( '<div class="elementor-message elementor-message-danger" role="alert">' + desc + '</div>' );
+
+		this.elements.$submitButton
+			.html( this.elements.$submitButton.text() )
+			.removeAttr( 'disabled' );
+
+		$form
+			.animate( {
+				opacity: '1'
+			}, 100 )
+			.removeClass( 'elementor-form-waiting' );
+
+		$form.trigger( 'error' );
+	},
+
+	handleSubmit: function( event ) {
+		var self = this,
+			$form = this.elements.$form;
+
+		event.preventDefault();
+
+		if ( $form.hasClass( 'elementor-form-waiting' ) ) {
+			return false;
+		}
+
+		this.beforeSend();
+
+		jQuery.ajax( {
+			url: self.getSettings( 'ajaxUrl' ),
 			type: 'POST',
 			dataType: 'json',
-			data: formData,
+			data: self.getFormData(),
 			processData: false,
 			contentType: false,
-			success: function( response, status ) {
-				$submitButton
-					.removeAttr( 'disabled' )
-					.find( '.elementor-form-spinner' )
-					.remove();
-
-				$form
-					.animate( {
-						opacity: '1'
-					}, 100 )
-					.removeClass( 'elementor-form-waiting' );
-
-				if ( ! response.success ) {
-					if ( response.data.fields ) {
-						$.each( response.data.fields, function( key, title ) {
-							$form
-								.find( 'div.elementor-field-group' ).eq( key )
-								.addClass( 'elementor-error' )
-								.append( '<span class="elementor-message elementor-message-danger elementor-help-inline elementor-form-help-inline" role="alert">' + title + '</span>' )
-								.find( ':input' ).attr( 'aria-invalid', 'true' );
-						} );
-					}
-					$form.append( '<div class="elementor-message elementor-message-danger" role="alert">' + response.data.message + '</div>' );
-				} else {
-					$form.trigger( 'submit_success' );
-					$form.trigger( 'reset' );
-
-					if ( '' !== response.data.message ) {
-						$form.append( '<div class="elementor-message elementor-message-success" role="alert">' + response.data.message + '</div>' );
-					}
-					if ( '' !== response.data.link ) {
-						location.href = response.data.link;
-					}
-				}
-			},
-
-			error: function( xhr, desc ) {
-				$form.append( '<div class="elementor-message elementor-message-danger" role="alert">' + desc + '</div>' );
-
-				$submitButton
-					.html( $submitButton.text() )
-					.removeAttr( 'disabled' );
-
-				$form
-					.animate( {
-						opacity: '1'
-					}, 100 )
-					.removeClass( 'elementor-form-waiting' );
-
-				$form.trigger( 'error' );
-			}
+			success: self.onSuccess,
+			error: self.onError
 		} );
-	} );
+	}
+} );
+
+},{}],7:[function(require,module,exports){
+var FormSender = require( './form-sender' ),
+	Form = FormSender.extend();
+
+var RedirectAction = require( './form-redirect' );
+
+module.exports = function( $scope ) {
+	new Form( { $element: $scope } );
+	new RedirectAction( { $element: $scope } );
 };
 
-},{}],6:[function(require,module,exports){
+},{"./form-redirect":5,"./form-sender":6}],8:[function(require,module,exports){
 module.exports = function( $scope, $ ) {
-	var $element = $scope.find( '.elementor-g-recaptcha:last' ),
-		window;
+	var $element = $scope.find( '.elementor-g-recaptcha:last' );
 
 	if ( ! $element.length ) {
 		return;
 	}
 
 	var addRecaptcha = function( $element ) {
-		var widgetId = window.grecaptcha.render( $element[0], $element.data() ),
+		var widgetId = grecaptcha.render( $element[0], $element.data() ),
 			$form = $element.parents( 'form' );
 
 		$element.data( 'widgetId', widgetId );
 
 		$form.on( 'reset error', function() {
-			window.grecaptcha.reset( $element.data( 'widgetId' ) );
+			grecaptcha.reset( $element.data( 'widgetId' ) );
 		} );
 	};
 
 	var onRecaptchaApiReady = function( callback ) {
-		window = elementorFrontend.getScopeWindow();
 		if ( window.grecaptcha ) {
 			callback();
 		} else {
@@ -241,72 +343,75 @@ module.exports = function( $scope, $ ) {
 	} );
 };
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports = function() {
-	var settings = {};
+	var PostsModule = require( './handlers/posts' ),
+		CardsModule = require( './handlers/cards' ),
+		PortfolioModule = require( './handlers/portfolio' );
 
-	var initSettings = function() {
-		settings.classes = {
-			fitHeight: 'elementor-fit-height'
-		};
+	elementorFrontend.hooks.addAction( 'frontend/element_ready/posts.classic', function( $scope ) {
+		new PostsModule( { $element: $scope } );
+	} );
 
-		settings.selectors = {
-			postThumbnail: '.elementor-post__thumbnail'
-		};
-	};
+	elementorFrontend.hooks.addAction( 'frontend/element_ready/posts.cards', function( $scope ) {
+		new CardsModule( { $element: $scope } );
+	} );
 
-	var initHandlers = function() {
-		elementorFrontend.hooks.addAction( 'frontend/element_ready/portfolio.default', require( './handlers/portfolio' ) );
-		elementorFrontend.hooks.addAction( 'frontend/element_ready/posts.classic', require( './handlers/posts' ) );
-	};
-
-	var init = function() {
-		initSettings();
-
-		initHandlers();
-	};
-
-	this.fitImage = function( $post, itemRatio ) {
-		var $imageParent = $post.find( settings.selectors.postThumbnail ),
-			$image = $imageParent.find( 'img' ),
-			image = $image[0];
-
-		if ( ! image ) {
+	elementorFrontend.hooks.addAction( 'frontend/element_ready/portfolio.default', function( $scope ) {
+		if ( ! $scope.find( '.elementor-portfolio' ).length ) {
 			return;
 		}
 
-		var imageParentRatio = $imageParent.outerHeight() / $imageParent.outerWidth(),
-			imageRatio = image.naturalHeight / image.naturalWidth;
-
-		$imageParent.toggleClass( settings.classes.fitHeight, imageRatio < imageParentRatio );
-	};
-
-	this.setColsCountSettings = function( settings ) {
-		var currentDeviceMode = elementorFrontend.getCurrentDeviceMode();
-
-		switch ( currentDeviceMode ) {
-			case 'mobile':
-				settings.colsCount = settings.columns_mobile;
-				break;
-			case 'tablet':
-				settings.colsCount = settings.columns_tablet;
-				break;
-			default:
-				settings.colsCount = settings.columns;
-		}
-
-		settings.colsCount = +settings.colsCount;
-	};
-
-	init();
+		new PortfolioModule( { $element: $scope } );
+	} );
 };
 
-},{"./handlers/portfolio":8,"./handlers/posts":9}],8:[function(require,module,exports){
-var Portfolio = function( $element, settings, $ ) {
-	var elements = {};
+},{"./handlers/cards":10,"./handlers/portfolio":11,"./handlers/posts":12}],10:[function(require,module,exports){
+var PostsHandler = require( './posts' );
 
-	var getOffset = function( itemIndex, itemWidth, itemHeight ) {
-		var itemGap = elements.$container.width() / settings.colsCount - itemWidth;
+module.exports = PostsHandler.extend( {
+	getSkinPrefix: function() {
+		return 'cards_';
+	}
+} );
+
+},{"./posts":12}],11:[function(require,module,exports){
+var PostsHandler = require( './posts' );
+
+module.exports = PostsHandler.extend( {
+	getElementName: function() {
+		return 'portfolio';
+	},
+
+	getSkinPrefix: function() {
+		return '';
+	},
+
+	getDefaultSettings: function() {
+		var settings = PostsHandler.prototype.getDefaultSettings.apply( this, arguments );
+
+		settings.transitionDuration = 450;
+
+		jQuery.extend( settings.classes, {
+			active: 'elementor-active',
+			item: 'elementor-portfolio-item',
+			ghostItem: 'elementor-portfolio-ghost-item'
+		} );
+
+		return settings;
+	},
+
+	getDefaultElements: function() {
+		var elements = PostsHandler.prototype.getDefaultElements.apply( this, arguments );
+
+		elements.$filterButtons = this.$element.find( '.elementor-portfolio__filter' );
+
+		return elements;
+	},
+
+	getOffset: function( itemIndex, itemWidth, itemHeight ) {
+		var settings = this.getSettings(),
+			itemGap = this.elements.$postsContainer.width() / settings.colsCount - itemWidth;
 
 		itemGap += itemGap / ( settings.colsCount - 1 );
 
@@ -314,99 +419,111 @@ var Portfolio = function( $element, settings, $ ) {
 			left: ( itemWidth + itemGap ) * ( itemIndex % settings.colsCount ),
 			top: ( itemHeight + itemGap ) * Math.floor( itemIndex / settings.colsCount )
 		};
-	};
+	},
 
-	var filterItems = function( term ) {
+	getClosureMethodsNames: function() {
+		var baseClosureMethods = PostsHandler.prototype.getClosureMethodsNames.apply( this, arguments );
+
+		return baseClosureMethods.concat( [ 'onFilterButtonClick' ] );
+	},
+
+	filterItems: function( term ) {
+		var $posts = this.elements.$posts,
+			activeClass = this.getSettings( 'classes.active' ),
+			termSelector = '.elementor-filter-' + term;
+
 		if ( '__all' === term ) {
-			elements.$items.addClass( settings.classes.active );
+			$posts.addClass( activeClass );
 
 			return;
 		}
 
-		elements.$items.not( '.elementor-filter-' + term ).removeClass( settings.classes.active );
+		$posts.not( termSelector ).removeClass( activeClass );
 
-		elements.$items.filter( '.elementor-filter-' + term ).addClass( settings.classes.active );
-	};
+		$posts.filter( termSelector ).addClass( activeClass );
+	},
 
-	var removeExtraGhostItems = function() {
-		var $shownItems = elements.$items.filter( ':visible' ),
+	removeExtraGhostItems: function() {
+		var settings = this.getSettings(),
+			$shownItems = this.elements.$posts.filter( ':visible' ),
 			emptyColumns = ( settings.colsCount - $shownItems.length % settings.colsCount ) % settings.colsCount,
-			$ghostItems = elements.$container.find( '.' + settings.classes.ghostItem );
+			$ghostItems = this.elements.$postsContainer.find( '.' + settings.classes.ghostItem );
 
 		$ghostItems.slice( emptyColumns ).remove();
-	};
+	},
 
-	var handleEmptyColumns = function() {
-		removeExtraGhostItems();
+	handleEmptyColumns: function() {
+		this.removeExtraGhostItems();
 
-		var $shownItems = elements.$items.filter( ':visible' ),
-			$ghostItems = elements.$container.find( '.' + settings.classes.ghostItem ),
+		var settings = this.getSettings(),
+			$shownItems = this.elements.$posts.filter( ':visible' ),
+			$ghostItems = this.elements.$postsContainer.find( '.' + settings.classes.ghostItem ),
 			emptyColumns = ( settings.colsCount - ( ( $shownItems.length + $ghostItems.length ) % settings.colsCount ) ) % settings.colsCount;
 
 		for ( var i = 0; i < emptyColumns; i++ ) {
-			elements.$container.append( $( '<div>', { 'class': settings.classes.item + ' ' + settings.classes.ghostItem } ) );
+			this.elements.$postsContainer.append( jQuery( '<div>', { 'class': settings.classes.item + ' ' + settings.classes.ghostItem } ) );
 		}
-	};
+	},
 
-	var fitImages = function() {
-		elements.$items.each( function() {
-			elementorProFrontend.modules.posts.fitImage( $( this ) );
-		} );
-	};
-
-	var arrangeGrid = function() {
-		var $activeItems = elements.$items.filter( '.' + settings.classes.active ),
-			$inactiveItems = elements.$items.not( '.' + settings.classes.active ),
-			$shownItems = elements.$items.filter( ':visible' ),
-			$activeOrShownItems = elements.$items.filter( function() {
-				var $item = $( this );
-
-				return $item.is( '.' + settings.classes.active ) || $item.is( ':visible' );
-			} ),
-			$activeShownItems = $activeItems.filter( ':visible' ),
-			$activeHiddenItems = $activeItems.filter( ':hidden' ),
-			$inactiveShownItems = $inactiveItems.filter( ':visible' ),
-			itemWidth = $shownItems.outerWidth(),
-			itemHeight = $shownItems.outerHeight();
-
-		elements.$items.css( 'transition-duration', settings.transitionDuration + 'ms' );
-
+	showItems: function( $activeHiddenItems ) {
 		$activeHiddenItems.show();
-
-		if ( elementorFrontend.isEditMode() ) {
-			fitImages();
-		}
 
 		setTimeout( function() {
 			$activeHiddenItems.css( {
 				opacity: 1
 			} );
 		} );
+	},
+
+	hideItems: function( $inactiveShownItems ) {
+		$inactiveShownItems.hide();
+	},
+
+	arrangeGrid: function() {
+		var $ = jQuery,
+			self = this,
+			settings = self.getSettings(),
+			$activeItems = this.elements.$posts.filter( '.' + settings.classes.active ),
+			$inactiveItems = this.elements.$posts.not( '.' + settings.classes.active ),
+			$shownItems = this.elements.$posts.filter( ':visible' ),
+			$activeOrShownItems = $activeItems.add( $shownItems ),
+			$activeShownItems = $activeItems.filter( ':visible' ),
+			$activeHiddenItems = $activeItems.filter( ':hidden' ),
+			$inactiveShownItems = $inactiveItems.filter( ':visible' ),
+			itemWidth = $shownItems.outerWidth(),
+			itemHeight = $shownItems.outerHeight();
+
+		this.elements.$posts.css( 'transition-duration', settings.transitionDuration + 'ms' );
+
+		self.showItems( $activeHiddenItems );
+
+		if ( elementorFrontend.isEditMode() ) {
+			self.fitImages();
+		}
+
+		self.handleEmptyColumns();
+
+		if ( self.isMasonryEnabled() ) {
+			self.hideItems( $inactiveShownItems );
+
+			self.showItems( $activeHiddenItems );
+
+			self.handleEmptyColumns();
+
+			self.runMasonry();
+
+			return;
+		}
 
 		$inactiveShownItems.css( {
 			opacity: 0,
 			transform: 'scale3d(0.2, 0.2, 1)'
 		} );
 
-		removeExtraGhostItems();
-
-		setTimeout( function() {
-			$inactiveShownItems.hide();
-
-			$activeItems.css( {
-				transitionDuration: '',
-				transform: 'translate3d(0px, 0px, 0px)'
-			} );
-
-			handleEmptyColumns();
-		}, settings.transitionDuration );
-
-		handleEmptyColumns();
-
 		$activeShownItems.each( function() {
 			var $item = $( this ),
-				currentOffset = getOffset( $activeOrShownItems.index( $item ), itemWidth, itemHeight ),
-				requiredOffset = getOffset( $shownItems.index( $item ), itemWidth, itemHeight );
+				currentOffset = self.getOffset( $activeOrShownItems.index( $item ), itemWidth, itemHeight ),
+				requiredOffset = self.getOffset( $shownItems.index( $item ), itemWidth, itemHeight );
 
 			if ( currentOffset.left === requiredOffset.left && currentOffset.top === requiredOffset.top ) {
 				return;
@@ -425,8 +542,8 @@ var Portfolio = function( $element, settings, $ ) {
 		setTimeout( function() {
 			$activeItems.each( function() {
 				var $item = $( this ),
-					currentOffset = getOffset( $activeOrShownItems.index( $item ), itemWidth, itemHeight ),
-					requiredOffset = getOffset( $activeItems.index( $item ), itemWidth, itemHeight );
+					currentOffset = self.getOffset( $activeOrShownItems.index( $item ), itemWidth, itemHeight ),
+					requiredOffset = self.getOffset( $activeItems.index( $item ), itemWidth, itemHeight );
 
 				$item.css( {
 					transitionDuration: settings.transitionDuration + 'ms'
@@ -441,143 +558,229 @@ var Portfolio = function( $element, settings, $ ) {
 				} );
 			} );
 		} );
-	};
 
-	var activeFilterButton = function( filter ) {
-		var $button = elements.$filterButtons.filter( '[data-filter="' + filter + '"]' );
+		setTimeout( function() {
+			self.hideItems( $inactiveShownItems );
 
-		elements.$filterButtons.removeClass( settings.classes.active );
+			$activeItems.css( {
+				transitionDuration: '',
+				transform: 'translate3d(0px, 0px, 0px)'
+			} );
 
-		$button.addClass( settings.classes.active );
-	};
+			self.handleEmptyColumns();
+		}, settings.transitionDuration );
+	},
 
-	var setFilter = function( filter ) {
-		activeFilterButton( filter );
+    activeFilterButton: function( filter ) {
+        var activeClass = this.getSettings( 'classes.active' ),
+            $filterButtons = this.elements.$filterButtons,
+            $button = $filterButtons.filter( '[data-filter="' + filter + '"]' );
 
-		filterItems( filter );
+        $filterButtons.removeClass( activeClass );
 
-		arrangeGrid();
-	};
+        $button.addClass( activeClass );
+    },
 
-	var onFilterButtonClick = function() {
-		setFilter( $( this ).data( 'filter' ) );
-	};
+	setFilter: function( filter ) {
+		this.activeFilterButton( filter );
 
-	var refreshGrid = function() {
-		elementorProFrontend.modules.posts.setColsCountSettings( settings );
+		this.filterItems( filter );
 
-		arrangeGrid();
-	};
+		this.arrangeGrid();
+	},
 
-	var initSettings = function() {
-		settings.transitionDuration = 450;
+	refreshGrid: function() {
+		this.setColsCountSettings();
 
-		settings.classes = {
-			active: 'elementor-active',
-			fitHeight: 'elementor-fit-height',
-			item: 'elementor-portfolio-item',
-			ghostItem: 'elementor-portfolio-ghost-item'
-		};
-	};
+		this.arrangeGrid();
+	},
 
-	var initElements = function() {
-		elements.$container = $element.find( '.elementor-portfolio' );
+	bindEvents: function() {
+		PostsHandler.prototype.bindEvents.apply( this, arguments );
 
-		elements.$items = elements.$container.find( '.' + settings.classes.item + ':not(.' + settings.classes.ghostItem + ')' );
+		this.elements.$filterButtons.on( 'click', this.onFilterButtonClick );
+	},
 
-		elements.$filterButtons = $element.find( '.elementor-portfolio__filter' );
+	isMasonryEnabled: function() {
+		return !! this.getElementSettings( 'masonry' );
+	},
 
-		elements.$scopeWindow = $( elementorFrontend.getScopeWindow() );
-	};
+	run: function() {
+		PostsHandler.prototype.run.apply( this, arguments );
 
-	var bindEvents = function() {
-		elements.$filterButtons.on( 'click', onFilterButtonClick );
+		this.setColsCountSettings();
 
-		var uniqueIdentifier = $element.data( 'model-cid' );
+		this.setFilter( '__all' );
 
-		elementorFrontend.addListenerOnce( uniqueIdentifier, 'resize', refreshGrid );
+		this.handleEmptyColumns();
+	},
 
-		if ( elementorFrontend.isEditMode() ) {
-			elementorFrontend.addListenerOnce( uniqueIdentifier, 'change:portfolio:item_ratio', refreshGrid, elementor.channels.editor );
+	onFilterButtonClick: function( event ) {
+		this.setFilter( jQuery( event.currentTarget ).data( 'filter' ) );
+	},
+
+	onWindowResize: function() {
+		PostsHandler.prototype.onWindowResize.apply( this, arguments );
+
+		this.refreshGrid();
+	},
+
+	onElementChange: function( propertyName ) {
+		PostsHandler.prototype.onElementChange.apply( this, arguments );
+
+		if ( 'classic_item_ratio' === propertyName ) {
+			this.refreshGrid();
 		}
-	};
-
-	var run = function() {
-		elementorProFrontend.modules.posts.setColsCountSettings( settings );
-
-		setFilter( '__all' );
-
-		handleEmptyColumns();
-
-		// For slow browsers
-		setTimeout( fitImages, 0 );
-	};
-
-	var init = function() {
-		initSettings();
-
-		initElements();
-
-		bindEvents();
-
-		run();
-	};
-
-	init();
-};
-
-module.exports = function( $scope, $ ) {
-	if ( ! $scope.find( '.elementor-portfolio' ).length ) {
-		return;
 	}
+} );
 
-	new Portfolio( $scope, $scope.find( '.elementor-portfolio' ).data( 'portfolio-options' ), $ );
-};
+},{"./posts":12}],12:[function(require,module,exports){
+module.exports = elementorFrontend.Module.extend( {
+	getElementName: function() {
+		return 'posts';
+	},
 
-},{}],9:[function(require,module,exports){
-var Posts = function( $element, $ ) {
-	var settings = {},
-		elements = {};
+	getSkinPrefix: function() {
+		return 'classic_';
+	},
 
-	var fitPostsImage = function() {
-		elements.$posts.each( function() {
+	bindEvents: function() {
+		var cid = this.getModelCID();
+
+		elementorFrontend.addListenerOnce( cid, 'resize', this.onWindowResize );
+	},
+
+	getClosureMethodsNames: function() {
+		return elementorFrontend.Module.prototype.getClosureMethodsNames.apply( this, arguments ).concat( [ 'fitImages', 'onWindowResize', 'runMasonry' ] );
+	},
+
+	getDefaultSettings: function() {
+		return {
+			classes: {
+				fitHeight: 'elementor-fit-height',
+				hasItemRatio: 'elementor-has-item-ratio'
+			},
+			selectors: {
+				postsContainer: '.elementor-posts-container',
+				post: '.elementor-post',
+				postThumbnail: '.elementor-post__thumbnail',
+				postThumbnailImage: '.elementor-post__thumbnail img'
+			}
+		};
+	},
+
+	getDefaultElements: function() {
+		var selectors = this.getSettings( 'selectors' );
+
+		return {
+			$postsContainer: this.$element.find( selectors.postsContainer ),
+			$posts: this.$element.find( selectors.post )
+		};
+	},
+
+	fitImage: function( $post ) {
+		var settings = this.getSettings(),
+			$imageParent = $post.find( settings.selectors.postThumbnail ),
+			$image = $imageParent.find( 'img' ),
+			image = $image[0];
+
+		if ( ! image ) {
+			return;
+		}
+
+		var imageParentRatio = $imageParent.outerHeight() / $imageParent.outerWidth(),
+			imageRatio = image.naturalHeight / image.naturalWidth;
+
+		$imageParent.toggleClass( settings.classes.fitHeight, imageRatio < imageParentRatio );
+	},
+
+	fitImages: function() {
+		var $ = jQuery,
+			self = this,
+			itemRatio = getComputedStyle( this.$element[0], ':after' ).content,
+			settings = this.getSettings();
+
+		this.elements.$postsContainer.toggleClass( settings.classes.hasItemRatio, !! itemRatio.match( /\d/ ) );
+
+		if ( self.isMasonryEnabled() ) {
+			return;
+		}
+
+		this.elements.$posts.each( function() {
 			var $post = $( this ),
 				$image = $post.find( settings.selectors.postThumbnailImage );
 
-			elementorProFrontend.modules.posts.fitImage( $post );
+			self.fitImage( $post );
 
 			$image.on( 'load', function() {
-				elementorProFrontend.modules.posts.fitImage( $post );
+				self.fitImage( $post );
 			} );
 		} );
-	};
+	},
 
-	var runMasonry = function() {
-		elementorProFrontend.modules.posts.setColsCountSettings( settings );
+	setColsCountSettings: function() {
+		var currentDeviceMode = elementorFrontend.getCurrentDeviceMode(),
+			settings = this.getElementSettings(),
+			skinPrefix = this.getSkinPrefix(),
+			colsCount;
 
-		elements.$posts.css( 'transform', 'translateY(0)' );
+		switch ( currentDeviceMode ) {
+			case 'mobile':
+				colsCount = settings[ skinPrefix + 'columns_mobile' ];
+				break;
+			case 'tablet':
+				colsCount = settings[ skinPrefix + 'columns_tablet' ];
+				break;
+			default:
+				colsCount = settings[ skinPrefix + 'columns' ];
+		}
 
-		if ( ! settings.classic_masonry || settings.colsCount < 2 ) {
-			elements.$postsContainer
-				.height( '' )
-				.removeClass( settings.classes.masonry );
+		this.setSettings( 'colsCount', colsCount );
+	},
+
+	isMasonryEnabled: function() {
+		return !! this.getElementSettings( this.getSkinPrefix() + 'masonry' );
+	},
+
+	initMasonry: function() {
+		this.elements.$posts.imagesLoaded().always( this.runMasonry );
+	},
+
+	runMasonry: function() {
+		var $ = jQuery,
+			elements = this.elements;
+
+        elements.$posts.css( {
+            marginTop: '',
+            transitionDuration: ''
+        } );
+
+		this.setColsCountSettings();
+
+		var colsCount = this.getSettings( 'colsCount' ),
+			hasMasonry = this.isMasonryEnabled() && colsCount >= 2;
+
+		elements.$postsContainer.toggleClass( 'elementor-posts-masonry', hasMasonry );
+
+		if ( ! hasMasonry ) {
+			elements.$postsContainer.height( '' );
 
 			return;
 		}
 
-		elements.$postsContainer.addClass( settings.classes.masonry );
+		var heights = [],
+			distanceFromTop = elements.$postsContainer.position().top,
+			$shownPosts = elements.$posts.filter( ':visible' );
 
-		var heights = [];
-
-		elements.$posts.each( function( index ) {
-			var row = Math.floor( index / settings.colsCount ),
-				indexAtRow = index % settings.colsCount,
+		$shownPosts.each( function( index ) {
+			var row = Math.floor( index / colsCount ),
+				indexAtRow = index % colsCount,
 				$post = $( this ),
 				itemPosition = $post.position(),
 				itemHeight = $post.outerHeight();
 
 			if ( row ) {
-				$post.css( 'transform', 'translateY(-' + ( itemPosition.top - heights[ indexAtRow ] ) + 'px)' );
+				$post.css( 'margin-top', '-' + ( itemPosition.top - distanceFromTop - heights[ indexAtRow ] ) + 'px' );
 
 				heights[ indexAtRow ] += itemHeight;
 			} else {
@@ -586,96 +789,111 @@ var Posts = function( $element, $ ) {
 		} );
 
 		elements.$postsContainer.height( Math.max.apply( Math, heights ) );
-	};
+	},
 
-	var initMasonry = function() {
-		// TODO: Implement `imagesLoaded` also in frontend
-		if ( elementorFrontend.isEditMode() ) {
-			elements.$posts.imagesLoaded().always( runMasonry );
+	run: function() {
+		// For slow browsers
+		setTimeout( this.fitImages, 0 );
+
+		this.initMasonry();
+	},
+
+	onInit: function() {
+		elementorFrontend.Module.prototype.onInit.apply( this, arguments );
+
+		this.bindEvents();
+
+		this.run();
+	},
+
+	onWindowResize: function() {
+		this.fitImages();
+
+		this.runMasonry();
+	},
+
+	onElementChange: function() {
+		this.fitImages();
+
+		setTimeout( this.runMasonry );
+	}
+} );
+
+},{}],13:[function(require,module,exports){
+module.exports = function() {
+	if ( ! elementorFrontend.isEditMode() ) {
+		elementorFrontend.hooks.addAction( 'frontend/element_ready/share-buttons.default', require( './handlers/share-buttons' ) );
+	}
+};
+
+},{"./handlers/share-buttons":14}],14:[function(require,module,exports){
+var HandlerModule = elementorFrontend.Module,
+	ShareButtonsHandler;
+
+ShareButtonsHandler = HandlerModule.extend( {
+	onInit: function() {
+		HandlerModule.prototype.onInit.apply( this, arguments );
+
+		var elementSettings = this.getElementSettings(),
+			classes = this.getSettings( 'classes' ),
+			isCustomURL = elementSettings.share_url && elementSettings.share_url.url,
+			shareLinkSettings = {
+				classPrefix: classes.shareLinkPrefix
+			};
+
+		if ( isCustomURL ) {
+			shareLinkSettings.url = elementSettings.share_url.url;
 		} else {
-			runMasonry();
+			shareLinkSettings.url = location.href;
+			shareLinkSettings.title = elementorProFrontend.config.postTitle;
+			shareLinkSettings.text = elementorProFrontend.config.postDescription;
 		}
-	};
 
-	var onWindowResize = function() {
-		fitPostsImage();
+		this.elements.$shareButton.shareLink( shareLinkSettings );
 
-		runMasonry();
-	};
+		var shareCountProviders = jQuery.map( elementorProFrontend.config.shareButtonsNetworks, function( network, networkName ) {
+			return network.has_counter ? networkName : null;
+		} );
 
-	var initSettings = function() {
-		settings.selectors = {
-			postsContainer: '.elementor-posts-container',
-			post: '.elementor-post',
-			postThumbnail: '.elementor-post__thumbnail',
-			postThumbnailImage: '.elementor-post__thumbnail img'
+		this.elements.$shareCounter.shareCounter( {
+			url:  isCustomURL ? elementSettings.share_url.url : location.href,
+			providers: shareCountProviders,
+			classPrefix: classes.shareCounterPrefix,
+			formatCount: true
+		} );
+	},
+	getDefaultSettings: function() {
+		return {
+			selectors: {
+				shareButton: '.elementor-share-btn',
+				shareCounter: '.elementor-share-btn__counter'
+			},
+			classes: {
+				shareLinkPrefix: 'elementor-share-btn_',
+				shareCounterPrefix: 'elementor-share-btn__counter_'
+			}
 		};
+	},
+	getDefaultElements: function() {
+		var selectors = this.getSettings( 'selectors' );
 
-		settings.classes = {
-			masonry: 'elementor-posts-masonry'
+		return {
+			$shareButton: this.$element.find( selectors.shareButton ),
+			$shareCounter: this.$element.find( selectors.shareCounter )
 		};
-	};
+	}
+} );
 
-	var initElements = function() {
-		elements.$postsContainer = $element.find( settings.selectors.postsContainer );
-
-		elements.$posts = $element.find( settings.selectors.post );
-
-		$.extend( settings, elements.$postsContainer.data( 'options' ) );
-	};
-
-	var bindEvents = function() {
-		var uniqueIdentifier = $element.data( 'model-cid' );
-
-		elementorFrontend.addListenerOnce( uniqueIdentifier, 'resize', onWindowResize );
-
-		if ( elementorFrontend.isEditMode() ) {
-			elementorFrontend.addListenerOnce( uniqueIdentifier, 'change:posts', function( controlView, elementView ) {
-				var controlName = controlView.model.get( 'name' ),
-					elementSettings = elementView.model.get( 'settings' );
-
-				if ( undefined !== settings[ controlName ] ) {
-					settings[ controlName ] = elementSettings.get( controlName );
-				}
-
-				runMasonry();
-
-				if ( /^classic_(item_ratio|masonry)/.test( controlName ) ) {
-					fitPostsImage();
-				}
-			}, elementor.channels.editor );
-		}
-	};
-
-	var run = function() {
-		fitPostsImage();
-
-		initMasonry();
-	};
-
-	var init = function() {
-		initSettings();
-
-		initElements();
-
-		bindEvents();
-
-		run();
-	};
-
-	init();
+module.exports = function( $scope ) {
+	new ShareButtonsHandler( { $element: $scope } );
 };
 
-module.exports = function( $scope, $ ) {
-	new Posts( $scope, $ );
-};
-
-},{}],10:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 module.exports = function() {
 	elementorFrontend.hooks.addAction( 'frontend/element_ready/slides.default', require( './handlers/slides' ) );
 };
 
-},{"./handlers/slides":11}],11:[function(require,module,exports){
+},{"./handlers/slides":16}],16:[function(require,module,exports){
 module.exports = function( $scope, $ ) {
 	var $slider = $scope.find( '.elementor-slides' );
 

@@ -9,11 +9,13 @@ function themeslug_enqueue_style() {
 
 function themeslug_enqueue_script() {
 	wp_enqueue_script( 'my-js', get_template_directory_uri() . '/js/main_v2.min.js', false );
+
+	wp_enqueue_script( 'elementor-slider', get_template_directory_uri() . '/js/elementor_slider.min.js', false );
 }
+
 
 add_action( 'wp_enqueue_scripts', 'themeslug_enqueue_style' );
 add_action( 'wp_enqueue_scripts', 'themeslug_enqueue_script' );
-
 
 
 function register_my_menu() {
@@ -31,6 +33,14 @@ add_theme_support( 'post-thumbnails' );
 add_image_size( 'banner', 1440, 670, true );
 add_image_size( 'full_hd', 1920, 1080, true );
 add_image_size( 'blog', 328, 244, true );
+
+
+add_action( 'elementor/widgets/widgets_registered', function () {
+
+	require( 'widgets/complex-carousel.php' );
+	\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new ComplexCarouselWidget() );
+
+} );
 
 /**
  * Filter the except length to 20 words.
@@ -216,7 +226,6 @@ function get_related_posts( $post, $nb = 3 ) {
 	$tags = wp_get_post_tags( $post->ID );
 
 
-
 	if ( $tags ) {
 		$tag_ids = array();
 		foreach ( $tags as $individual_tag ) {
@@ -235,12 +244,10 @@ function get_related_posts( $post, $nb = 3 ) {
 		foreach ( $my_query->get_posts() as $curr_post ) {
 
 
-
 			array_push( $posts, $curr_post );
 		}
 
 	}
-
 
 
 	$categories = get_categories( $post->ID );
@@ -291,7 +298,7 @@ function get_related_posts( $post, $nb = 3 ) {
 
 	wp_reset_query();
 
-	array_slice($posts, 0, $nb);
+	array_slice( $posts, 0, $nb );
 
 	return $posts;
 }

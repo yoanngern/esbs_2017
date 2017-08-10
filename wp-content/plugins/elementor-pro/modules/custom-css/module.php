@@ -2,15 +2,17 @@
 namespace ElementorPro\Modules\CustomCss;
 
 use Elementor\Controls_Manager;
+use Elementor\Controls_Stack;
 use Elementor\Element_Base;
-use Elementor\Plugin;
+use Elementor\Element_Column;
+use Elementor\Element_Section;
+use Elementor\PageSettings\Manager as PageSettingsManager;
 use Elementor\Post_CSS_File;
 use Elementor\Widget_Base;
 use ElementorPro\Base\Module_Base;
+use ElementorPro\Plugin;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Module extends Module_Base {
 
@@ -25,12 +27,19 @@ class Module extends Module_Base {
 	}
 
 	/**
-	 * @param $element    Widget_Base
+	 * @param $element Controls_Stack
 	 * @param $section_id string
-	 * @param $args       array
 	 */
-	public function register_controls( $element, $section_id, $args ) {
-		if ( Controls_Manager::TAB_ADVANCED !== $args['tab'] || ( '_section_responsive' !== $section_id /* Section/Widget */ && 'section_responsive' !== $section_id /* Column */ ) ) {
+	public function register_controls( Controls_Stack $element, $section_id ) {
+		if ( $element instanceof Element_Section || $element instanceof Widget_Base ) {
+			$required_section_id = '_section_responsive';
+		} elseif ( $element instanceof Element_Column ) {
+			$required_section_id = 'section_advanced';
+		} else {
+			$required_section_id = 'section_page_style';
+		}
+
+		if ( $required_section_id !== $section_id ) {
 			return;
 		}
 
@@ -38,16 +47,16 @@ class Module extends Module_Base {
 			'section_custom_css',
 			[
 				'label' => __( 'Custom CSS', 'elementor-pro' ),
-				'tab'   => Controls_Manager::TAB_ADVANCED,
+				'tab' => 'section_page_style' === $section_id ? Controls_Manager::TAB_STYLE : Controls_Manager::TAB_ADVANCED,
 			]
 		);
 
 		$element->add_control(
 			'custom_css',
 			[
-				'type'      => Controls_Manager::CODE,
-				'label'     => __( 'Add your own custom CSS here', 'elementor-pro' ),
-				'language'  => 'css',
+				'type' => Controls_Manager::CODE,
+				'label' => __( 'Add your own custom CSS here', 'elementor-pro' ),
+				'language' => 'css',
 				'render_type' => 'ui',
 			]
 		);
@@ -55,8 +64,8 @@ class Module extends Module_Base {
 		$element->add_control(
 			'custom_css_description',
 			[
-				'raw'     => __( 'Use "selector" to target wrapper element. Examples:<br>selector {color: red;} // For main element<br>selector .child-element {margin: 10px;} // For child element<br>.my-class {text-align: center;} // Or use any custom selector', 'elementor-pro' ),
-				'type'    => Controls_Manager::RAW_HTML,
+				'raw' => __( 'Use "selector" to target wrapper element. Examples:<br>selector {color: red;} // For main element<br>selector .child-element {margin: 10px;} // For child element<br>.my-class {text-align: center;} // Or use any custom selector', 'elementor-pro' ),
+				'type' => Controls_Manager::RAW_HTML,
 				'content_classes' => 'elementor-descriptor',
 			]
 		);
@@ -79,7 +88,7 @@ class Module extends Module_Base {
 
 	/**
 	 * @param $post_css Post_CSS_File
-	 * @param $element  Element_Base
+	 * @param $element Element_Base
 	 */
 	public function add_post_css( $post_css, $element ) {
 		$element_settings = $element->get_settings();
@@ -102,17 +111,46 @@ class Module extends Module_Base {
 	}
 
 	/**
+	 * @param $post_css Post_CSS_File
+	 */
+	public function add_page_settings_css( $post_css ) {
+		$page_settings_instance = PageSettingsManager::get_page( $post_css->get_post_id() );
+		$custom_css = $page_settings_instance->get_settings( 'custom_css' );
+
+		$custom_css = trim( $custom_css );
+
+		if ( empty( $custom_css ) ) {
+			return;
+		}
+
+		$custom_css = str_replace( 'selector', 'body.elementor-page-' . $post_css->get_post_id(), $custom_css );
+
+		// Add a css comment
+		$custom_css = '/* Start custom CSS for page-settings */' . $custom_css . '/* End custom CSS */';
+
+		$post_css->get_stylesheet()->add_raw_css( $custom_css );
+	}
+
+	/**
 	 * @param $element Element_Base
 	 */
 	public function remove_go_pro_custom_css( $element ) {
 		$controls_to_remove = [ 'section_custom_css_pro', 'custom_css_pro' ];
 
-		Plugin::instance()->controls_manager->remove_control_from_stack( $element->get_name(), $controls_to_remove );
+		// Check if elementor free is higher than 1.6.0
+		if ( method_exists( $element, 'get_unique_name' ) ) {
+			$element_name = $element->get_unique_name();
+		} else {
+			$element_name = $element->get_name();
+		}
+
+		Plugin::elementor()->controls_manager->remove_control_from_stack( $element_name, $controls_to_remove );
 	}
 
 	protected function add_actions() {
-		add_action( 'elementor/element/after_section_end', [ $this, 'register_controls' ], 10, 3 );
+		add_action( 'elementor/element/after_section_end', [ $this, 'register_controls' ], 10, 2 );
 		add_action( 'elementor/element/parse_css', [ $this, 'add_post_css' ], 10, 2 );
+		add_action( 'elementor/post-css-file/parse', [ $this, 'add_page_settings_css' ] );
 
 		// Remove Custom CSS Banner (From free version)
 		foreach ( [ 'section', 'column', 'common' ] as $element ) {

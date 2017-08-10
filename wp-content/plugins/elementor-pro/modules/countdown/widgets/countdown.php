@@ -112,7 +112,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'show_labels',
 			[
-				'label' => __( 'Show Labels', 'elementor-pro' ),
+				'label' => __( 'Show Label', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
@@ -125,7 +125,7 @@ class Countdown extends Widget_Base {
 		$this->add_control(
 			'custom_labels',
 			[
-				'label' => __( 'Custom Labels', 'elementor-pro' ),
+				'label' => __( 'Custom Label', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Yes', 'elementor-pro' ),
 				'label_off' => __( 'No', 'elementor-pro' ),
@@ -215,6 +215,12 @@ class Countdown extends Widget_Base {
 					'unit' => '%',
 					'size' => 100,
 				],
+				'tablet_default' => [
+					'unit' => '%',
+				],
+				'mobile_default' => [
+					'unit' => '%',
+				],
 				'range' => [
 					'px' => [
 						'min' => 0,
@@ -253,6 +259,7 @@ class Countdown extends Widget_Base {
 				'name' => 'box_border',
 				'label' => __( 'Border', 'elementor-pro' ),
 				'selector' => '{{WRAPPER}} .elementor-countdown-item',
+				'separator' => 'before',
 			]
 		);
 

@@ -1,15 +1,15 @@
 <?php
 namespace ElementorPro\Modules\Posts\Widgets;
 
-use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
-use Elementor\Scheme_Color;
 use Elementor\Scheme_Typography;
 use Elementor\Widget_Base;
-use ElementorPro\Modules\PanelPostsControl\Controls\Group_Control_Posts;
-use ElementorPro\Modules\PanelPostsControl\Module;
+use ElementorPro\Modules\QueryControl\Controls\Group_Control_Posts;
+use ElementorPro\Modules\QueryControl\Module;
 use ElementorPro\Modules\Posts\Skins;
 use Elementor\Controls_Manager;
+
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
  * Class Posts
@@ -40,7 +40,7 @@ class Posts extends Widget_Base {
 	}
 
 	public function get_script_depends() {
-		return [ 'jquery-slick' ];
+		return [ 'imagesloaded' ];
 	}
 
 	public function on_import( $element ) {
@@ -58,6 +58,7 @@ class Posts extends Widget_Base {
 
 	protected function _register_skins() {
 		$this->add_skin( new Skins\Skin_Classic( $this ) );
+		$this->add_skin( new Skins\Skin_Cards( $this ) );
 	}
 
 	public function get_query() {
@@ -147,9 +148,10 @@ class Posts extends Widget_Base {
 			]
 		);
 
+		Module::add_exclude_controls( $this );
+
 		$this->end_controls_section();
 	}
-
 
 	public function register_pagination_section_controls() {
 		$this->start_controls_section(

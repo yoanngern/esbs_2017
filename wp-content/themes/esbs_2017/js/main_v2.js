@@ -1,11 +1,14 @@
 // @codekit-prepend "vendor/jquery-2.2.2.js"
 
+
+
 $(document).ready(function () {
+
+
 
 
     $("body > header").on("click", "#burger", function (event) {
         event.preventDefault();
-
 
 
         if ($("body > header #burger").hasClass("open")) {
@@ -26,6 +29,9 @@ $(document).ready(function () {
         toggleForm();
 
     });
+
+
+
 
 
     $("#content.blog header").on("click", "#current_act", function (event) {
@@ -285,3 +291,12 @@ function showSlides() {
 
     setTimeout(showSlides, 5000); // Change image every 5 seconds
 }
+
+
+
+
+
+
+
+
+

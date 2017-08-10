@@ -1,4 +1,4 @@
-/*! elementor-pro - v1.2.4 - 21-03-2017 */
+/*! elementor-pro - v1.5.8 - 25-07-2017 */
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var EditorModule = function() {
 	var self = this;
@@ -9,6 +9,10 @@ var EditorModule = function() {
 
 	this.onElementorReady = function() {
 		self.onElementorInit();
+
+		elementor.on( 'frontend:init', function() {
+			self.onElementorFrontendInit();
+		} );
 
 		elementor.on( 'preview:loaded', function() {
 			self.onElementorPreviewLoaded();
@@ -22,6 +26,8 @@ EditorModule.prototype.onElementorInit = function() {};
 
 EditorModule.prototype.onElementorPreviewLoaded = function() {};
 
+EditorModule.prototype.onElementorFrontendInit = function() {};
+
 EditorModule.extend = Backbone.View.extend;
 
 module.exports = EditorModule;
@@ -33,22 +39,24 @@ var ElementorPro = Marionette.Application.extend( {
 	modules: {},
 
 	initModules: function() {
-		var PanelPostsControl = require( 'modules/panel-posts-control/assets/js/editor' ),
+		var QueryControl = require( 'modules/query-control/assets/js/editor' ),
 			Forms = require( 'modules/forms/assets/js/editor' ),
 			Library = require( 'modules/library/assets/js/editor' ),
 			CustomCSS = require( 'modules/custom-css/assets/js/editor' ),
 			Slides = require( 'modules/slides/assets/js/editor' ),
 			GlobalWidget = require( 'modules/global-widget/assets/js/editor/editor' ),
-			FlipBox = require( 'modules/flip-box/assets/js/editor/editor' );
+			FlipBox = require( 'modules/flip-box/assets/js/editor/editor' ),
+			ShareButtons = require( 'modules/share-buttons/assets/js/editor/editor' );
 
 		this.modules = {
-			panelPostsControl: new PanelPostsControl(),
+			queryControl: new QueryControl(),
 			forms: new Forms(),
 			library: new Library(),
 			customCSS: new CustomCSS(),
 			slides: new Slides(),
 			globalWidget: new GlobalWidget(),
-			flipBox: new FlipBox()
+			flipBox: new FlipBox(),
+			shareButtons: new ShareButtons()
 		};
 	},
 
@@ -71,13 +79,25 @@ var ElementorPro = Marionette.Application.extend( {
 
 		this.initModules();
 
-		Backbone.$( window ).on( 'elementor:init', this.libraryRemoveGetProButtons );
+		Backbone.$( window ).on( 'elementor:init', this.onElementorInit );
+	},
+
+	onElementorInit: function() {
+		elementorPro.libraryRemoveGetProButtons();
+
+		elementor.debug.addURLToWatch( 'elementor-pro/assets' );
 	},
 
 	libraryRemoveGetProButtons: function() {
-		elementor.hooks.addFilter( 'elementor/editor/template-library/template/action-button', function() {
-			return '#tmpl-elementor-template-library-insert-button';
-		});
+		elementor.hooks.addFilter( 'elementor/editor/template-library/template/action-button', function( viewID, templateData ) {
+			var insertTemplate = '#tmpl-elementor-template-library-insert-button';
+
+			if ( ! templateData ) {
+				return insertTemplate;
+			}
+
+			return templateData.isPro && ! elementorPro.config.isActive ? '#tmpl-elementor-pro-template-library-activate-license-button' : insertTemplate;
+		} );
 	}
 } );
 
@@ -85,7 +105,76 @@ window.elementorPro = new ElementorPro();
 
 elementorPro.start();
 
-},{"modules/custom-css/assets/js/editor":3,"modules/flip-box/assets/js/editor/editor":5,"modules/forms/assets/js/editor":6,"modules/global-widget/assets/js/editor/editor":8,"modules/library/assets/js/editor":14,"modules/panel-posts-control/assets/js/editor":16,"modules/slides/assets/js/editor":18}],3:[function(require,module,exports){
+},{"modules/custom-css/assets/js/editor":4,"modules/flip-box/assets/js/editor/editor":6,"modules/forms/assets/js/editor":7,"modules/global-widget/assets/js/editor/editor":13,"modules/library/assets/js/editor":19,"modules/query-control/assets/js/editor":21,"modules/share-buttons/assets/js/editor/editor":23,"modules/slides/assets/js/editor":24}],3:[function(require,module,exports){
+var Module = require( 'elementor-utils/module' );
+
+module.exports = Module.extend( {
+	elementType: null,
+
+	__construct: function( elementType ) {
+		this.elementType = elementType;
+
+		this.addEditorListener();
+	},
+
+	addEditorListener: function() {
+		var self = this;
+
+		if ( self.onElementChange ) {
+			var eventName = 'change';
+
+			if ( 'global' !== self.elementType ) {
+				eventName += ':' + self.elementType;
+			}
+
+			elementor.channels.editor.on( eventName, function( controlView, elementView ) {
+				self.onElementChange( controlView.model.get( 'name' ),  controlView, elementView );
+			} );
+		}
+	},
+
+	getView: function( name ) {
+		var editor = elementor.getPanelView().getCurrentPageView();
+		return editor.children.findByModelCid( this.getControl( name ).cid );
+	},
+
+	getControl: function( name ) {
+		var editor = elementor.getPanelView().getCurrentPageView();
+		return editor.collection.findWhere( { name: name } );
+	},
+
+	addControlSpinner: function( name ) {
+		this.getView( name ).$el.find( ':input' ).attr( 'disabled', true );
+		this.getView( name ).$el.find( '.elementor-control-title' ).after( '<span class="elementor-control-spinner"><i class="fa fa-spinner fa-spin"></i>&nbsp;</span>' );
+	},
+
+	removeControlSpinner: function( name ) {
+		this.getView( name ).$el.find( ':input' ).attr( 'disabled', false );
+		this.getView( name ).$el.find( 'elementor-control-spinner' ).remove();
+	},
+
+	addSectionListener: function( section, callback ) {
+		var self = this;
+
+		elementor.channels.editor.on( 'section:activated', function( sectionName, editor ) {
+			var model = editor.getOption( 'editedElementView' ).model,
+				currentElementType = model.get( 'elType' ),
+				_arguments = arguments;
+
+			if ( 'widget' === currentElementType ) {
+				currentElementType = model.get( 'widgetType' );
+			}
+
+			if ( self.elementType === currentElementType && section === sectionName ) {
+				setTimeout( function() {
+					callback.apply( self, _arguments );
+				}, 10 );
+			}
+		} );
+	}
+} );
+
+},{"elementor-utils/module":26}],4:[function(require,module,exports){
 var EditorModule = require( 'elementor-pro/editor/editor-module' );
 
 module.exports = EditorModule.extend( {
@@ -95,12 +184,22 @@ module.exports = EditorModule.extend( {
 	}
 } );
 
-},{"./editor/custom-css":4,"elementor-pro/editor/editor-module":1}],4:[function(require,module,exports){
+},{"./editor/custom-css":5,"elementor-pro/editor/editor-module":1}],5:[function(require,module,exports){
 module.exports = function() {
 	var self = this;
 
 	self.init = function() {
 		elementor.hooks.addFilter( 'editor/style/styleText', self.addCustomCss );
+
+		elementor.pageSettings.addChangeCallback( 'custom_css', self.addPageCustomCss );
+
+		self.addPageCustomCss.call(  elementor.pageSettings,  elementor.pageSettings.model.get( 'custom_css' ) );
+	};
+
+	self.addPageCustomCss = function( newValue ) {
+		newValue = newValue.replace( /selector/g, '.elementor-page-' + elementor.config.post_id );
+
+		this.controlsCSS.stylesheet.addRawCSS( 'page-settings-custom-css', newValue );
 	};
 
 	self.addCustomCss = function( css, view ) {
@@ -108,7 +207,7 @@ module.exports = function() {
 			customCSS = model.get( 'settings' ).get( 'custom_css' );
 
 		if ( customCSS ) {
-			css += customCSS.replace( /selector/g, '.elementor-element-' + view.model.id );
+			css += customCSS.replace( /selector/g, '.elementor-element.elementor-element-' + view.model.id );
 		}
 
 		return css;
@@ -117,7 +216,7 @@ module.exports = function() {
 	self.init();
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var EditorModule = require( 'elementor-pro/editor/editor-module' );
 
 module.exports = EditorModule.extend( {
@@ -150,17 +249,244 @@ module.exports = EditorModule.extend( {
 	}
 } );
 
-},{"elementor-pro/editor/editor-module":1}],6:[function(require,module,exports){
+},{"elementor-pro/editor/editor-module":1}],7:[function(require,module,exports){
 var EditorModule = require( 'elementor-pro/editor/editor-module' );
 
 module.exports = EditorModule.extend( {
-	onElementorPreviewLoaded: function() {
-		var ReplyToField = require( './editor/reply-to-field' );
+	onElementorInit: function() {
+		var ReplyToField = require( './editor/reply-to-field' ),
+			Mailchimp = require( './editor/mailchimp' ),
+			Recaptcha = require( './editor/recaptcha' ),
+			Shortcode = require( './editor/shortcode' );
+
 		this.replyToField = new ReplyToField();
+		this.mailchimp = new Mailchimp( 'form' );
+		this.shortcode = new Shortcode( 'form' );
+		this.recaptcha = new Recaptcha( 'form' );
+
+		elementor.addControlView( 'Fields_map', require( './editor/fields-map-control' ) );
 	}
 } );
 
-},{"./editor/reply-to-field":7,"elementor-pro/editor/editor-module":1}],7:[function(require,module,exports){
+},{"./editor/fields-map-control":8,"./editor/mailchimp":9,"./editor/recaptcha":10,"./editor/reply-to-field":11,"./editor/shortcode":12,"elementor-pro/editor/editor-module":1}],8:[function(require,module,exports){
+module.exports = elementor.modules.controls.Repeater.extend( {
+	onBeforeRender: function() {
+		 this.$el.hide();
+	},
+
+	updateMap: function( fields ) {
+		var self = this,
+			savedMapObject = {};
+
+		self.collection.each( function( model ) {
+			savedMapObject[ model.get( 'remote_id' ) ] = model.get( 'local_id' );
+		} );
+
+		self.collection.reset();
+
+		_.each( fields, function( field ) {
+			var model = {
+				remote_id: field.remote_id,
+				remote_label: field.remote_label,
+				remote_type: field.remote_type ? field.remote_type : '',
+				remote_required: field.remote_required ? field.remote_required : false,
+				local_id: savedMapObject[field.remote_id] ? savedMapObject[field.remote_id] : ''
+			};
+
+			self.collection.add( model );
+		} );
+
+		self.render();
+	},
+
+	onRender: function() {
+		elementor.modules.controls.Base.prototype.onRender.apply( this, arguments );
+
+		var self = this;
+
+		self.children.each( function( view ) {
+			var localFieldsControl = view.children.last(),
+				options = {
+					'': '- ' + elementor.translate( 'None' ) + ' -'
+				},
+				label = view.model.get( 'remote_label' );
+
+			if ( view.model.get( 'remote_required' ) ) {
+				label += '<span class="elementor-required">*</span>';
+			}
+
+			_.each( self.elementSettingsModel.get( 'form_fields' ).models, function( model, index ) {
+
+				// If it's an email field, add only email fields from thr form
+				var remoteType = view.model.get( 'remote_type' );
+
+				if ( 'text' !== remoteType && remoteType !== model.get( 'field_type' ) ) {
+					return;
+				}
+
+				options[ model.get( '_id' ) ] = model.get( 'field_label' ) || 'Field #' + ( index + 1 );
+			} );
+
+			localFieldsControl.model.set( 'label',  label );
+			localFieldsControl.model.set( 'options', options );
+			localFieldsControl.render();
+
+			view.$el.find( '.elementor-repeater-row-tools' ).hide();
+			view.$el.find( '.elementor-repeater-row-controls' )
+				.removeClass( 'elementor-repeater-row-controls' )
+				.find( '.elementor-control' )
+				.css( {
+					paddingBottom: 0
+				} );
+		} );
+
+		self.$el.find( '.elementor-button-wrapper' ).remove();
+
+		if ( self.children.length ) {
+			self.$el.show();
+		}
+	}
+} );
+
+},{}],9:[function(require,module,exports){
+var ElementEditorModule = require( 'elementor-pro/editor/element-editor-module' );
+
+module.exports = ElementEditorModule.extend( {
+	cache: {},
+
+	onElementChange: function( setting ) {
+		switch ( setting ) {
+			case 'mailchimp_api_key':
+				this.onMailchimpApiKeyUpdate();
+				break;
+			case 'mailchimp_list':
+				this.onMailchimpListUpdate();
+				break;
+		}
+	},
+
+	onMailchimpApiKeyUpdate: function() {
+		var self = this,
+			controlView = self.getView( 'mailchimp_api_key' );
+
+		if ( ! controlView.getControlValue().match( /[0-9a-z-]{36,37}/ ) ) {
+			self.updateOptions( 'mailchimp_list', [] );
+			self.getView( 'mailchimp_list' ).setValue( '' );
+			return;
+		}
+
+		self.addControlSpinner( 'mailchimp_list' );
+
+		self.getMailchimpCache( 'lists', controlView.getControlValue() ).done( function( json ) {
+			self.updateOptions( 'mailchimp_list', json.data.lists );
+		} );
+	},
+
+	onMailchimpListUpdate: function() {
+		var self = this;
+
+		self.updateOptions( 'mailchimp_groups', [] );
+		self.getView( 'mailchimp_groups' ).setValue( '' );
+		self.updatMailchimpList();
+	},
+
+	updatMailchimpList: function() {
+		var self = this,
+		controlView = self.getView( 'mailchimp_list' );
+
+		if ( ! controlView.getControlValue() ) {
+			return;
+		}
+
+		self.addControlSpinner( 'mailchimp_groups' );
+
+		self.getMailchimpCache( 'list_details', controlView.getControlValue(), {
+			mailchimp_list: controlView.getControlValue()
+		} ).done( function( json ) {
+			self.updateOptions( 'mailchimp_groups', json.data.list_details.groups );
+			self.getView( 'mailchimp_fields_map' ).updateMap( json.data.list_details.fields );
+		} );
+	},
+
+	getMailchimpCache: function( type, cacheKey, requestArgs ) {
+		if ( _.has( this.cache[ type ], cacheKey ) ) {
+			var data = {};
+			data[ type ] = this.cache[ type][ cacheKey ];
+			return jQuery.Deferred().resolve( {
+				data: data
+			} );
+		}
+
+		requestArgs = _.extend( {}, requestArgs, {
+			service: 'mailchimp',
+			mailchimp_action: type,
+			api_key: this.getView( 'mailchimp_api_key' ).getControlValue()
+		} );
+
+		var self = this;
+
+		return elementorPro.ajax.send( 'forms_panel_action_data', {
+			data: requestArgs,
+			success: function( data ) {
+				self.cache[ type ] = _.extend( {}, self.cache[ type ] );
+				self.cache[ type ][ cacheKey ] = data[ type ];
+			}
+		} );
+	},
+
+	updateOptions: function( name, options ) {
+		if ( this.getView( name ) ) {
+			this.getControl( name ).set( 'options', options );
+			this.getView( name ).render();
+		}
+	},
+
+	onSectionActive: function() {
+		this.onMailchimpApiKeyUpdate();
+		this.updatMailchimpList();
+	},
+
+	onInit: function() {
+		this.addSectionListener( 'section_mailchimp', this.onSectionActive );
+	}
+} );
+
+},{"elementor-pro/editor/element-editor-module":3}],10:[function(require,module,exports){
+var ElementEditorModule = require( 'elementor-pro/editor/element-editor-module' );
+
+module.exports = ElementEditorModule.extend( {
+
+	renderField: function( inputField, item ) {
+		var config = elementorPro.config.forms.recaptcha;
+		inputField += '<div class="elementor-field">';
+
+		if ( config.enabled ) {
+			inputField += '<div class="elementor-g-recaptcha' + _.escape( item.css_classes ) + '" data-sitekey="' + config.site_key + '" data-theme="' + item.recaptcha_style + '" data-size="' + item.recaptcha_size + '"></div>';
+		} else {
+			inputField += '<div class="elementor-alert">' + config.setup_message + '</div>';
+		}
+
+		inputField += '</div>';
+
+		return inputField;
+
+	},
+
+	filterItem: function( item ) {
+		if ( 'recaptcha' === item.field_type ) {
+			item.field_label = false;
+		}
+
+		return item;
+	},
+
+	onInit: function() {
+		elementor.hooks.addFilter( 'elementor_pro/forms/content_template/item', this.filterItem );
+		elementor.hooks.addFilter( 'elementor_pro/forms/content_template/field/recaptcha', this.renderField, 10, 2 );
+	}
+} );
+
+},{"elementor-pro/editor/element-editor-module":3}],11:[function(require,module,exports){
 module.exports = function() {
 	var editor,
 		editedModel,
@@ -247,7 +573,80 @@ module.exports = function() {
 	init();
 };
 
-},{}],8:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
+var ElementEditorModule = require( 'elementor-pro/editor/element-editor-module' );
+
+module.exports = ElementEditorModule.extend( {
+	getExistId: function( id ) {
+		var exist = this.getView( 'form_fields' ).collection.filter( function( model ) {
+			return id === model.get( '_id' );
+		} );
+
+		return exist.length > 1;
+	},
+
+	onFieldChanged: function( model, collection, eventArgs ) {
+		var self = this;
+
+		_.defer( function() {
+			var view = self.getView( 'form_fields' ).children.findByModel( model );
+			self.updateId( view, eventArgs && eventArgs.add );
+			self.updateShortcode( view );
+		} );
+	},
+
+	updateId: function( view, isNewItem ) {
+		var id = view.model.get( '_id' ),
+			sanitizedId = id.replace( /[^\w]/, '_' ),
+			fieldIndex = 1,
+			IdView = view.children.filter( function( view ) {
+				return '_id' === view.model.get( 'name' );
+			});
+
+		while ( sanitizedId !== id || isNewItem || ! id || this.getExistId( id ) ) {
+			if ( sanitizedId !== id ) {
+				id = sanitizedId;
+			} else {
+				id = 'field_' + fieldIndex;
+				sanitizedId = id;
+			}
+
+			view.model.attributes._id = id;
+			IdView[0].render();
+			IdView[0].$el.find( 'input' ).focus();
+			fieldIndex++;
+			isNewItem = false;
+		}
+	},
+
+	updateShortcode: function( view ) {
+		var template = _.template( '[field id="<%= id %>"]' )( {
+			title: view.model.get( 'field_label' ),
+			id: view.model.get( '_id' )
+		} );
+
+		view.$el.find( '.elementor-form-field-shortcode' ).focus( function() {
+			this.select();
+		} ).val( template );
+	},
+
+	onSectionActive: function() {
+		var controlView = this.getView( 'form_fields' );
+
+		controlView.children.each( this.updateShortcode  );
+
+		if ( ! this.collectionEventsAttached ) {
+			controlView.collection.on( 'add change', this.onFieldChanged );
+			this.collectionEventsAttached = true;
+		}
+	},
+
+	onInit: function() {
+		this.addSectionListener( 'section_form_fields', this.onSectionActive );
+	}
+} );
+
+},{"elementor-pro/editor/element-editor-module":3}],13:[function(require,module,exports){
 var EditorModule = require( 'elementor-pro/editor/editor-module' );
 
 module.exports =  EditorModule.extend( {
@@ -297,6 +696,10 @@ module.exports =  EditorModule.extend( {
 	},
 
 	registerTemplateType: function() {
+		elementor.config.widgets.global = {
+			title: elementor.translate( 'global' )
+		};
+
 		elementor.templates.registerTemplateType( 'widget', {
 			showInLibrary: false,
 			saveDialog: {
@@ -304,7 +707,13 @@ module.exports =  EditorModule.extend( {
 				description: elementorPro.translate( 'global_widget_save_description' )
 			},
 			prepareSavedData: function( data ) {
-				data.widgetType = data.data[0].widgetType;
+				// Todo: Temp patch since 1.3.0
+				if ( data.content ) {
+					data.widgetType = data.content[0].widgetType;
+				} else {
+					data.widgetType = data.data[0].widgetType;
+				}
+				// END patch
 
 				return data;
 			},
@@ -371,6 +780,10 @@ module.exports =  EditorModule.extend( {
 			templatesData.push( data );
 		} );
 
+		if ( ! templatesData.length ) {
+			return;
+		}
+
 		elementor.ajax.send( 'update_templates', {
 			data: {
 				templates: templatesData
@@ -387,8 +800,17 @@ module.exports =  EditorModule.extend( {
 			success: function( data ) {
 				globalModel.set( 'settingsLoadedStatus', 'loaded' ).trigger( 'settings:loaded' );
 
+				if ( data.content ) {
+					data = data.content;
+				}
+
 				var settings = data[0].settings,
 					settingsModel = globalModel.get( 'settings' );
+
+				// Don't track it in History
+				if ( elementor.history ) {
+					elementor.history.history.setActive( false );
+				}
 
 				settingsModel.handleRepeaterData( settings );
 
@@ -397,6 +819,10 @@ module.exports =  EditorModule.extend( {
 				if ( callback ) {
 					callback( globalModel );
 				}
+
+				if ( elementor.history ) {
+					elementor.history.history.setActive( true );
+				}
 			}
 		} );
 	},
@@ -404,6 +830,14 @@ module.exports =  EditorModule.extend( {
 	onElementorInit: function() {
 		this.setWidgetType();
 		this.registerTemplateType();
+
+		// If it's before moving handlers scripts to frontend in edit mode
+		if ( ! elementor.compareVersions ) {
+			this.addSavedWidgetsToPanel();
+		}
+	},
+
+	onElementorFrontendInit: function() {
 		this.addSavedWidgetsToPanel();
 	},
 
@@ -413,6 +847,13 @@ module.exports =  EditorModule.extend( {
 	},
 
 	onWidgetTemplateSaved: function( data ) {
+		if ( elementor.history ) {
+			elementor.history.history.startItem( {
+				title: elementor.config.widgets[ data.widgetType ].title,
+				type: elementorPro.translate( 'linked_to_global' )
+			} );
+		}
+
 		var widgetModel = elementor.templates.getLayout().modalContent.currentView.model,
 			widgetModelIndex = widgetModel.collection.indexOf( widgetModel );
 
@@ -438,10 +879,14 @@ module.exports =  EditorModule.extend( {
 		panel.setPage( 'elements' );
 
 		panel.getCurrentPageView().activateTab( 'global' );
+
+		if ( elementor.history ) {
+			elementor.history.history.endItem();
+		}
 	}
 } );
 
-},{"./global-templates-view":9,"./panel-page":11,"./widget-model":12,"./widget-view":13,"elementor-pro/editor/editor-module":1}],9:[function(require,module,exports){
+},{"./global-templates-view":14,"./panel-page":16,"./widget-model":17,"./widget-view":18,"elementor-pro/editor/editor-module":1}],14:[function(require,module,exports){
 module.exports = elementor.modules.templateLibrary.ElementsCollectionView.extend( {
 	id: 'elementor-global-templates',
 
@@ -456,7 +901,7 @@ module.exports = elementor.modules.templateLibrary.ElementsCollectionView.extend
 	onFilterEmpty: function() {}
 } );
 
-},{"./no-templates":10}],10:[function(require,module,exports){
+},{"./no-templates":15}],15:[function(require,module,exports){
 module.exports = Marionette.ItemView.extend( {
 	template: '#tmpl-elementor-panel-global-widget-no-templates',
 
@@ -473,7 +918,7 @@ module.exports = Marionette.ItemView.extend( {
 	}
 } );
 
-},{}],11:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 
 module.exports = Marionette.ItemView.extend( {
 	id: 'elementor-panel-global-widget',
@@ -559,7 +1004,7 @@ module.exports = Marionette.ItemView.extend( {
 	}
 } );
 
-},{}],12:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 module.exports = elementor.modules.element.Model.extend( {
 	initialize: function() {
 		this.set( { widgetType: 'global' }, { silent: true } );
@@ -567,7 +1012,12 @@ module.exports = elementor.modules.element.Model.extend( {
 		elementor.modules.element.Model.prototype.initialize.apply( this, arguments );
 	},
 
-	initSettings: function() {},
+	initSettings: function() {
+		var templateID = this.get( 'templateID' ),
+			globalModel = elementorPro.modules.globalWidget.getGlobalModels( templateID );
+
+		elementorFrontend.config.elements.data[ this.cid ] = globalModel.get( 'settings' );
+	},
 
 	initEditSettings: function() {},
 
@@ -581,7 +1031,7 @@ module.exports = elementor.modules.element.Model.extend( {
 	}
 } );
 
-},{}],13:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 var WidgetView = elementor.modules.WidgetView,
 	GlobalWidgetView;
 
@@ -644,12 +1094,9 @@ GlobalWidgetView = WidgetView.extend( {
 		var newModel = new elementor.modules.element.Model( {
 			elType: 'widget',
 			widgetType: this.globalModel.get( 'widgetType' ),
-			id: elementor.helpers.getUniqueID()
-		} );
-
-		newModel.set( {
-			settings: this.globalModel.get( 'settings' ).clone(),
-			editSettings: this.globalModel.get( 'editSettings' ).clone()
+			id: elementor.helpers.getUniqueID(),
+			settings: elementor.helpers.cloneObject( this.globalModel.get( 'settings' ).attributes ),
+			defaultEditSettings: elementor.helpers.cloneObject( this.globalModel.get( 'editSettings' ).attributes )
 		} );
 
 		this._parent.addChildModel( newModel, { at: this.model.collection.indexOf( this.model ) } );
@@ -664,7 +1111,7 @@ GlobalWidgetView = WidgetView.extend( {
 
 module.exports = GlobalWidgetView;
 
-},{}],14:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 var EditorModule = require( 'elementor-pro/editor/editor-module' );
 
 module.exports = EditorModule.extend( {
@@ -674,7 +1121,7 @@ module.exports = EditorModule.extend( {
 	}
 } );
 
-},{"./editor/edit-button":15,"elementor-pro/editor/editor-module":1}],15:[function(require,module,exports){
+},{"./editor/edit-button":20,"elementor-pro/editor/editor-module":1}],20:[function(require,module,exports){
 module.exports = function() {
 	var self = this;
 
@@ -725,7 +1172,7 @@ module.exports = function() {
 	self.init();
 };
 
-},{}],16:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 var EditorModule = require( 'elementor-pro/editor/editor-module' );
 
 module.exports = EditorModule.extend( {
@@ -734,7 +1181,7 @@ module.exports = EditorModule.extend( {
 	}
 } );
 
-},{"./editor/query-control":17,"elementor-pro/editor/editor-module":1}],17:[function(require,module,exports){
+},{"./editor/query-control":22,"elementor-pro/editor/editor-module":1}],22:[function(require,module,exports){
 module.exports = elementor.modules.controls.Select2.extend( {
 	isTitlesReceived: false,
 
@@ -787,6 +1234,8 @@ module.exports = elementor.modules.controls.Select2.extend( {
 			value: value
 		};
 
+		this.addControlSpinner();
+
 		var request = elementorPro.ajax.send( 'panel_posts_control_value_titles', { data: data });
 
 		request.then( function( response ) {
@@ -795,7 +1244,14 @@ module.exports = elementor.modules.controls.Select2.extend( {
 			self.model.set( 'options', response.data );
 
 			self.render();
+
+			self.ui.select.select2( self.getSelect2Options() );
 		});
+	},
+
+	addControlSpinner: function( name ) {
+		this.ui.select.prop( 'disabled', true );
+		this.$el.find( '.elementor-control-title' ).after( '<span class="elementor-control-spinner">&nbsp;<i class="fa fa-spinner fa-spin"></i>&nbsp;</span>' );
 	},
 
 	onReady: function() {
@@ -807,7 +1263,32 @@ module.exports = elementor.modules.controls.Select2.extend( {
 	}
 } );
 
-},{}],18:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
+var EditorModule = require( 'elementor-pro/editor/editor-module' );
+
+module.exports = EditorModule.extend( {
+	config: elementorPro.config.shareButtonsNetworks,
+
+	networksClassDictionary: {
+		google: 'fa fa-google-plus',
+		pocket: 'fa fa-get-pocket',
+		email: 'fa fa-envelope'
+	},
+
+	getNetworkClass: function( networkName ) {
+		return this.networksClassDictionary[ networkName ] || 'fa fa-' + networkName;
+	},
+
+	getNetworkTitle: function( buttonSettings ) {
+		return buttonSettings.text || this.config[ buttonSettings.button ].title;
+	},
+
+	hasCounter: function( networkName, settings ) {
+		return 'icon' !== settings.view && 'yes' === settings.show_counter && this.config[ networkName ].has_counter;
+	}
+} );
+
+},{"elementor-pro/editor/editor-module":1}],24:[function(require,module,exports){
 var EditorModule = require( 'elementor-pro/editor/editor-module' );
 
 module.exports = EditorModule.extend( {
@@ -817,7 +1298,7 @@ module.exports = EditorModule.extend( {
 	}
 } );
 
-},{"./editor/stop-slider":19,"elementor-pro/editor/editor-module":1}],19:[function(require,module,exports){
+},{"./editor/stop-slider":25,"elementor-pro/editor/editor-module":1}],25:[function(require,module,exports){
 module.exports = function() {
 	var self = this;
 
@@ -839,6 +1320,198 @@ module.exports = function() {
 
 	self.init();
 };
+
+},{}],26:[function(require,module,exports){
+var Module = function() {
+	var $ = jQuery,
+		instanceParams = arguments,
+		self = this,
+		settings,
+		events = {};
+
+	var ensureClosureMethods = function() {
+		$.each( self, function( methodName ) {
+			var oldMethod = self[ methodName ];
+
+			if ( 'function' !== typeof oldMethod ) {
+				return;
+			}
+
+			self[ methodName ] = function() {
+				return oldMethod.apply( self, arguments );
+			};
+		});
+	};
+
+	var initSettings = function() {
+		settings = self.getDefaultSettings();
+
+		var instanceSettings = instanceParams[0];
+
+		if ( instanceSettings ) {
+			$.extend( settings, instanceSettings );
+		}
+	};
+
+	var init = function() {
+		self.__construct.apply( self, instanceParams );
+
+		ensureClosureMethods();
+
+		initSettings();
+
+		self.trigger( 'init' );
+	};
+
+	this.getItems = function( items, itemKey ) {
+		if ( itemKey ) {
+			var keyStack = itemKey.split( '.' ),
+				currentKey = keyStack.splice( 0, 1 );
+
+			if ( ! keyStack.length ) {
+				return items[ currentKey ];
+			}
+
+			if ( ! items[ currentKey ] ) {
+				return;
+			}
+
+			return this.getItems(  items[ currentKey ], keyStack.join( '.' ) );
+		}
+
+		return items;
+	};
+
+	this.getSettings = function( setting ) {
+		return this.getItems( settings, setting );
+	};
+
+	this.setSettings = function( settingKey, value, settingsContainer ) {
+		if ( ! settingsContainer ) {
+			settingsContainer = settings;
+		}
+
+		if ( 'object' === typeof settingKey ) {
+			$.extend( settingsContainer, settingKey );
+
+			return self;
+		}
+
+		var keyStack = settingKey.split( '.' ),
+			currentKey = keyStack.splice( 0, 1 );
+
+		if ( ! keyStack.length ) {
+			settingsContainer[ currentKey ] = value;
+
+			return self;
+		}
+
+		if ( ! settingsContainer[ currentKey ] ) {
+			settingsContainer[ currentKey ] = {};
+		}
+
+		return self.setSettings( keyStack.join( '.' ), value, settingsContainer[ currentKey ] );
+	};
+
+	this.forceMethodImplementation = function( methodArguments ) {
+		var functionName = methodArguments.callee.name;
+
+		throw new ReferenceError( 'The method ' + functionName + ' must to be implemented in the inheritor child.' );
+	};
+
+	this.on = function( eventName, callback ) {
+		if ( ! events[ eventName ] ) {
+			events[ eventName ] = [];
+		}
+
+		events[ eventName ].push( callback );
+
+		return self;
+	};
+
+	this.off = function( eventName, callback ) {
+		if ( ! events[ eventName ] ) {
+			return self;
+		}
+
+		if ( ! callback ) {
+			delete events[ eventName ];
+
+			return self;
+		}
+
+		var callbackIndex = events[ eventName ].indexOf( callback );
+
+		if ( -1 !== callbackIndex ) {
+			delete events[ eventName ][ callbackIndex ];
+		}
+
+		return self;
+	};
+
+	this.trigger = function( eventName ) {
+		var methodName = 'on' + eventName[ 0 ].toUpperCase() + eventName.slice( 1 ),
+			params = Array.prototype.slice.call( arguments, 1 );
+
+		if ( self[ methodName ] ) {
+			self[ methodName ].apply( self, params );
+		}
+
+		var callbacks = events[ eventName ];
+
+		if ( ! callbacks ) {
+			return;
+		}
+
+		$.each( callbacks, function( index, callback ) {
+			callback.apply( self, params );
+		} );
+	};
+
+	init();
+};
+
+Module.prototype.__construct = function() {};
+
+Module.prototype.getDefaultSettings = function() {
+	return {};
+};
+
+Module.extendsCount = 0;
+
+Module.extend = function( properties ) {
+	var $ = jQuery,
+		parent = this;
+
+	var child = function() {
+		return parent.apply( this, arguments );
+	};
+
+	$.extend( child, parent );
+
+	child.prototype = Object.create( $.extend( {}, parent.prototype, properties ) );
+
+	child.prototype.constructor = child;
+
+	/*
+	 * Constructor ID is used to set an unique ID
+     * to every extend of the Module.
+     *
+	 * It's useful in some cases such as unique
+	 * listener for frontend handlers.
+	 */
+	var constructorID = ++Module.extendsCount;
+
+	child.prototype.getConstructorID = function() {
+		return constructorID;
+	};
+
+	child.__super__ = parent.prototype;
+
+	return child;
+};
+
+module.exports = Module;
 
 },{}]},{},[2])
 //# sourceMappingURL=editor.js.map

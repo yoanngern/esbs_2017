@@ -1075,6 +1075,28 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/images\/next_white.png": {
+		"ft": 32768,
+		"iS": 736,
+		"oA": 0,
+		"oAP": "\/images\/next_white.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/prev_white.png": {
+		"ft": 32768,
+		"iS": 682,
+		"oA": 0,
+		"oAP": "\/images\/prev_white.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
 	"\/images\/right.png": {
 		"ft": 32768,
 		"iS": 1294,
@@ -1102,6 +1124,24 @@
 		"oA": 2,
 		"oAP": "\/index.php",
 		"oF": 0
+		},
+	"\/js\/elementor_slider.js": {
+		"ft": 64,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/elementor_slider.min.js",
+		"oF": 2,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/js\/elementor_slider.min.js": {
+		"ft": 64,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/min\/elementor_slider.min-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
 		},
 	"\/js\/grayscale\/filters.svg": {
 		"ft": 2097152,
@@ -1144,7 +1184,7 @@
 		"ft": 64,
 		"mi": 1,
 		"oA": 0,
-		"oAP": "\/js\/main_v2-min.js",
+		"oAP": "\/js\/main_v2.min.js",
 		"oF": 2,
 		"sC": 0,
 		"tS": 0
@@ -3916,6 +3956,19 @@
 		"oF": 0,
 		"oS": 0
 		},
+	"\/scss\/elementor\/slider.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/css\/slider.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/scss\/style_v3.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -3958,6 +4011,16 @@
 		"oAP": "\/style_v2-min.css",
 		"oF": 0,
 		"oS": 0
+		},
+	"\/style_v3.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/style_v3-min.css",
+		"oF": 0,
+		"oS": 3
 		},
 	"\/template-parts\/blog\/blogroll.php": {
 		"ft": 8192,
@@ -4005,6 +4068,12 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/form\/simple.php",
+		"oF": 0
+		},
+	"\/widgets\/complex-carousel.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/widgets\/complex-carousel.php",
 		"oF": 0
 		}
 	},
@@ -5374,7 +5443,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http:\/\/test.esbs.org",
+	"externalServerAddress": "http:\/\/esbs.org",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",

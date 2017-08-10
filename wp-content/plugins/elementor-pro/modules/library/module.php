@@ -5,7 +5,7 @@ use ElementorPro\Base\Module_Base;
 use ElementorPro\Modules\Library\Classes\Shortcode;
 use ElementorPro\Plugin;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Module extends Module_Base {
 
@@ -59,11 +59,8 @@ class Module extends Module_Base {
 	}
 
 	public static function get_templates() {
-		$source = \Elementor\Plugin::instance()->templates_manager->get_source( 'local' );
-
-		return $source->get_items();
+		return Plugin::elementor()->templates_manager->get_source( 'local' )->get_items();
 	}
-
 
 	public static function empty_templates_message() {
 		return '<div id="elementor-widget-template-empty-templates">

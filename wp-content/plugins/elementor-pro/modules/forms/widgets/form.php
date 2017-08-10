@@ -7,15 +7,14 @@ use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Elementor\Scheme_Color;
 use Elementor\Scheme_Typography;
-use Elementor\Widget_Base;
-use ElementorPro\Classes\Utils;
 use ElementorPro\Modules\Forms\Classes\Ajax_Handler;
+use ElementorPro\Modules\Forms\Classes\Form_Base;
 use ElementorPro\Modules\Forms\Classes\Recaptcha_Handler;
 use ElementorPro\Modules\Forms\Module;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class Form extends Widget_Base {
+class Form extends Form_Base {
 
 	public function get_name() {
 		return 'form';
@@ -27,32 +26,6 @@ class Form extends Widget_Base {
 
 	public function get_icon() {
 		return 'eicon-form-horizontal';
-	}
-
-	public function get_categories() {
-		return [ 'pro-elements' ];
-	}
-
-	public function on_export( $element ) {
-		unset(
-			$element['settings']['email_to'],
-			$element['settings']['email_from'],
-			$element['settings']['email_from_name'],
-			$element['settings']['email_subject'],
-			$element['settings']['redirect_to']
-		);
-
-		return $element;
-	}
-
-	public static function get_button_sizes() {
-		return [
-			'xs' => __( 'Extra Small', 'elementor-pro' ),
-			'sm' => __( 'Small', 'elementor-pro' ),
-			'md' => __( 'Medium', 'elementor-pro' ),
-			'lg' => __( 'Large', 'elementor-pro' ),
-			'xl' => __( 'Extra Large', 'elementor-pro' ),
-		];
 	}
 
 	protected function _register_controls() {
@@ -73,6 +46,12 @@ class Form extends Widget_Base {
 
 		$field_types = apply_filters( 'elementor_pro/forms/field_types', $field_types );
 
+		$repeater->start_controls_tabs( 'form_fields_tabs' );
+
+		$repeater->start_controls_tab( 'form_fields_content_tab', [
+			'label' => __( 'Content', 'elementor-pro' ),
+		] );
+
 		$repeater->add_control(
 			'field_type',
 			[
@@ -89,17 +68,6 @@ class Form extends Widget_Base {
 				'label' => __( 'Label', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => '',
-				'conditions' => [
-					'terms' => [
-						[
-							'name' => 'field_type',
-							'operator' => '!in',
-							'value' => [
-								'recaptcha',
-							],
-						],
-					],
-				],
 			]
 		);
 
@@ -135,7 +103,7 @@ class Form extends Widget_Base {
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Yes', 'elementor-pro' ),
 				'label_off' => __( 'No', 'elementor-pro' ),
-				'return_value' => true,
+				'return_value' => 'true',
 				'default' => '',
 				'conditions' => [
 					'terms' => [
@@ -217,7 +185,7 @@ class Form extends Widget_Base {
 					'25' => '25%',
 					'20' => '20%',
 				],
-				'desktop_default' => '100',
+				'default' => '100',
 				'conditions' => [
 					'terms' => [
 						[
@@ -301,6 +269,36 @@ class Form extends Widget_Base {
 			]
 		);
 
+		$repeater->end_controls_tab();
+
+		$repeater->start_controls_tab( 'form_fields_advanced_tab', [
+			'label' => __( 'Advanced', 'elementor-pro' ),
+		] );
+
+		$repeater->add_control(
+			'_id',
+			[
+				'label' => __( 'Custom ID', 'elementor-pro' ),
+				'type' => Controls_Manager::TEXT,
+				'description' => __( 'Please make sure the ID is unique and not used elsewhere in this form. This field allows <code>A-z 0-9</code> & underscore chars without spaces.', 'elementor-pro' ),
+				'render_type' => 'none',
+			]
+		);
+
+		$repeater->add_control(
+			'shortcode',
+			[
+				'label' => __( 'Shortcode', 'elementor-pro' ),
+				'type' => Controls_Manager::RAW_HTML,
+				'classes' => 'forms-field-shortcode',
+				'raw' => '<input class="elementor-form-field-shortcode" readonly />',
+			]
+		);
+
+		$repeater->end_controls_tab();
+
+		$repeater->end_controls_tabs();
+
 		$this->start_controls_section(
 			'section_form_fields',
 			[
@@ -321,26 +319,26 @@ class Form extends Widget_Base {
 		$this->add_control(
 			'form_fields',
 			[
-				'label' => __( 'Form Fields', 'elementor-pro' ),
 				'type' => Controls_Manager::REPEATER,
-				'show_label' => false,
-				'separator' => 'before',
 				'fields' => array_values( $repeater->get_controls() ),
 				'default' => [
 					[
+						'_id' => 'name',
 						'field_type' => 'text',
 						'field_label' => __( 'Name', 'elementor-pro' ),
 						'placeholder' => __( 'Name', 'elementor-pro' ),
 						'width' => '100',
 					],
 					[
+						'_id' => 'email',
 						'field_type' => 'email',
-						'required' => true,
+						'required' => 'true',
 						'field_label' => __( 'Email', 'elementor-pro' ),
 						'placeholder' => __( 'Email', 'elementor-pro' ),
 						'width' => '100',
 					],
 					[
+						'_id' => 'message',
 						'field_type' => 'textarea',
 						'field_label' => __( 'Message', 'elementor-pro' ),
 						'placeholder' => __( 'Message', 'elementor-pro' ),
@@ -371,12 +369,12 @@ class Form extends Widget_Base {
 		$this->add_control(
 			'show_labels',
 			[
-				'label' => __( 'Labels', 'elementor-pro' ),
+				'label' => __( 'Label', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => true,
-				'default' => true,
+				'return_value' => 'true',
+				'default' => 'true',
 				'separator' => 'before',
 			]
 		);
@@ -459,7 +457,7 @@ class Form extends Widget_Base {
 					'25' => '25%',
 					'20' => '20%',
 				],
-				'desktop_default' => '100',
+				'default' => '100',
 			]
 		);
 
@@ -486,7 +484,7 @@ class Form extends Widget_Base {
 						'icon' => 'fa fa-align-justify',
 					],
 				],
-				'desktop_default' => 'stretch',
+				'default' => 'stretch',
 				'prefix_class' => 'elementor%s-button-align-',
 			]
 		);
@@ -540,135 +538,47 @@ class Form extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
-			'section_form_options',
+			'section_integration',
 			[
-				'label' => __( 'Emails & Options', 'elementor-pro' ),
-				'tab' => Controls_Manager::TAB_CONTENT,
+				'label' => __( 'Actions After Submit', 'elementor-pro' ),
 			]
 		);
 
-		$this->add_control(
-			'email_to',
-			[
-				'label' => __( 'Email-To', 'elementor-pro' ),
-				'type' => Controls_Manager::TEXT,
-				'default' => get_option( 'admin_email' ),
-				'placeholder' => get_option( 'admin_email' ),
-				'label_block' => true,
-				'title' => __( 'Separate emails with commas', 'elementor-pro' ),
-				'render_type' => 'none',
-			]
-		);
+		$actions = Module::instance()->get_form_actions();
 
-		$default_message = sprintf( __( 'New message from "%s"', 'elementor-pro' ), get_option( 'blogname' ) );
+		$actions_options = [];
+
+		foreach ( $actions as $action ) {
+			$actions_options[ $action->get_name() ] = $action->get_label();
+		}
 
 		$this->add_control(
-			'email_subject',
+			'submit_actions',
 			[
-				'label' => __( 'Email Subject', 'elementor-pro' ),
-				'type' => Controls_Manager::TEXT,
-				'default' => $default_message,
-				'placeholder' => $default_message,
-				'label_block' => true,
-				'render_type' => 'none',
-			]
-		);
-
-		$site_domain = Utils::get_site_domain();
-
-		$this->add_control(
-			'email_from',
-			[
-				'label' => __( 'From Email', 'elementor-pro' ),
-				'type' => Controls_Manager::TEXT,
-				'default' => 'email@' . $site_domain,
-				'render_type' => 'none',
-			]
-		);
-
-		$this->add_control(
-			'email_from_name',
-			[
-				'label' => __( 'From Name', 'elementor-pro' ),
-				'type' => Controls_Manager::TEXT,
-				'default' => get_bloginfo( 'name' ),
-				'render_type' => 'none',
-			]
-		);
-
-		$this->add_control(
-			'email_reply_to',
-			[
-				'label' => __( 'Reply-To', 'elementor-pro' ),
-				'type' => Controls_Manager::SELECT,
-				'options' => [
-					'' => '',
-				],
-				'render_type' => 'none',
-			]
-		);
-
-		$this->add_control(
-			'form_metadata',
-			[
-				'label' => __( 'Meta Data', 'elementor-pro' ),
+				'label' => __( 'Add Action', 'elementor-pro' ),
 				'type' => Controls_Manager::SELECT2,
 				'multiple' => true,
+				'options' => $actions_options,
+				'render_type' => 'none',
 				'label_block' => true,
-				'separator' => 'before',
 				'default' => [
-					'date',
-					'time',
-					'page_url',
-					'user_agent',
-					'remote_ip',
-					'credit',
+					'email',
 				],
-				'options' => [
-					'date' => __( 'Date', 'elementor-pro' ),
-					'time' => __( 'Time', 'elementor-pro' ),
-					'page_url' => __( 'Page URL', 'elementor-pro' ),
-					'user_agent' => __( 'User Agent', 'elementor-pro' ),
-					'remote_ip' => __( 'Remote IP', 'elementor-pro' ),
-					'credit' => __( 'Credit', 'elementor-pro' ),
-				],
-				'render_type' => 'none',
+				'description' => __( 'Add actions that will be performed after a visitor submits the form (e.g. send an email notification). Choosing an action will add its setting below.', 'elementor-pro' ),
 			]
 		);
 
-		$this->add_control(
-			'send_html',
-			[
-				'label' => __( 'Send HTML', 'elementor-pro' ),
-				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __( 'Yes', 'elementor-pro' ),
-				'label_off' => __( 'No', 'elementor-pro' ),
-				'default' => '',
-				'render_type' => 'none',
-			]
-		);
+		$this->end_controls_section();
 
-		$this->add_control(
-			'redirect_to',
-			[
-				'label' => __( 'Redirect To', 'elementor-pro' ),
-				'type' => Controls_Manager::TEXT,
-				'placeholder' => home_url( '/thank-you' ),
-				'label_block' => true,
-				'render_type' => 'none',
-			]
-		);
+		foreach ( $actions as $action ) {
+			$action->register_settings_section( $this );
+		}
 
-		$this->add_control(
-			'webhooks',
+		$this->start_controls_section(
+			'section_form_options',
 			[
-				'label' => __( 'Webhook URL', 'elementor-pro' ),
-				'type' => Controls_Manager::TEXT,
-				'placeholder' => 'https://your-webhook-url',
-				'label_block' => true,
-				'separator' => 'before',
-				'description' => __( 'Enter the integration URL (like Zapier) that will receive the form\'s submitted data.', 'elementor-pro' ),
-				'render_type' => 'none',
+				'label' => __( 'Additional Options', 'elementor-pro' ),
+				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
 
@@ -950,7 +860,7 @@ class Form extends Widget_Base {
 		$this->add_control(
 			'field_border_width',
 			[
-				'label' => __( 'Border  Width', 'elementor-pro' ),
+				'label' => __( 'Border Width', 'elementor-pro' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'placeholder' => '1',
 				'size_units' => [ 'px' ],
@@ -1037,6 +947,7 @@ class Form extends Widget_Base {
 				'placeholder' => '1px',
 				'default' => '1px',
 				'selector' => '{{WRAPPER}} .elementor-button',
+				'separator' => 'before',
 			]
 		);
 
@@ -1124,156 +1035,6 @@ class Form extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	private function make_textarea_field( $item, $item_index ) {
-		$this->add_render_attribute( 'textarea' . $item_index, [
-			'class' => [
-				'elementor-field-textual',
-				'elementor-field',
-				esc_attr( $item['css_classes'] ),
-				'elementor-size-' . $item['input_size'],
-			],
-			'name' => $this->get_attribute_name( $item_index ),
-			'id' => $this->get_attribute_id( $item_index ),
-			'rows' => $item['rows'],
-		] );
-
-		if ( $item['placeholder'] ) {
-			$this->add_render_attribute( 'textarea' . $item_index , 'placeholder', $item['placeholder'] );
-		}
-
-		if ( $item['required'] ) {
-			$this->add_render_attribute( 'textarea' . $item_index , 'required', true );
-			$this->add_render_attribute( 'textarea' . $item_index , 'aria-required', 'true' );
-		}
-
-		return '<textarea ' . $this->get_render_attribute_string( 'textarea' . $item_index ) . '></textarea>';
-	}
-
-	private function make_select_field( $item, $i ) {
-		$this->add_render_attribute(
-			[
-				'select-wrapper' . $i => [
-					'class' => [
-						'elementor-field',
-						'elementor-select-wrapper',
-						esc_attr( $item['css_classes'] ),
-					],
-				],
-				'select' . $i => [
-					'name' => $this->get_attribute_name( $i ),
-					'id' => $this->get_attribute_id( $i ),
-					'class' => [
-						'elementor-field-textual',
-						'elementor-size-' . $item['input_size'],
-					],
-				],
-			]
-		);
-
-		if ( $item['required'] ) {
-			$this->add_render_attribute( 'select' . $i , 'required', true );
-			$this->add_render_attribute( 'select' . $i , 'aria-required', 'true' );
-		}
-
-		$options = preg_split( "/\\r\\n|\\r|\\n/", $item['field_options'] );
-
-		if ( ! $options ) {
-			return '';
-		}
-
-		ob_start();
-		?>
-		<div <?php echo $this->get_render_attribute_string( 'select-wrapper' . $i ); ?>>
-			<select <?php echo $this->get_render_attribute_string( 'select' . $i ); ?>>
-				<?php
-				foreach ( $options as $option ) : ?>
-					<option value="<?php echo esc_attr( $option ); ?>"><?php echo $option; ?></option>
-				<?php endforeach; ?>
-			</select>
-		</div>
-		<?php
-
-		return ob_get_clean();
-	}
-
-	private function make_radio_checkbox_field( $item, $item_index, $type ) {
-		$options = preg_split( "/\\r\\n|\\r|\\n/", $item['field_options'] );
-		$html    = '';
-		if ( $options ) {
-			$html .= '<div class="elementor-field-subgroup ' . esc_attr( $item['css_classes'] ) . ' ' . $item['inline_list'] . '">';
-			foreach ( $options as $key => $option ) {
-				$html .= '<span class="elementor-field-option"><input type="' . $type . '"
-							value="' . esc_attr( $option ) . '"
-							id="' . $this->get_attribute_id( $item_index ) . '-' . $key . '"
-							name="' . $this->get_attribute_name( $item_index ) . ( ( 'checkbox' === $type && count( $options ) > 1 ) ? '[]"' : '"' ) .
-				         ( ( $item['required'] && 'radio' === $type )  ? ' required aria-required="true"' : '' ) . '>
-							<label for="' . $this->get_attribute_id( $item_index ) . '-' . $key . '">' . $option . '</label></span>';
-			}
-			$html .= '</div>';
-		}
-		return $html;
-	}
-
-	private function form_fields_render_attributes( $i, $instance, $item ) {
-		$this->add_render_attribute(
-			[
-				'field-group' . $i => [
-					'class' => [
-						'elementor-field-type-' . $item['field_type'],
-						'elementor-field-group',
-						'elementor-column',
-					],
-				],
-				'input' . $i => [
-					'type' => $item['field_type'],
-					'name' => $this->get_attribute_name( $i ),
-					'id' => $this->get_attribute_id( $i ),
-					'class' => [
-						'elementor-field',
-						'elementor-size-' . $item['input_size'],
-						esc_attr( $item['css_classes'] ),
-					],
-				],
-				'label' . $i => [
-					'for' => $this->get_attribute_id( $i ),
-					'class' => 'elementor-field-label',
-				],
-			]
-		);
-
-		if ( empty( $item['width'] ) ) {
-			$item['width'] = '100';
-		}
-
-		$this->add_render_attribute( 'field-group' . $i, 'class', 'elementor-col-' . $item['width'] );
-
-		if ( $item['width_tablet'] ) {
-			$this->add_render_attribute( 'field-group' . $i , 'class' , 'elementor-md-' . $item['width_tablet'] );
-		}
-
-		if ( $item['width_mobile'] ) {
-			$this->add_render_attribute( 'field-group' . $i , 'class' , 'elementor-sm-' . $item['width_mobile'] );
-		}
-
-		if ( $item['placeholder'] ) {
-			$this->add_render_attribute( 'input' . $i , 'placeholder', $item['placeholder'] );
-		}
-
-		if ( ! $instance['show_labels'] ) {
-			$this->add_render_attribute( 'label' . $i, 'class', 'elementor-screen-only' );
-		}
-
-		if ( $item['required'] ) {
-			$class = 'elementor-field-required';
-			if ( $instance['mark_required'] ) {
-				$class .= ' elementor-mark-required';
-			}
-			$this->add_render_attribute( 'field-group' . $i , 'class', $class )
-				 ->add_render_attribute( 'input' . $i , 'required', true )
-				 ->add_render_attribute( 'input' . $i , 'aria-required', 'true' );
-		}
-	}
-
 	protected function render() {
 		$instance = $this->get_settings();
 
@@ -1297,7 +1058,8 @@ class Form extends Widget_Base {
 				],
 				'icon-align' => [
 					'class' => [
-						'elementor-align-icon-' . $instance['button_icon_align'],
+						empty( $instance['button_icon_align'] ) ? '' :
+							'elementor-align-icon-' . $instance['button_icon_align'],
 						'elementor-button-icon',
 					],
 				],
@@ -1362,10 +1124,6 @@ class Form extends Widget_Base {
 						case 'checkbox':
 							echo $this->make_radio_checkbox_field( $item, $item_index, $item['field_type'] );
 							break;
-						case 'recaptcha':
-							// TODO: allow register external fields types
-							echo Module::instance()->get_component( 'recaptcha' )->make_recaptcha_field( $item, $item_index, $this );
-							break;
 						case 'text':
 						case 'email':
 						case 'url':
@@ -1377,7 +1135,7 @@ class Form extends Widget_Base {
 							echo '<input size="1" ' . $this->get_render_attribute_string( 'input' . $item_index ) . '>';
 							break;
 						default:
-							do_action( 'elementor_pro/forms/render_field/' . $item['field_type'],  $item, $item_index, $this );
+							do_action( 'elementor_pro/forms/render_field/' . $item['field_type'], $item, $item_index, $this );
 					endswitch;
 					?>
 				</div>
@@ -1389,8 +1147,8 @@ class Form extends Widget_Base {
 								<span <?php echo $this->get_render_attribute_string( 'icon-align' ); ?>>
 									<i class="<?php echo esc_attr( $instance['button_icon'] ); ?>"></i>
 								</span>
-							<?php endif;
-							if ( ! empty( $instance['button_text'] ) ) : ?>
+							<?php endif; ?>
+							<?php if ( ! empty( $instance['button_text'] ) ) : ?>
 								<span class="elementor-button-text"><?php echo $instance['button_text']; ?></span>
 							<?php endif; ?>
 						</span>
@@ -1473,7 +1231,7 @@ class Form extends Widget_Base {
 									inputField = '<div class="elementor-field-subgroup ' + itemClasses + ' ' + item.inline_list + '">';
 
 									for ( var x in options ) {
-										inputField += '<span class="elementor-field-option"><input type="' + item.field_type + '" value="' + options[ x ] + '" id="form_field_' + i + '-' + x + '" name="form_field_' + i + multiple + '" ' + required +  '> ';
+										inputField += '<span class="elementor-field-option"><input type="' + item.field_type + '" value="' + options[ x ] + '" id="form_field_' + i + '-' + x + '" name="form_field_' + i + multiple + '" ' + required + '> ';
 										inputField += '<label for="form_field_' + i + '-' + x + '">' + options[ x ] + '</label></span>';
 									}
 
@@ -1481,15 +1239,6 @@ class Form extends Widget_Base {
 								}
 								break;
 
-								case 'recaptcha':
-									inputField += '<div class="elementor-field">';
-									<?php if ( Recaptcha_Handler::is_enabled() ) {  ?>
-										inputField += '<div class="elementor-g-recaptcha' + itemClasses + '" data-sitekey="<?php echo Recaptcha_Handler::get_site_key() ?>" data-theme="' + item.recaptcha_style + '" data-size="' + item.recaptcha_size + '"></div>';
-									<?php } else { ?>
-										inputField += '<div class="elementor-alert"><?php echo esc_attr( Recaptcha_Handler::get_setup_message() ); ?></div>';
-									<?php } ?>
-									inputField += '</div>';
-								break;
 							case 'text':
 							case 'email':
 							case 'url':
@@ -1551,15 +1300,5 @@ class Form extends Widget_Base {
 			</div>
 		</form>
 		<?php
-	}
-
-	public function render_plain_content() {}
-
-	private function get_attribute_name( $item_index ) {
-		return "form_fields[{$item_index}]";
-	}
-
-	private function get_attribute_id( $item_index ) {
-		return 'form-field-' . $item_index;
 	}
 }

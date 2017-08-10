@@ -1,9 +1,13 @@
 <?php
 namespace ElementorPro\License;
 
+use Elementor\Settings;
+
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Admin {
+
+	const PAGE_ID = 'elementor-license';
 
 	public static $updater = null;
 
@@ -86,17 +90,21 @@ class Admin {
 		die;
 	}
 
-	public function register_menu() {
+	public function register_page() {
 		$menu_text = __( 'License', 'elementor-pro' );
 
 		add_submenu_page(
-			'elementor',
+			Settings::PAGE_ID,
 			$menu_text,
 			$menu_text,
 			'manage_options',
-			'elementor-license',
+			self::PAGE_ID,
 			[ $this, 'display_page' ]
 		);
+	}
+
+	public static function get_url() {
+		return admin_url( 'admin.php?page=' . self::PAGE_ID );
 	}
 
 	public function display_page() {
@@ -159,7 +167,7 @@ class Admin {
 	}
 
 	public function admin_license_details() {
-		$license_page_link = add_query_arg( [ 'page' => 'elementor-license' ], admin_url( 'admin.php' ) );
+		$license_page_link = self::get_url();
 
 		$license_key = self::get_license_key();
 		if ( empty( $license_key ) ) {
@@ -235,7 +243,7 @@ class Admin {
 	}
 
 	public function __construct() {
-		add_action( 'admin_menu', [ $this, 'register_menu' ], 800 );
+		add_action( 'admin_menu', [ $this, 'register_page' ], 800 );
 		add_action( 'admin_post_elementor_pro_activate_license', [ $this, 'action_activate_license' ] );
 		add_action( 'admin_post_elementor_pro_deactivate_license', [ $this, 'action_deactivate_license' ] );
 

@@ -3,7 +3,7 @@ namespace ElementorPro;
 
 use Elementor\Utils;
 
-if ( ! defined( 'ABSPATH' ) ) {	exit; } // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
  * Main class plugin
@@ -19,6 +19,12 @@ class Plugin {
 	 * @var Manager
 	 */
 	private $_modules_manager;
+
+	private $classes_aliases = [
+		'ElementorPro\Modules\PanelPostsControl\Module' => 'ElementorPro\Modules\QueryControl\Module',
+		'ElementorPro\Modules\PanelPostsControl\Controls\Group_Control_Posts' => 'ElementorPro\Modules\QueryControl\Controls\Group_Control_Posts',
+		'ElementorPro\Modules\PanelPostsControl\Controls\Query' => 'ElementorPro\Modules\QueryControl\Controls\Query',
+	];
 
 	/**
 	 * @deprecated
@@ -59,7 +65,7 @@ class Plugin {
 	 */
 
 	public static function elementor() {
-		return \Elementor\Plugin::instance();
+		return \Elementor\Plugin::$instance;
 	}
 
 	/**
@@ -87,17 +93,33 @@ class Plugin {
 			return;
 		}
 
-		$filename = strtolower(
-			preg_replace(
-				[ '/^' . __NAMESPACE__ . '\\\/', '/([a-z])([A-Z])/', '/_/', '/\\\/' ],
-				[ '', '$1-$2', '-', DIRECTORY_SEPARATOR ],
-				$class
-			)
-		);
-		$filename = ELEMENTOR_PRO_PATH . $filename . '.php';
+		$has_class_alias = isset( $this->classes_aliases[ $class ] );
 
-		if ( is_readable( $filename ) ) {
-			include( $filename );
+		// Backward Compatibility: Save old class name for set an alias after the new class is loaded
+		if ( $has_class_alias ) {
+			$class_alias_name = $this->classes_aliases[ $class ];
+			$class_to_load = $class_alias_name;
+		} else {
+			$class_to_load = $class;
+		}
+
+		if ( ! class_exists( $class_to_load ) ) {
+			$filename = strtolower(
+				preg_replace(
+					[ '/^' . __NAMESPACE__ . '\\\/', '/([a-z])([A-Z])/', '/_/', '/\\\/' ],
+					[ '', '$1-$2', '-', DIRECTORY_SEPARATOR ],
+					$class_to_load
+				)
+			);
+			$filename = ELEMENTOR_PRO_PATH . $filename . '.php';
+
+			if ( is_readable( $filename ) ) {
+				include( $filename );
+			}
+		}
+
+		if ( $has_class_alias ) {
+			class_alias( $class_alias_name, $class );
 		}
 	}
 
@@ -108,22 +130,13 @@ class Plugin {
 
 		wp_enqueue_style(
 			'elementor-pro',
-			ELEMENTOR_PRO_URL . 'assets/css/frontend' . $direction_suffix . $suffix . '.css',
+			ELEMENTOR_PRO_ASSETS_URL . 'css/frontend' . $direction_suffix . $suffix . '.css',
 			[],
 			ELEMENTOR_PRO_VERSION
 		);
-
-		if ( is_admin() ) {
-			wp_enqueue_style(
-				'elementor-pro-admin',
-				ELEMENTOR_PRO_URL . 'assets/css/admin' . $direction_suffix . $suffix . '.css',
-				[],
-				ELEMENTOR_PRO_VERSION
-			);
-		}
 	}
 
-	public function enqueue_scripts() {
+	public function enqueue_frontend_scripts() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		wp_enqueue_script(
@@ -136,17 +149,25 @@ class Plugin {
 			true
 		);
 
+		$post = get_post();
+
+		$locale_settings = [
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'nonce' => wp_create_nonce( 'elementor-pro-frontend' ),
+			// TODO: Temp since 1.3.0
+			'postTitle' => $post->post_title,
+			'postDescription' => $post->post_excerpt,
+			// End temp
+		];
+
 		wp_localize_script(
 			'elementor-pro-frontend',
 			'ElementorProFrontendConfig',
-			[
-				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'nonce' => wp_create_nonce( 'elementor-pro-frontend' ),
-			]
+			apply_filters( 'elementor_pro/frontend/localize_settings', $locale_settings )
 		);
 	}
 
-	public function enqueue_panel_scripts() {
+	public function enqueue_editor_scripts() {
 		$suffix = Utils::is_script_debug() ? '' : '.min';
 
 		wp_enqueue_script(
@@ -159,14 +180,45 @@ class Plugin {
 			true
 		);
 
+		$is_license_active = false;
+
+		$license_key = License\Admin::get_license_key();
+
+		if ( ! empty( $license_key ) ) {
+			$license_data = License\API::get_license_data();
+
+			if ( ! empty( $license_data['license'] ) && License\API::STATUS_VALID === $license_data['license'] ) {
+				$is_license_active = true;
+			}
+		}
+
+		$locale_settings = [
+			'i18n' => [],
+			'isActive' => $is_license_active,
+		];
+
 		wp_localize_script(
 			'elementor-pro',
 			'ElementorProConfig',
-			apply_filters( 'elementor_pro/editor/localize_settings', [] )
+			apply_filters( 'elementor_pro/editor/localize_settings', $locale_settings )
 		);
 	}
 
-	public function enqueue_panel_styles() {
+	public function register_frontend_scripts() {
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+		wp_register_script(
+			'social-share',
+			ELEMENTOR_PRO_URL . 'assets/lib/social-share/social-share' . $suffix . '.js',
+			[
+				'jquery',
+			],
+			'0.2.17',
+			true
+		);
+	}
+
+	public function enqueue_editor_styles() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		wp_enqueue_style(
@@ -182,8 +234,10 @@ class Plugin {
 	public function elementor_init() {
 		$this->_modules_manager = new Manager();
 
+		$elementor = \Elementor\Plugin::$instance;
+
 		// Add element category in panel
-		\Elementor\Plugin::instance()->elements_manager->add_category(
+		$elementor->elements_manager->add_category(
 			'pro-elements',
 			[
 				'title' => __( 'Pro Elements', 'elementor-pro' ),
@@ -191,16 +245,22 @@ class Plugin {
 			],
 			1
 		);
+
+		$elementor->editor->add_editor_template( __DIR__ . '/includes/templates/editor.php' );
+
+		do_action( 'elementor_pro/init' );
 	}
 
 	private function setup_hooks() {
 		add_action( 'elementor/init', [ $this, 'elementor_init' ] );
 
-		add_action( 'elementor/editor/before_enqueue_scripts', [ $this, 'enqueue_panel_styles' ] );
-		add_action( 'elementor/editor/before_enqueue_scripts', [ $this, 'enqueue_panel_scripts' ] );
+		add_action( 'elementor/frontend/before_register_scripts', [ $this, 'register_frontend_scripts' ] );
 
-		add_action( 'elementor/frontend/before_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
+		add_action( 'elementor/editor/after_enqueue_styles', [ $this, 'enqueue_editor_styles' ] );
+		add_action( 'elementor/editor/before_enqueue_scripts', [ $this, 'enqueue_editor_scripts' ] );
+
+		add_action( 'elementor/frontend/before_enqueue_scripts', [ $this, 'enqueue_frontend_scripts' ] );
+		add_action( 'elementor/frontend/after_enqueue_styles', [ $this, 'enqueue_styles' ] );
 	}
 
 	/**

@@ -26,11 +26,11 @@ class Module extends Module_Base {
 		Source_Local::add_template_type( self::TEMPLATE_TYPE );
 
 		Widget_Base::add_edit_tool( 'save', [
-			'title' => __( 'Save', 'elementor-pro' ),
+			'title' => sprintf( __( 'Save %s', 'elementor-pro' ), __( 'Widget', 'elementor-pro' ) ),
 			'icon' => 'floppy-o',
 		], 'duplicate' );
 
-		ElementorPlugin::instance()->editor->add_editor_template( __DIR__ . '/views/panel-template.php' );
+		Plugin::elementor()->editor->add_editor_template( __DIR__ . '/views/panel-template.php' );
 
 		$this->_add_hooks();
 	}
@@ -46,9 +46,11 @@ class Module extends Module_Base {
 	}
 
 	public function add_templates_localize_data( $settings ) {
-		$templates_manager = ElementorPlugin::instance()->templates_manager;
+		$elementor = Plugin::elementor();
 
-		$widgets_types = ElementorPlugin::instance()->widgets_manager->get_widget_types();
+		$templates_manager = $elementor->templates_manager;
+
+		$widgets_types = $elementor->widgets_manager->get_widget_types();
 
 		$widget_templates = array_filter( $templates_manager->get_source( 'local' )->get_items(), function( $template ) use ( $widgets_types ) {
 			return ! empty( $template['widgetType'] ) && ! empty( $widgets_types[ $template['widgetType'] ] );
@@ -71,9 +73,11 @@ class Module extends Module_Base {
 				'unlink' => __( 'Unlink', 'elementor-pro' ),
 				'cancel' => __( 'Cancel', 'elementor-pro' ),
 				'unlink_widget' => __( 'Unlink Widget', 'elementor-pro' ),
+				'global' => __( 'Global', 'elementor-pro' ),
 				'dialog_confirm_unlink' => __( 'This will make the widget stop being global. It\'ll be reverted into being just a regular widget.', 'elementor-pro' ),
 				'global_widget_save_title' => __( 'Save your widget as a global widget', 'elementor-pro' ),
 				'global_widget_save_description' => __( 'You\'ll be able to add this global widget to multiple areas on your site, and edit it from one single place.', 'elementor-pro' ),
+				'linked_to_global' => __( 'Linked to Global', 'elementor-pro' ),
 			],
 		] );
 
@@ -82,7 +86,9 @@ class Module extends Module_Base {
 
 	public function set_template_widget_type_meta( $post_id, $template_data ) {
 		if ( self::TEMPLATE_TYPE === $template_data['type'] ) {
-			update_post_meta( $post_id, self::WIDGET_TYPE_META_KEY, $template_data['data'][0]['widgetType'] );
+			$template_content = isset( $template_data['content'] ) ? $template_data['content'] : $template_data['data'];
+
+			update_post_meta( $post_id, self::WIDGET_TYPE_META_KEY, $template_content[0]['widgetType'] );
 		}
 	}
 
@@ -163,7 +169,7 @@ class Module extends Module_Base {
 	public function set_global_widget_included_posts_list( $post_id, $editor_data ) {
 		$global_widget_ids = [];
 
-		ElementorPlugin::instance()->db->iterate_data( $editor_data, function ( $element_data ) use ( & $global_widget_ids ) {
+		Plugin::elementor()->db->iterate_data( $editor_data, function ( $element_data ) use ( & $global_widget_ids ) {
 			if ( isset( $element_data['templateID'] ) ) {
 				$global_widget_ids[] = $element_data['templateID'];
 			}

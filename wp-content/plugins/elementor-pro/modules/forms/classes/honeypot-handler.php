@@ -1,8 +1,8 @@
 <?php
 namespace ElementorPro\Modules\Forms\Classes;
 
-use Elementor\Plugin;
 use Elementor\Widget_Base;
+use ElementorPro\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -27,8 +27,8 @@ class Honeypot_Handler {
 	}
 
 	/**
-	 * @param string      $item
-	 * @param integer     $item_index
+	 * @param string $item
+	 * @param integer $item_index
 	 * @param Widget_Base $widget
 	 */
 	public function render_field( $item, $item_index, $widget ) {
@@ -38,37 +38,41 @@ class Honeypot_Handler {
 		echo '<input size="1" ' . $widget->get_render_attribute_string( 'input' . $item_index ) . '>';
 	}
 
-	public function filter_record_fields( $record ) {
-		foreach ( $record['fields'] as $key => $field ) {
-			if ( 'honeypot' === $field['type'] ) {
-				unset( $record['fields'][ $key ] );
-				break;
-			}
+	/**
+	 * @param Form_Record $record
+	 * @param Ajax_Handler $ajax_handler
+	 */
+	public function validation( $record, $ajax_handler ) {
+		$fields = $record->get_field( [
+			'type' => 'honeypot',
+		] );
+
+		if ( empty( $fields ) ) {
+			return;
 		}
 
-		return $record;
-	}
+		$field = current( $fields );
 
-	public function validation( $return_array, $form_id, $settings ) {
-		$fields = $settings['form_fields'];
-
-		// Get first honeypot field
-		foreach ( $fields as $field_index => $field ) {
-			if ( 'honeypot' === $field['field_type'] ) {
-				$honeypot = $field;
-				break;
-			}
+		if ( ! empty( $field['value'] ) ) {
+			$ajax_handler->add_error( $field['id'], __( 'Invalid Form.', 'elementor-pro' ) );
 		}
 
-		if ( isset( $honeypot ) && ! empty( $_POST['form_fields'][ $field_index ] ) ) {
-			$return_array['fields'][ $field_index ] = __( 'Invalid Form.', 'elementor-pro' );
-		}
-
-		return $return_array;
+		// If success - remove the field form list (don't send it in emails and etc )
+		$record->remove_field( $field['id'] );
 	}
 
 	public function update_controls( Widget_Base $widget ) {
-		$control_data = Plugin::instance()->controls_manager->get_control_from_stack( $widget->get_name(), 'form_fields' );
+		$elementor = Plugin::elementor();
+
+		// Check if elementor free is higher than 1.6.0
+		if ( method_exists( $widget, 'get_unique_name' ) ) {
+			$widget_name = $widget->get_unique_name();
+		} else {
+			$widget_name = $widget->get_name();
+		}
+
+		$control_data = $elementor->controls_manager->get_control_from_stack( $widget_name, 'form_fields' );
+
 		if ( is_wp_error( $control_data ) ) {
 			return;
 		}
@@ -84,15 +88,14 @@ class Honeypot_Handler {
 			}
 		}
 
-		Plugin::instance()->controls_manager->add_control_to_stack( $widget, 'form_fields', $control_data, true );
+		$elementor->controls_manager->add_control_to_stack( $widget, 'form_fields', $control_data, true );
 	}
 
 	public function __construct() {
 		add_filter( 'elementor_pro/forms/field_types', [ $this, 'add_field_type' ] );
 		add_action( 'elementor_pro/forms/render/item', [ $this, 'hide_label' ], 10, 3 );
 		add_action( 'elementor_pro/forms/render_field/honeypot', [ $this, 'render_field' ], 10, 3 );
-		add_filter( 'elementor_pro/forms/validation', [ $this, 'validation' ], 10, 3 );
-		add_filter( 'elementor_pro/forms/record', [ $this, 'filter_record_fields' ] );
+		add_action( 'elementor_pro/forms/validation', [ $this, 'validation' ], 10, 2 );
 		add_action( 'elementor/element/form/section_form_fields/before_section_end', [ $this, 'update_controls' ] );
 	}
 }

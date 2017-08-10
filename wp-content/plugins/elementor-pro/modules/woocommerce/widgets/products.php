@@ -3,8 +3,8 @@ namespace ElementorPro\Modules\Woocommerce\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
-use ElementorPro\Modules\PanelPostsControl\Controls\Group_Control_Posts;
-use ElementorPro\Modules\PanelPostsControl\Module;
+use ElementorPro\Modules\QueryControl\Controls\Group_Control_Posts;
+use ElementorPro\Modules\QueryControl\Module;
 use ElementorPro\Modules\Woocommerce\Skins;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -84,6 +84,14 @@ class Products extends Widget_Base {
 		);
 
 		$this->add_control(
+			'advanced',
+			[
+				'label' => __( 'Advanced', 'elementor-pro' ),
+				'type' => Controls_Manager::HEADING,
+			]
+		);
+
+		$this->add_control(
 			'filter_by',
 			[
 				'label' => __( 'Filter By', 'elementor-pro' ),
@@ -110,6 +118,7 @@ class Products extends Widget_Base {
 					'popularity' => __( 'Popularity', 'elementor-pro' ),
 					'rating' => __( 'Rating', 'elementor-pro' ),
 					'rand' => __( 'Random', 'elementor-pro' ),
+					'menu_order' => __( 'Menu Order', 'elementor-pro' ),
 				],
 			]
 		);
@@ -127,6 +136,8 @@ class Products extends Widget_Base {
 			]
 		);
 
+		Module::add_exclude_controls( $this );
+
 		$this->end_controls_section();
 	}
 
@@ -139,6 +150,43 @@ class Products extends Widget_Base {
 
 		$query_args['orderby'] = $ordering_args['orderby'];
 		$query_args['order'] = $ordering_args['order'];
+
+		if ( ! empty( $ordering_args['meta_key'] ) ) {
+			$query_args['meta_key'] = $ordering_args['meta_key'];
+		}
+
+		if ( 'sale' === $settings['filter_by'] ) {
+			// From WooCommerce `sale_products` shortcode
+			$query_args['post__in'] = array_merge( [ 0 ], wc_get_product_ids_on_sale() );
+		}
+
+		if ( version_compare( WC()->version, '3.0.0', '>=' ) ) {
+			$query_args = $this->get_wc_visibility_parse_query( $query_args );
+		} else {
+			$query_args = $this->get_wc_legacy_visibility_parse_query( $query_args );
+		}
+
+		$this->query = new \WP_Query( $query_args );
+	}
+
+	private function get_wc_visibility_parse_query( $query_args ) {
+		$settings = $this->get_settings();
+		$product_visibility_term_ids = wc_get_product_visibility_term_ids();
+
+		if ( 'featured' === $settings['filter_by'] ) {
+			$query_args['tax_query'][] = [
+				'taxonomy' => 'product_visibility',
+				'field' => 'term_taxonomy_id',
+				'terms' => $product_visibility_term_ids['featured'],
+			];
+		}
+
+		return $query_args;
+	}
+
+	private function get_wc_legacy_visibility_parse_query( $query_args ) {
+		$settings = $this->get_settings();
+
 		$query_args['meta_query'] = [
 			[
 				'key' => '_visibility',
@@ -146,10 +194,6 @@ class Products extends Widget_Base {
 				'compare' => 'IN',
 			],
 		];
-
-		if ( ! empty( $ordering_args['meta_key'] ) ) {
-			$query_args['meta_key'] = $ordering_args['meta_key'];
-		}
 
 		if ( 'featured' === $settings['filter_by'] ) {
 			// From WooCommerce `featured_products` shortcode
@@ -159,12 +203,7 @@ class Products extends Widget_Base {
 			];
 		}
 
-		if ( 'sale' === $settings['filter_by'] ) {
-			// From WooCommerce `sale_products` shortcode
-			$query_args['post__in'] = array_merge( [ 0 ], wc_get_product_ids_on_sale() );
-		}
-
-		$this->query = new \WP_Query( $query_args );
+		return $query_args;
 	}
 
 	public function render_plain_content() {}

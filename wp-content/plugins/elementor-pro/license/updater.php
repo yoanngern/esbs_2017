@@ -47,6 +47,10 @@ class Updater {
 			$_transient_data = new \stdClass;
 		}
 
+		if ( empty( $_transient_data->checked ) ) {
+			return $_transient_data;
+		}
+
 		$version_info = get_transient( $this->response_transient_key );
 		if ( false === $version_info ) {
 			$version_info = API::get_version();
@@ -145,7 +149,7 @@ class Updater {
 
 			$api_request_transient->sections = unserialize( $api_response['sections'] );
 
-			//Expires in 1 day
+			// Expires in 1 day
 			set_site_transient( $cache_key, $api_request_transient, DAY_IN_SECONDS );
 		}
 

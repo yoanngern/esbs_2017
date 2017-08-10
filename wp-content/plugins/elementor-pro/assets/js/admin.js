@@ -1,4 +1,4 @@
-/*! elementor-pro - v1.2.4 - 21-03-2017 */
+/*! elementor-pro - v1.5.8 - 25-07-2017 */
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var modules = {
 	widget_template_edit_button: require( 'modules/library/assets/js/admin' )
@@ -24,7 +24,7 @@ module.exports = function() {
 				$editButton = $this.parents( 'p' ).find( '.elementor-edit-template' ),
 				type = $this.find( '[value="' + templateID + '"]' ).data( 'type' );
 
-			if ( '0' === templateID || ! templateID || 'widget' === type ) { // '0' = first option, 'widget' is editable only from Elementor page
+			if ( 'page' !== type ) { // 'widget' is editable only from Elementor page
 				$editButton.hide();
 
 				return;

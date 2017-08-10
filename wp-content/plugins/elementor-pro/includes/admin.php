@@ -1,8 +1,11 @@
 <?php
 namespace ElementorPro;
 
+use Elementor\Rollback;
 use Elementor\Settings;
+use Elementor\Tools;
 use Elementor\Utils;
+use ElementorPro\License\API;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -47,7 +50,49 @@ class Admin {
 	}
 
 	public function remove_go_pro_menu() {
-		remove_action( 'admin_menu', [ \Elementor\Plugin::instance()->settings, 'register_pro_menu' ], Settings::MENU_PRIORITY_GO_PRO );
+		remove_action( 'admin_menu', [ Plugin::elementor()->settings, 'register_pro_menu' ], Settings::MENU_PRIORITY_GO_PRO );
+	}
+
+	public function register_admin_tools_fields( Tools $tools ) {
+		// Rollback
+		$tools->add_fields( 'versions', 'rollback', [
+			'rollback_pro_separator' => [
+				'field_args' => [
+					'type' => 'raw_html',
+					'html' => '<hr>',
+				],
+			],
+			'rollback_pro' => [
+				'label' => __( 'Rollback Pro Version', 'elementor-pro' ),
+				'field_args' => [
+					'type' => 'raw_html',
+					'html' => sprintf( '<a href="%s" class="button elementor-button-spinner elementor-rollback-button">%s</a>', wp_nonce_url( admin_url( 'admin-post.php?action=elementor_pro_rollback' ), 'elementor_pro_rollback' ), sprintf( __( 'Reinstall Pro v%s', 'elementor-pro' ), ELEMENTOR_PRO_PREVIOUS_STABLE_VERSION ) ),
+					'desc' => '<span style="color: red;">' . __( 'Warning: Please backup your database before making the rollback.', 'elementor-pro' ) . '</span>',
+				],
+			],
+		] );
+	}
+
+	public function post_elementor_pro_rollback() {
+		check_admin_referer( 'elementor_pro_rollback' );
+
+		$plugin_slug = basename( ELEMENTOR_PRO__FILE__, '.php' );
+
+		$package_url = API::get_previous_package_url();
+		if ( is_wp_error( $package_url ) ) {
+			wp_die( $package_url );
+		}
+
+		$rollback = new Rollback( [
+			'version' => ELEMENTOR_PRO_PREVIOUS_STABLE_VERSION,
+			'plugin_name' => ELEMENTOR_PRO_PLUGIN_BASE,
+			'plugin_slug' => $plugin_slug,
+			'package_url' => $package_url,
+		] );
+
+		$rollback->run();
+
+		wp_die( '', __( 'Rollback to Previous Version', 'elementor-pro' ), [ 'response' => 200 ] );
 	}
 
 	public function plugin_action_links( $links ) {
@@ -91,9 +136,12 @@ class Admin {
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_action( 'admin_menu', [ $this, 'remove_go_pro_menu' ], 0 );
 
+		add_action( 'elementor/admin/after_create_settings/' . Tools::PAGE_ID, [ $this, 'register_admin_tools_fields' ], 50 );
+
 		add_filter( 'plugin_action_links_' . ELEMENTOR_PLUGIN_BASE, [ $this, 'plugin_action_links' ], 50 );
 		add_filter( 'plugin_row_meta', [ $this, 'plugin_row_meta' ], 10, 2 );
 
 		add_filter( 'elementor/tracker/send_tracking_data_params', [ $this, 'change_tracker_params' ], 200 );
+		add_action( 'admin_post_elementor_pro_rollback', [ $this, 'post_elementor_pro_rollback' ] );
 	}
 }

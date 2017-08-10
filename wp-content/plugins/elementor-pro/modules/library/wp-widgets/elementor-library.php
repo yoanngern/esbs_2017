@@ -1,9 +1,9 @@
 <?php
 namespace ElementorPro\Modules\Library\WP_Widgets;
 
-use Elementor\Plugin;
 use Elementor\TemplateLibrary\Source_Local;
 use ElementorPro\Modules\Library\Module;
+use ElementorPro\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -37,7 +37,7 @@ class Elementor_Library extends \WP_Widget {
 
 			add_filter( 'elementor/frontend/builder_content_data', [ $this, 'filter_content_data' ] );
 
-			echo Plugin::instance()->frontend->get_builder_content_for_display( $instance['template_id'] );
+			echo Plugin::elementor()->frontend->get_builder_content_for_display( $instance['template_id'] );
 
 			remove_filter( 'elementor/frontend/builder_content_data', [ $this, 'filter_content_data' ] );
 
@@ -54,7 +54,7 @@ class Elementor_Library extends \WP_Widget {
 	 */
 	function filter_content_data( $data ) {
 		if ( ! empty( $data ) ) {
-			$data = Plugin::instance()->db->iterate_data( $data, function( $element ) {
+			$data = Plugin::elementor()->db->iterate_data( $data, function( $element ) {
 				if ( 'widget' === $element['elType'] && 'sidebar' === $element['widgetType'] && $this->sidebar_id === $element['settings']['sidebar'] ) {
 					$element['settings']['sidebar'] = null;
 				}
@@ -72,16 +72,16 @@ class Elementor_Library extends \WP_Widget {
 	 * @return void
 	 */
 	public function form( $instance ) {
-		if ( ! isset( $instance['title'] ) ) :
-			$instance['title'] = '';
-		endif;
-		if ( ! isset( $instance['template_id'] ) ) :
-			$instance['template_id'] = '';
-		endif;
+		$default = [
+			'title' => '',
+			'template_id' => '',
+		];
+
+		$instance = array_merge( $default, $instance );
 
 		$templates = Module::get_templates();
 
-		if ( empty( $templates ) ) {
+		if ( ! $templates ) {
 			echo Module::empty_templates_message();
 			return;
 		}
@@ -105,15 +105,16 @@ class Elementor_Library extends \WP_Widget {
 				<?php endforeach; ?>
 			</select>
 			<?php
-			$style = '';
-			$template_type = get_post_meta( $template['template_id'], Source_Local::TYPE_META_KEY, true );
+			$style = ' style="display:none"';
+
+			$template_type = get_post_meta( $instance['template_id'], Source_Local::TYPE_META_KEY, true );
 
 			// 'widget' is editable only from an Elementor page
-			if ( 'widget' === $template_type ) {
-				$style = 'style="display:none"';
+			if ( 'page' === $template_type ) {
+				$style = '';
 			}
 			?>
-			<a target="_blank" class="elementor-edit-template" <?php echo $style; ?> href="<?php echo add_query_arg( 'elementor', '', get_permalink( $instance['template_id'] ) ); ?>">
+			<a target="_blank" class="elementor-edit-template"<?php echo $style; ?> href="<?php echo add_query_arg( 'elementor', '', get_permalink( $instance['template_id'] ) ); ?>">
 				<i class="fa fa-pencil"></i> <?php echo __( 'Edit Template', 'elementor-pro' ); ?>
 			</a>
 		</p>

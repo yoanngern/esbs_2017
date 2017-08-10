@@ -2,9 +2,9 @@
 namespace ElementorPro\Modules\Library\Widgets;
 
 use Elementor\Controls_Manager;
-use Elementor\Plugin;
 use Elementor\Widget_Base;
 use ElementorPro\Modules\Library\Module;
+use ElementorPro\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -85,7 +85,7 @@ class Template extends Widget_Base {
 		?>
 		<div class="elementor-template">
 			<?php
-			echo Plugin::instance()->frontend->get_builder_content_for_display( $template_id );
+			echo Plugin::elementor()->frontend->get_builder_content_for_display( $template_id );
 			?>
 		</div>
 		<?php

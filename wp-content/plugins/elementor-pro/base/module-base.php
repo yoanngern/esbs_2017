@@ -1,6 +1,10 @@
 <?php
 namespace ElementorPro\Base;
 
+use ElementorPro\Plugin;
+
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 abstract class Module_Base {
 
 	/**
@@ -72,7 +76,7 @@ abstract class Module_Base {
 	}
 
 	public function init_widgets() {
-		$widget_manager = \Elementor\Plugin::instance()->widgets_manager;
+		$widget_manager = Plugin::elementor()->widgets_manager;
 
 		foreach ( $this->get_widgets() as $widget ) {
 			$class_name = $this->reflection->getNamespaceName() . '\Widgets\\' . $widget;

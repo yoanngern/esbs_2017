@@ -3,7 +3,7 @@ namespace ElementorPro\Modules\Woocommerce\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Widget_Button;
-use ElementorPro\Modules\PanelPostsControl\Module;
+use ElementorPro\Modules\QueryControl\Module;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -60,6 +60,9 @@ class Add_To_Cart extends Widget_Button {
 			'link',
 			[
 				'type' => Controls_Manager::HIDDEN,
+				'default' => [
+					'url' => '',
+				],
 			]
 		);
 
@@ -88,11 +91,19 @@ class Add_To_Cart extends Widget_Button {
 			$settings['text'] = __( 'Please set the product', 'elementor-pro' );
 		}
 
-		$product = ! empty( $product_data ) && in_array( $product_data->post_type, array( 'product', 'product_variation' ) ) ? wc_setup_product_data( $product_data ) : false;
+		$product = ! empty( $product_data ) && in_array( $product_data->post_type, [ 'product', 'product_variation' ] ) ? wc_setup_product_data( $product_data ) : false;
 
 		if ( $product ) {
+			if ( version_compare( WC()->version, '3.0.0', '>=' ) ) {
+				$product_id = $product->get_id();
+				$product_type = $product->get_type();
+			} else {
+				$product_id = $product->id;
+				$product_type = $product->product_type;
+			}
+
 			$class = implode( ' ', array_filter( [
-				'product_type_' . $product->product_type,
+				'product_type_' . $product_type,
 				$product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button' : '',
 				$product->supports( 'ajax_add_to_cart' ) ? 'ajax_add_to_cart' : '',
 			] ) );
@@ -101,7 +112,7 @@ class Add_To_Cart extends Widget_Button {
 					'rel' => 'nofollow',
 					'href' => $product->add_to_cart_url(),
 					'data-quantity' => ( isset( $settings['quantity'] ) ? $settings['quantity'] : 1 ),
-					'data-product_id' => $product->id,
+					'data-product_id' => $product_id,
 					'class' => $class,
 				]
 			);

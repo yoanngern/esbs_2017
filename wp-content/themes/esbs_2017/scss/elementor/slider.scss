@@ -1,0 +1,209 @@
+section.elementor-slider {
+    color: $white;
+    position: relative;
+    margin: 0 auto;
+
+    &[data-nb="1"] {
+        article.slide {
+            width: 100%;
+            padding: 0;
+        }
+    }
+
+    &[data-nb="2"] {
+        article.slide {
+            width: 47%;
+            padding: 0 2%;
+        }
+    }
+
+    &[data-nb="4"] {
+        article.slide {
+            width: 23%;
+            padding: 0 2%;
+
+            div.image {
+                img {
+                    width: 120px;
+                    height: 120px;
+                }
+            }
+        }
+    }
+
+    div.nav {
+        display: block;
+        position: absolute;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 30px;
+        height: 60px;
+        top: 50%;
+        cursor: pointer;
+
+        &#prev {
+            left: -60px;
+            background-image: url('images/prev_white.png');
+        }
+
+        &#next {
+            right: -60px;
+            background-image: url('images/next_white.png');
+        }
+    }
+
+    div.container {
+        width: 100%;
+        //display: table;
+        max-width: 1140px;
+        margin: 10px auto 10px;
+        position: relative;
+        overflow: hidden;
+
+    }
+
+    div.content {
+        display: table;
+        position: relative;
+        top: 0;
+        left: 0;
+
+        div.page {
+            display: inline-block;
+            overflow: hidden;
+            width: 1140px;
+            vertical-align: top;
+            text-align: center;
+        }
+    }
+
+    article.slide {
+        text-align: center;
+        width: 33%;
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        padding: 0 2%;
+        margin: 0 auto;
+
+        div.image {
+            margin: 0 0 20px 0;
+            img {
+                @include border-radius(100px);
+                max-width: 100%;
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        h1 {
+            font-size: 1.5em;
+            text-transform: uppercase;
+            line-height: 1.6em;
+            padding-bottom: 15px;
+            letter-spacing: 0.05em;
+            font-family: $avenir-med;
+        }
+
+        h2 {
+            font-size: 1em;
+            font-family: $avenir;
+            line-height: 1.5em;
+            padding-bottom: 15px;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        p {
+            color: $white;
+            font-size: 1.5em;
+            line-height: 1.6em;
+            font-family: $dido-i;
+        }
+    }
+
+    @media only screen and (max-width: 1280px) {
+
+        max-width: 85%;
+
+        div.nav {
+
+            &#prev {
+                left: -70px;
+            }
+
+            &#next {
+                right: -70px;
+            }
+        }
+
+    }
+
+    @media only screen and (max-width: 1160px) {
+
+        max-width: 80%;
+
+        div.nav {
+
+            &#prev {
+                left: -50px;
+            }
+
+            &#next {
+                right: -50px;
+            }
+        }
+
+    }
+
+    @media only screen and (min-width: 1025px) {
+
+        div.content {
+            div.page.nb_slide-3,
+            div.page.nb_slide-4 {
+                display: inline-block;
+            }
+
+            div.page.nb_slide-1,
+            div.page.nb_slide-2 {
+                display: none;
+            }
+        }
+
+    }
+
+    @media only screen and (max-width: 1024px) {
+
+        div.content {
+            div.page.nb_slide-2 {
+                display: inline-block;
+            }
+
+            div.page.nb_slide-1,
+            div.page.nb_slide-3,
+            div.page.nb_slide-4 {
+                display: none;
+            }
+        }
+
+    }
+
+    @media only screen and (max-width: 780px) {
+
+        div.content {
+            div.page.nb_slide-1 {
+                display: inline-block;
+            }
+
+            div.page.nb_slide-2,
+            div.page.nb_slide-3,
+            div.page.nb_slide-4 {
+                display: none;
+            }
+        }
+
+    }
+
+}
+

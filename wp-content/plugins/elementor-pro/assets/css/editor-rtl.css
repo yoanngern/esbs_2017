@@ -1,6 +1,15 @@
-/*! elementor-pro - v1.2.4 - 21-03-2017 */
+/*! elementor-pro - v1.5.8 - 25-07-2017 */
 #elementor-panel-get-pro-elements {
   display: none; }
+
+.elementor-panel .elementor-control.forms-field-shortcode .elementor-control-title {
+  display: table-cell;
+  vertical-align: middle;
+  width: 45%; }
+
+.elementor-panel .elementor-control.forms-field-shortcode .elementor-control-raw-html {
+  display: table-cell;
+  vertical-align: middle; }
 
 #elementor-widget-template-empty-templates {
   margin-top: 15px;
@@ -27,7 +36,8 @@
     background-color: #fff; }
 
 #elementor-global-widget-locked-header {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); }
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); }
   #elementor-global-widget-locked-header.elementor-panel-nerd-box {
     padding: 40px 25px; }
 
@@ -36,11 +46,15 @@
   padding: 0 20px; }
 
 .elementor-global-widget-locked-tool {
+  display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   padding: 20px 0;
-  -ms-flex-align: center;
-      align-items: center; }
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
   .elementor-global-widget-locked-tool .elementor-button {
     text-transform: uppercase;
     color: #fff;
@@ -49,8 +63,10 @@
     font-weight: 600; }
 
 .elementor-global-widget-locked-tool-description {
-  -ms-flex-positive: 1;
-      flex-grow: 1; }
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1; }
 
 #elementor-global-widget-locked-unlink {
   border-top: 1px solid #e6e9ec; }
@@ -76,14 +92,27 @@
   left: 0;
   height: 100%;
   width: 100%;
-  -ms-flex-align: center;
-      align-items: center;
-  -ms-flex-pack: center;
-      justify-content: center; }
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
   #elementor-global-widget-loading:not(.elementor-hidden) {
+    display: -webkit-box;
+    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex; }
   #elementor-global-widget-loading i {
     color: #d5dadf;
     font-size: 50px; }
+
+.elementor-panel .elementor-control-type-fields_map .repeater-fields {
+  margin: 10px 0; }
+  .elementor-panel .elementor-control-type-fields_map .repeater-fields .elementor-control {
+    padding: 0; }
+  .elementor-panel .elementor-control-type-fields_map .repeater-fields:last-child {
+    margin-bottom: 0; }
 /*# sourceMappingURL=editor-rtl.css.map */

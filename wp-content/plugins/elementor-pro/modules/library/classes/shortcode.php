@@ -2,8 +2,8 @@
 
 namespace ElementorPro\Modules\Library\Classes;
 
-use Elementor\Plugin;
 use Elementor\TemplateLibrary\Source_Local;
+use ElementorPro\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -33,7 +33,7 @@ class Shortcode {
 			return '';
 		}
 
-		return Plugin::instance()->frontend->get_builder_content_for_display( $attributes['id'] );
+		return Plugin::elementor()->frontend->get_builder_content_for_display( $attributes['id'] );
 	}
 
 	private function add_actions() {

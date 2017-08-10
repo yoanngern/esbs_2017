@@ -1,6 +1,6 @@
-/*! elementor-pro - v1.2.4 - 21-03-2017 */
+/*! elementor-pro - v1.5.8 - 25-07-2017 */
 .elementor-shortcode-input {
-  min-width: 215px; }
+  min-width: 235px; }
 
 #available-widgets [class*="elementor-template"] .widget-title:before {
   content: "\e801";

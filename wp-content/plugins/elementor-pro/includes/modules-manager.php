@@ -27,15 +27,16 @@ final class Manager {
 
 	public function __construct() {
 		$modules = [
-			'panel-posts-control',
+			'query-control',
 			'posts',
+			'slides',
 			'forms',
 			'pricing',
 			'flip-box',
 			'countdown',
-			'custom-css',
-			'slides',
 			'woocommerce',
+			'share-buttons',
+			'custom-css',
 			'global-widget',
 			'library',
 		];

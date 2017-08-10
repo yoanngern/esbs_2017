@@ -8,11 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Categories extends Widget_Base {
 
-	/**
-	 * @var \WP_Query
-	 */
-	private $query = null;
-
 	protected $_has_template_content = false;
 
 	public function get_name() {

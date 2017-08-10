@@ -6,12 +6,14 @@ use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Color;
 use Elementor\Scheme_Typography;
 use Elementor\Widget_Base;
-use ElementorPro\Modules\PanelPostsControl\Controls\Group_Control_Posts;
-use ElementorPro\Modules\PanelPostsControl\Module;
+use ElementorPro\Modules\QueryControl\Controls\Group_Control_Posts;
+use ElementorPro\Modules\QueryControl\Module;
 use Elementor\Controls_Manager;
 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /**
- * Class Posts
+ * Class Portfolio
  */
 class Portfolio extends Widget_Base {
 
@@ -77,7 +79,7 @@ class Portfolio extends Widget_Base {
 			[
 				'label' => __( 'Columns', 'elementor-pro' ),
 				'type' => Controls_Manager::SELECT,
-				'desktop_default' => '3',
+				'default' => '3',
 				'tablet_default' => '2',
 				'mobile_default' => '1',
 				'options' => [
@@ -88,6 +90,7 @@ class Portfolio extends Widget_Base {
 					'5' => '5',
 					'6' => '6',
 				],
+				'frontend_available' => true,
 			]
 		);
 
@@ -96,7 +99,7 @@ class Portfolio extends Widget_Base {
 			[
 				'label' => __( 'Posts Per Page', 'elementor-pro' ),
 				'type' => Controls_Manager::NUMBER,
-				'default' => 3,
+				'default' => 6,
 			]
 		);
 
@@ -108,6 +111,21 @@ class Portfolio extends Widget_Base {
 				'exclude' => [ 'custom' ],
 				'default' => 'medium',
 				'prefix_class' => 'elementor-portfolio--thumbnail-size-',
+			]
+		);
+
+		$this->add_control(
+			'masonry',
+			[
+				'label' => __( 'Masonry', 'elementor-pro' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_off' => __( 'Off', 'elementor-pro' ),
+				'label_on' => __( 'On', 'elementor-pro' ),
+				'condition' => [
+					'columns!' => '1',
+				],
+				'render_type' => 'ui',
+				'frontend_available' => true,
 			]
 		);
 
@@ -128,7 +146,12 @@ class Portfolio extends Widget_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-post__thumbnail__link' => 'padding-bottom: calc( {{SIZE}} * 100% )',
+					'{{WRAPPER}}:after' => 'content: "{{SIZE}}"; position: absolute; color: transparent;',
 				],
+				'condition' => [
+					'masonry' => '',
+				],
+				'frontend_available' => true,
 			]
 		);
 
@@ -232,6 +255,8 @@ class Portfolio extends Widget_Base {
 			]
 		);
 
+		Module::add_exclude_controls( $this );
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -297,6 +322,7 @@ class Portfolio extends Widget_Base {
 					'(tablet){{WRAPPER}} .elementor-portfolio-item' => 'width: calc( 100% / {{columns_tablet.SIZE}} ); border: {{SIZE}}px solid transparent',
 					'(mobile){{WRAPPER}} .elementor-portfolio-item' => 'width: calc( 100% / {{columns_mobile.SIZE}} ); border: {{SIZE}}px solid transparent',
 				],
+				'frontend_available' => true,
 			]
 		);
 
@@ -543,20 +569,6 @@ class Portfolio extends Widget_Base {
 		<?php
 	}
 
-	protected function get_portfolio_js_options() {
-		$settings = $this->get_settings();
-
-		$options = [
-			'itemGap' => $settings['item_gap']['size'],
-			'itemRatio' => $settings['item_ratio']['size'],
-			'columns' => $settings['columns'],
-			'columns_tablet' => $settings['columns_tablet'],
-			'columns_mobile' => $settings['columns_mobile'],
-		];
-
-		return $options;
-	}
-
 	protected function render_filter_menu() {
 		$taxonomy = $this->get_settings( 'taxonomy' );
 
@@ -573,6 +585,11 @@ class Portfolio extends Widget_Base {
 		if ( empty( $terms ) ) {
 			return;
 		}
+
+		usort( $terms, function( $a, $b ) {
+			return strcmp( $a->name, $b->name );
+		} );
+
 		?>
 		<ul class="elementor-portfolio__filters">
 			<li class="elementor-portfolio__filter elementor-active" data-filter="__all"><?php echo __( 'All', 'elementor-pro' ); ?></li>
@@ -621,13 +638,18 @@ class Portfolio extends Widget_Base {
 	protected function render_post_header() {
 		global $post;
 
-		$classes = [];
+		$tags_classes = array_map( function( $tag ) {
+			return 'elementor-filter-' . $tag->term_id;
+		}, $post->tags );
 
-		foreach ( $post->tags as $tag ) {
-			$classes[] = 'elementor-filter-' . $tag->term_id;
-		}
+		$classes = [
+			'elementor-portfolio-item',
+			'elementor-post',
+			implode( ' ', $tags_classes ),
+		];
+
 		?>
-		<article class="elementor-portfolio-item <?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+		<article <?php post_class( $classes ); ?>>
 			<a class="elementor-post__thumbnail__link" href="<?php echo get_permalink() ?>">
 		<?php
 	}
@@ -656,7 +678,7 @@ class Portfolio extends Widget_Base {
 			$this->render_filter_menu();
 		}
 		?>
-		<div class="elementor-portfolio elementor-posts-container" data-portfolio-options="<?php echo esc_attr( wp_json_encode( $this->get_portfolio_js_options() ) ); ?>">
+		<div class="elementor-portfolio elementor-posts-container">
 		<?php
 	}
 

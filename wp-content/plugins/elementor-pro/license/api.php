@@ -134,10 +134,50 @@ class API {
 			'license' => Admin::get_license_key(),
 			'translations' => wp_json_encode( $plugin_translations ),
 			'locales' => wp_json_encode( $locales ),
+			'beta' => 'yes' === get_option( 'elementor_beta', 'no' ),
 		];
 
 		$license_data = self::_remote_post( $body_args );
 
 		return $license_data;
+	}
+
+	public static function get_previous_package_url() {
+		$url = 'http://my.elementor.com/api/v1/pro-downloads/';
+
+		$body_args = [
+			'item_name' => self::PRODUCT_NAME,
+			'version' => ELEMENTOR_PRO_PREVIOUS_STABLE_VERSION,
+			'license' => Admin::get_license_key(),
+			'url' => home_url(),
+		];
+
+		$response = wp_remote_post( $url, [
+			'sslverify' => false,
+			'timeout' => 40,
+			'body' => $body_args,
+		] );
+
+		if ( is_wp_error( $response ) ) {
+			return $response;
+		}
+
+		$response_code = (int) wp_remote_retrieve_response_code( $response );
+		$data = json_decode( wp_remote_retrieve_body( $response ), true );
+
+		if ( 401 === $response_code ) {
+			return new \WP_Error( $response_code, $data['message'] );
+		}
+
+		if ( 200 !== $response_code ) {
+			return new \WP_Error( $response_code, __( 'HTTP Error', 'elementor-pro' ) );
+		}
+
+		$data = json_decode( wp_remote_retrieve_body( $response ), true );
+		if ( empty( $data ) || ! is_array( $data ) ) {
+			return new \WP_Error( 'no_json', __( 'An error occurred, please try again', 'elementor-pro' ) );
+		}
+
+		return $data['package_url'];
 	}
 }

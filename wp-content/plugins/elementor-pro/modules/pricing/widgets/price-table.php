@@ -1075,6 +1075,7 @@ class Price_Table extends Widget_Base {
 				'condition' => [
 					'button_text!' => '',
 				],
+				'separator' => 'before',
 			]
 		);
 
