@@ -4,7 +4,7 @@
  *
  */
 function themeslug_enqueue_style() {
-	wp_enqueue_style( 'core', get_template_directory_uri() . '/style_v3.css', false );
+	wp_enqueue_style( 'core', get_template_directory_uri() . '/style_v4.css', false );
 }
 
 function themeslug_enqueue_script() {

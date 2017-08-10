@@ -3982,6 +3982,19 @@
 		"oS": 3,
 		"uL": 1
 		},
+	"\/scss\/style_v4.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/style_v4.css",
+		"oF": 2,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/style-min.css": {
 		"aP": 1,
 		"bl": 0,
