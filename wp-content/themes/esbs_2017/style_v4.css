@@ -825,7 +825,7 @@ section.elementor-slider {
       display: none; } }
   @media only screen and (max-width: 780px) {
     section.elementor-slider {
-      font-size: 0.9em; }
+      font-size: 0.8em; }
       section.elementor-slider div.content div.page.nb_slide-1 {
         display: inline-block; }
       section.elementor-slider div.content div.page.nb_slide-2,
