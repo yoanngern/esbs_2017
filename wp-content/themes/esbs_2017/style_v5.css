@@ -719,7 +719,7 @@ a.button {
   text-decoration: none;
   text-transform: uppercase;
   display: inline-block;
-  margin-right: 20px; }
+  margin: 5px 0 5px 20px; }
 
 @media only screen and (max-width: 767px) {
   #content div.platter {
