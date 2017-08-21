@@ -4,11 +4,11 @@
  *
  */
 function themeslug_enqueue_style() {
-	wp_enqueue_style( 'core', get_template_directory_uri() . '/style_v4.css', false );
+	wp_enqueue_style( 'core', get_template_directory_uri() . '/style_v5.css', false );
 }
 
 function themeslug_enqueue_script() {
-	wp_enqueue_script( 'my-js', get_template_directory_uri() . '/js/main_v2.min.js', false );
+	wp_enqueue_script( 'my-js', get_template_directory_uri() . '/js/main_v3.min.js', false );
 
 	wp_enqueue_script( 'elementor-slider', get_template_directory_uri() . '/js/elementor_slider.min.js', false );
 }

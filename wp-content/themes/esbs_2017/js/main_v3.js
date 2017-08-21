@@ -1,10 +1,7 @@
 // @codekit-prepend "vendor/jquery-2.2.2.js"
 
 
-
 $(document).ready(function () {
-
-
 
 
     $("body > header").on("click", "#burger", function (event) {
@@ -23,15 +20,35 @@ $(document).ready(function () {
     });
 
 
+    $("iframe.video").each(function () {
+
+        var iframe = $(this);
+
+        var iframe_width = $(this).width();
+        var iframe_height = $(this).height();
+
+        $(this).attr("width", "100%");
+        $(this).attr("height", "100%");
+
+
+        console.log(iframe);
+        console.log("width: " + iframe_width);
+        console.log("height: " + iframe_height);
+
+
+        var container = ' <section class="player" style="max-width: ' + iframe_width + 'px" data-width="' + iframe_width + '"><div class="container"></div></section> ';
+
+        $(this).wrapAll(container);
+
+
+    });
+
     $("body").on("click", 'a[href^="#join"]', function (event) {
         event.preventDefault();
 
         toggleForm();
 
     });
-
-
-
 
 
     $("#content.blog header").on("click", "#current_act", function (event) {
@@ -291,11 +308,6 @@ function showSlides() {
 
     setTimeout(showSlides, 5000); // Change image every 5 seconds
 }
-
-
-
-
-
 
 
 

@@ -1171,29 +1171,20 @@
 		"sC": 1,
 		"tS": 0
 		},
-	"\/js\/main_v2-min.js": {
+	"\/js\/main_v3.js": {
 		"ft": 64,
 		"mi": 1,
 		"oA": 0,
-		"oAP": "\/js\/min\/main_v2-min-min.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 0
-		},
-	"\/js\/main_v2.js": {
-		"ft": 64,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/js\/main_v2.min.js",
+		"oAP": "\/js\/main_v3.min.js",
 		"oF": 2,
 		"sC": 0,
 		"tS": 0
 		},
-	"\/js\/main_v2.min.js": {
+	"\/js\/main_v3.min.js": {
 		"ft": 64,
 		"mi": 1,
 		"oA": 0,
-		"oAP": "\/js\/min\/main_v2.min-min.js",
+		"oAP": "\/js\/min\/main_v3.min-min.js",
 		"oF": 0,
 		"sC": 1,
 		"tS": 0
@@ -3969,7 +3960,7 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/style_v3.scss": {
+	"\/scss\/style_v5.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -3977,20 +3968,7 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "\/style_v3.css",
-		"oF": 2,
-		"oS": 3,
-		"uL": 1
-		},
-	"\/scss\/style_v4.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/style_v4.css",
+		"oAP": "\/style_v5.css",
 		"oF": 2,
 		"oS": 0,
 		"uL": 1
@@ -4032,6 +4010,16 @@
 		"ma": 0,
 		"oA": 0,
 		"oAP": "\/style_v3-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"\/style_v4.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/style_v4-min.css",
 		"oF": 0,
 		"oS": 3
 		},

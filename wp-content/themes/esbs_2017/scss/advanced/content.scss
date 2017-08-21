@@ -79,6 +79,28 @@
     }
 }
 
+section.player {
+    width: 100%;
+    background-color: #000;
+    margin: 0 auto;
+
+    div.container {
+        height: 0;
+        padding-bottom: 56.2%;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+
+        iframe {
+            margin: 0 auto;
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute
+        }
+    }
+}
+
 h1, h2, h3, h4 {
     font-family: $dido-head;
 }
@@ -106,8 +128,6 @@ a.button {
 }
 
 @media only screen and (max-width: 767px) {
-
-
 
     #content {
 
