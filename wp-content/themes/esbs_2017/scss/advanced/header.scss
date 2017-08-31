@@ -6,10 +6,9 @@ body > header {
     text-transform: uppercase;
     -webkit-font-smoothing: antialiased;
     display: block;
-    position: fixed;
+    position: absolute;
     left: 0;
     right: 0;
-    top: 0;
     background-color: $gray;
 
     #language {

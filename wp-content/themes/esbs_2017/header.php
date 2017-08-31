@@ -114,6 +114,8 @@
 
 <body <?php body_class(); ?>>
 
+<?php get_template_part( 'template-parts/divers/action_banner' ); ?>
+
 <header>
 
 	<?php

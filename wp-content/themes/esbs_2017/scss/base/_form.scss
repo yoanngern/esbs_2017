@@ -45,6 +45,17 @@ body.logged-in {
             margin: 10px 0 20px;
         }
 
+        div.quote {
+            margin-top: 20px;
+
+            h1 {
+                font-family: $dido;
+                color: $gold;
+                line-height: 1.5em;
+                margin: 0;
+            }
+        }
+
         div {
             padding: 5px 0;
 
@@ -123,7 +134,7 @@ body.logged-in {
                 padding: 0;
 
                 &.mc-field-group {
-                    margin-top: 40px;
+                    margin-top: 20px;
                 }
 
                 &.checkbox {

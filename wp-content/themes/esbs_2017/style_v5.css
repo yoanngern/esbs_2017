@@ -129,6 +129,13 @@ body.logged-in #mc_embed_signup {
     font-family: "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
     font-size: 1.3em;
     margin: 10px 0 20px; }
+  #mc_embed_signup div#mc_embed_signup_scroll div.quote {
+    margin-top: 20px; }
+    #mc_embed_signup div#mc_embed_signup_scroll div.quote h1 {
+      font-family: "DidotLTStd-Roman", times, serif;
+      color: #d3b963;
+      line-height: 1.5em;
+      margin: 0; }
   #mc_embed_signup div#mc_embed_signup_scroll div {
     padding: 5px 0; }
     #mc_embed_signup div#mc_embed_signup_scroll div strong {
@@ -178,7 +185,7 @@ body.logged-in #mc_embed_signup {
       margin: 0;
       padding: 0; }
       #mc_embed_signup div#mc_embed_signup_scroll div.input-group.mc-field-group {
-        margin-top: 40px; }
+        margin-top: 20px; }
       #mc_embed_signup div#mc_embed_signup_scroll div.input-group.checkbox {
         margin-bottom: 20px; }
       #mc_embed_signup div#mc_embed_signup_scroll div.input-group label {
@@ -238,10 +245,9 @@ body > header {
   text-transform: uppercase;
   -webkit-font-smoothing: antialiased;
   display: block;
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
-  top: 0;
   background-color: #333333;
   /*
     @media only screen and (max-width: 1000px) {
@@ -1768,6 +1774,108 @@ section#content section.related_posts {
       margin: 5px; }
       #slider div.bullets a.current {
         background-color: #FFE591; }
+
+#action_banner {
+  background-color: #333333;
+  width: 100%;
+  height: 300px;
+  display: block;
+  position: relative;
+  top: 0;
+  background-image: url("images/bg_video.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; }
+  #action_banner div.video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    z-index: 1; }
+    #action_banner div.video video {
+      z-index: 0;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      min-width: 100%; }
+  #action_banner div.buttons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 100; }
+  #action_banner .box {
+    max-width: 1024px;
+    margin: 0 auto;
+    display: table;
+    width: 100%;
+    height: 100%; }
+    #action_banner .box article {
+      width: 33.333%;
+      text-align: center;
+      vertical-align: middle;
+      display: table-cell; }
+      #action_banner .box article a.icon {
+        display: block;
+        margin: 10px auto 30px;
+        width: 70px;
+        height: 70px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        -webkit-transition: 0.1s ease-in-out;
+        -o-transition: 0.1s ease-in-out;
+        -moz-transition: 0.1s ease-in-out;
+        transition: 0.1s ease-in-out; }
+        #action_banner .box article a.icon:hover {
+          width: 75px;
+          height: 75px; }
+      #action_banner .box article a.button {
+        margin: 0 0 20px 0;
+        color: #d3b963;
+        border-color: #FFFFFF;
+        font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
+        letter-spacing: 0.4em;
+        padding: 10px 20px 8px;
+        -webkit-transition: 0.1s ease-in-out;
+        -o-transition: 0.1s ease-in-out;
+        -moz-transition: 0.1s ease-in-out;
+        transition: 0.1s ease-in-out; }
+        #action_banner .box article a.button:hover {
+          background-color: #FFFFFF; }
+      #action_banner .box article.video a.icon {
+        background-image: url("images/icon_video.png"); }
+      #action_banner .box article.blog a.icon {
+        background-image: url("images/icon_blog.png"); }
+      #action_banner .box article.invite a.icon {
+        background-image: url("images/icon_invite.png"); }
+  @media only screen and (max-width: 960px) {
+    #action_banner {
+      height: 270px; }
+      #action_banner .box article a.icon {
+        width: 50px;
+        height: 50px; }
+        #action_banner .box article a.icon:hover {
+          width: 55px;
+          height: 55px; } }
+  @media only screen and (max-width: 768px) {
+    #action_banner {
+      height: 240px; }
+      #action_banner .box article a.icon {
+        margin-bottom: 20px; }
+      #action_banner .box article a.button {
+        font-size: 0.8em;
+        padding: 10px 15px 8px; } }
+  @media only screen and (max-width: 500px) {
+    #action_banner {
+      height: 120px; }
+      #action_banner .box article a.icon {
+        margin-bottom: 20px; }
+      #action_banner .box article a.button {
+        display: none; } }
+
+body > header.fixed {
+  top: 0;
+  position: fixed; }
 
 body {
   font-family: "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;

@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     $(".elementor-slider").each(function () {
 
-        container = $('.container', this);
+        var container = $('.container', this);
 
         initElementorSlider(container);
 
@@ -20,9 +20,9 @@ $(document).ready(function () {
         slider_auto = false;
         window.clearTimeout(timeout_slider);
 
-        parent_container = $(this).parent();
+        var parent_container = $(this).parent();
 
-        container = $('.container', parent_container);
+        var container = $('.container', parent_container);
 
         elementorSlider(container, $(this).attr('id'));
 
@@ -43,7 +43,7 @@ $(document).ready(function () {
 function auto_slider() {
 
     if (slider_auto) {
-        container = $('.elementor-slider[data-nb="3"] .container');
+        var container = $('.elementor-slider[data-nb="3"] .container');
 
         window.clearTimeout(timeout_slider);
 
@@ -74,7 +74,7 @@ function ratio() {
 
     $(".elementor-slider").each(function () {
 
-        container = $('.container', this);
+        var container = $('.container', this);
 
         initElementorSlider_size(container);
     });
@@ -87,15 +87,15 @@ function ratio() {
 function elementorSlider(container, direction) {
 
 
-    slide_width = $(container).width();
+    var slide_width = $(container).width();
 
-    actualPos = $(".actual", container).index();
+    var actualPos = $(".actual", container).index();
 
-    position = actualPos * slide_width;
+    var position = actualPos * slide_width;
 
     if (direction == 'next') {
 
-        new_pos = position + slide_width;
+        var new_pos = position + slide_width;
 
         $(".content", container).animate({
             left: -new_pos,
@@ -145,17 +145,19 @@ function initElementorSlider(container) {
 
 function initElementorSlider_size(container) {
 
-    slide_width = $(container).width();
+
+
+    var slide_width = $(container).width();
 
     $('.page', container).css("width", slide_width);
 
-    nb_slide = $(".page", container).size();
+    var nb_slide = $(".page", container).size();
 
     $(".content", container).width(slide_width * nb_slide);
 
-    actualPos = $(".actual", container).index();
+    var actualPos = $(".actual", container).index();
 
-    position = actualPos * slide_width;
+    var position = actualPos * slide_width;
 
     $(".content", container).css({"left": -position});
 

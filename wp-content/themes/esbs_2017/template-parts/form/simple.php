@@ -1,7 +1,6 @@
 <div id="mc_embed_signup">
 
 
-
     <form action="//europe-shall-be-saved.us14.list-manage.com/subscribe/post?u=c60044849e7354db163f217a2&amp;id=18a65a07d4"
           method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
           novalidate>
@@ -16,6 +15,14 @@
             </div>
 
 
+            <div class="quote">
+                <h1>Let’s trust in God the Almighty.<br/>
+                    Let’s never stop doing good to people.<br/>
+                    Unity amongst the Christians, by joining our strengths and gifts.<br/>
+                    Let’s love the world with His love.</h1>
+            </div>
+
+
             <div class="mc-field-group input-group">
                 <strong>Subscribe </strong>
                 <ul>
@@ -24,6 +31,8 @@
                             ESBS movement</label></li>
                     <li><input type="checkbox" value="2" name="group[3975][2]" id="mce-group[3975]-3975-1"><label
                                 for="mce-group[3975]-3975-1">I want to join ESBS as an intercessor</label></li>
+                    <li><input type="checkbox" value="8" name="group[3975][8]" id="mce-group[3975]-3975-2"><label
+                                for="mce-group[3975]-3975-2">I am a church leader</label></li>
                 </ul>
             </div>
 
@@ -320,6 +329,42 @@
                         <span class="small-meta nowrap">( dd / mm / yyyy )</span>
                     </div>
                 </div>
+                <div class="mc-field-group">
+                    <label for="mce-LANG">Preferred language </label>
+                    <select name="LANG" class="" id="mce-LANG">
+                        <option value=""></option>
+                        <option value="English">English</option>
+                        <option value="German">German</option>
+                        <option value="French">French</option>
+                        <option value="Russian">Russian</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="Dutch">Dutch</option>
+                        <option value="Swedish">Swedish</option>
+                        <option value="Polish">Polish</option>
+                        <option value="Ukrainian">Ukrainian</option>
+                        <option value="Romanian">Romanian</option>
+                        <option value="Modern Greek">Modern Greek</option>
+                        <option value="Hungarian">Hungarian</option>
+                        <option value="Czech">Czech</option>
+                        <option value="Portuguese">Portuguese</option>
+                        <option value="Serbian">Serbian</option>
+                        <option value="Bulgarian">Bulgarian</option>
+                        <option value="Croatian">Croatian</option>
+                        <option value="Danish">Danish</option>
+                        <option value="Finnish">Finnish</option>
+                        <option value="Albanian">Albanian</option>
+                        <option value="Slovak">Slovak</option>
+                        <option value="Norwegian">Norwegian</option>
+                        <option value="Lithuanian">Lithuanian</option>
+                        <option value="Slovenian">Slovenian</option>
+                        <option value="Macedonian">Macedonian</option>
+                        <option value="Estonian">Estonian</option>
+                        <option value="Montenegrin">Montenegrin</option>
+                        <option value="Icelandic">Icelandic</option>
+
+                    </select>
+                </div>
                 <div id="mce-responses" class="clear">
                     <div class="response" id="mce-error-response" style="display:none"></div>
                     <div class="response" id="mce-success-response" style="display:none"></div>
@@ -330,7 +375,7 @@
             <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
                                                                                       name="b_c60044849e7354db163f217a2_18a65a07d4"
                                                                                       tabindex="-1" value=""></div>
-            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+            <div class="clear"><input type="submit" value="I'm in" name="subscribe" id="mc-embedded-subscribe"
                                       class="button"></div>
         </div>
     </form>

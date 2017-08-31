@@ -19,7 +19,6 @@ $(document).ready(function () {
 
     });
 
-
     $("iframe.video").each(function () {
 
         var iframe = $(this);
@@ -187,6 +186,9 @@ $(document).ready(function () {
 
     setTimeout(showSlides, 6000);
 
+    $(document).on( 'scroll', function(){
+        scrollEvent();
+    });
 
 });
 
@@ -204,6 +206,22 @@ var openSelect = function (selector) {
     if (!worked) { // unknown browser / error
         alert("It didn't worked in your browser.");
     }
+}
+
+
+function scrollEvent() {
+
+
+    var scrollPos = $(document).scrollTop();
+    var bannerH = $("#action_banner").height();
+
+
+    if(scrollPos > bannerH) {
+        $("body > header").addClass("fixed");
+    } else {
+        $("body > header").removeClass("fixed");
+    }
+
 }
 
 
