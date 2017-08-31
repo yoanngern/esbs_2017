@@ -1860,6 +1860,8 @@ section#content section.related_posts {
   @media only screen and (max-width: 768px) {
     #action_banner {
       height: 240px; }
+      #action_banner div.video {
+        display: none; }
       #action_banner .box article a.icon {
         margin-bottom: 20px; }
       #action_banner .box article a.button {
