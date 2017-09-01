@@ -219,9 +219,16 @@ div.mailchimp_form {
     input, select {
         display: inline-block;
         outline: none;
-        border: none;
+        border: 1px solid $white;
         padding: 11px 20px 9px;
         text-align: center;
+        background-color: transparent;
+        color: $white;
+
+        &:focus {
+            background-color: $white;
+            color: $black;
+        }
 
     }
 
