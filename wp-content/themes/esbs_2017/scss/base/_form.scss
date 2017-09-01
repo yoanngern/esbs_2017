@@ -226,9 +226,9 @@ div.mailchimp_form {
     }
 
     input[type="submit"] {
-        background-color: transparent;
+        background-color: $gold;
         margin-top: 40px;
-        border: 1px solid $white;
+        border: none;
         outline: none;
         color: $white;
         padding: 10px 20px 8px;
@@ -242,9 +242,8 @@ div.mailchimp_form {
         appearance: none;
 
         &:hover {
-            color: $white;
+            color: $black;
             background-color: $gold;
-            border: 1px solid $gold;
         }
 
     }
