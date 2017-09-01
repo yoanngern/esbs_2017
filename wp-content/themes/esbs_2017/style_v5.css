@@ -237,6 +237,33 @@ body.logged-in #mc_embed_signup {
       width: 100%;
       max-width: inherit; } }
 
+div.mailchimp_form input, div.mailchimp_form select {
+  display: inline-block;
+  outline: none;
+  border: none;
+  padding: 11px 20px 9px;
+  text-align: center; }
+
+div.mailchimp_form input[type="submit"] {
+  background-color: transparent;
+  margin-top: 40px;
+  border: 1px solid #FFFFFF;
+  outline: none;
+  color: #FFFFFF;
+  padding: 10px 20px 8px;
+  font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  line-height: 25px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+  div.mailchimp_form input[type="submit"]:hover {
+    color: #FFFFFF;
+    background-color: #d3b963;
+    border: 1px solid #d3b963; }
+
 body > header {
   width: 100%;
   z-index: 1000;
