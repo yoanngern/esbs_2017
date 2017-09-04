@@ -10,19 +10,24 @@ body.logged-in {
     overflow: scroll;
     overflow-y: scroll;
     background-color: $white;
-    top: 0;
+    top: 300px;
     height: 100%;
     right: -550px;
     max-width: 500px;
     width: 450px;
     margin: 0;
     z-index: 100;
-    transition: all 300ms ease;
+    transition: right 300ms ease;
     box-shadow: 5px 10px 12px $black;
+    display: block;
 
     &.visible {
-        display: block;
         right: 0;
+    }
+
+    &.fixed {
+        position: fixed;
+        top: 0;
     }
 
     fieldset.optional_fields {
@@ -203,6 +208,18 @@ body.logged-in {
 
             }
         }
+    }
+
+    @media only screen and (max-width: 960px) {
+        top: 270px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        top: 240px;
+    }
+
+    @media only screen and (max-width: 500px) {
+        top: 120px;
     }
 
     @media only screen and (max-width: 550px) {

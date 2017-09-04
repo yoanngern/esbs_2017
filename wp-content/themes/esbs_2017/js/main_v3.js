@@ -218,8 +218,14 @@ function scrollEvent() {
 
     if(scrollPos > bannerH) {
         $("body > header").addClass("fixed");
+        $("body #mc_embed_signup").addClass("fixed");
+
+        $("body #mc_embed_signup").css("top", 0);
     } else {
         $("body > header").removeClass("fixed");
+        $("body #mc_embed_signup").removeClass("fixed");
+
+        $("body #mc_embed_signup").css("top", bannerH-scrollPos);
     }
 
 }

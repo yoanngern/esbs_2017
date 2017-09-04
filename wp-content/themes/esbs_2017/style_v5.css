@@ -107,18 +107,21 @@ body.logged-in #mc_embed_signup {
   overflow: scroll;
   overflow-y: scroll;
   background-color: #FFFFFF;
-  top: 0;
+  top: 300px;
   height: 100%;
   right: -550px;
   max-width: 500px;
   width: 450px;
   margin: 0;
   z-index: 100;
-  transition: all 300ms ease;
-  box-shadow: 5px 10px 12px #333333; }
+  transition: right 300ms ease;
+  box-shadow: 5px 10px 12px #333333;
+  display: block; }
   #mc_embed_signup.visible {
-    display: block;
     right: 0; }
+  #mc_embed_signup.fixed {
+    position: fixed;
+    top: 0; }
   #mc_embed_signup fieldset.optional_fields {
     display: none; }
     #mc_embed_signup fieldset.optional_fields.visible {
@@ -232,6 +235,15 @@ body.logged-in #mc_embed_signup {
       appearance: none; }
       #mc_embed_signup div#mc_embed_signup_scroll div input[type="submit"]:hover {
         color: #333333; }
+  @media only screen and (max-width: 960px) {
+    #mc_embed_signup {
+      top: 270px; } }
+  @media only screen and (max-width: 768px) {
+    #mc_embed_signup {
+      top: 240px; } }
+  @media only screen and (max-width: 500px) {
+    #mc_embed_signup {
+      top: 120px; } }
   @media only screen and (max-width: 550px) {
     #mc_embed_signup {
       width: 100%;
@@ -1816,7 +1828,8 @@ section#content section.related_posts {
   background-image: url("images/bg_video.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover; }
+  background-size: cover;
+  z-index: 1000; }
   #action_banner div.video {
     width: 100%;
     height: 100%;
