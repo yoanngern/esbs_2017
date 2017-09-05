@@ -1923,6 +1923,9 @@ body > header.fixed {
   top: 0;
   position: fixed; }
 
+body.mobile section#custom-page.join div.video {
+  display: none; }
+
 body.page-template-page-custom {
   background-color: black; }
   body.page-template-page-custom header {
@@ -1939,6 +1942,9 @@ body.page-template-page-custom {
   @media only screen and (max-height: 700px) {
     body.page-template-page-custom header {
       background-color: rgba(51, 51, 51, 0.8); } }
+  @media only screen and (max-width: 1064px) {
+    body.page-template-page-custom header {
+      background-color: transparent; } }
 
 section#custom-page {
   display: block;

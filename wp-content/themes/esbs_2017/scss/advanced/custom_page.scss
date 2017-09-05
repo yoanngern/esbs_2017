@@ -1,3 +1,14 @@
+body.mobile {
+
+    section#custom-page {
+        &.join {
+            div.video {
+                display: none;
+            }
+        }
+    }
+}
+
 body.page-template-page-custom {
 
     background-color: black;
@@ -27,7 +38,6 @@ body.page-template-page-custom {
         }
     }
 
-
     @media only screen and (max-height: 700px) {
 
         header {
@@ -35,6 +45,15 @@ body.page-template-page-custom {
 
         }
     }
+
+    @media only screen and (max-width: 1064px) {
+
+        header {
+            background-color: transparent;
+
+        }
+    }
+
 }
 
 section#custom-page {
