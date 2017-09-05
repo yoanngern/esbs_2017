@@ -3,7 +3,9 @@ body.mobile {
     section#custom-page {
         &.join {
             div.video {
-                display: none;
+                video {
+                    display: none;
+                }
             }
         }
     }
@@ -83,10 +85,6 @@ section#custom-page {
     &.join {
         background-color: $white;
         color: $white;
-        background-image: url('images/bg_video.jpg');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
         text-align: center;
 
         .bg_black {
@@ -120,6 +118,10 @@ section#custom-page {
             z-index: 1;
             top: 0;
             bottom: 0;
+            background-image: url('images/bg_video.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
 
             video {
                 z-index: 0;

@@ -1923,7 +1923,7 @@ body > header.fixed {
   top: 0;
   position: fixed; }
 
-body.mobile section#custom-page.join div.video {
+body.mobile section#custom-page.join div.video video {
   display: none; }
 
 body.page-template-page-custom {
@@ -1970,10 +1970,6 @@ section#custom-page {
   section#custom-page.join {
     background-color: #FFFFFF;
     color: #FFFFFF;
-    background-image: url("images/bg_video.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
     text-align: center; }
     section#custom-page.join .bg_black {
       background-color: black;
@@ -2001,7 +1997,11 @@ section#custom-page {
       overflow: hidden;
       z-index: 1;
       top: 0;
-      bottom: 0; }
+      bottom: 0;
+      background-image: url("images/bg_video.jpg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover; }
       section#custom-page.join div.video video {
         z-index: 0;
         position: absolute;
