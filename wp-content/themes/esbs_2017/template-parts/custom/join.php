@@ -12,7 +12,7 @@
 
         <a href="#" class="play"></a>
 
-		<?php echo do_shortcode('[mc4wp_form id="1255"]'); ?>
+		<?php echo do_shortcode('[mc4wp_form id="1337"]'); ?>
 
 	</article>
 
