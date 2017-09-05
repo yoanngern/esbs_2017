@@ -924,6 +924,15 @@ a.elementor-button {
     font-family: "DidotLTStd-Italic", "DidotLTStd-Roman", times, serif;
     letter-spacing: 0.1em; }
 
+#mailchimp_count div {
+  color: #FFFFFF;
+  font-size: 6em;
+  line-height: 1.2em;
+  letter-spacing: 0.1em;
+  font-family: "DidotLTStd-Roman", times, serif;
+  text-align: center;
+  margin: 0; }
+
 .elementor-column-gap-default > .elementor-row > .elementor-column.full_width div {
   padding: 0; }
 

@@ -22,6 +22,16 @@ a.elementor-button {
     }
 }
 
+#mailchimp_count div {
+    color: $white;
+    font-size: 6em;
+    line-height: 1.2em;
+    letter-spacing: 0.1em;
+    font-family: $dido;
+    text-align: center;
+    margin: 0;
+}
+
 .elementor-column-gap-default > .elementor-row > .elementor-column.full_width {
     div {
         padding: 0;
