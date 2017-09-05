@@ -128,6 +128,47 @@ class Widget_Heading extends Widget_Base {
 
 		$this->end_controls_section();
 
+		$this->start_controls_section(
+			'section_title_style',
+			[
+				'label' => __( 'Title', 'elementor' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'title_color',
+			[
+				'label' => __( 'Text Color', 'elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'scheme' => [
+					'type' => Scheme_Color::get_type(),
+					'value' => Scheme_Color::COLOR_1,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .elementor-heading-title' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name' => 'typography',
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .elementor-heading-title',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Text_Shadow::get_type(),
+			[
+				'name' => 'text_shadow',
+				'selector' => '{{WRAPPER}} .elementor-heading-title',
+			]
+		);
+
+		$this->end_controls_section();
 	}
 
 	protected function render() {
