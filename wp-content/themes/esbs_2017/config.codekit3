@@ -4455,6 +4455,12 @@
 		"oA": 2,
 		"oAP": "\/widgets\/complex-carousel.php",
 		"oF": 0
+		},
+	"\/widgets\/count_mailchimp.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/widgets\/count_mailchimp.php",
+		"oF": 0
 		}
 	},
 "hooks": [

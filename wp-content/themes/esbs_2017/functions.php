@@ -40,7 +40,12 @@ add_action( 'elementor/widgets/widgets_registered', function () {
 	require( 'widgets/complex-carousel.php' );
 	\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new ComplexCarouselWidget() );
 
+	require( 'widgets/count_mailchimp.php' );
+	\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new CountMailchimplWidget() );
+
 } );
+
+
 
 /**
  * Filter the except length to 20 words.
