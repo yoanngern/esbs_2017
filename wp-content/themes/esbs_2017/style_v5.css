@@ -2060,7 +2060,9 @@ section#custom-page {
           font-family: "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
           max-width: 220px;
           width: 40%;
-          display: inline-block; }
+          display: inline-block;
+          -webkit-appearance: none;
+          border-radius: 0; }
         section#custom-page.join form > div input[type="submit"] {
           vertical-align: top;
           background-color: #d3b963;
