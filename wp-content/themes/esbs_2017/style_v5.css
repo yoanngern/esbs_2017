@@ -1923,6 +1923,196 @@ body > header.fixed {
   top: 0;
   position: fixed; }
 
+body.page-template-page-custom {
+  background-color: black; }
+  body.page-template-page-custom header {
+    background-color: transparent;
+    transition: all 300ms ease; }
+    body.page-template-page-custom header:hover {
+      background-color: rgba(51, 51, 51, 0.96); }
+  body.page-template-page-custom header div.principal-nav div > ul {
+    background-color: transparent; }
+    body.page-template-page-custom header div.principal-nav div > ul > li.icons ul {
+      background-color: rgba(230, 229, 229, 0.9); }
+    body.page-template-page-custom header div.principal-nav div > ul > li:last-of-type {
+      display: none; }
+  @media only screen and (max-height: 700px) {
+    body.page-template-page-custom header {
+      background-color: rgba(51, 51, 51, 0.8); } }
+
+section#custom-page {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%; }
+  section#custom-page article.center {
+    position: relative;
+    z-index: 10;
+    top: 48%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    white-space: normal;
+    margin: 0 auto;
+    max-width: 700px;
+    text-align: center;
+    width: 94%; }
+  section#custom-page.join {
+    background-color: #FFFFFF;
+    color: #FFFFFF;
+    background-image: url("images/bg_video.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    text-align: center; }
+    section#custom-page.join .bg_black {
+      background-color: black;
+      opacity: 0.5;
+      position: fixed;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%; }
+    section#custom-page.join #logo {
+      display: block;
+      width: 180px;
+      height: 120px;
+      position: relative;
+      background-image: url("images/logo_esbs_white.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin: 30px auto 50px; }
+    section#custom-page.join div.video {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      overflow: hidden;
+      z-index: 1;
+      top: 0;
+      bottom: 0; }
+      section#custom-page.join div.video video {
+        z-index: 0;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        min-width: 100%;
+        background-color: black;
+        background-position: center center;
+        background-size: contain;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; }
+    section#custom-page.join h1 {
+      font-size: 4.5em;
+      line-height: 1em;
+      padding-bottom: 30px; }
+    section#custom-page.join h2 {
+      text-transform: uppercase;
+      font-family: "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
+      font-size: 1.4em;
+      line-height: 1.5em;
+      letter-spacing: 0.02em;
+      margin-bottom: 20px; }
+    section#custom-page.join a.play {
+      display: block;
+      width: 60px;
+      height: 60px;
+      background-position: center;
+      background-image: url("images/play.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin: 30px auto;
+      opacity: 0.8;
+      transition: all 300ms ease; }
+      section#custom-page.join a.play:hover {
+        opacity: 1; }
+    section#custom-page.join form {
+      display: block;
+      margin: 60px auto 0; }
+      section#custom-page.join form > div {
+        vertical-align: top;
+        display: table;
+        width: 100%;
+        margin-bottom: 30px; }
+        section#custom-page.join form > div input {
+          background-color: #FFFFFF;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          outline: none;
+          border: none;
+          line-height: 25px;
+          padding: 11px 10px 9px 20px;
+          vertical-align: top;
+          font-size: 1.2em;
+          font-family: "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
+          max-width: 220px;
+          width: 40%;
+          display: inline-block; }
+        section#custom-page.join form > div input[type="submit"] {
+          vertical-align: top;
+          background-color: #d3b963;
+          border: none;
+          outline: none;
+          color: #FFFFFF;
+          padding: 11px 10px 9px;
+          font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          cursor: pointer;
+          line-height: 25px;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          min-width: 110px;
+          max-width: 140px;
+          transition: all 300ms ease;
+          display: inline-block; }
+          section#custom-page.join form > div input[type="submit"]:hover {
+            background-color: #cdb04f; }
+    section#custom-page.join a.home {
+      color: #FFFFFF;
+      text-transform: uppercase;
+      font-size: 0.8em;
+      text-decoration: none;
+      display: block;
+      margin: 0 auto 10px;
+      position: fixed;
+      bottom: 15px;
+      z-index: 1000;
+      text-align: center;
+      width: 100%;
+      letter-spacing: 0.05em; }
+      section#custom-page.join a.home:hover {
+        opacity: 0.8; }
+  @media only screen and (max-height: 820px) {
+    section#custom-page.join a.home {
+      display: none; } }
+  @media only screen and (max-height: 700px) {
+    section#custom-page.join #logo {
+      margin-top: 100px; }
+    section#custom-page.join article.center {
+      top: inherit;
+      -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+      transform: translateY(0); } }
+  @media only screen and (max-width: 500px) {
+    section#custom-page article.center {
+      top: inherit;
+      -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+      transform: translateY(0); }
+      section#custom-page article.center h1 {
+        font-size: 3.5em; }
+      section#custom-page article.center h2 {
+        font-size: 1.2em; } }
+
 body {
   font-family: "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;

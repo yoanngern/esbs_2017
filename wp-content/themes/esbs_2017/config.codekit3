@@ -303,6 +303,12 @@
 		"oAP": "\/fonts\/330FB7_B_0.woff2",
 		"oF": 0
 		},
+	"\/footer-empty.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/footer-empty.php",
+		"oF": 0
+		},
 	"\/footer.php": {
 		"ft": 8192,
 		"oA": 2,
@@ -313,6 +319,12 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/functions.php",
+		"oF": 0
+		},
+	"\/header-campaign.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/header-campaign.php",
 		"oF": 0
 		},
 	"\/header.php": {
@@ -1123,6 +1135,17 @@
 		"iS": 736,
 		"oA": 0,
 		"oAP": "\/images\/next_white.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/play.png": {
+		"ft": 32768,
+		"iS": 4719,
+		"oA": 0,
+		"oAP": "\/images\/play.png",
 		"oF": 0,
 		"oIPL": 1,
 		"opt": 1,
@@ -3672,6 +3695,12 @@
 		"sC": 1,
 		"tS": 0
 		},
+	"\/page-custom.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/page-custom.php",
+		"oF": 0
+		},
 	"\/page-elementor.php": {
 		"ft": 8192,
 		"oA": 2,
@@ -4071,6 +4100,19 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/advanced\/custom_page.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/css\/custom_page.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/scss\/advanced\/elementor.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -4378,10 +4420,28 @@
 		"oAP": "\/template-parts\/blog\/slider.php",
 		"oF": 0
 		},
+	"\/template-parts\/custom\/join.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/custom\/join.php",
+		"oF": 0
+		},
 	"\/template-parts\/divers\/action_banner.php": {
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/divers\/action_banner.php",
+		"oF": 0
+		},
+	"\/template-parts\/divers\/head.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/divers\/head.php",
+		"oF": 0
+		},
+	"\/template-parts\/divers\/header_nav.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/divers\/header_nav.php",
 		"oF": 0
 		},
 	"\/template-parts\/form\/simple.php": {

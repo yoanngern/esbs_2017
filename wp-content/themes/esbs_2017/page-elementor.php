@@ -1,6 +1,6 @@
 <?php /* Template Name: Elementor */ ?>
 
-<?php get_header( 'header' ); ?>
+<?php get_header( 'campaign' ); ?>
 
 
 <section id="content">

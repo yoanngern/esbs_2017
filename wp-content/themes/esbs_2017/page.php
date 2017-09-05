@@ -1,4 +1,4 @@
-<?php get_header( 'header' ); ?>
+<?php get_header( 'campaign' ); ?>
 
 <section id="content">
 

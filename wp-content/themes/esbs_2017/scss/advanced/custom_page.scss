@@ -1,0 +1,278 @@
+body.page-template-page-custom {
+
+    background-color: black;
+
+    header {
+        background-color: transparent;
+        transition: all 300ms ease;
+
+        &:hover {
+            background-color: rgba($black, 0.96);
+        }
+    }
+
+    header div.principal-nav div > ul {
+        background-color: transparent;
+
+        & > li {
+            &.icons ul {
+
+                background-color: rgba(lighten($gray, 70), 0.9);
+
+            }
+
+            &:last-of-type {
+                display: none;
+            }
+        }
+    }
+
+
+    @media only screen and (max-height: 700px) {
+
+        header {
+            background-color: rgba($black, 0.8);
+
+        }
+    }
+}
+
+section#custom-page {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+
+    article.center {
+        position: relative;
+        z-index: 10;
+        top: 48%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        white-space: normal;
+        margin: 0 auto;
+        max-width: 700px;
+        text-align: center;
+        width: 94%;
+    }
+
+    &.join {
+        background-color: $white;
+        color: $white;
+        background-image: url('images/bg_video.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        text-align: center;
+
+        .bg_black {
+            background-color: darken($black, 20);
+            opacity: 0.5;
+            position: fixed;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        #logo {
+            display: block;
+            width: 180px;
+            height: 120px;
+            position: relative;
+            background-image: url('images/logo_esbs_white.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin: 30px auto 50px;
+        }
+
+        div.video {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            overflow: hidden;
+            z-index: 1;
+            top: 0;
+            bottom: 0;
+
+            video {
+                z-index: 0;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                min-width: 100%;
+                background-color: black;
+                background-position: center center;
+                background-size: contain;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        h1 {
+            font-size: 4.5em;
+            line-height: 1em;
+            padding-bottom: 30px;
+        }
+
+        h2 {
+            text-transform: uppercase;
+            font-family: $avenir;
+            font-size: 1.4em;
+            line-height: 1.5em;
+            letter-spacing: 0.02em;
+            margin-bottom: 20px;
+        }
+
+        a.play {
+            display: block;
+            width: 60px;
+            height: 60px;
+            background-position: center;
+            background-image: url('images/play.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin: 30px auto;
+            opacity: 0.8;
+            transition: all 300ms ease;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+
+        form {
+            display: block;
+            margin: 60px auto 0;
+
+            & > div {
+                vertical-align: top;
+                display: table;
+                width: 100%;
+                margin-bottom: 30px;
+
+                input {
+                    background-color: $white;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    outline: none;
+                    border: none;
+                    line-height: 25px;
+                    padding: 11px 10px 9px 20px;
+                    vertical-align: top;
+                    font-size: 1.2em;
+                    font-family: $avenir;
+                    max-width: 220px;
+                    width: 40%;
+                    display: inline-block;
+                }
+
+                input[type="submit"] {
+                    vertical-align: top;
+                    background-color: $gold;
+                    border: none;
+                    outline: none;
+                    color: $white;
+                    padding: 11px 10px 9px;
+                    font-family: $avenir-blk;
+                    text-transform: uppercase;
+                    letter-spacing: 0.2em;
+                    cursor: pointer;
+                    line-height: 25px;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    min-width: 110px;
+                    max-width: 140px;
+                    transition: all 300ms ease;
+                    display: inline-block;
+
+                    &:hover {
+                        background-color: darken($gold, 5);
+                    }
+
+                }
+            }
+        }
+
+        a.home {
+            color: $white;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            text-decoration: none;
+            display: block;
+            margin: 0 auto 10px;
+            position: fixed;
+            bottom: 15px;
+            z-index: 1000;
+            text-align: center;
+            width: 100%;
+            letter-spacing: 0.05em;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+
+    @media only screen and (max-height: 820px) {
+
+        &.join {
+            a.home {
+                display: none;
+            }
+        }
+
+    }
+
+    @media only screen and (max-height: 700px) {
+
+        &.join {
+
+            #logo {
+                margin-top: 100px;
+
+            }
+
+            article.center {
+
+                top: inherit;
+                -webkit-transform: translateY(0);
+                -ms-transform: translateY(0);
+                transform: translateY(0);
+
+            }
+        }
+
+    }
+
+    @media only screen and (max-width: 500px) {
+        article.center {
+
+            top: inherit;
+            -webkit-transform: translateY(0);
+            -ms-transform: translateY(0);
+            transform: translateY(0);
+
+            h1 {
+                font-size: 3.5em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+        }
+
+    }
+}
+
