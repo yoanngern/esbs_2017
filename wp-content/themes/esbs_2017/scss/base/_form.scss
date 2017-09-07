@@ -235,6 +235,7 @@ div.mailchimp_form {
 
     p {
         margin-bottom: 20px;
+        color: $white;
     }
 
     input, select {
@@ -243,12 +244,11 @@ div.mailchimp_form {
         border: 1px solid $white;
         padding: 11px 20px 9px;
         text-align: center;
-        background-color: transparent;
-        color: $white;
+        background-color: $white;
+        color: $black;
 
         &:focus {
-            background-color: $white;
-            color: $black;
+
         }
 
     }
