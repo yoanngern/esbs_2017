@@ -2262,8 +2262,6 @@ body {
   padding: 0;
   color: #333333;
   background-color: #333333; }
-  body.logged-in {
-    padding-top: 30px; }
   body.black {
     background-color: #333333; }
   body div.dark {

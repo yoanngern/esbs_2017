@@ -37,8 +37,4 @@
 		</video>
 	</div>
 
-
-
-
-
 </section>

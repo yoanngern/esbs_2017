@@ -19,7 +19,7 @@
                 <h1>1. Share the Gospel with new people.<br/>
                     2. Declare daily “Europe Shall Be Saved!”<br/>
                     3. Do together what we can do together.<br/>
-                    4. Believe and pray for a break through in Europe.</h1>
+                    4. Believe and pray for a breakthrough in Europe.</h1>
             </div>
 
 
