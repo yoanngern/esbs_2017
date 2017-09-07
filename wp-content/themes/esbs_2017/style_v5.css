@@ -343,7 +343,7 @@ body > header {
     z-index: 10;
     font-size: 1.8em;
     line-height: 1.8em;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.09em;
     font-family: "AvenirLTStd-Black", "AvenirLTStd-Medium", "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;
     margin: 3px 0 0 10px; }
   body > header div.private-nav {
@@ -2251,7 +2251,10 @@ section#custom-page {
       width: 50%; }
     section#custom-page.join article.center form > div input[type="submit"] {
       padding: 11px 5px 9px;
-      width: auto; } }
+      width: auto; }
+  section#custom-page.join div.video_full a.close {
+    right: 15px;
+    top: 12px; } }
 
 @media only screen and (max-width: 320px) {
   section#custom-page.join article.center h1 {
