@@ -4432,6 +4432,12 @@
 		"oAP": "\/template-parts\/divers\/action_banner.php",
 		"oF": 0
 		},
+	"\/template-parts\/divers\/facebook_pixel.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/divers\/facebook_pixel.php",
+		"oF": 0
+		},
 	"\/template-parts\/divers\/head.php": {
 		"ft": 8192,
 		"oA": 2,

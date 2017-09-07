@@ -110,4 +110,7 @@
 
 	</script>
 
+	<?php get_template_part( 'template-parts/divers/facebook_pixel' ); ?>
+
 </head>
+
