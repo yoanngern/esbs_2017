@@ -1854,7 +1854,13 @@ section#content section.related_posts {
       position: absolute;
       top: 0px;
       left: 0px;
-      min-width: 100%; }
+      min-width: 100%;
+      background-color: black;
+      background-position: center center;
+      background-size: contain;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; }
   #action_banner div.buttons {
     position: absolute;
     width: 100%;
@@ -1939,6 +1945,18 @@ body > header.fixed {
 body.mobile section#custom-page.join div.video video {
   display: none; }
 
+body.show_full_video > header {
+  display: none; }
+
+body.show_full_video section#custom-page article.center,
+body.show_full_video section#custom-page a.home,
+body.show_full_video section#custom-page div.video,
+body.show_full_video section#custom-page div.bg_black {
+  display: none; }
+
+body.show_full_video section#custom-page div.video_full {
+  display: block; }
+
 body.page-template-page-custom {
   background-color: black; }
   body.page-template-page-custom header {
@@ -1968,6 +1986,28 @@ section#custom-page {
   right: 0;
   height: 100%;
   width: 100%; }
+  section#custom-page div.video_full {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0; }
+    section#custom-page div.video_full a.close {
+      display: block;
+      width: 50px;
+      height: 50px;
+      position: fixed;
+      right: 40px;
+      top: 30px;
+      opacity: 0.6;
+      background-image: url("images/close.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain; }
+    section#custom-page div.video_full iframe {
+      margin: 0; }
   section#custom-page article.center {
     position: relative;
     z-index: 10;

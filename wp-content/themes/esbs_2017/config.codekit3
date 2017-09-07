@@ -578,6 +578,17 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/images\/close.png": {
+		"ft": 32768,
+		"iS": 2605,
+		"oA": 0,
+		"oAP": "\/images\/close.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"\/images\/close_blue.png": {
 		"ft": 32768,
 		"iS": 741,
@@ -1267,6 +1278,16 @@
 		"mi": 1,
 		"oA": 0,
 		"oAP": "\/js\/min\/min\/main_v2-min-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/min\/youtube_player-min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/min\/min\/youtube_player-min-min.js",
 		"oF": 0,
 		"sC": 1,
 		"tS": 0
@@ -3691,6 +3712,26 @@
 		"mi": 1,
 		"oA": 0,
 		"oAP": "\/js\/vendor\/min\/jssor.slider.min-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/youtube_player.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/youtube_player.min.js",
+		"oF": 2,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/js\/youtube_player.min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/min\/youtube_player.min-min.js",
 		"oF": 0,
 		"sC": 1,
 		"tS": 0

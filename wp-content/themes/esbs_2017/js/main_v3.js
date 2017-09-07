@@ -21,9 +21,13 @@ $(document).ready(function () {
         } else {
             openNav();
         }
-
-
     });
+
+
+
+
+
+
 
     $("iframe.video").each(function () {
 

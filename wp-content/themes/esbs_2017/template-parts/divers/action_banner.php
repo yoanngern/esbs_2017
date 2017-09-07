@@ -10,8 +10,8 @@
             </article>
 
             <article class="video">
-                <a href="<?php echo pll_home_url() . "join"; ?>" class="icon"></a>
-                <a href="<?php echo pll_home_url() . "join"; ?>" class="button">Watch video</a>
+                <a href="<?php echo pll_home_url() . "join/#play"; ?>" class="icon"></a>
+                <a href="<?php echo pll_home_url() . "join/#play"; ?>" class="button">Watch video</a>
             </article>
 
             <article class="invite">

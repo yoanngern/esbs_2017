@@ -1,6 +1,16 @@
 <section id="custom-page" class="join">
 
 
+    <div class="video_full">
+
+        <a href="#" class="close"></a>
+
+        <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/js/youtube_player.min.js"></script>
+
+        <div id="player"></div>
+    </div>
+
+
     <div class="bg_black"></div>
 
 	<article class="center">
@@ -12,9 +22,9 @@
 
         <a href="#" class="play"></a>
 
-		<?php echo do_shortcode('[mc4wp_form id="1337"]'); ?>
+		<?php //echo do_shortcode('[mc4wp_form id="1337"]'); ?>
 
-		<?php //echo do_shortcode('[mc4wp_form id="1255"]'); ?>
+		<?php echo do_shortcode('[mc4wp_form id="1255"]'); ?>
 
 	</article>
 
