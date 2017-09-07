@@ -1206,6 +1206,16 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/images\/Share.jpg": {
+		"ft": 16384,
+		"iS": 106135,
+		"oA": 0,
+		"oAP": "\/images\/Share.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 1,
+		"q": 100
+		},
 	"\/index.php": {
 		"ft": 8192,
 		"oA": 2,
@@ -4475,6 +4485,12 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/custom\/join.php",
+		"oF": 0
+		},
+	"\/template-parts\/custom\/share.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/custom\/share.php",
 		"oF": 0
 		},
 	"\/template-parts\/divers\/action_banner.php": {
