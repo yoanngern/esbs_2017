@@ -258,7 +258,7 @@ div.mailchimp_form input, div.mailchimp_form select {
   border: 1px solid #FFFFFF;
   padding: 11px 20px 9px;
   text-align: center;
-  background-color: #FFFFFF;
+  background-color: transparent;
   color: #FFFFFF; }
   div.mailchimp_form input:focus, div.mailchimp_form select:focus {
     background-color: #FFFFFF;
