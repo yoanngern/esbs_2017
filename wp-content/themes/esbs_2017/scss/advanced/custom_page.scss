@@ -247,38 +247,169 @@ section#custom-page {
         }
     }
 
-    @media only screen and (max-height: 820px) {
+}
 
-        &.join {
-            a.home {
-                display: none;
-            }
+@media only screen and (max-height: 820px) {
+    section#custom-page.join {
+
+        a.home {
+            display: none;
         }
 
     }
 
-    @media only screen and (max-height: 700px) {
+}
 
-        &.join {
+@media only screen and (max-height: 700px) {
+    section#custom-page.join {
+
+        #logo {
+            margin: 50px auto 30px;
+
+        }
+
+        article.center {
+
+            top: inherit;
+            -webkit-transform: translateY(0);
+            -ms-transform: translateY(0);
+            transform: translateY(0);
+
+        }
+    }
+
+}
+
+@media only screen and (max-height: 600px) {
+    section#custom-page.join {
+
+        article.center {
 
             #logo {
-                margin-top: 100px;
+                width: 160px;
+                height: 110px;
+                margin: 30px auto 20px;
+            }
+
+            a.play {
+                margin: 30px auto 20px;
+            }
+
+            h1 {
+                font-size: 2.8em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+                max-width: 70%;
+                margin: 0 auto;
+            }
+
+            form {
+                margin: 40px auto 0;
+            }
+
+        }
+    }
+
+}
+
+@media only screen and (max-height: 480px) {
+    section#custom-page.join {
+
+        article.center {
+
+            #logo {
+                width: 150px;
+                height: 100px;
+            }
+
+            a.play {
+                width: 50px;
+                height: 50px;
+            }
+
+            h1 {
 
             }
 
-            article.center {
+            h2 {
+                font-size: 1.1em;
+            }
 
-                top: inherit;
-                -webkit-transform: translateY(0);
-                -ms-transform: translateY(0);
-                transform: translateY(0);
+            form {
 
             }
+
+        }
+    }
+
+}
+
+@media only screen and (max-width: 800px) {
+    section#custom-page.join {
+
+        article.center {
+
+            h1 {
+                font-size: 3.9em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+                max-width: 70%;
+                margin: 0 auto;
+            }
+
         }
 
     }
 
-    @media only screen and (max-width: 500px) {
+}
+
+@media only screen and (max-width: 700px) {
+    section#custom-page.join {
+
+        article.center {
+
+            h1 {
+                font-size: 3.5em;
+            }
+
+            h2 {
+                max-width: 85%;
+
+            }
+
+        }
+
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    section#custom-page.join {
+
+        article.center {
+
+            h1 {
+                font-size: 2.8em;
+            }
+
+            h2 {
+                max-width: 90%;
+
+            }
+
+        }
+
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+    section#custom-page.join {
+
         article.center {
 
             top: inherit;
@@ -287,11 +418,26 @@ section#custom-page {
             transform: translateY(0);
 
             h1 {
-                font-size: 3.5em;
+                font-size: 2.1em;
             }
 
             h2 {
-                font-size: 1.2em;
+                font-size: 1em;
+            }
+
+            form {
+
+                & > div {
+
+                    input {
+                        width: 50%;
+                    }
+
+                    input[type="submit"] {
+                        padding: 11px 5px 9px;
+                        width: auto;
+                    }
+                }
             }
 
         }
@@ -299,3 +445,71 @@ section#custom-page {
     }
 }
 
+@media only screen and (max-width: 320px) {
+    section#custom-page.join {
+
+        article.center {
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 0.85em;
+            }
+
+
+
+        }
+
+    }
+}
+
+@media only screen and (max-height: 430px) {
+    section#custom-page.join {
+
+        article.center {
+
+            #logo {
+                margin: 15px auto;
+            }
+
+            h1 {
+                font-size: 2.3em;
+                margin: 20px auto;
+                padding: 0;
+            }
+
+            h2 {
+                font-size: 1em;
+                margin: 10px auto;
+            }
+
+            a.play {
+                width: 50px;
+                height: 50px;
+                margin: 20px auto;
+            }
+
+            form {
+                margin: 30px auto 0;
+            }
+
+        }
+    }
+
+}
+
+@media only screen and (max-height: 380px) {
+    section#custom-page.join {
+
+        article.center {
+
+            h2 {
+                display: none;
+            }
+
+        }
+    }
+
+}

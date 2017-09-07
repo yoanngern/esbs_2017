@@ -2112,27 +2112,108 @@ section#custom-page {
       letter-spacing: 0.05em; }
       section#custom-page.join a.home:hover {
         opacity: 0.8; }
-  @media only screen and (max-height: 820px) {
-    section#custom-page.join a.home {
-      display: none; } }
-  @media only screen and (max-height: 700px) {
-    section#custom-page.join #logo {
-      margin-top: 100px; }
-    section#custom-page.join article.center {
-      top: inherit;
-      -webkit-transform: translateY(0);
-      -ms-transform: translateY(0);
-      transform: translateY(0); } }
-  @media only screen and (max-width: 500px) {
-    section#custom-page article.center {
-      top: inherit;
-      -webkit-transform: translateY(0);
-      -ms-transform: translateY(0);
-      transform: translateY(0); }
-      section#custom-page article.center h1 {
-        font-size: 3.5em; }
-      section#custom-page article.center h2 {
-        font-size: 1.2em; } }
+
+@media only screen and (max-height: 820px) {
+  section#custom-page.join a.home {
+    display: none; } }
+
+@media only screen and (max-height: 700px) {
+  section#custom-page.join #logo {
+    margin: 50px auto 30px; }
+  section#custom-page.join article.center {
+    top: inherit;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0); } }
+
+@media only screen and (max-height: 600px) {
+  section#custom-page.join article.center #logo {
+    width: 160px;
+    height: 110px;
+    margin: 30px auto 20px; }
+  section#custom-page.join article.center a.play {
+    margin: 30px auto 20px; }
+  section#custom-page.join article.center h1 {
+    font-size: 2.8em; }
+  section#custom-page.join article.center h2 {
+    font-size: 1.2em;
+    max-width: 70%;
+    margin: 0 auto; }
+  section#custom-page.join article.center form {
+    margin: 40px auto 0; } }
+
+@media only screen and (max-height: 480px) {
+  section#custom-page.join article.center #logo {
+    width: 150px;
+    height: 100px; }
+  section#custom-page.join article.center a.play {
+    width: 50px;
+    height: 50px; }
+  section#custom-page.join article.center h2 {
+    font-size: 1.1em; } }
+
+@media only screen and (max-width: 800px) {
+  section#custom-page.join article.center h1 {
+    font-size: 3.9em; }
+  section#custom-page.join article.center h2 {
+    font-size: 1.2em;
+    max-width: 70%;
+    margin: 0 auto; } }
+
+@media only screen and (max-width: 700px) {
+  section#custom-page.join article.center h1 {
+    font-size: 3.5em; }
+  section#custom-page.join article.center h2 {
+    max-width: 85%; } }
+
+@media only screen and (max-width: 600px) {
+  section#custom-page.join article.center h1 {
+    font-size: 2.8em; }
+  section#custom-page.join article.center h2 {
+    max-width: 90%; } }
+
+@media only screen and (max-width: 500px) {
+  section#custom-page.join article.center {
+    top: inherit;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0); }
+    section#custom-page.join article.center h1 {
+      font-size: 2.1em; }
+    section#custom-page.join article.center h2 {
+      font-size: 1em; }
+    section#custom-page.join article.center form > div input {
+      width: 50%; }
+    section#custom-page.join article.center form > div input[type="submit"] {
+      padding: 11px 5px 9px;
+      width: auto; } }
+
+@media only screen and (max-width: 320px) {
+  section#custom-page.join article.center h1 {
+    font-size: 1.8em; }
+  section#custom-page.join article.center h2 {
+    font-size: 0.85em; } }
+
+@media only screen and (max-height: 430px) {
+  section#custom-page.join article.center #logo {
+    margin: 15px auto; }
+  section#custom-page.join article.center h1 {
+    font-size: 2.3em;
+    margin: 20px auto;
+    padding: 0; }
+  section#custom-page.join article.center h2 {
+    font-size: 1em;
+    margin: 10px auto; }
+  section#custom-page.join article.center a.play {
+    width: 50px;
+    height: 50px;
+    margin: 20px auto; }
+  section#custom-page.join article.center form {
+    margin: 30px auto 0; } }
+
+@media only screen and (max-height: 380px) {
+  section#custom-page.join article.center h2 {
+    display: none; } }
 
 body {
   font-family: "AvenirLTStd-Book", Arial, Helvetica, Verdana, sans-serif;

@@ -14,6 +14,8 @@
 
 		<?php echo do_shortcode('[mc4wp_form id="1337"]'); ?>
 
+		<?php //echo do_shortcode('[mc4wp_form id="1255"]'); ?>
+
 	</article>
 
     <a href="<?php echo pll_home_url(); ?>" class="home">Tell me more</a>
