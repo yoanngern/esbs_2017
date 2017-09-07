@@ -15,7 +15,9 @@
 		</div>
 	<?php endif; ?>
 
-	<a href="/" id="simple_logo"></a>
+	<a href="<?php echo pll_home_url(); ?>" id="simple_logo"></a>
+
+    <a href="<?php echo pll_home_url(); ?>" id="mobile_esbs">ESBS</a>
 
 
 	<?php if ( is_user_logged_in() ) : ?>

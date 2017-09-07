@@ -43,6 +43,10 @@ body.page-template-page-custom {
         &:hover {
             background-color: rgba($black, 0.96);
         }
+
+        #mobile_esbs {
+            display: none;
+        }
     }
 
     header div.principal-nav div > ul {
@@ -74,6 +78,29 @@ body.page-template-page-custom {
         header {
             background-color: transparent;
 
+        }
+    }
+
+    @media only screen and (max-width: 1064px) {
+        header {
+
+            &:hover {
+                background-color: transparent;
+            }
+
+            div.principal-nav div > ul {
+
+                &.show {
+                    background-color: $black;
+                }
+
+                li.icons ul {
+
+                    background-color: transparent;
+
+                }
+
+            }
         }
     }
 
@@ -168,7 +195,7 @@ section#custom-page {
             z-index: 1;
             top: 0;
             bottom: 0;
-            background-image: url('images/bg_video.jpg');
+            background-image: url('images/bg_video_2.jpg');
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
