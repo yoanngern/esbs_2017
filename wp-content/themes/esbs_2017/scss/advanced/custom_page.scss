@@ -73,16 +73,9 @@ body.page-template-page-custom {
         }
     }
 
-    @media only screen and (max-width: 1064px) {
-
+    @media only screen and (max-width: 740px) {
         header {
             background-color: transparent;
-
-        }
-    }
-
-    @media only screen and (max-width: 1064px) {
-        header {
 
             &:hover {
                 background-color: transparent;
