@@ -249,6 +249,9 @@ body.logged-in #mc_embed_signup {
       width: 100%;
       max-width: inherit; } }
 
+form.mc4wp-form p {
+  color: #FFFFFF; }
+
 div.mailchimp_form p {
   margin-bottom: 20px;
   color: #FFFFFF; }
