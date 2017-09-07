@@ -69,7 +69,7 @@
 	endif; ?>
 
 	<?php if ( get_field( 'fb_image' ) ):
-		$meta_fb_image = get_field( 'fb_image' )['sizes']['social'];;
+		$meta_fb_image = get_field( 'fb_image' )['sizes']['full_hd'];;
 	else:
 		$meta_fb_image = "http://esbs.org/wp-content/themes/esbs_2017/images/facebook_default_home.png";
 	endif; ?>
