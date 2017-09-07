@@ -244,17 +244,18 @@ div.mailchimp_form {
         padding: 11px 20px 9px;
         text-align: center;
         background-color: $white;
-        color: $black;
+        color: $white;
 
         &:focus {
-
+            background-color: $white;
+            color: $black;
         }
 
     }
 
     input[type="submit"] {
         background-color: $gold;
-        margin-top: 40px;
+        margin-top: 20px;
         border: none;
         outline: none;
         color: $white;
