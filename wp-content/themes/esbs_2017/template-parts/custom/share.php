@@ -1,5 +1,6 @@
 <section id="custom-page" class="share">
 
+    <div class="bg"></div>
 
     <article class="center">
 
@@ -19,7 +20,10 @@
                         <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode( get_sub_field( 'link' ) ); ?>"
                            id="post_c"
                            target="_blank"
-                           style="background-image: url('<?php echo get_sub_field( 'image' )['sizes']['social']; ?>')"></a>
+                           style="background-image: url('<?php echo get_sub_field( 'image' )['sizes']['social']; ?>')">
+                            <span>share</span>
+                            <div class="black"></div>
+                        </a>
                     </div>
 				<?php endwhile; ?>
 
