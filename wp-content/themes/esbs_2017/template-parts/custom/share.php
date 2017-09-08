@@ -6,7 +6,7 @@
 
         <h1>Spread the word</h1>
         <h2>Want to tell your friends about ESBS?</h2>
-        <h3>Use these social images to spread the word.</h3>
+        <h3>Use these social images to spread the word on Facebook.</h3>
 
 
 		<?php if ( have_rows( 'posts' ) ): ?>
