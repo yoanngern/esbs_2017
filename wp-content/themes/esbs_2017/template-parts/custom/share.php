@@ -20,7 +20,7 @@
                         <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode( get_sub_field( 'link' ) ); ?>"
                            id="post_c"
                            target="_blank"
-                           style="background-image: url('<?php echo get_sub_field( 'image' )['sizes']['social']; ?>')">
+                           style="background-image: url('<?php echo get_sub_field( 'image' )['sizes']['hd']; ?>')">
                             <span>share</span>
                             <div class="black"></div>
                         </a>
