@@ -33,6 +33,8 @@
                                 for="mce-group[3975]-3975-1">I want to join ESBS as an intercessor</label></li>
                     <li><input type="checkbox" value="8" name="group[3975][8]" id="mce-group[3975]-3975-2"><label
                                 for="mce-group[3975]-3975-2">I am a church leader</label></li>
+                    <li><input type="checkbox" value="32" name="group[3975][32]" id="mce-group[3975]-3975-3"><label
+                                for="mce-group[3975]-3975-3">I am an evangelist</label></li>
                 </ul>
             </div>
 
@@ -380,3 +382,4 @@
         </div>
     </form>
 </div>
+
