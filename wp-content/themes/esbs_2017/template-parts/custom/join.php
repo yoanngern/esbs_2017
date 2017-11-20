@@ -1,3 +1,13 @@
+<?php
+
+$title    = get_field( 'join_title', $_POST );
+$subtitle = get_field( 'join_subtitle', $_POST );
+$button  = get_field( 'join_button', $_POST );
+$form_id  = get_field( 'join_form', $_POST );
+
+?>
+
+
 <section id="custom-page" class="join">
 
 
@@ -18,18 +28,18 @@
 
         <div id="logo"></div>
 
-        <h1><?php echo pll_e( 'Join the movement today' ); ?></h1>
-        <h2><?php echo pll_e( 'One movement of people from all backgrounds to see the Gospel of Jesus Christ change Europe' ); ?></h2>
+        <h1><?php echo $title; ?></h1>
+        <h2><?php echo $subtitle; ?></h2>
 
         <a href="#" class="play"></a>
 
-		<?php echo do_shortcode( '[mc4wp_form id="1337"]' ); ?>
+		<?php echo do_shortcode( '[mc4wp_form id="' . $form_id . '"]' ); ?>
 
 		<?php //echo do_shortcode('[mc4wp_form id="1255"]'); ?>
 
     </article>
 
-    <a href="<?php echo pll_home_url(); ?>" class="home"><?php echo pll_e( 'Tell me more' ); ?></a>
+    <a href="<?php echo pll_home_url(); ?>" class="home"><?php echo $button; ?></a>
 
     <div class="video">
         <video id="bgvid" autoplay loop muted plays-inline>
