@@ -4610,6 +4610,13 @@
 		"oAP": "\/template-parts\/blog\/slider.php",
 		"oF": 0
 		},
+	"\/template-parts\/custom\/fullscreen.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/custom\/fullscreen.php",
+		"oF": 0
+		},
 	"\/template-parts\/custom\/join.php": {
 		"cB": 0,
 		"ft": 8192,
