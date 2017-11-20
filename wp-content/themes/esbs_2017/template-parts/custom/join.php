@@ -18,7 +18,7 @@
 
         <div id="logo"></div>
 
-        <h1><?php echo pll_e( 'Join the movement today' ); ?>Join the movement today</h1>
+        <h1><?php echo pll_e( 'Join the movement today' ); ?></h1>
         <h2><?php echo pll_e( 'One movement of people from all backgrounds to see the Gospel of Jesus Christ change Europe' ); ?></h2>
 
         <a href="#" class="play"></a>
