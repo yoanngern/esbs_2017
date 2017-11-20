@@ -3,14 +3,11 @@
 get_header();
 
 global $post;
-$post_slug = $post->post_name;
 
-if ( $post_slug == 'join-2' || $post_slug == 'join' || $post_slug == 'join-a' || $post_slug == 'join-b' || $post_slug == 'join-c' ) {
-	get_template_part( 'template-parts/custom/join' );
-}
+$custom_tmp = get_field('custom_tmp', $_POST);
 
-if ( $post_slug == 'share' ) {
-	get_template_part( 'template-parts/custom/share' );
+if ( $custom_tmp != null ) {
+	get_template_part( 'template-parts/custom/' . $custom_tmp );
 }
 
 get_footer( 'empty' );
