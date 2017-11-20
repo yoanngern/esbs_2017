@@ -218,7 +218,10 @@ body.page-template-default {
 
                     hr {
                         margin: 10px 0;
-                        border: 1px solid $gold_dark;
+                        border-top: none;
+                        border-left: none;
+                        border-right: none;
+                        border-bottom: 0.5px solid $gold_dark;
                     }
 
                     blockquote {
