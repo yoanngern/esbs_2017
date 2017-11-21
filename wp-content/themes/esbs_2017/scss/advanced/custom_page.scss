@@ -153,6 +153,8 @@ section#custom-page {
     }
 
     &.fullscreen {
+        color: $white;
+
         div.bg {
             background-size: cover;
             background-position: center;
@@ -171,6 +173,7 @@ section#custom-page {
             line-height: 1.5em;
             letter-spacing: 0.02em;
             margin-bottom: 20px;
+            color: $white;
         }
     }
 

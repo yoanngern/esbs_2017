@@ -44,6 +44,13 @@ footer {
         margin-bottom: 30px;
         line-height: 1.6em;
 
+        &.social {
+            a {
+                padding: 0 10px;
+                display: inline-block;
+            }
+        }
+
         em {
             font-family: $avenir-blk;
         }
