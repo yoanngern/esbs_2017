@@ -182,7 +182,6 @@ section#custom-page {
         color: $white;
         text-align: center;
 
-
         div.bg {
             background-image: url('images/share.jpg');
             background-size: cover;
@@ -388,7 +387,45 @@ section#custom-page {
                 vertical-align: top;
                 display: table;
                 width: 100%;
-                margin-bottom: 30px;
+                margin: 0 auto 30px;
+                table-layout: auto;
+                max-width: 450px;
+                border-collapse: collapse;
+
+                .row {
+                    display: table;
+                    width: 100%;
+                    white-space: nowrap;
+
+                    &.flex .cell {
+                        float: inherit;
+                    }
+
+
+                    .cell {
+                        width: 50%;
+                        float: left;
+                        padding: 1.5px;
+                        box-sizing: border-box;
+                        display: table-cell;
+                        //white-space: nowrap;
+
+
+                        &.email {
+                            width: 100%;
+                        }
+
+                        &.submit {
+                            width: auto;
+                            white-space: nowrap;
+
+                        }
+                    }
+                }
+
+                input[name="FNAME"] {
+                    //margin: 0 3px 3px 0;
+                }
 
                 input {
                     background-color: $white;
@@ -402,8 +439,8 @@ section#custom-page {
                     vertical-align: top;
                     font-size: 1.2em;
                     font-family: $avenir;
-                    max-width: 220px;
-                    width: 40%;
+                    width: 100%;
+                    box-sizing: border-box;
                     display: inline-block;
                     -webkit-appearance: none;
                     border-radius: 0;
@@ -425,9 +462,8 @@ section#custom-page {
                     -moz-appearance: none;
                     appearance: none;
                     min-width: 110px;
-                    width: auto;
+                    //width: auto;
                     transition: all 300ms ease;
-                    display: inline-block;
 
                     &:hover {
                         background-color: darken($gold, 5);
@@ -491,8 +527,6 @@ section#custom-page {
     section#custom-page.share {
 
         article.center {
-
-
 
             h1 {
                 font-size: 2.8em;
