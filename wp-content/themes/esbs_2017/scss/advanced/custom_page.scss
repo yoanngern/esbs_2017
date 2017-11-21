@@ -381,7 +381,7 @@ section#custom-page {
 
         form {
             display: block;
-            margin: 60px auto 0;
+            margin: 30px auto 0;
 
             & > div {
                 vertical-align: top;
@@ -408,7 +408,6 @@ section#custom-page {
                         padding: 2px;
                         box-sizing: border-box;
                         display: table-cell;
-                        //white-space: nowrap;
 
 
                         &.email {
