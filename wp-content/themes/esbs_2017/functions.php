@@ -39,6 +39,8 @@ add_image_size( 'fullscreen', 1440, 806, true );
 add_image_size( 'social', 500, 500, true );
 
 
+require_once( __DIR__ . '/includes/acf_fields.php' );
+
 add_action( 'elementor/widgets/widgets_registered', function () {
 
 	require( 'widgets/complex-carousel.php' );
@@ -311,3 +313,4 @@ function get_related_posts( $post, $nb = 3 ) {
 
 	return $posts;
 }
+

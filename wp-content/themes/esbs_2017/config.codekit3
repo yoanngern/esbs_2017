@@ -1272,6 +1272,20 @@
 		"opt": 0,
 		"q": 100
 		},
+	"\/includes\/acf\/custom_page.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/custom_page.php",
+		"oF": 0
+		},
+	"\/includes\/acf_fields.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf_fields.php",
+		"oF": 0
+		},
 	"\/index.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -4511,6 +4525,16 @@
 		"oF": 0,
 		"oS": 3
 		},
+	"\/style_v6.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/style_v6-min.css",
+		"oF": 0,
+		"oS": 3
+		},
 	"\/template-parts\/blog\/blogroll.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -4579,6 +4603,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/custom\/share.php",
+		"oF": 0
+		},
+	"\/template-parts\/custom\/thank_you.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/custom\/thank_you.php",
 		"oF": 0
 		},
 	"\/template-parts\/divers\/action_banner.php": {
