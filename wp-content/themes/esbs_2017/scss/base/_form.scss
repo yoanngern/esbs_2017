@@ -40,6 +40,14 @@ body.logged-in {
 
     form {
         padding: 70px 30px 20px;
+
+        .mc4wp-error {
+
+            p {
+                color: $red;
+            }
+        }
+
     }
 
     div#mc_embed_signup_scroll {

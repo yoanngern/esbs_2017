@@ -260,13 +260,14 @@ body > header {
                         a {
                             padding: 0 35px;
                             transition: all 300ms ease;
+                            color: $gray;
 
                             &.close {
                                 background-color: lighten($gray, 20);
                             }
 
                             &:hover {
-                                color: $gray;
+                                color: $white;
                             }
                         }
                     }
