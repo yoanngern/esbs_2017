@@ -4465,16 +4465,6 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/css\/slider.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/scss\/css\/slider-min.css",
-		"oF": 0,
-		"oS": 0
-		},
 	"\/scss\/elementor\/slider.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -4488,7 +4478,7 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/style_v5.scss": {
+	"\/scss\/style_v6.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -4496,20 +4486,10 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "\/style_v5.css",
+		"oAP": "\/style_v6.css",
 		"oF": 2,
 		"oS": 3,
 		"uL": 1
-		},
-	"\/style-min.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/style-min-min.css",
-		"oF": 0,
-		"oS": 0
 		},
 	"\/style.css": {
 		"aP": 1,
@@ -4519,36 +4499,6 @@
 		"oA": 1,
 		"oAP": "\/style-min.css",
 		"oF": 1,
-		"oS": 3
-		},
-	"\/style_v2.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/style_v2-min.css",
-		"oF": 0,
-		"oS": 0
-		},
-	"\/style_v3.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/style_v3-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"\/style_v4.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/style_v4-min.css",
-		"oF": 0,
 		"oS": 3
 		},
 	"\/style_v5.css": {
@@ -6079,7 +6029,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http:\/\/campaign.esbs.org",
+	"externalServerAddress": "http:\/\/esbs.org",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",

@@ -26,9 +26,6 @@ $(document).ready(function () {
 
 
 
-
-
-
     $("iframe.video").each(function () {
 
         var iframe = $(this);

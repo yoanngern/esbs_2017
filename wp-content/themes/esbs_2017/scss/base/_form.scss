@@ -115,7 +115,9 @@ body.logged-in {
                 }
             }
 
-            &.mc-field-group {
+            &.mc-field-group,
+            &.field-group {
+
                 margin: 10px 0;
 
                 ul {
@@ -134,7 +136,8 @@ body.logged-in {
                 }
             }
 
-            &.input-group {
+            &.input-group,
+            p {
                 margin: 0;
                 padding: 0;
 
