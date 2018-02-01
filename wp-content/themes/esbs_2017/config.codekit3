@@ -4598,6 +4598,13 @@
 		"oAP": "\/template-parts\/custom\/join.php",
 		"oF": 0
 		},
+	"\/template-parts\/custom\/landing_page.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/custom\/landing_page.php",
+		"oF": 0
+		},
 	"\/template-parts\/custom\/share.php": {
 		"cB": 0,
 		"ft": 8192,

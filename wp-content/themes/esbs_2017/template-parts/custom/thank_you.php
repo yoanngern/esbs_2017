@@ -11,10 +11,12 @@ $email = $_GET['email'];
 if ( $list_id != null && $email != null ) {
 	$contact = mc4wp_get_api_v3()->get_list_member( $list_id, $email );
 
-	$status = $contact->status;
-} else {
+	$interests = $contact->interests;
+	$status    = $contact->status;
 
-	$status = 'pending';
+} else {
+	$interests = array();
+	$status    = 'pending';
 }
 
 
@@ -33,11 +35,27 @@ if ( $list_id != null && $email != null ) {
 			<?php while ( have_rows( 'messages' ) ): the_row(); ?>
 
 
-				<?php if ( get_sub_field( 'status' ) == $status ): ?>
+				<?php if ( get_sub_field( 'status' ) == $status ):
 
-                    <h1><?php echo get_sub_field( 'thank_you_title' ); ?></h1>
-					<?php echo get_sub_field( 'thank_you_text' ) ?>
-				<?php endif; ?>
+                    $show = true;
+
+					foreach ( get_sub_field( 'subscribe' ) as $interest ):
+
+                        if(!$interests->$interest) {
+	                        $show = false;
+                        }
+
+					endforeach;
+
+					if($show) {
+						echo '<h1>' . get_sub_field( 'thank_you_title' ) . '</h1>';
+
+						echo get_sub_field( 'thank_you_text' );
+
+						break;
+                    }
+				endif; ?>
+
 
 
 			<?php endwhile; ?>

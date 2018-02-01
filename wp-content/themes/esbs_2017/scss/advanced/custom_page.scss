@@ -111,6 +111,17 @@ section#custom-page {
     height: 100%;
     width: 100%;
 
+    div.bg {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        bottom: 0;
+    }
+
     article.center {
         position: relative;
         z-index: 10;
@@ -155,17 +166,6 @@ section#custom-page {
     &.fullscreen {
         color: $white;
 
-        div.bg {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            bottom: 0;
-        }
-
         p {
             text-transform: uppercase;
             font-family: $avenir;
@@ -184,14 +184,6 @@ section#custom-page {
 
         div.bg {
             background-image: url('images/share.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            bottom: 0;
         }
 
         article.center {
@@ -289,7 +281,8 @@ section#custom-page {
         }
     }
 
-    &.join {
+    &.join,
+    &.landing_page {
         background-color: $white;
         color: $white;
         text-align: center;
@@ -401,14 +394,12 @@ section#custom-page {
                         float: inherit;
                     }
 
-
                     .cell {
                         width: 50%;
                         float: left;
                         padding: 2px;
                         box-sizing: border-box;
                         display: table-cell;
-
 
                         &.email {
                             width: 100%;
