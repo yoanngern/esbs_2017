@@ -31,6 +31,38 @@ body > header {
         margin: 3px 0 0 10px;
     }
 
+    div.button-social {
+        position: absolute;
+        top: 0;
+        right: 0px;
+        margin: 8px 10px;
+
+        a {
+            vertical-align: top;
+            text-decoration: none;
+            display: inline-block;
+            left: 0;
+            top: 0;
+            z-index: 300;
+            fill: $white;
+            fill-opacity: 0.4;
+            margin: 4px 5px;
+            cursor: pointer;
+            -webkit-transition: fill-opacity 300ms;
+            transition: fill-opacity 300ms;
+
+            svg {
+                width: 30px;
+                height: 30px;
+                display: block;
+            }
+
+            &:hover {
+                fill-opacity: 0.8;
+            }
+        }
+    }
+
     div.private-nav {
         width: 100%;
         background-color: darken($black, 5);
@@ -246,8 +278,6 @@ body > header {
                                 background-image: url('images/icon_teams.png');
                             }
 
-
-
                         }
                     }
 
@@ -255,7 +285,6 @@ body > header {
                         background-color: $gold;
                         position: absolute;
                         right: 0;
-
 
                         a {
                             padding: 0 35px;
@@ -396,6 +425,10 @@ body > header {
                 }
             }
         }
+
+        div.button-social {
+            margin: 3px 10px;
+        }
     }
 
     @media only screen and (max-width: 740px) {
@@ -448,6 +481,12 @@ body > header {
             }
         }
 
+        div.button-social {
+            margin: 5px 0;
+            right: 70px !important;
+
+        }
+
         div {
             text-align: left;
         }
@@ -469,7 +508,6 @@ body > header {
         #mobile_esbs {
             display: block;
         }
-
 
         div.principal-nav {
             div {

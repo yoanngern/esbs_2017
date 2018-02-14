@@ -26,6 +26,8 @@ $(document).ready(function () {
 
 
 
+
+
     $("iframe.video").each(function () {
 
         var iframe = $(this);
@@ -116,6 +118,14 @@ $(document).ready(function () {
     });
 
 
+    button_social();
+
+    $(window).resize(function () {
+
+        button_social();
+    });
+
+
     $("#content.blog header #search_input").blur(function (event) {
         event.preventDefault();
 
@@ -199,6 +209,23 @@ $(document).ready(function () {
 
 });
 
+
+
+function button_social() {
+    $("body > header").each(function () {
+
+
+        var join_button = $("div.principal-nav li.join_link", this);
+
+
+        if(join_button.is(":visible")) {
+            var join_width = join_button.width();
+
+            $("div.button-social", this).css("right", join_width);
+        }
+
+    });
+}
 
 var openSelect = function (selector) {
 

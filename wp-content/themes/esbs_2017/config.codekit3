@@ -7,7 +7,7 @@
 		"uuidString": "35FCC746-D50B-47EC-8292-55E51DFD872E"
 		}
 	],
-"creatorBuild": "26148",
+"creatorBuild": "26261",
 "files": {
 	"\/404.php": {
 		"cB": 0,
@@ -1251,6 +1251,50 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/images\/rs_facebook.png": {
+		"ft": 32768,
+		"iS": 1599,
+		"oA": 0,
+		"oAP": "\/images\/rs_facebook.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/rs_instagram.png": {
+		"ft": 32768,
+		"iS": 3213,
+		"oA": 0,
+		"oAP": "\/images\/rs_instagram.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/rs_twitter.png": {
+		"ft": 32768,
+		"iS": 3020,
+		"oA": 0,
+		"oAP": "\/images\/rs_twitter.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/rs_youtube.png": {
+		"ft": 32768,
+		"iS": 2235,
+		"oA": 0,
+		"oAP": "\/images\/rs_youtube.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"\/images\/search.png": {
 		"ft": 32768,
 		"iS": 851,
@@ -1343,42 +1387,22 @@
 		"sC": 1,
 		"tS": 0
 		},
-	"\/js\/main_v3.js": {
+	"\/js\/main_v4.js": {
 		"ft": 64,
 		"ma": 0,
 		"mi": 1,
 		"oA": 0,
-		"oAP": "\/js\/main_v3.min.js",
+		"oAP": "\/js\/min\/main_v4.min.js",
 		"oF": 2,
 		"sC": 0,
 		"tS": 0
 		},
-	"\/js\/main_v3.min.js": {
+	"\/js\/main_v4.min.js": {
 		"ft": 64,
 		"ma": 0,
 		"mi": 1,
 		"oA": 0,
-		"oAP": "\/js\/min\/main_v3.min-min.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 0
-		},
-	"\/js\/min\/main_v2-min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/js\/min\/min\/main_v2-min-min.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 0
-		},
-	"\/js\/min\/youtube_player-min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/js\/min\/min\/youtube_player-min-min.js",
+		"oAP": "\/js\/min\/main_v4.min-min.js",
 		"oF": 0,
 		"sC": 1,
 		"tS": 0
@@ -4492,7 +4516,7 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/style_v6.scss": {
+	"\/scss\/style_v7.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -4500,7 +4524,7 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "\/style_v6.css",
+		"oAP": "\/style_v7.css",
 		"oF": 2,
 		"oS": 3,
 		"uL": 1
@@ -4515,13 +4539,13 @@
 		"oF": 1,
 		"oS": 3
 		},
-	"\/style_v6.css": {
+	"\/style_v7.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "\/style_v6-min.css",
+		"oAP": "\/style_v7-min.css",
 		"oF": 0,
 		"oS": 3
 		},
@@ -5238,6 +5262,10 @@
 		"id-match": {
 			"active": 0,
 			"optionString": "'^[a-z]+([A-Z][a-z]+)*$', {'properties': false, 'onlyDeclarations': true}"
+			},
+		"implicit-arrow-linebreak": {
+			"active": 0,
+			"optionString": "'beside'"
 			},
 		"indent": {
 			"active": 0,
