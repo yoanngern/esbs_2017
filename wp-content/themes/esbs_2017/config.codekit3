@@ -1251,50 +1251,6 @@
 		"oT": 1,
 		"q": 100
 		},
-	"\/images\/rs_facebook.png": {
-		"ft": 32768,
-		"iS": 1599,
-		"oA": 0,
-		"oAP": "\/images\/rs_facebook.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/rs_instagram.png": {
-		"ft": 32768,
-		"iS": 3213,
-		"oA": 0,
-		"oAP": "\/images\/rs_instagram.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/rs_twitter.png": {
-		"ft": 32768,
-		"iS": 3020,
-		"oA": 0,
-		"oAP": "\/images\/rs_twitter.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/rs_youtube.png": {
-		"ft": 32768,
-		"iS": 2235,
-		"oA": 0,
-		"oAP": "\/images\/rs_youtube.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
 	"\/images\/search.png": {
 		"ft": 32768,
 		"iS": 851,
@@ -4369,6 +4325,19 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/scss\/css\/header.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/advanced\/logged-in.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/css\/logged-in.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
