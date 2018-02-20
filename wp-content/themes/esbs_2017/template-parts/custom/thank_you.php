@@ -37,25 +37,27 @@ if ( $list_id != null && $email != null ) {
 
 				<?php if ( get_sub_field( 'status' ) == $status ):
 
-                    $show = true;
+					$show = true;
 
-					foreach ( get_sub_field( 'subscribe' ) as $interest ):
+					if ( get_sub_field( 'subscribe' ) ):
+						foreach ( get_sub_field( 'subscribe' ) as $interest ):
 
-                        if(!$interests->$interest) {
-	                        $show = false;
-                        }
+							if ( ! $interests->$interest ) {
+								$show = false;
+							}
 
-					endforeach;
+						endforeach;
+					endif;
 
-					if($show) {
+					if ( $show ) {
 						echo '<h1>' . get_sub_field( 'thank_you_title' ) . '</h1>';
 
 						echo get_sub_field( 'thank_you_text' );
 
 						break;
-                    }
-				endif; ?>
+					}
 
+				endif; ?>
 
 
 			<?php endwhile; ?>
