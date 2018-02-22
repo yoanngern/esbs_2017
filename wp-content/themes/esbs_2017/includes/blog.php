@@ -51,17 +51,17 @@ function update_post( $post_id ) {
 
 		// Update fields
 
-		if ( $infos['title'] ) {
+		if ( $infos['title'] && ! get_the_title( $post_id ) ) {
 
 			$my_post['post_title'] = $infos['title'];
 
 		}
 
-		if ( $infos['desc'] ) {
+		if ( $infos['desc'] && ! get_the_content() ) {
 			$my_post['post_content'] = $infos['desc'];
 		}
 
-		if ( $infos['image'] ) {
+		if ( $infos['image'] && ! get_field( 'thumb', $post_id ) ) {
 
 			$upload_file = crb_insert_attachment_from_url( $infos['image'], $post_id );
 
