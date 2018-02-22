@@ -15,8 +15,10 @@ function update_post( $post_id ) {
 	}
 
 
-	if ( get_the_title() == 0 ) {
-		$title = "test";
+	if ( get_the_title() == "" ) {
+		$title = "Draft";
+	} else {
+		$title = get_the_title();
 	}
 
 
