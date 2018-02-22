@@ -322,6 +322,7 @@ function get_related_posts( $post, $nb = 3 ) {
 
 function get_iframe_video( $iframe ) {
 
+
 	if ( $iframe == null ) {
 		return false;
 	}

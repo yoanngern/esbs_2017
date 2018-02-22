@@ -1,4 +1,4 @@
-<?php get_header(  ); ?>
+<?php get_header(); ?>
 
 <section id="content" class="blog">
 
@@ -6,12 +6,29 @@
 
 	$bg       = get_field_or_parent( 'thumb', get_the_ID() );
 	$title    = get_the_title();
+	$video    = get_iframe_video( get_field( 'video', get_the_ID() ) );
 	$subtitle = "";
 	$link     = "";
 
+
 	?>
 
-	<?php if ( $bg ): ?>
+
+	<?php if ( $video ): ?>
+
+        <article class="title video_banner">
+
+            <div class="video_box">
+                <div class="video">
+					<?php echo $video; ?>
+                </div>
+            </div>
+
+            <div class="bg" style="background-image: url('<?php echo $bg['sizes']['banner']; ?>')"></div>
+        </article>
+
+
+	<?php elseif ( $bg ): ?>
 
         <article class="title"
                  style="background-image: url('<?php echo $bg['sizes']['banner']; ?>')">
@@ -47,6 +64,11 @@
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
                 <header>
+
+					<?php if ( $video ): ?>
+                        <h1><?php echo $title; ?></h1>
+					<?php endif; ?>
+
                     <time><?php echo get_the_date(); ?></time>
 					<?php if ( get_field( "author" ) ): ?><span
                             class="author"><?php echo get_field( "author" ) ?></span><?php endif; ?>

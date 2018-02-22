@@ -9,6 +9,8 @@ $link = esc_url( get_permalink( $item ) );
 $date = get_the_date( '', $item );
 
 
+$type = get_field( 'type', $item );
+
 $text = $item->post_content;
 
 
@@ -23,7 +25,7 @@ $link_email = "mailto:?subject=$title&body=$url_encoded";
 
 ?>
 
-<article id="post-<?php echo $id; ?>">
+<article id="post-<?php echo $id; ?>" class="<?php echo $type; ?>">
     <div class="box">
 
         <div class="hide">
@@ -38,13 +40,18 @@ $link_email = "mailto:?subject=$title&body=$url_encoded";
 
                         <h2><?php echo $title; ?></h2>
 
-						<p><?php echo wp_trim_words( $text, 20 ); ?></p>
+                        <p><?php echo wp_trim_words( $text, 20 ); ?></p>
 
                     </div>
                 </div>
             </a>
 
-            <figure style="background-image: url('<?php echo get_field( 'thumb', $id )['sizes']['banner'] ?>')"></figure>
+            <figure style="background-image: url('<?php echo get_field( 'thumb', $id )['sizes']['banner'] ?>')">
+
+                <div class="play">
+                    <span>Play</span>
+                </div>
+            </figure>
 
             <div class="share">
 

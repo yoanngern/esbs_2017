@@ -9,7 +9,6 @@ function update_post( $post_id ) {
 
 	$post_type = get_post_type( $post_id );
 
-
 	if ( $post_type != "post" ) {
 		return;
 	}
@@ -18,6 +17,7 @@ function update_post( $post_id ) {
 	$content_post = get_post($post_id);
 	$content = $content_post->post_content;
 
+	$type = 'article';
 
 	if ( get_the_title() == "" ) {
 		$title = "Draft";
@@ -44,12 +44,16 @@ function update_post( $post_id ) {
 		if ( get_url_info( $url ) == 'vimeo' ) {
 
 			$infos = get_vimeo_info( $url );
+
+			$type = 'video';
 		}
 
 
 		if ( get_url_info( $url ) == 'youtube' ) {
 
 			$infos = get_youtube_info( $url );
+
+			$type = 'video';
 
 		}
 
@@ -72,6 +76,14 @@ function update_post( $post_id ) {
 
 			update_field( 'thumb', $upload_file, $post_id );
 		}
+
+		if ( $type == 'video' && ! get_field( 'video', $post_id ) ) {
+
+			update_field( 'video', $url, $post_id );
+		}
+
+
+		update_field( 'type', $type, $post_id );
 
 	}
 
