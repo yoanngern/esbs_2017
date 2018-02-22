@@ -15,6 +15,10 @@ function update_post( $post_id ) {
 	}
 
 
+	$content_post = get_post($post_id);
+	$content = $content_post->post_content;
+
+
 	if ( get_the_title() == "" ) {
 		$title = "Draft";
 	} else {
@@ -57,7 +61,8 @@ function update_post( $post_id ) {
 
 		}
 
-		if ( $infos['desc'] && ! get_the_content() ) {
+		if ( $infos['desc'] && ! $content ) {
+
 			$my_post['post_content'] = $infos['desc'];
 		}
 
@@ -76,7 +81,6 @@ function update_post( $post_id ) {
 
 	// re-hook this function
 	add_action( 'save_post', 'update_post' );
-
 
 }
 
