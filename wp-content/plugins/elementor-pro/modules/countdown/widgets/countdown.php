@@ -7,11 +7,11 @@ use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Color;
 use Elementor\Scheme_Typography;
 use Elementor\Utils;
-use Elementor\Widget_Base;
+use ElementorPro\Base\Base_Widget;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class Countdown extends Widget_Base {
+class Countdown extends Base_Widget {
 
 	public function get_name() {
 		return 'countdown';
@@ -23,10 +23,6 @@ class Countdown extends Widget_Base {
 
 	public function get_icon() {
 		return 'eicon-countdown';
-	}
-
-	public function get_categories() {
-		return [ 'pro-elements' ];
 	}
 
 	protected function _register_controls() {
@@ -127,8 +123,6 @@ class Countdown extends Widget_Base {
 			[
 				'label' => __( 'Custom Label', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __( 'Yes', 'elementor-pro' ),
-				'label_off' => __( 'No', 'elementor-pro' ),
 				'return_value' => 'yes',
 				'condition' => [
 					'show_labels!' => '',
@@ -257,7 +251,6 @@ class Countdown extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'box_border',
-				'label' => __( 'Border', 'elementor-pro' ),
 				'selector' => '{{WRAPPER}} .elementor-countdown-item',
 				'separator' => 'before',
 			]

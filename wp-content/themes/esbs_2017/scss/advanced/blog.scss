@@ -13,14 +13,14 @@ section#content section.related_posts {
 
     section.title > article,
     article.title {
-        background-position: center center;
+        background-position: center 25%;
         background-repeat: no-repeat;
         background-size: cover;
         text-align: center;
-        padding-top: 55px;
-        min-height: 500px;
+        padding-top: 45px;
+        min-height: 250px;
         position: relative;
-        height: 70vh;
+        height: 45vh;
 
         div.dark {
             z-index: 0;
@@ -41,7 +41,7 @@ section#content section.related_posts {
 
         div.text {
             position: absolute;
-            top: 45%;
+            top: 55%;
             width: 100%;
 
             @media only screen and (max-height: 700px) {

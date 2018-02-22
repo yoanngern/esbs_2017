@@ -5,12 +5,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Elementor upgrades class.
+ *
+ * Elementor upgrades handler class is responsible for updating different
+ * Elementor versions.
+ *
+ * @since 1.0.0
+ */
 class Upgrades {
 
+	/**
+	 * Add actions.
+	 *
+	 * Hook into WordPress actions and launce Elementor upgrades.
+	 *
+	 * @static
+	 * @since 1.0.0
+	 * @access public
+	 */
 	public static function add_actions() {
 		add_action( 'init', [ __CLASS__, 'init' ], 20 );
 	}
 
+	/**
+	 * Init.
+	 *
+	 * Initialize Elementor upgrades.
+	 *
+	 * Fired by `init` action.
+	 *
+	 * @static
+	 * @since 1.0.0
+	 * @access public
+	 */
 	public static function init() {
 		$elementor_version = get_option( 'elementor_version' );
 
@@ -26,6 +54,18 @@ class Upgrades {
 		update_option( 'elementor_version', ELEMENTOR_VERSION );
 	}
 
+	/**
+	 * Check upgrades.
+	 *
+	 * Checks whether the Elementor version need the be upgraded.
+	 *
+	 * If an upgrade required for a specific Elementor version, it will update
+	 * the `elementor_upgrades` option in the database.
+	 *
+	 * @static
+	 * @since 1.0.10
+	 * @access private
+	 */
 	private static function check_upgrades( $elementor_version ) {
 		// It's a new install.
 		if ( ! $elementor_version ) {
@@ -49,17 +89,22 @@ class Upgrades {
 		}
 	}
 
+	/**
+	 * Upgrade Elementor 0.3.2
+	 *
+	 * Change the image widget link URL, setting is to `custom` link.
+	 *
+	 * @static
+	 * @since 1.0.0
+	 * @access private
+	 */
 	private static function _upgrade_v032() {
 		global $wpdb;
 
 		$post_ids = $wpdb->get_col(
-			$wpdb->prepare(
-				'SELECT `post_id` FROM %1$s
-						WHERE `meta_key` = \'_elementor_version\'
-							AND `meta_value` = \'%2$s\';',
-				$wpdb->postmeta,
-				'0.1'
-			)
+			'SELECT `post_id` FROM `' . $wpdb->postmeta . '`
+					WHERE `meta_key` = \'_elementor_version\'
+						AND `meta_value` = \'0.1\';'
 		);
 
 		if ( empty( $post_ids ) ) {
@@ -88,18 +133,26 @@ class Upgrades {
 		}
 	}
 
+	/**
+	 * Upgrade Elementor 0.9.2
+	 *
+	 * Change the icon widget, icon-box widget and the social-icons widget,
+	 * setting their icon padding size to an empty string.
+	 *
+	 * Change the image widget, setting the image size to full image size.
+	 *
+	 * @static
+	 * @since 1.0.0
+	 * @access private
+	 */
 	private static function _upgrade_v092() {
 		global $wpdb;
 
 		// Fix Icon/Icon Box Widgets padding.
 		$post_ids = $wpdb->get_col(
-			$wpdb->prepare(
-				'SELECT `post_id` FROM %1$s
-						WHERE `meta_key` = \'_elementor_version\'
-							AND `meta_value` = \'%2$s\';',
-				$wpdb->postmeta,
-				'0.2'
-			)
+			'SELECT `post_id` FROM `' . $wpdb->postmeta . '`
+					WHERE `meta_key` = \'_elementor_version\'
+						AND `meta_value` = \'0.2\';'
 		);
 
 		if ( empty( $post_ids ) ) {
@@ -136,18 +189,23 @@ class Upgrades {
 		}
 	}
 
+	/**
+	 * Upgrade Elementor 0.11.0
+	 *
+	 * Change the button widget sizes, setting up new button sizes.
+	 *
+	 * @static
+	 * @since 1.0.0
+	 * @access private
+	 */
 	private static function _upgrade_v0110() {
 		global $wpdb;
 
 		// Fix Button widget to new sizes options.
 		$post_ids = $wpdb->get_col(
-			$wpdb->prepare(
-				'SELECT `post_id` FROM %1$s
-						WHERE `meta_key` = \'_elementor_version\'
-							AND `meta_value` = \'%2$s\';',
-				$wpdb->postmeta,
-				'0.3'
-			)
+			'SELECT `post_id` FROM `' . $wpdb->postmeta . '`
+					WHERE `meta_key` = \'_elementor_version\'
+						AND `meta_value` = \'0.3\';'
 		);
 
 		if ( empty( $post_ids ) ) {

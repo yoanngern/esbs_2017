@@ -8,11 +8,11 @@ use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Elementor\Scheme_Color;
 use Elementor\Scheme_Typography;
-use Elementor\Widget_Base;
+use ElementorPro\Base\Base_Widget;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class Price_Table extends Widget_Base {
+class Price_Table extends Base_Widget {
 
 	public function get_name() {
 		return 'price-table';
@@ -26,12 +26,7 @@ class Price_Table extends Widget_Base {
 		return 'eicon-price-table';
 	}
 
-	public function get_categories() {
-		return [ 'pro-elements' ];
-	}
-
 	protected function _register_controls() {
-
 		$this->start_controls_section(
 			'section_header',
 			[
@@ -266,8 +261,6 @@ class Price_Table extends Widget_Base {
 			[
 				'label' => __( 'Show', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __( 'Yes', 'elementor-pro' ),
-				'label_off' => __( 'No', 'elementor-pro' ),
 				'return_value' => 'yes',
 				'default' => 'yes',
 				'separator' => 'before',
@@ -793,15 +786,15 @@ class Price_Table extends Widget_Base {
 				'options' => [
 					'left' => [
 						'title' => __( 'Left', 'elementor-pro' ),
-						'icon'  => 'fa fa-align-left',
+						'icon' => 'fa fa-align-left',
 					],
 					'center' => [
 						'title' => __( 'Center', 'elementor-pro' ),
-						'icon'  => 'fa fa-align-center',
+						'icon' => 'fa fa-align-center',
 					],
 					'right' => [
 						'title' => __( 'Right', 'elementor-pro' ),
-						'icon'  => 'fa fa-align-right',
+						'icon' => 'fa fa-align-right',
 					],
 				],
 				'selectors' => [
@@ -832,8 +825,6 @@ class Price_Table extends Widget_Base {
 			[
 				'label' => __( 'Divider', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __( 'Yes', 'elementor-pro' ),
-				'label_off' => __( 'No', 'elementor-pro' ),
 				'return_value' => 'yes',
 				'default' => 'yes',
 				'separator' => 'before',
@@ -1038,7 +1029,6 @@ class Price_Table extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'button_typography',
-				'label' => __( 'Typography', 'elementor-pro' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_4,
 				'selector' => '{{WRAPPER}} .elementor-price-table__button',
 				'condition' => [
@@ -1068,7 +1058,6 @@ class Price_Table extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Border::get_type(), [
 				'name' => 'button_border',
-				'label' => __( 'Border', 'elementor-pro' ),
 				'placeholder' => '1px',
 				'default' => '1px',
 				'selector' => '{{WRAPPER}} .elementor-price-table__button',
@@ -1404,14 +1393,14 @@ class Price_Table extends Widget_Base {
 				<?php if ( 'yes' === $settings['sale'] && ! empty( $settings['original_price'] ) ) : ?>
 					<div class="elementor-price-table__original-price elementor-typo-excluded"><?php echo $symbol . $settings['original_price']; ?></div>
 				<?php endif; ?>
-				<?php if ( ! empty( $symbol ) && is_numeric( $intpart ) ) : ?>
+				<?php if ( ! empty( $symbol ) ) : ?>
 					<span class="elementor-price-table__currency"><?php echo $symbol; ?></span>
 				<?php endif; ?>
 				<?php if ( ! empty( $intpart ) || 0 <= $intpart ) : ?>
 					<span class="elementor-price-table__integer-part"><?php echo $intpart; ?></span>
 				<?php endif; ?>
 
-				<?php if ( 0 < $fraction || ( ! empty( $settings['period'] ) && 'beside' === $period_position ) ) : ?>
+				<?php if ( '' !== $fraction || ( ! empty( $settings['period'] ) && 'beside' === $period_position ) ) : ?>
 					<div class="elementor-price-table__after-price">
 						<span class="elementor-price-table__fractional-part"><?php echo $fraction; ?></span>
 						<?php if ( ! empty( $settings['period'] ) && 'beside' === $period_position ) : ?>
@@ -1537,7 +1526,7 @@ class Price_Table extends Widget_Base {
 					<div class="elementor-price-table__original-price elementor-typo-excluded">{{{ symbol + settings.original_price }}}</div>
 				<# } #>
 
-				<# if (  ! _.isEmpty( symbol ) && isFinite( intpart ) ) { #>
+				<# if ( ! _.isEmpty( symbol ) ) { #>
 					<span class="elementor-price-table__currency">{{{ symbol }}}</span>
 				<# } #>
 				<# if ( intpart ) { #>

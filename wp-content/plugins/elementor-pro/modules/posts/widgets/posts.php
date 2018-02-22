@@ -3,7 +3,7 @@ namespace ElementorPro\Modules\Posts\Widgets;
 
 use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Typography;
-use Elementor\Widget_Base;
+use ElementorPro\Base\Base_Widget;
 use ElementorPro\Modules\QueryControl\Controls\Group_Control_Posts;
 use ElementorPro\Modules\QueryControl\Module;
 use ElementorPro\Modules\Posts\Skins;
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * Class Posts
  */
-class Posts extends Widget_Base {
+class Posts extends Base_Widget {
 
 	/**
 	 * @var \WP_Query
@@ -33,10 +33,6 @@ class Posts extends Widget_Base {
 
 	public function get_icon() {
 		return 'eicon-post-list';
-	}
-
-	public function get_categories() {
-		return [ 'pro-elements' ];
 	}
 
 	public function get_script_depends() {
@@ -95,7 +91,6 @@ class Posts extends Widget_Base {
 			Group_Control_Posts::get_type(),
 			[
 				'name' => 'posts',
-				'label' => __( 'Posts', 'elementor-pro' ),
 			]
 		);
 
@@ -193,8 +188,6 @@ class Posts extends Widget_Base {
 				'label' => __( 'Shorten', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
 				'default' => '',
-				'label_on' => __( 'Yes', 'elementor-pro' ),
-				'label_off' => __( 'No', 'elementor-pro' ),
 				'return_value' => 'yes',
 				'condition' => [
 					'pagination_type' => [
@@ -394,6 +387,10 @@ class Posts extends Widget_Base {
 	}
 
 	public function get_current_page() {
+		if ( '' === $this->get_settings( 'pagination_type' ) ) {
+			return 1;
+		}
+
 		return max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
 	}
 

@@ -5,12 +5,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Elementor widgets manager class.
+ *
+ * Elementor widgets manager handler class is responsible for registering and
+ * initializing all the supported Elementor widgets.
+ *
+ * @since 1.0.0
+ */
 class Widgets_Manager {
+
 	/**
+	 * Widget types.
+	 *
+	 * Holds the list of all the widget types.
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 *
 	 * @var Widget_Base[]
 	 */
 	private $_widget_types = null;
 
+	/**
+	 * Init widgets.
+	 *
+	 * Initialize Elementor widgets manager. Include all the the widgets files
+	 * and register each Elementor and WordPress widget.
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 */
 	private function _init_widgets() {
 		$build_widgets_filename = [
 			'common',
@@ -57,9 +82,29 @@ class Widgets_Manager {
 
 		$this->_register_wp_widgets();
 
+		/**
+		 * After widgets registered.
+		 *
+		 * Fires after Elementor widgets are registered.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Widgets_Manager $this The widgets manager.
+		 */
 		do_action( 'elementor/widgets/widgets_registered', $this );
 	}
 
+	/**
+	 * Register WordPress widgets.
+	 *
+	 * Add native WordPress widget to the list of registered widget types.
+	 *
+	 * Exclude the widgets that are in Elementor widgets black list. Theme and
+	 * plugin authors can filter the black list.
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 */
 	private function _register_wp_widgets() {
 		global $wp_widget_factory;
 
@@ -79,7 +124,18 @@ class Widgets_Manager {
 		];
 
 		// Allow themes/plugins to filter out their widgets.
-		$black_list = apply_filters( 'elementor/widgets/black_list', [] );
+		$black_list = [];
+
+		/**
+		 * Elementor widgets black list.
+		 *
+		 * Filters the widgets black list that won't be displayed in the panel.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $black_list A black list of widgets. Default is an empty array.
+		 */
+		$black_list = apply_filters( 'elementor/widgets/black_list', $black_list );
 
 		foreach ( $wp_widget_factory->widgets as $widget_class => $widget_obj ) {
 
@@ -101,10 +157,30 @@ class Widgets_Manager {
 		}
 	}
 
+	/**
+	 * Require files.
+	 *
+	 * Require Elementor widget base class.
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 */
 	private function _require_files() {
 		require ELEMENTOR_PATH . 'includes/base/widget-base.php';
 	}
 
+	/**
+	 * Register widget type.
+	 *
+	 * Add a new widget type to the list of registered widget types.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @param Widget_Base $widget Elementor widget.
+	 *
+	 * @return true True if the widget was registered.
+	 */
 	public function register_widget_type( Widget_Base $widget ) {
 		if ( is_null( $this->_widget_types ) ) {
 			$this->_init_widgets();
@@ -115,6 +191,18 @@ class Widgets_Manager {
 		return true;
 	}
 
+	/**
+	 * Unregister widget type.
+	 *
+	 * Removes widget type from the list of registered widget types.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @param string $name Widget name.
+	 *
+	 * @return true True if the widget was unregistered, False otherwise.
+	 */
 	public function unregister_widget_type( $name ) {
 		if ( ! isset( $this->_widget_types[ $name ] ) ) {
 			return false;
@@ -125,6 +213,18 @@ class Widgets_Manager {
 		return true;
 	}
 
+	/**
+	 * Get widget types.
+	 *
+	 * Retrieve the registered widget types list.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @param string $widget_name Optional. Widget name. Default is null.
+	 *
+	 * @return null|Widget_Base[] Registered widget types.
+	 */
 	public function get_widget_types( $widget_name = null ) {
 		if ( is_null( $this->_widget_types ) ) {
 			$this->_init_widgets();
@@ -137,6 +237,16 @@ class Widgets_Manager {
 		return $this->_widget_types;
 	}
 
+	/**
+	 * Get widget types config.
+	 *
+	 * Retrieve all the registered widgets with config for each widgets.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return array Registered widget types with each widget config.
+	 */
 	public function get_widget_types_config() {
 		$config = [];
 
@@ -151,10 +261,18 @@ class Widgets_Manager {
 		return $config;
 	}
 
+	/**
+	 * Ajax render widget.
+	 *
+	 * Ajax handler for Elementor render_widget.
+	 *
+	 * Fired by `wp_ajax_elementor_render_widget` action.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
 	public function ajax_render_widget() {
-		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'elementor-editing' ) ) {
-			wp_send_json_error( new \WP_Error( 'token_expired' ) );
-		}
+		Plugin::$instance->editor->verify_ajax_nonce();
 
 		if ( empty( $_POST['post_id'] ) ) {
 			wp_send_json_error( new \WP_Error( 'no_post_id', 'No post_id' ) );
@@ -179,6 +297,7 @@ class Widgets_Manager {
 		// Start buffering
 		ob_start();
 
+		/** @var Widget_Base $widget */
 		$widget = Plugin::$instance->elements_manager->create_element_instance( $data );
 
 		if ( ! $widget ) {
@@ -198,10 +317,18 @@ class Widgets_Manager {
 		);
 	}
 
+	/**
+	 * Ajax get WordPress widget form.
+	 *
+	 * Ajax handler for Elementor editor get_wp_widget_form.
+	 *
+	 * Fired by `wp_ajax_elementor_editor_get_wp_widget_form` action.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
 	public function ajax_get_wp_widget_form() {
-		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'elementor-editing' ) ) {
-			die;
-		}
+		Plugin::$instance->editor->verify_ajax_nonce();
 
 		if ( empty( $_POST['widget_type'] ) ) {
 			wp_send_json_error();
@@ -232,12 +359,32 @@ class Widgets_Manager {
 		wp_send_json_success( $widget_obj->get_form() );
 	}
 
+	/**
+	 * Render widgets content.
+	 *
+	 * Used to generate the widget templates on the editor using Underscore JS
+	 * template, for all the registered widget types.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
 	public function render_widgets_content() {
 		foreach ( $this->get_widget_types() as $widget ) {
 			$widget->print_template();
 		}
 	}
 
+	/**
+	 * Get widgets frontend settings keys.
+	 *
+	 * Retrieve frontend controls settings keys for all the registered widget
+	 * types.
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @return array Registered widget types with settings keys for each widget.
+	 */
 	public function get_widgets_frontend_settings_keys() {
 		$keys = [];
 
@@ -252,12 +399,84 @@ class Widgets_Manager {
 		return $keys;
 	}
 
+	/**
+	 * Enqueue widgets scripts.
+	 *
+	 * Enqueue all the scripts defined as a dependency for each widget.
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 */
 	public function enqueue_widgets_scripts() {
 		foreach ( $this->get_widget_types() as $widget ) {
 			$widget->enqueue_scripts();
 		}
 	}
 
+	/**
+	 * Retrieve inline editing configuration.
+	 *
+	 * Returns general inline editing configurations like toolbar types etc.
+	 *
+	 * @access public
+	 * @since 1.8.0
+	 *
+	 * @return array {
+	 *     Inline editing configuration.
+	 *
+	 *     @type array $toolbar {
+	 *         Toolbar types and the actions each toolbar includes.
+	 *         Note: Wysiwyg controls uses the advanced toolbar, textarea controls
+	 *         uses the basic toolbar and text controls has no toolbar.
+	 *
+	 *         @type array $basic    Basic actions included in the edit tool.
+	 *         @type array $advanced Advanced actions included in the edit tool.
+	 *     }
+	 * }
+	 */
+	public function get_inline_editing_config() {
+		$basic_tools = [
+			'bold',
+			'underline',
+			'italic',
+		];
+
+		$advanced_tools = array_merge( $basic_tools, [
+			'createlink',
+			'unlink',
+			'h1' => [
+				'h1',
+				'h2',
+				'h3',
+				'h4',
+				'h5',
+				'h6',
+				'p',
+				'blockquote',
+				'pre',
+			],
+			'list' => [
+				'insertOrderedList',
+				'insertUnorderedList',
+			],
+		] );
+
+		return [
+			'toolbar' => [
+				'basic' => $basic_tools,
+				'advanced' => $advanced_tools,
+			],
+		];
+	}
+
+	/**
+	 * Widgets manager constructor.
+	 *
+	 * Initializing Elementor widgets manager.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
 	public function __construct() {
 		$this->_require_files();
 

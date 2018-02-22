@@ -1,15 +1,15 @@
 <?php
 namespace ElementorPro\Modules\Woocommerce\Widgets;
 
-use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use ElementorPro\Base\Base_Widget;
 use ElementorPro\Modules\QueryControl\Controls\Group_Control_Posts;
 use ElementorPro\Modules\QueryControl\Module;
 use ElementorPro\Modules\Woocommerce\Skins;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class Products extends Widget_Base {
+class Products extends Base_Widget {
 
 	/**
 	 * @var \WP_Query
@@ -28,10 +28,6 @@ class Products extends Widget_Base {
 
 	public function get_icon() {
 		return 'eicon-woocommerce';
-	}
-
-	public function get_categories() {
-		return [ 'pro-elements' ];
 	}
 
 	public function on_export( $element ) {

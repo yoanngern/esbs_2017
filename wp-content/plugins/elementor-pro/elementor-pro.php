@@ -4,7 +4,7 @@
  * Description: Elementor Pro adds new features to the Elementor Page Builder plugin. Control your conversions, your user engagement, your entire website, from one page builder.
  * Plugin URI: https://elementor.com/
  * Author: Elementor.com
- * Version: 1.5.8
+ * Version: 1.15.0
  * Author URI: https://elementor.com/
  *
  * Text Domain: elementor-pro
@@ -12,8 +12,8 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-define( 'ELEMENTOR_PRO_VERSION', '1.5.8' );
-define( 'ELEMENTOR_PRO_PREVIOUS_STABLE_VERSION', '1.4.2' );
+define( 'ELEMENTOR_PRO_VERSION', '1.15.0' );
+define( 'ELEMENTOR_PRO_PREVIOUS_STABLE_VERSION', '1.14.2' );
 
 define( 'ELEMENTOR_PRO__FILE__', __FILE__ );
 define( 'ELEMENTOR_PRO_PLUGIN_BASE', plugin_basename( ELEMENTOR_PRO__FILE__ ) );
@@ -38,13 +38,13 @@ function elementor_pro_load_plugin() {
 		return;
 	}
 
-	$elementor_version_required = '1.4.0';
+	$elementor_version_required = '1.8.0';
 	if ( ! version_compare( ELEMENTOR_VERSION, $elementor_version_required, '>=' ) ) {
 		add_action( 'admin_notices', 'elementor_pro_fail_load_out_of_date' );
 		return;
 	}
 
-	$elementor_version_recommendation = '1.4.1';
+	$elementor_version_recommendation = '1.8.11';
 	if ( ! version_compare( ELEMENTOR_VERSION, $elementor_version_recommendation, '>=' ) ) {
 		add_action( 'admin_notices', 'elementor_pro_admin_notice_upgrade_recommendation' );
 	}
@@ -84,7 +84,7 @@ function elementor_pro_fail_load() {
 
 		$install_url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=elementor' ), 'install-plugin_elementor' );
 
-		$message = '<p>' . __( 'Elementor Pro not working because you need to install the Elemenor plugin', 'elementor-pro' ) . '</p>';
+		$message = '<p>' . __( 'Elementor Pro not working because you need to install the Elementor plugin', 'elementor-pro' ) . '</p>';
 		$message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $install_url, __( 'Install Elementor Now', 'elementor-pro' ) ) . '</p>';
 	}
 

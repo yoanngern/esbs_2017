@@ -2,7 +2,7 @@
 
 $title    = get_field( 'join_title', $_POST );
 $subtitle = get_field( 'join_subtitle', $_POST );
-$button  = get_field( 'join_button', $_POST );
+$button   = get_field( 'join_button', $_POST );
 $form_id  = get_field( 'join_form', $_POST );
 
 ?>
@@ -33,7 +33,9 @@ $form_id  = get_field( 'join_form', $_POST );
 
         <a href="#" class="play"></a>
 
-		<?php echo do_shortcode( '[mc4wp_form id="' . $form_id . '"]' ); ?>
+        <div class="small_form">
+			<?php echo do_shortcode( '[mc4wp_form id="' . $form_id . '"]' ); ?>
+        </div>
 
 		<?php //echo do_shortcode('[mc4wp_form id="1255"]'); ?>
 

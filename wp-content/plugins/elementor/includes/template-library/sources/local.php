@@ -5,6 +5,7 @@ use Elementor\DB;
 use Elementor\Core\Settings\Page\Manager as PageSettingsManager;
 use Elementor\Core\Settings\Manager as SettingsManager;
 use Elementor\Core\Settings\Page\Model;
+use Elementor\Editor;
 use Elementor\Plugin;
 use Elementor\Settings;
 use Elementor\User;
@@ -27,10 +28,22 @@ class Source_Local extends Source_Base {
 
 	private static $_template_types = [ 'page', 'section' ];
 
+	private $post_type_object;
+
+	/**
+	 * @static
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public static function get_template_type( $template_id ) {
 		return get_post_meta( $template_id, self::TYPE_META_KEY, true );
 	}
 
+	/**
+	 * @static
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public static function is_base_templates_screen() {
 		global $current_screen;
 
@@ -41,18 +54,47 @@ class Source_Local extends Source_Base {
 		return 'edit' === $current_screen->base && self::CPT === $current_screen->post_type;
 	}
 
+	/**
+	 * @static
+	 * @since 1.0.3
+	 * @access public
+	 */
 	public static function add_template_type( $type ) {
 		self::$_template_types[] = $type;
 	}
 
+	/**
+	 * @static
+	 * @since 1.8.0
+	 * @access public
+	 */
+	public static function remove_template_type( $type ) {
+		$key = array_search( $type, self::$_template_types, true );
+		if ( false !== $key ) {
+			unset( self::$_template_types[ $key ] );
+		}
+	}
+
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function get_id() {
 		return 'local';
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function get_title() {
 		return __( 'Local', 'elementor' );
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function register_data() {
 		$labels = [
 			'name' => _x( 'My Library', 'Template Library', 'elementor' ),
@@ -83,10 +125,18 @@ class Source_Local extends Source_Base {
 			'supports' => [ 'title', 'thumbnail', 'author', 'elementor' ],
 		];
 
-		register_post_type(
-			self::CPT,
-			apply_filters( 'elementor/template_library/sources/local/register_post_type_args', $args )
-		);
+		/**
+		 * Register template library post type args.
+		 *
+		 * Filters the post type arguments when registering elementor template library post type.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $args Arguments for registering a post type.
+		 */
+		$args = apply_filters( 'elementor/template_library/sources/local/register_post_type_args', $args );
+
+		$this->post_type_object = register_post_type( self::CPT, $args );
 
 		$args = [
 			'hierarchical' => false,
@@ -99,27 +149,38 @@ class Source_Local extends Source_Base {
 			'label' => _x( 'Type', 'Template Library', 'elementor' ),
 		];
 
-		register_taxonomy(
-			self::TAXONOMY_TYPE_SLUG,
-			self::CPT,
-			apply_filters( 'elementor/template_library/sources/local/register_taxonomy_args', $args )
-		);
+		/**
+		 * Register template library taxonomy args.
+		 *
+		 * Filters the taxonomy arguments when registering elementor template library taxonomy.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $args Arguments for registering a taxonomy.
+		 */
+		$args = apply_filters( 'elementor/template_library/sources/local/register_taxonomy_args', $args );
+
+		register_taxonomy( self::TAXONOMY_TYPE_SLUG, self::CPT, $args );
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function register_admin_menu() {
 		if ( current_user_can( 'manage_options' ) ) {
 			add_submenu_page(
 				Settings::PAGE_ID,
-				__( 'My Library', 'elementor' ),
-				__( 'My Library', 'elementor' ),
-				'edit_pages',
+				_x( 'My Library', 'Template Library', 'elementor' ),
+				_x( 'My Library', 'Template Library', 'elementor' ),
+				Editor::EDITING_CAPABILITY,
 				'edit.php?post_type=' . self::CPT
 			);
 		} else {
 			add_menu_page(
 				__( 'Elementor', 'elementor' ),
 				__( 'Elementor', 'elementor' ),
-				'edit_pages',
+				Editor::EDITING_CAPABILITY,
 				'edit.php?post_type=' . self::CPT,
 				'',
 				'',
@@ -128,6 +189,10 @@ class Source_Local extends Source_Base {
 		}
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function get_items( $args = [] ) {
 		$templates_query = new \WP_Query(
 			[
@@ -160,14 +225,22 @@ class Source_Local extends Source_Base {
 		return $templates;
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function save_item( $template_data ) {
 		if ( ! in_array( $template_data['type'], self::$_template_types ) ) {
 			return new \WP_Error( 'save_error', 'Invalid template type `' . $template_data['type'] . '`' );
 		}
 
+		if ( ! current_user_can( $this->post_type_object->cap->edit_posts ) ) {
+			return new \WP_Error( 'save_error', __( 'Access Denied.', 'elementor' ) );
+		}
+
 		$template_id = wp_insert_post( [
 			'post_title' => ! empty( $template_data['title'] ) ? $template_data['title'] : __( '(no title)', 'elementor' ),
-			'post_status' => 'publish',
+			'post_status' => current_user_can( 'publish_posts' ) ? 'publish' : 'pending',
 			'post_type' => self::CPT,
 		] );
 
@@ -185,21 +258,62 @@ class Source_Local extends Source_Base {
 			SettingsManager::get_settings_managers( 'page' )->save_settings( $template_data['page_settings'], $template_id );
 		}
 
+		/**
+		 * After template library save.
+		 *
+		 * Fires after Elementor template library was saved.
+		 *
+		 * @since 1.0.1
+		 *
+		 * @param int   $template_id   The ID of the template.
+		 * @param array $template_data The template data.
+		 */
 		do_action( 'elementor/template-library/after_save_template', $template_id, $template_data );
+
+		/**
+		 * After template library update.
+		 *
+		 * Fires after Elementor template library was updated.
+		 *
+		 * @since 1.0.1
+		 *
+		 * @param int   $template_id   The ID of the template.
+		 * @param array $template_data The template data.
+		 */
 		do_action( 'elementor/template-library/after_update_template', $template_id, $template_data );
 
 		return $template_id;
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function update_item( $new_data ) {
+		if ( ! current_user_can( $this->post_type_object->cap->edit_post, $new_data['id'] ) ) {
+			return new \WP_Error( 'save_error', __( 'Access Denied.', 'elementor' ) );
+		}
+
 		Plugin::$instance->db->save_editor( $new_data['id'], $new_data['content'] );
 
+		/**
+		 * After template library update.
+		 *
+		 * Fires after Elementor template library was updated.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param int   $new_data_id The ID of the new template.
+		 * @param array $new_data    The new template data.
+		 */
 		do_action( 'elementor/template-library/after_update_template', $new_data['id'], $new_data );
 
 		return true;
 	}
 
 	/**
+	 * @since 1.0.0
+	 * @access public
 	 * @param int $template_id
 	 *
 	 * @return array
@@ -211,31 +325,48 @@ class Source_Local extends Source_Base {
 
 		$page_settings = get_post_meta( $post->ID, PageSettingsManager::META_KEY, true );
 
+		$date = strtotime( $post->post_date );
+
 		$data = [
 			'template_id' => $post->ID,
 			'source' => $this->get_id(),
 			'type' => self::get_template_type( $post->ID ),
 			'title' => $post->post_title,
 			'thumbnail' => get_the_post_thumbnail_url( $post ),
-			'date' => mysql2date( get_option( 'date_format' ), $post->post_date ),
+			'date' => $date,
+			'human_date' => date_i18n( get_option( 'date_format' ), $date ),
 			'author' => $user->display_name,
 			'hasPageSettings' => ! empty( $page_settings ),
-			'categories' => [],
-			'keywords' => [],
+			'tags' => [],
 			'export_link' => $this->_get_export_link( $template_id ),
 			'url' => get_permalink( $post->ID ),
 		];
 
-		return apply_filters( 'elementor/template-library/get_template', $data );
+		/**
+		 * Get template library template.
+		 *
+		 * Filters the elementor template data when loading template library item.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $data Arguments for registering a taxonomy.
+		 */
+		$data = apply_filters( 'elementor/template-library/get_template', $data );
+
+		return $data;
 	}
 
-	public function get_data( array $args, $context = 'display' ) {
+	/**
+	 * @since 1.5.0
+	 * @access public
+	*/
+	public function get_data( array $args ) {
 		$db = Plugin::$instance->db;
 
 		$template_id = $args['template_id'];
 
 		// TODO: Validate the data (in JS too!).
-		if ( 'display' === $context ) {
+		if ( ! empty( $args['display'] ) ) {
 			$content = $db->get_builder( $template_id );
 		} else {
 			$content = $db->get_plain_editor( $template_id );
@@ -258,10 +389,22 @@ class Source_Local extends Source_Base {
 		return $data;
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function delete_template( $template_id ) {
-		wp_delete_post( $template_id, true );
+		if ( ! current_user_can( $this->post_type_object->cap->delete_post, $template_id ) ) {
+			return new \WP_Error( 'template_error', __( 'Access Denied.', 'elementor' ) );
+		}
+
+		return wp_delete_post( $template_id, true );
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function export_template( $template_id ) {
 		$file_data = $this->prepare_template_export( $template_id );
 
@@ -282,6 +425,10 @@ class Source_Local extends Source_Base {
 		die;
 	}
 
+	/**
+	 * @since 1.6.0
+	 * @access public
+	*/
 	public function export_multiple_templates( array $template_ids ) {
 		$files = [];
 
@@ -350,6 +497,10 @@ class Source_Local extends Source_Base {
 		die;
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function import_template() {
 		$import_file = $_FILES['file']['tmp_name'];
 
@@ -359,15 +510,20 @@ class Source_Local extends Source_Base {
 
 		$items = [];
 
-		$zip = new \ZipArchive();
+		$file_extension = pathinfo( $_FILES['file']['name'], PATHINFO_EXTENSION );
 
-		/*
-		 * Check if file is a json or a .zip archive
-		 */
-		if ( true === $zip->open( $import_file ) ) {
+		if ( 'zip' === $file_extension ) {
+			if ( ! class_exists( '\ZipArchive' ) ) {
+				return new \WP_Error( 'zip_error', 'PHP Zip extension not loaded.' );
+			}
+
+			$zip = new \ZipArchive();
+
 			$wp_upload_dir = wp_upload_dir();
 
 			$temp_path = $wp_upload_dir['basedir'] . '/' . self::TEMP_FILES_DIR . '/' . uniqid();
+
+			$zip->open( $import_file );
 
 			$zip->extractTo( $temp_path );
 
@@ -391,6 +547,10 @@ class Source_Local extends Source_Base {
 		return $items;
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function post_row_actions( $actions, \WP_Post $post ) {
 		if ( self::is_base_templates_screen() ) {
 			if ( $this->is_template_supports_export( $post->ID ) ) {
@@ -403,20 +563,25 @@ class Source_Local extends Source_Base {
 		return $actions;
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function admin_import_template_form() {
 		if ( ! self::is_base_templates_screen() ) {
 			return;
 		}
 		?>
 		<div id="elementor-hidden-area">
-			<a id="elementor-import-template-trigger" class="page-title-action"><?php _e( 'Import Templates', 'elementor' ); ?></a>
+			<a id="elementor-import-template-trigger" class="page-title-action"><?php esc_attr_e( 'Import Templates', 'elementor' ); ?></a>
 			<div id="elementor-import-template-area">
-				<div id="elementor-import-template-title"><?php _e( 'Choose an Elementor template JSON file or a .zip archive of Elementor templates, and add them to the list of templates available in your library.', 'elementor' ); ?></div>
+				<div id="elementor-import-template-title"><?php esc_attr_e( 'Choose an Elementor template JSON file or a .zip archive of Elementor templates, and add them to the list of templates available in your library.', 'elementor' ); ?></div>
 				<form id="elementor-import-template-form" method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" enctype="multipart/form-data">
 					<input type="hidden" name="action" value="elementor_import_template">
+					<input type="hidden" name="_nonce" value="<?php echo Plugin::$instance->editor->create_nonce( self::CPT ); ?>">
 					<fieldset id="elementor-import-template-form-inputs">
-						<input type="file" name="file" accept=".json, .zip" required>
-						<input type="submit" class="button" value="<?php _e( 'Import Now', 'elementor' ); ?>">
+						<input type="file" name="file" accept=".json,application/json,.zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" required>
+						<input type="submit" class="button" value="<?php esc_attr_e( 'Import Now', 'elementor' ); ?>">
 					</fieldset>
 				</form>
 			</div>
@@ -424,28 +589,71 @@ class Source_Local extends Source_Base {
 		<?php
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function block_template_frontend() {
-		if ( is_singular( self::CPT ) && ! User::is_current_user_can_edit() ) {
+		if ( is_singular( self::CPT ) && ! current_user_can( 'edit_posts' ) ) {
 			wp_redirect( site_url(), 301 );
 			die;
 		}
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function is_template_supports_export( $template_id ) {
-		return apply_filters( 'elementor/template_library/is_template_supports_export', true, $template_id );
+		$export_support = true;
+
+		/**
+		 * Is template library supports export.
+		 *
+		 * Filters whether the template library supports export.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param bool $export_support Whether the template library supports export.
+		 *                             Default is true.
+		 * @param int  $template_id    Post ID.
+		 */
+		$export_support = apply_filters( 'elementor/template_library/is_template_supports_export', $export_support, $template_id );
+
+		return $export_support;
 	}
 
+	/**
+	 * @since 1.8.0
+	 * @access public
+	 */
+	public function remove_elementor_post_state_from_library( $post_states, $post ) {
+		if ( self::CPT === $post->post_type && isset( $post_states['elementor'] ) ) {
+			unset( $post_states['elementor'] );
+		}
+		return $post_states;
+	}
+
+	/**
+	 * @since 1.0.0
+	 * @access private
+	*/
 	private function _get_export_link( $template_id ) {
 		return add_query_arg(
 			[
 				'action' => 'elementor_export_template',
 				'source' => $this->get_id(),
+				'_nonce' => Plugin::$instance->editor->create_nonce( self::CPT ),
 				'template_id' => $template_id,
 			],
 			admin_url( 'admin-ajax.php' )
 		);
 	}
 
+	/**
+	 * @since 1.0.1
+	 * @access public
+	*/
 	public function on_save_post( $post_id, $post ) {
 		if ( self::CPT !== $post->post_type ) {
 			return;
@@ -455,9 +663,18 @@ class Source_Local extends Source_Base {
 			return;
 		}
 
+		// Don't save type on import, the importer will do it.
+		if ( did_action( 'import_start' ) ) {
+			return;
+		}
+
 		$this->save_item_type( $post_id, 'page' );
 	}
 
+	/**
+	 * @since 1.0.1
+	 * @access private
+	*/
 	private function save_item_type( $post_id, $type ) {
 		update_post_meta( $post_id, self::TYPE_META_KEY, $type );
 
@@ -465,6 +682,8 @@ class Source_Local extends Source_Base {
 	}
 
 	/**
+	 * @since 1.0.6
+	 * @access public
 	 * @param $query \WP_Query
 	 */
 	public function admin_query_filter_types( $query ) {
@@ -483,12 +702,20 @@ class Source_Local extends Source_Base {
 		$query->query_vars['meta_value'] = self::$_template_types;
 	}
 
+	/**
+	 * @since 1.6.0
+	 * @access public
+	*/
 	public function admin_add_bulk_export_action( $actions ) {
 		$actions[ self::BULK_EXPORT_ACTION ] = __( 'Export', 'elementor' );
 
 		return $actions;
 	}
 
+	/**
+	 * @since 1.6.0
+	 * @access public
+	*/
 	public function admin_export_multiple_templates( $redirect_to, $action, $post_ids ) {
 		if ( self::BULK_EXPORT_ACTION === $action ) {
 			$this->export_multiple_templates( $post_ids );
@@ -497,6 +724,10 @@ class Source_Local extends Source_Base {
 		return $redirect_to;
 	}
 
+	/**
+	 * @since 1.6.0
+	 * @access private
+	*/
 	private function import_single_template( $file_name ) {
 		$data = json_decode( file_get_contents( $file_name ), true );
 
@@ -546,17 +777,20 @@ class Source_Local extends Source_Base {
 		return $this->get_item( $template_id );
 	}
 
+	/**
+	 * @since 1.6.0
+	 * @access private
+	*/
 	private function prepare_template_export( $template_id ) {
 		$template_data = $this->get_data( [
 			'template_id' => $template_id,
-		], 'raw' );
+		] );
 
 		if ( empty( $template_data['content'] ) ) {
 			return new \WP_Error( '404', 'The template does not exist' );
 		}
 
-		// TODO: since 1.5.0 to content container named `content` instead of `data`.
-		$template_data['data'] = $this->process_export_import_content( $template_data['content'], 'on_export' );
+		$template_data['content'] = $this->process_export_import_content( $template_data['content'], 'on_export' );
 
 		$template_type = self::get_template_type( $template_id );
 
@@ -584,6 +818,10 @@ class Source_Local extends Source_Base {
 		];
 	}
 
+	/**
+	 * @since 1.6.0
+	 * @access private
+	*/
 	private function send_file_headers( $file_name, $file_size ) {
 		header( 'Content-Type: application/octet-stream' );
 		header( 'Content-Disposition: attachment; filename=' . $file_name );
@@ -593,6 +831,10 @@ class Source_Local extends Source_Base {
 		header( 'Content-Length: ' . $file_size );
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access private
+	*/
 	private function _add_actions() {
 		if ( is_admin() ) {
 			add_action( 'admin_menu', [ $this, 'register_admin_menu' ], 50 );
@@ -600,6 +842,7 @@ class Source_Local extends Source_Base {
 			add_action( 'admin_footer', [ $this, 'admin_import_template_form' ] );
 			add_action( 'save_post', [ $this, 'on_save_post' ], 10, 2 );
 			add_action( 'parse_query', [ $this, 'admin_query_filter_types' ] );
+			add_filter( 'display_post_states', [ $this, 'remove_elementor_post_state_from_library' ], 11, 2 );
 
 			// template library bulk actions.
 			add_filter( 'bulk_actions-edit-elementor_library', [ $this, 'admin_add_bulk_export_action' ] );
@@ -610,6 +853,10 @@ class Source_Local extends Source_Base {
 		add_action( 'template_redirect', [ $this, 'block_template_frontend' ] );
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function __construct() {
 		parent::__construct();
 

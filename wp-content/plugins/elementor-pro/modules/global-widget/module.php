@@ -2,15 +2,14 @@
 namespace ElementorPro\Modules\GlobalWidget;
 
 use Elementor\Element_Base;
-use Elementor\Post_CSS_File;
 use Elementor\TemplateLibrary\Source_Local;
 use Elementor\Widget_Base;
-use Elementor\Plugin as ElementorPlugin;
 use ElementorPro\Base\Module_Base;
-use ElementorPro\Modules\GlobalWidget\Widgets\Global_Widget;
 use ElementorPro\Plugin;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 class Module extends Module_Base {
 
@@ -27,7 +26,7 @@ class Module extends Module_Base {
 
 		Widget_Base::add_edit_tool( 'save', [
 			'title' => sprintf( __( 'Save %s', 'elementor-pro' ), __( 'Widget', 'elementor-pro' ) ),
-			'icon' => 'floppy-o',
+			'icon' => 'save',
 		], 'duplicate' );
 
 		Plugin::elementor()->editor->add_editor_template( __DIR__ . '/views/panel-template.php' );
@@ -63,7 +62,6 @@ class Module extends Module_Base {
 				'elType' => 'widget',
 				'title' => $widget_template['title'],
 				'widgetType' => $widget_template['widgetType'],
-				'keywords' => $widget_template['keywords'],
 			];
 		}
 
@@ -86,9 +84,7 @@ class Module extends Module_Base {
 
 	public function set_template_widget_type_meta( $post_id, $template_data ) {
 		if ( self::TEMPLATE_TYPE === $template_data['type'] ) {
-			$template_content = isset( $template_data['content'] ) ? $template_data['content'] : $template_data['data'];
-
-			update_post_meta( $post_id, self::WIDGET_TYPE_META_KEY, $template_content[0]['widgetType'] );
+			update_post_meta( $post_id, self::WIDGET_TYPE_META_KEY, $template_data['content'][0]['widgetType'] );
 		}
 	}
 
@@ -132,32 +128,49 @@ class Module extends Module_Base {
 		return $default_value && ! $this->is_widget_template( $template_id );
 	}
 
-	public function remove_user_edit_cap( $all_caps, $caps, $args ) {
+	/**
+	 * Remove user edit capabilities.
+	 *
+	 * Filters the user capabilities to disable editing in admin.
+	 *
+	 * @param array $allcaps An array of all the user's capabilities.
+	 * @param array $caps    Actual capabilities for meta capability.
+	 * @param array $args    Optional parameters passed to has_cap(), typically object ID.
+	 *
+	 * @return array
+	 */
+	public function remove_user_edit_cap( $allcaps, $caps, $args ) {
 		$capability = $args[0];
 
 		if ( empty( $args[2] ) ) {
-			return $all_caps;
+			return $allcaps;
+		}
+
+		global $pagenow;
+
+		if ( ! in_array( $pagenow, [ 'post.php', 'edit.php' ] ) ) {
+			return $allcaps;
 		}
 
 		$post_id = $args[2];
 
 		if ( 'edit_post' !== $capability ) {
-			return $all_caps;
+			return $allcaps;
 		}
 
 		$post = get_post( $post_id );
 
 		if ( Source_Local::CPT !== $post->post_type ) {
-			return $all_caps;
+			return $allcaps;
 		}
 
 		if ( ! $this->is_widget_template( $post_id ) ) {
-			return $all_caps;
+			return $allcaps;
 		}
 
-		$all_caps[ $caps[0] ] = false;
+		$allcaps[ $caps[0] ] = false;
 
-		return $all_caps;
+		return $allcaps;
 	}
 
 	public function is_widget_template( $template_id ) {
@@ -169,7 +182,7 @@ class Module extends Module_Base {
 	public function set_global_widget_included_posts_list( $post_id, $editor_data ) {
 		$global_widget_ids = [];
 
-		Plugin::elementor()->db->iterate_data( $editor_data, function ( $element_data ) use ( & $global_widget_ids ) {
+		Plugin::elementor()->db->iterate_data( $editor_data, function( $element_data ) use ( & $global_widget_ids ) {
 			if ( isset( $element_data['templateID'] ) ) {
 				$global_widget_ids[] = $element_data['templateID'];
 			}
@@ -195,8 +208,7 @@ class Module extends Module_Base {
 
 		$wpdb->query(
 			$wpdb->prepare(
-				"DELETE FROM {$wpdb->postmeta} WHERE `meta_key` = '%s' AND `post_id` IN (%s);",
-				'_elementor_css',
+				"DELETE FROM {$wpdb->postmeta} WHERE `meta_key` = '_elementor_css' AND `post_id` IN (%s);",
 				implode( ',', array_keys( $including_post_ids ) )
 			)
 		);

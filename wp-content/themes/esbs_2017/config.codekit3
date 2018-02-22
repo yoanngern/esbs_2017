@@ -727,27 +727,6 @@
 		"oAP": "\/images\/favicon.ico",
 		"oF": 0
 		},
-	"\/images\/header_red.jpg": {
-		"ft": 16384,
-		"iS": 130004,
-		"oA": 0,
-		"oAP": "\/images\/header_red.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"\/images\/header_title_aimg.png": {
-		"ft": 32768,
-		"iS": 69439,
-		"oA": 0,
-		"oAP": "\/images\/header_title_aimg.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
 	"\/images\/icon_1_4.png": {
 		"ft": 32768,
 		"iS": 7009,
@@ -1067,28 +1046,6 @@
 		"oT": 1,
 		"q": 100
 		},
-	"\/images\/live_aimg_logo.png": {
-		"ft": 32768,
-		"iS": 33451,
-		"oA": 0,
-		"oAP": "\/images\/live_aimg_logo.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/logo_aimg.png": {
-		"ft": 32768,
-		"iS": 33451,
-		"oA": 0,
-		"oAP": "\/images\/logo_aimg.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
 	"\/images\/logo_esbs_white.png": {
 		"ft": 32768,
 		"iS": 7395,
@@ -1097,61 +1054,6 @@
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/logo_gw.png": {
-		"ft": 32768,
-		"iS": 9258,
-		"oA": 0,
-		"oAP": "\/images\/logo_gw.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/logo_gw_gray.png": {
-		"ft": 32768,
-		"iS": 17438,
-		"oA": 0,
-		"oAP": "\/images\/logo_gw_gray.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/logo_gw_white.png": {
-		"ft": 32768,
-		"iS": 11418,
-		"oA": 0,
-		"oAP": "\/images\/logo_gw_white.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/logo_iahm.png": {
-		"ft": 32768,
-		"iS": 29889,
-		"oA": 0,
-		"oAP": "\/images\/logo_iahm.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/logo_simple.png": {
-		"ft": 32768,
-		"iS": 3621,
-		"oA": 0,
-		"oAP": "\/images\/logo_simple.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
 		"oT": 1,
 		"q": 100
 		},
@@ -1272,6 +1174,34 @@
 		"opt": 0,
 		"q": 100
 		},
+	"\/includes\/acf\/adverts.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/adverts.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/blog.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/blog.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/blog_categories.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/blog_categories.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/blog_home.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/blog_home.php",
+		"oF": 0
+		},
 	"\/includes\/acf\/custom_page.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -1279,11 +1209,46 @@
 		"oAP": "\/includes\/acf\/custom_page.php",
 		"oF": 0
 		},
+	"\/includes\/acf\/default_page.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/default_page.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/harvest_cycle.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/harvest_cycle.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/meta_facebook.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/meta_facebook.php",
+		"oF": 0
+		},
 	"\/includes\/acf_fields.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/includes\/acf_fields.php",
+		"oF": 0
+		},
+	"\/includes\/blog.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/blog.php",
+		"oF": 0
+		},
+	"\/includes\/esbs_harvest-cycle.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/esbs_harvest-cycle.php",
 		"oF": 0
 		},
 	"\/index.php": {
@@ -1359,6 +1324,16 @@
 		"mi": 1,
 		"oA": 0,
 		"oAP": "\/js\/min\/main_v4.min-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/min\/main_v4.min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/min\/min\/main_v4.min-min.js",
 		"oF": 0,
 		"sC": 1,
 		"tS": 0
@@ -3811,6 +3786,13 @@
 		"sC": 1,
 		"tS": 0
 		},
+	"\/options.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/options.php",
+		"oF": 0
+		},
 	"\/page-custom.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -3823,6 +3805,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/page-elementor.php",
+		"oF": 0
+		},
+	"\/page-hc.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/page-hc.php",
 		"oF": 0
 		},
 	"\/page.php": {
@@ -4264,6 +4253,19 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/advanced\/blog_wall.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/css\/blog_wall.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/scss\/advanced\/content.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -4312,6 +4314,19 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/scss\/css\/footer.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/advanced\/harvest-cycle.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/css\/harvest-cycle.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
@@ -4472,6 +4487,16 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/css\/blog_wall.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/scss\/css\/blog_wall-min.css",
+		"oF": 0,
+		"oS": 3
+		},
 	"\/scss\/elementor\/slider.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -4530,6 +4555,20 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/blog\/index.php",
+		"oF": 0
+		},
+	"\/template-parts\/blog\/item.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/blog\/item.php",
+		"oF": 0
+		},
+	"\/template-parts\/blog\/item_wall.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/blog\/item_wall.php",
 		"oF": 0
 		},
 	"\/template-parts\/blog\/list.php": {
@@ -4630,11 +4669,39 @@
 		"oAP": "\/template-parts\/divers\/header_nav.php",
 		"oF": 0
 		},
+	"\/template-parts\/divers\/social_networks.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/divers\/social_networks.php",
+		"oF": 0
+		},
 	"\/template-parts\/form\/simple.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/form\/simple.php",
+		"oF": 0
+		},
+	"\/template-parts\/harvest-cycle\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/harvest-cycle\/index.php",
+		"oF": 0
+		},
+	"\/template-parts\/harvest-cycle\/none.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/harvest-cycle\/none.php",
+		"oF": 0
+		},
+	"\/template-parts\/harvest-cycle\/single.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/harvest-cycle\/single.php",
 		"oF": 0
 		},
 	"\/widgets\/complex-carousel.php": {

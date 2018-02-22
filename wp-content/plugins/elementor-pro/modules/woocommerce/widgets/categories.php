@@ -1,12 +1,12 @@
 <?php
 namespace ElementorPro\Modules\Woocommerce\Widgets;
 
-use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use ElementorPro\Base\Base_Widget;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class Categories extends Widget_Base {
+class Categories extends Base_Widget {
 
 	protected $_has_template_content = false;
 
@@ -20,10 +20,6 @@ class Categories extends Widget_Base {
 
 	public function get_icon() {
 		return 'eicon-woocommerce';
-	}
-
-	public function get_categories() {
-		return [ 'pro-elements' ];
 	}
 
 	protected function _register_controls() {

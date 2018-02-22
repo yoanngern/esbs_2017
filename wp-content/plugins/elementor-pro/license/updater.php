@@ -22,7 +22,7 @@ class Updater {
 	}
 
 	private function setup_hooks() {
-		add_filter( 'pre_set_site_transient_update_plugins', [ $this, 'check_update' ] );
+		add_filter( 'pre_set_site_transient_update_plugins', [ $this, 'check_update' ], 50 );
 		add_action( 'delete_site_transient_update_plugins', [ $this, 'delete_transients' ] );
 		add_filter( 'plugins_api', [ $this, 'plugins_api_filter' ], 10, 3 );
 
@@ -44,7 +44,7 @@ class Updater {
 
 	private function check_transient_data( $_transient_data ) {
 		if ( ! is_object( $_transient_data ) ) {
-			$_transient_data = new \stdClass;
+			$_transient_data = new \stdClass();
 		}
 
 		if ( empty( $_transient_data->checked ) ) {
@@ -106,7 +106,7 @@ class Updater {
 		global $pagenow;
 
 		if ( ! is_object( $_transient_data ) ) {
-			$_transient_data = new \stdClass;
+			$_transient_data = new \stdClass();
 		}
 
 		if ( 'plugins.php' === $pagenow && is_multisite() ) {

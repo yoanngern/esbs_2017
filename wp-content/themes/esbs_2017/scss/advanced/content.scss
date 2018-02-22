@@ -79,10 +79,31 @@
     }
 }
 
+div.video {
+    width: 100%;
+    overflow: auto;
+    display: block;
+
+    section.player {
+        max-width: 100% !important;
+
+        div {
+            width: 100% !important;
+
+            span {
+                width: 100% !important;
+
+                iframe {
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+}
+
 section.player {
     width: 100%;
     background-color: #000;
-    margin: 0 auto;
 
     div.container {
         height: 0;
@@ -124,6 +145,11 @@ a.button {
     text-transform: uppercase;
     display: inline-block;
     margin: 5px 0 5px 20px;
+
+    &:hover {
+        background-color: darken($gold, 5);
+
+    }
 
 }
 

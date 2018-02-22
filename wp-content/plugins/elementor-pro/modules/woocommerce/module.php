@@ -7,6 +7,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Module extends Module_Base {
 
+	public static function is_active() {
+		return function_exists( 'WC' );
+	}
+
 	public function get_name() {
 		return 'woocommerce';
 	}
@@ -32,5 +36,16 @@ class Module extends Module_Base {
 
 	public function remove_products_post_class_filter() {
 		remove_filter( 'post_class', [ $this, 'add_product_post_class' ] );
+	}
+
+	public function register_wc_hooks() {
+		wc()->frontend_includes();
+	}
+
+	public function __construct() {
+		parent::__construct();
+
+		// On Editor - register Woocommerce frontend hooks - before the Editor init
+		add_action( 'admin_action_elementor', [ $this, 'register_wc_hooks' ], 9 );
 	}
 }

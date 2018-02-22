@@ -5,16 +5,52 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Elementor common widget.
+ *
+ * Elementor base widget that givs you all the advanced options of the basic
+ * widget.
+ *
+ * @since 1.0.0
+ */
 class Widget_Common extends Widget_Base {
 
+	/**
+	 * Get widget name.
+	 *
+	 * Retrieve common widget name.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget name.
+	 */
 	public function get_name() {
 		return 'common';
 	}
 
+	/**
+	 * Show in panel.
+	 *
+	 * Whether to show the common widget in the panel or not.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return bool Whether to show the widget in the panel.
+	 */
 	public function show_in_panel() {
 		return false;
 	}
 
+	/**
+	 * Register common widget controls.
+	 *
+	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function _register_controls() {
 		$this->start_controls_section(
 			'_section_style',

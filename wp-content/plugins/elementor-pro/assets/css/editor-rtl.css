@@ -1,4 +1,4 @@
-/*! elementor-pro - v1.5.8 - 25-07-2017 */
+/*! elementor-pro - v1.15.0 - 19-02-2018 */
 #elementor-panel-get-pro-elements {
   display: none; }
 
@@ -115,4 +115,14 @@
     padding: 0; }
   .elementor-panel .elementor-control-type-fields_map .repeater-fields:last-child {
     margin-bottom: 0; }
+
+.elementor-facebook-widget.fb_iframe_widget {
+  width: 100% !important; }
+  .elementor-facebook-widget.fb_iframe_widget span {
+    width: 100% !important; }
+  .elementor-facebook-widget.fb_iframe_widget iframe {
+    position: relative; }
+
+.elementor-widget-facebook-comments iframe {
+  width: 100% !important; }
 /*# sourceMappingURL=editor-rtl.css.map */

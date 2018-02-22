@@ -5,20 +5,65 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Elementor image widget.
+ *
+ * Elementor widget that displays an image into the page.
+ *
+ * @since 1.0.0
+ */
 class Widget_Image extends Widget_Base {
 
+	/**
+	 * Get widget name.
+	 *
+	 * Retrieve image widget name.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget name.
+	 */
 	public function get_name() {
 		return 'image';
 	}
 
+	/**
+	 * Get widget title.
+	 *
+	 * Retrieve image widget title.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget title.
+	 */
 	public function get_title() {
 		return __( 'Image', 'elementor' );
 	}
 
+	/**
+	 * Get widget icon.
+	 *
+	 * Retrieve image widget icon.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget icon.
+	 */
 	public function get_icon() {
 		return 'eicon-insert-image';
 	}
 
+	/**
+	 * Register image widget controls.
+	 *
+	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_image',
@@ -42,7 +87,6 @@ class Widget_Image extends Widget_Base {
 			Group_Control_Image_Size::get_type(),
 			[
 				'name' => 'image', // Actually its `image_size`.
-				'label' => __( 'Image Size', 'elementor' ),
 				'default' => 'large',
 			]
 		);
@@ -79,8 +123,7 @@ class Widget_Image extends Widget_Base {
 				'label' => __( 'Caption', 'elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => '',
-				'placeholder' => __( 'Enter your caption about the image', 'elementor' ),
-				'title' => __( 'Input image caption here', 'elementor' ),
+				'placeholder' => __( 'Enter your image caption', 'elementor' ),
 			]
 		);
 
@@ -103,7 +146,7 @@ class Widget_Image extends Widget_Base {
 			[
 				'label' => __( 'Link to', 'elementor' ),
 				'type' => Controls_Manager::URL,
-				'placeholder' => __( 'http://your-link.com', 'elementor' ),
+				'placeholder' => __( 'https://your-link.com', 'elementor' ),
 				'condition' => [
 					'link_to' => 'custom',
 				],
@@ -208,7 +251,6 @@ class Widget_Image extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'image_border',
-				'label' => __( 'Image Border', 'elementor' ),
 				'selector' => '{{WRAPPER}} .elementor-image img',
 				'separator' => 'before',
 			]
@@ -305,6 +347,14 @@ class Widget_Image extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Render image widget output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function render() {
 		$settings = $this->get_settings();
 
@@ -371,6 +421,14 @@ class Widget_Image extends Widget_Base {
 		<?php
 	}
 
+	/**
+	 * Render image widget output in the editor.
+	 *
+	 * Written as a Backbone JavaScript template and used to generate the live preview.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function _content_template() {
 		?>
 		<# if ( '' !== settings.image.url ) {
@@ -379,7 +437,7 @@ class Widget_Image extends Widget_Base {
 				url: settings.image.url,
 				size: settings.image_size,
 				dimension: settings.image_custom_dimension,
-				model: editModel
+				model: view.getEditModel()
 			};
 
 			var image_url = elementor.imagesManager.getImageUrl( image );
@@ -432,20 +490,30 @@ class Widget_Image extends Widget_Base {
 		<?php
 	}
 
-	private function get_link_url( $instance ) {
-		if ( 'none' === $instance['link_to'] ) {
+	/**
+	 * Retrieve image widget link URL.
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 *
+	 * @param array $settings
+	 *
+	 * @return array|string|false An array/string containing the link URL, or false if no link.
+	 */
+	private function get_link_url( $settings ) {
+		if ( 'none' === $settings['link_to'] ) {
 			return false;
 		}
 
-		if ( 'custom' === $instance['link_to'] ) {
-			if ( empty( $instance['link']['url'] ) ) {
+		if ( 'custom' === $settings['link_to'] ) {
+			if ( empty( $settings['link']['url'] ) ) {
 				return false;
 			}
-			return $instance['link'];
+			return $settings['link'];
 		}
 
 		return [
-			'url' => $instance['image']['url'],
+			'url' => $settings['image']['url'],
 		];
 	}
 }

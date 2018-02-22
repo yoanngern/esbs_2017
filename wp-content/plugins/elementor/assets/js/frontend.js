@@ -1,4 +1,4 @@
-/*! elementor - v1.6.3 - 06-08-2017 */
+/*! elementor - v1.9.5 - 14-02-2018 */
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var ElementsHandler;
 
@@ -96,7 +96,7 @@ ElementsHandler = function( $ ) {
 
 module.exports = ElementsHandler;
 
-},{"elementor-frontend/handlers/accordion":4,"elementor-frontend/handlers/alert":5,"elementor-frontend/handlers/counter":6,"elementor-frontend/handlers/global":7,"elementor-frontend/handlers/image-carousel":8,"elementor-frontend/handlers/progress":9,"elementor-frontend/handlers/section":10,"elementor-frontend/handlers/tabs":11,"elementor-frontend/handlers/text-editor":12,"elementor-frontend/handlers/toggle":13,"elementor-frontend/handlers/video":14,"elementor-frontend/handlers/widget":15}],2:[function(require,module,exports){
+},{"elementor-frontend/handlers/accordion":4,"elementor-frontend/handlers/alert":5,"elementor-frontend/handlers/counter":7,"elementor-frontend/handlers/global":8,"elementor-frontend/handlers/image-carousel":9,"elementor-frontend/handlers/progress":10,"elementor-frontend/handlers/section":11,"elementor-frontend/handlers/tabs":12,"elementor-frontend/handlers/text-editor":13,"elementor-frontend/handlers/toggle":14,"elementor-frontend/handlers/video":15,"elementor-frontend/handlers/widget":16}],2:[function(require,module,exports){
 /* global elementorFrontendConfig */
 ( function( $ ) {
 	var elements = {},
@@ -142,7 +142,17 @@ module.exports = ElementsHandler;
 				lightbox: new LightboxModule()
 			};
 
+			self.modules = {
+				StretchElement: require( 'elementor-frontend/modules/stretch-element' )
+			};
+
 			self.elementsHandler = new ElementsHandler( $ );
+		};
+
+		var initHotKeys = function() {
+			self.hotKeys = require( 'elementor-utils/hot-keys' );
+
+			self.hotKeys.bindListener( elements.$window );
 		};
 
 		var getSiteSettings = function( settingType, settingName ) {
@@ -165,6 +175,10 @@ module.exports = ElementsHandler;
 			setDeviceModeData();
 
 			elements.$window.trigger( 'elementor/frontend/init' );
+
+			if ( ! self.isEditMode() ) {
+				initHotKeys();
+			}
 
 			initOnReadyComponents();
 		};
@@ -267,10 +281,23 @@ module.exports = ElementsHandler;
 		};
 
 		this.waypoint = function( $element, callback, options ) {
-			var correctCallback = function() {
-				var element = this.element || this;
+			var defaultOptions = {
+				offset: '100%',
+				triggerOnce: true
+			};
 
-				return callback.apply( element, arguments );
+			options = $.extend( defaultOptions, options );
+
+			var correctCallback = function() {
+				var element = this.element || this,
+					result = callback.apply( element, arguments );
+
+				// If is Waypoint new API and is frontend
+				if ( options.triggerOnce && this.destroy ) {
+					this.destroy();
+				}
+
+				return result;
 			};
 
 			return $element.elementorWaypoint( correctCallback, options );
@@ -284,7 +311,7 @@ if ( ! elementorFrontend.isEditMode() ) {
 	jQuery( elementorFrontend.init );
 }
 
-},{"../utils/hooks":19,"./handler-module":3,"elementor-frontend/elements-handler":1,"elementor-frontend/utils/anchors":16,"elementor-frontend/utils/lightbox":17,"elementor-frontend/utils/youtube":18}],3:[function(require,module,exports){
+},{"../utils/hooks":21,"./handler-module":3,"elementor-frontend/elements-handler":1,"elementor-frontend/modules/stretch-element":17,"elementor-frontend/utils/anchors":18,"elementor-frontend/utils/lightbox":19,"elementor-frontend/utils/youtube":20,"elementor-utils/hot-keys":22}],3:[function(require,module,exports){
 var ViewModule = require( '../utils/view-module' ),
 	HandlerModule;
 
@@ -293,16 +320,30 @@ HandlerModule = ViewModule.extend( {
 
 	onElementChange: null,
 
+	onEditSettingsChange: null,
+
 	onGeneralSettingsChange: null,
 
 	onPageSettingsChange: null,
 
+	isEdit: null,
+
 	__construct: function( settings ) {
 		this.$element  = settings.$element;
 
-		if ( elementorFrontend.isEditMode() ) {
+		this.isEdit = this.$element.hasClass( 'elementor-element-edit-mode' );
+
+		if ( this.isEdit ) {
 			this.addEditorListener();
 		}
+	},
+
+	findElement: function( selector ) {
+		var $mainElement = this.$element;
+
+		return $mainElement.find( selector ).filter( function() {
+			return jQuery( this ).closest( '.elementor-element' ).is( $mainElement );
+		} );
 	},
 
 	getUniqueHandlerID: function( cid, $element ) {
@@ -340,6 +381,16 @@ HandlerModule = ViewModule.extend( {
 			}, elementor.channels.editor );
 		}
 
+		if ( self.onEditSettingsChange ) {
+			elementorFrontend.addListenerOnce( uniqueHandlerID, 'change:editSettings', function( changedModel, view ) {
+				if ( view.model.cid !== self.getModelCID() ) {
+					return;
+				}
+
+				self.onEditSettingsChange( Object.keys( changedModel.changed )[0] );
+			}, elementor.channels.editor );
+		}
+
 		[ 'page', 'general' ].forEach( function( settingsType ) {
 			var listenerMethodName = 'on' + settingsType.charAt( 0 ).toUpperCase() + settingsType.slice( 1 ) + 'SettingsChange';
 
@@ -367,7 +418,7 @@ HandlerModule = ViewModule.extend( {
 		var elementSettings = {},
 			modelCID = this.getModelCID();
 
-		if ( elementorFrontend.isEditMode() && modelCID ) {
+		if ( this.isEdit && modelCID ) {
 			var settings = elementorFrontend.config.elements.data[ modelCID ],
 				settingsKeys = elementorFrontend.config.elements.keys[ settings.attributes.widgetType || settings.attributes.elType ];
 
@@ -384,53 +435,30 @@ HandlerModule = ViewModule.extend( {
 	},
 
 	getEditSettings: function( setting ) {
-		if ( ! elementorFrontend.isEditMode() ) {
-			return {};
+		var attributes = {};
+
+		if ( this.isEdit ) {
+			attributes = elementorFrontend.config.elements.editSettings[ this.getModelCID() ].attributes;
 		}
 
-		var editSettings = elementorFrontend.config.elements.editSettings[ this.getModelCID() ];
-
-		return this.getItems( editSettings.attributes, setting );
+		return this.getItems( attributes, setting );
 	}
 } );
 
 module.exports = HandlerModule;
 
-},{"../utils/view-module":21}],4:[function(require,module,exports){
-var activateSection = function( sectionIndex, $accordionTitles ) {
-	var $activeTitle = $accordionTitles.filter( '.active' ),
-		$requestedTitle = $accordionTitles.filter( '[data-section="' + sectionIndex + '"]' ),
-		isRequestedActive = $requestedTitle.hasClass( 'active' );
+},{"../utils/view-module":24}],4:[function(require,module,exports){
+var TabsModule = require( 'elementor-frontend/handlers/base-tabs' );
 
-	$activeTitle
-		.removeClass( 'active' )
-		.next()
-		.slideUp();
-
-	if ( ! isRequestedActive ) {
-		$requestedTitle
-			.addClass( 'active' )
-			.next()
-			.slideDown();
-	}
-};
-
-module.exports = function( $scope, $ ) {
-	var defaultActiveSection = $scope.find( '.elementor-accordion' ).data( 'active-section' ),
-		$accordionTitles = $scope.find( '.elementor-accordion-title' );
-
-	if ( ! defaultActiveSection ) {
-		defaultActiveSection = 1;
-	}
-
-	activateSection( defaultActiveSection, $accordionTitles );
-
-	$accordionTitles.on( 'click', function() {
-		activateSection( this.dataset.section, $accordionTitles );
+module.exports = function( $scope ) {
+	new TabsModule( {
+		$element: $scope,
+		showTabFn: 'slideDown',
+		hideTabFn: 'slideUp'
 	} );
 };
 
-},{}],5:[function(require,module,exports){
+},{"elementor-frontend/handlers/base-tabs":6}],5:[function(require,module,exports){
 module.exports = function( $scope, $ ) {
 	$scope.find( '.elementor-alert-dismiss' ).on( 'click', function() {
 		$( this ).parent().fadeOut();
@@ -438,6 +466,136 @@ module.exports = function( $scope, $ ) {
 };
 
 },{}],6:[function(require,module,exports){
+var HandlerModule = require( 'elementor-frontend/handler-module' );
+
+module.exports = HandlerModule.extend( {
+	$activeContent: null,
+
+	getDefaultSettings: function() {
+		return {
+			selectors: {
+				tabTitle: '.elementor-tab-title',
+				tabContent: '.elementor-tab-content'
+			},
+			classes: {
+				active: 'elementor-active'
+			},
+			showTabFn: 'show',
+			hideTabFn: 'hide',
+			toggleSelf: true,
+			hidePrevious: true,
+			autoExpand: true
+		};
+	},
+
+	getDefaultElements: function() {
+		var selectors = this.getSettings( 'selectors' );
+
+		return {
+			$tabTitles: this.findElement( selectors.tabTitle ),
+			$tabContents: this.findElement( selectors.tabContent )
+		};
+	},
+
+	activateDefaultTab: function() {
+		var settings = this.getSettings();
+
+		if ( ! settings.autoExpand || 'editor' === settings.autoExpand && ! this.isEdit ) {
+			return;
+		}
+
+		var defaultActiveTab = this.getEditSettings( 'activeItemIndex' ) || 1,
+			originalToggleMethods = {
+				showTabFn: settings.showTabFn,
+				hideTabFn: settings.hideTabFn
+			};
+
+		// Toggle tabs without animation to avoid jumping
+		this.setSettings( {
+			showTabFn: 'show',
+			hideTabFn: 'hide'
+		} );
+
+		this.changeActiveTab( defaultActiveTab );
+
+		// Return back original toggle effects
+		this.setSettings( originalToggleMethods );
+	},
+
+	deactivateActiveTab: function( tabIndex ) {
+		var settings = this.getSettings(),
+			activeClass = settings.classes.active,
+			activeFilter = tabIndex ? '[data-tab="' + tabIndex + '"]' : '.' + activeClass,
+			$activeTitle = this.elements.$tabTitles.filter( activeFilter ),
+			$activeContent = this.elements.$tabContents.filter( activeFilter );
+
+		$activeTitle.add( $activeContent ).removeClass( activeClass );
+
+		$activeContent[ settings.hideTabFn ]();
+	},
+
+	activateTab: function( tabIndex ) {
+		var settings = this.getSettings(),
+			activeClass = settings.classes.active,
+			$requestedTitle = this.elements.$tabTitles.filter( '[data-tab="' + tabIndex + '"]' ),
+			$requestedContent = this.elements.$tabContents.filter( '[data-tab="' + tabIndex + '"]' );
+
+		$requestedTitle.add( $requestedContent ).addClass( activeClass );
+
+		$requestedContent[ settings.showTabFn ]();
+	},
+
+	isActiveTab: function( tabIndex ) {
+		return this.elements.$tabTitles.filter( '[data-tab="' + tabIndex + '"]' ).hasClass( this.getSettings( 'classes.active' ) );
+	},
+
+	bindEvents: function() {
+		var self = this;
+
+		self.elements.$tabTitles.on( 'focus', function( event ) {
+			self.changeActiveTab( event.currentTarget.dataset.tab );
+		} );
+
+		if ( self.getSettings( 'toggleSelf' ) ) {
+			self.elements.$tabTitles.on( 'mousedown', function( event ) {
+				if ( jQuery( event.currentTarget ).is( ':focus' ) ) {
+					self.changeActiveTab( event.currentTarget.dataset.tab );
+				}
+			} );
+		}
+	},
+
+	onInit: function() {
+		HandlerModule.prototype.onInit.apply( this, arguments );
+
+		this.activateDefaultTab();
+	},
+
+	onEditSettingsChange: function( propertyName ) {
+		if ( 'activeItemIndex' === propertyName ) {
+			this.activateDefaultTab();
+		}
+	},
+
+	changeActiveTab: function( tabIndex ) {
+		var isActiveTab = this.isActiveTab( tabIndex ),
+			settings = this.getSettings();
+
+		if ( ( settings.toggleSelf || ! isActiveTab ) && settings.hidePrevious ) {
+			this.deactivateActiveTab();
+		}
+
+		if ( ! settings.hidePrevious && isActiveTab ) {
+			this.deactivateActiveTab( tabIndex );
+		}
+
+		if ( ! isActiveTab ) {
+			this.activateTab( tabIndex );
+		}
+	}
+} );
+
+},{"elementor-frontend/handler-module":3}],7:[function(require,module,exports){
 module.exports = function( $scope, $ ) {
 	elementorFrontend.waypoint( $scope.find( '.elementor-counter-number' ), function() {
 		var $number = $( this ),
@@ -450,10 +608,10 @@ module.exports = function( $scope, $ ) {
 		}
 
 		$number.numerator( data );
-	}, { offset: '90%' } );
+	} );
 };
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var HandlerModule = require( 'elementor-frontend/handler-module' ),
 	GlobalHandler;
 
@@ -479,21 +637,17 @@ GlobalHandler = HandlerModule.extend( {
 		return elementSettings.animation || elementSettings._animation;
 	},
 	onInit: function() {
-		var self = this;
+		HandlerModule.prototype.onInit.apply( this, arguments );
 
-		HandlerModule.prototype.onInit.apply( self, arguments );
+		var animation = this.getAnimation();
 
-		if ( ! self.getAnimation() ) {
+		if ( ! animation ) {
 			return;
 		}
 
-		var waypoint = elementorFrontend.waypoint( self.$element, function() {
-			self.animate();
+		this.$element.removeClass( animation );
 
-			if ( waypoint && waypoint[0] && waypoint[0].destroy ) { // If it's Waypoint new API and is frontend
-				waypoint[0].destroy();
-			}
-		}, { offset: '90%' } );
+		elementorFrontend.waypoint( this.$element, this.animate.bind( this ) );
 	},
 	onElementChange: function( propertyName ) {
 		if ( /^_?animation/.test( propertyName ) ) {
@@ -506,7 +660,7 @@ module.exports = function( $scope ) {
 	new GlobalHandler( { $element: $scope } );
 };
 
-},{"elementor-frontend/handler-module":3}],8:[function(require,module,exports){
+},{"elementor-frontend/handler-module":3}],9:[function(require,module,exports){
 var HandlerModule = require( 'elementor-frontend/handler-module' ),
 	ImageCarouselHandler;
 
@@ -546,14 +700,14 @@ ImageCarouselHandler = HandlerModule.extend( {
 			rtl: 'rtl' === elementSettings.direction,
 			responsive: [
 				{
-					breakpoint: 768,
+					breakpoint: 1025,
 					settings: {
 						slidesToShow: +elementSettings.slides_to_show_tablet || ( isSingleSlide ? 1 : 2 ),
 						slidesToScroll: 1
 					}
 				},
 				{
-					breakpoint: 481,
+					breakpoint: 768,
 					settings: {
 						slidesToShow: +elementSettings.slides_to_show_mobile || 1,
 						slidesToScroll: 1
@@ -576,16 +730,16 @@ module.exports = function( $scope ) {
 	new ImageCarouselHandler( { $element: $scope } );
 };
 
-},{"elementor-frontend/handler-module":3}],9:[function(require,module,exports){
+},{"elementor-frontend/handler-module":3}],10:[function(require,module,exports){
 module.exports = function( $scope, $ ) {
 	elementorFrontend.waypoint( $scope.find( '.elementor-progress-bar' ), function() {
 		var $progressbar = $( this );
 
 		$progressbar.css( 'width', $progressbar.data( 'max' ) + '%' );
-	}, { offset: '90%' } );
+	} );
 };
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var HandlerModule = require( 'elementor-frontend/handler-module' );
 
 var BackgroundVideo = HandlerModule.extend( {
@@ -668,7 +822,8 @@ var BackgroundVideo = HandlerModule.extend( {
 			},
 			playerVars: {
 				controls: 0,
-				showinfo: 0
+				showinfo: 0,
+				rel: 0
 			}
 		} );
 
@@ -726,71 +881,34 @@ var BackgroundVideo = HandlerModule.extend( {
 
 var StretchedSection = HandlerModule.extend( {
 
+	stretchElement: null,
+
 	bindEvents: function() {
 		elementorFrontend.addListenerOnce( this.$element.data( 'model-cid' ), 'resize', this.stretchSection );
 	},
 
+	initStretch: function() {
+		this.stretchElement = new elementorFrontend.modules.StretchElement( { element: this.$element } );
+	},
+
 	stretchSection: function() {
-		// Clear any previously existing css associated with this script
-		var direction = elementorFrontend.config.is_rtl ? 'right' : 'left',
-			resetCss = {},
-			isStretched = this.$element.hasClass( 'elementor-section-stretched' );
+		var isStretched = this.$element.hasClass( 'elementor-section-stretched' );
 
 		if ( elementorFrontend.isEditMode() || isStretched ) {
-			resetCss.width = 'auto';
-
-			resetCss[ direction ] = 0;
-
-			this.$element.css( resetCss );
+			this.stretchElement.reset();
 		}
 
-		if ( ! isStretched ) {
-			return;
+		if ( isStretched ) {
+			this.stretchElement.setSettings( 'selectors.container', elementorFrontend.getGeneralSettings( 'elementor_stretched_section_container' ) || window );
+
+			this.stretchElement.stretch();
 		}
-
-		var $sectionContainer,
-			hasSpecialContainer = false;
-
-		try {
-			$sectionContainer = jQuery( elementorFrontend.getGeneralSettings( 'elementor_stretched_section_container' ) );
-
-			if ( $sectionContainer.length ) {
-				hasSpecialContainer = true;
-			}
-		} catch ( e ) {}
-
-		if ( ! hasSpecialContainer ) {
-			$sectionContainer = elementorFrontend.getElements( '$window' );
-		}
-
-		var containerWidth = $sectionContainer.outerWidth(),
-			sectionWidth = this.$element.outerWidth(),
-			sectionOffset = this.$element.offset().left,
-			correctOffset = sectionOffset;
-
-		if ( hasSpecialContainer ) {
-			var containerOffset = $sectionContainer.offset().left;
-
-			if ( sectionOffset > containerOffset ) {
-				correctOffset = sectionOffset - containerOffset;
-			} else {
-				correctOffset = 0;
-			}
-		}
-
-		if ( elementorFrontend.config.is_rtl ) {
-			correctOffset = containerWidth - ( sectionWidth + correctOffset );
-		}
-
-		resetCss.width = containerWidth + 'px';
-
-		resetCss[ direction ] = -correctOffset + 'px';
-
-		this.$element.css( resetCss );
 	},
 
 	onInit: function() {
 		HandlerModule.prototype.onInit.apply( this, arguments );
+
+		this.initStretch();
 
 		this.stretchSection();
 	},
@@ -898,42 +1016,17 @@ module.exports = function( $scope ) {
 	new BackgroundVideo( { $element: $scope } );
 };
 
-},{"elementor-frontend/handler-module":3}],11:[function(require,module,exports){
-module.exports = function( $scope, $ ) {
-	var defaultActiveTab = $scope.find( '.elementor-tabs' ).data( 'active-tab' ),
-		$tabsTitles = $scope.find( '.elementor-tab-title' ),
-		$tabs = $scope.find( '.elementor-tab-content' ),
-		$active,
-		$content;
+},{"elementor-frontend/handler-module":3}],12:[function(require,module,exports){
+var TabsModule = require( 'elementor-frontend/handlers/base-tabs' );
 
-	if ( ! defaultActiveTab ) {
-		defaultActiveTab = 1;
-	}
-
-	var activateTab = function( tabIndex ) {
-		if ( $active ) {
-			$active.removeClass( 'active' );
-
-			$content.hide();
-		}
-
-		$active = $tabsTitles.filter( '[data-tab="' + tabIndex + '"]' );
-
-		$active.addClass( 'active' );
-
-		$content = $tabs.filter( '[data-tab="' + tabIndex + '"]' );
-
-		$content.show();
-	};
-
-	activateTab( defaultActiveTab );
-
-	$tabsTitles.on( 'click', function() {
-		activateTab( this.dataset.tab );
+module.exports = function( $scope ) {
+	new TabsModule( {
+		$element: $scope,
+		toggleSelf: false
 	} );
 };
 
-},{}],12:[function(require,module,exports){
+},{"elementor-frontend/handlers/base-tabs":6}],13:[function(require,module,exports){
 var HandlerModule = require( 'elementor-frontend/handler-module' ),
 	TextEditor;
 
@@ -1036,25 +1129,20 @@ module.exports = function( $scope ) {
 	new TextEditor( { $element: $scope } );
 };
 
-},{"elementor-frontend/handler-module":3}],13:[function(require,module,exports){
-module.exports = function( $scope, $ ) {
-	var $toggleTitles = $scope.find( '.elementor-toggle-title' );
+},{"elementor-frontend/handler-module":3}],14:[function(require,module,exports){
+var TabsModule = require( 'elementor-frontend/handlers/base-tabs' );
 
-	$toggleTitles.on( 'click', function() {
-		var $active = $( this ),
-			$content = $active.next();
-
-		if ( $active.hasClass( 'active' ) ) {
-			$active.removeClass( 'active' );
-			$content.slideUp();
-		} else {
-			$active.addClass( 'active' );
-			$content.slideDown();
-		}
+module.exports = function( $scope ) {
+	new TabsModule( {
+		$element: $scope,
+		showTabFn: 'slideDown',
+		hideTabFn: 'slideUp',
+		hidePrevious: false,
+		autoExpand: 'editor'
 	} );
 };
 
-},{}],14:[function(require,module,exports){
+},{"elementor-frontend/handlers/base-tabs":6}],15:[function(require,module,exports){
 var HandlerModule = require( 'elementor-frontend/handler-module' ),
 	VideoModule;
 
@@ -1138,7 +1226,7 @@ module.exports = function( $scope ) {
 	new VideoModule( { $element: $scope } );
 };
 
-},{"elementor-frontend/handler-module":3}],15:[function(require,module,exports){
+},{"elementor-frontend/handler-module":3}],16:[function(require,module,exports){
 module.exports = function( $scope, $ ) {
 	if ( ! elementorFrontend.isEditMode() ) {
 		return;
@@ -1153,7 +1241,83 @@ module.exports = function( $scope, $ ) {
 	} );
 };
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
+var ViewModule = require( '../../utils/view-module' );
+
+module.exports = ViewModule.extend( {
+	getDefaultSettings: function() {
+		return {
+			element: null,
+			direction: elementorFrontend.config.is_rtl ? 'right' : 'left',
+			selectors: {
+				container: window
+			}
+		};
+	},
+
+	getDefaultElements: function() {
+		return {
+			$element: jQuery( this.getSettings( 'element' ) )
+		};
+	},
+
+	stretch: function() {
+		var containerSelector = this.getSettings( 'selectors.container' ),
+			$container;
+
+		try {
+			$container = jQuery( containerSelector );
+		} catch ( e ) {}
+
+		if ( ! $container || ! $container.length ) {
+			$container = jQuery( this.getDefaultSettings().selectors.container );
+		}
+
+		var $element = this.elements.$element,
+			isSpecialContainer = window !== $container[0];
+
+		this.reset();
+
+		var containerWidth = $container.outerWidth(),
+			elementWidth = $element.outerWidth(),
+			elementOffset = $element.offset().left,
+			correctOffset = elementOffset;
+
+		if ( isSpecialContainer ) {
+			var containerOffset = $container.offset().left;
+
+			if ( elementOffset > containerOffset ) {
+				correctOffset = elementOffset - containerOffset;
+			} else {
+				correctOffset = 0;
+			}
+		}
+
+		if ( elementorFrontend.config.is_rtl ) {
+			correctOffset = containerWidth - ( elementWidth + correctOffset );
+		}
+
+		var css = {};
+
+		css.width = containerWidth + 'px';
+
+		css[ this.getSettings( 'direction' ) ] = -correctOffset + 'px';
+
+		$element.css( css );
+	},
+
+	reset: function() {
+		var css = {};
+
+		css.width = 'auto';
+
+		css[ this.getSettings( 'direction' ) ] = 0;
+
+		this.elements.$element.css( css );
+	}
+} );
+
+},{"../../utils/view-module":24}],18:[function(require,module,exports){
 var ViewModule = require( '../../utils/view-module' );
 
 module.exports = ViewModule.extend( {
@@ -1199,8 +1363,12 @@ module.exports = ViewModule.extend( {
 			return;
 		}
 
-		var adminBarHeight = this.elements.$wpAdminBar.height(),
-			scrollTop = $anchor.offset().top - adminBarHeight;
+		var hasAdminBar = ( 1 <= this.elements.$wpAdminBar.length ),
+			scrollTop = $anchor.offset().top;
+
+		if ( hasAdminBar ) {
+			scrollTop -= this.elements.$wpAdminBar.height();
+		}
 
 		event.preventDefault();
 
@@ -1218,7 +1386,7 @@ module.exports = ViewModule.extend( {
 	}
 } );
 
-},{"../../utils/view-module":21}],17:[function(require,module,exports){
+},{"../../utils/view-module":24}],19:[function(require,module,exports){
 var ViewModule = require( '../../utils/view-module' ),
 	LightboxModule;
 
@@ -1236,12 +1404,13 @@ LightboxModule = ViewModule.extend( {
 				item: 'elementor-lightbox-item',
 				image: 'elementor-lightbox-image',
 				videoContainer: 'elementor-video-container',
-				videoWrapper: 'elementor-video-wrapper',
+				videoWrapper: 'elementor-fit-aspect-ratio',
 				playButton: 'elementor-custom-embed-play',
 				playButtonIcon: 'fa',
 				playing: 'elementor-playing',
 				hidden: 'elementor-hidden',
 				invisible: 'elementor-invisible',
+				preventClose: 'elementor-lightbox-prevent-close',
 				slideshow: {
 					container: 'swiper-container',
 					slidesWrapper: 'swiper-wrapper',
@@ -1283,7 +1452,13 @@ LightboxModule = ViewModule.extend( {
 		var modal = LightboxModule.modal = elementorFrontend.getDialogsManager().createWidget( 'lightbox', {
 			className: 'elementor-lightbox',
 			closeButton: true,
-			closeButtonClass: 'eicon-close'
+			closeButtonClass: 'eicon-close',
+			selectors: {
+				preventClose: '.' + this.getSettings( 'classes.preventClose' )
+			},
+			hide: {
+				onClick: true
+			}
 		} );
 
 		modal.on( 'hide', function() {
@@ -1343,7 +1518,7 @@ LightboxModule = ViewModule.extend( {
 		var self = this,
 			classes = self.getSettings( 'classes' ),
 			$item = jQuery( '<div>', { 'class': classes.item } ),
-			$image = jQuery( '<img>', { src: imageURL, 'class': classes.image } );
+			$image = jQuery( '<img>', { src: imageURL, 'class': classes.image + ' ' + classes.preventClose } );
 
 		$item.append( $image );
 
@@ -1356,7 +1531,7 @@ LightboxModule = ViewModule.extend( {
 		var classes = this.getSettings( 'classes' ),
 			$videoContainer = jQuery( '<div>', { 'class': classes.videoContainer } ),
 			$videoWrapper = jQuery( '<div>', { 'class': classes.videoWrapper } ),
-			$videoFrame = jQuery( '<iframe>', { src: videoEmbedURL } ),
+			$videoFrame = jQuery( '<iframe>', { src: videoEmbedURL, allowfullscreen: 1 } ),
 			modal = this.getModal();
 
 		$videoContainer.append( $videoWrapper );
@@ -1372,7 +1547,7 @@ LightboxModule = ViewModule.extend( {
 		modal.onHide = function() {
 			onHideMethod();
 
-			modal.getElements( 'message' ).removeClass( 'elementor-video-wrapper' );
+			modal.getElements( 'message' ).removeClass( 'elementor-fit-aspect-ratio' );
 		};
 	},
 
@@ -1383,8 +1558,8 @@ LightboxModule = ViewModule.extend( {
 			slideshowClasses = classes.slideshow,
 			$container = $( '<div>', { 'class': slideshowClasses.container } ),
 			$slidesWrapper = $( '<div>', { 'class': slideshowClasses.slidesWrapper } ),
-			$prevButton = $( '<div>', { 'class': slideshowClasses.prevButton } ).html( $( '<i>', { 'class': slideshowClasses.prevButtonIcon } ) ),
-			$nextButton = $( '<div>', { 'class': slideshowClasses.nextButton } ).html( $( '<i>', { 'class': slideshowClasses.nextButtonIcon } ) );
+			$prevButton = $( '<div>', { 'class': slideshowClasses.prevButton + ' ' + classes.preventClose } ).html( $( '<i>', { 'class': slideshowClasses.prevButtonIcon } ) ),
+			$nextButton = $( '<div>', { 'class': slideshowClasses.nextButton + ' ' + classes.preventClose } ).html( $( '<i>', { 'class': slideshowClasses.nextButtonIcon } ) );
 
 		options.slides.forEach( function( slide ) {
 			var slideClass =  slideshowClasses.slide + ' ' + classes.item;
@@ -1393,13 +1568,7 @@ LightboxModule = ViewModule.extend( {
 				slideClass += ' ' + classes.video;
 			}
 
-			var $slide = $( '<div>', { 'class': slideClass } ),
-				$zoomContainer = $( '<div>', { 'class': 'swiper-zoom-container' } ),
-				$slideImage = $( '<img>', { 'class': classes.image } ).attr( 'src', slide.image );
-
-			$slide.append( $zoomContainer );
-
-			$zoomContainer.append( $slideImage );
+			var $slide = $( '<div>', { 'class': slideClass } );
 
 			if ( slide.video ) {
 				$slide.attr( 'data-elementor-slideshow-video', slide.video );
@@ -1407,6 +1576,13 @@ LightboxModule = ViewModule.extend( {
 				var $playIcon = $( '<div>', { 'class': classes.playButton } ).html( $( '<i>', { 'class': classes.playButtonIcon } ) );
 
 				$slide.append( $playIcon );
+			} else {
+				var $zoomContainer = $( '<div>', { 'class': 'swiper-zoom-container' } ),
+					$slideImage = $( '<img>', { 'class': classes.image + ' ' + classes.preventClose } ).attr( 'src', slide.image );
+
+				$zoomContainer.append( $slideImage );
+
+				$slide.append( $zoomContainer );
 			}
 
 			$slidesWrapper.append( $slide );
@@ -1434,7 +1610,8 @@ LightboxModule = ViewModule.extend( {
 				grabCursor: true,
 				onSlideChangeEnd: self.onSlideChange,
 				runCallbacksOnInit: false,
-				loop: true
+				loop: true,
+				keyboardControl: true
 			};
 
 			if ( options.swiper ) {
@@ -1472,8 +1649,7 @@ LightboxModule = ViewModule.extend( {
 	},
 
 	playSlideVideo: function() {
-		var selectors = this.getSettings( 'selectors' ),
-			$activeSlide = this.getSlide( 'active' ),
+		var $activeSlide = this.getSlide( 'active' ),
 			videoURL = $activeSlide.data( 'elementor-slideshow-video' );
 
 		if ( ! videoURL ) {
@@ -1485,8 +1661,7 @@ LightboxModule = ViewModule.extend( {
 		var $videoContainer = jQuery( '<div>', { 'class': classes.videoContainer + ' ' + classes.invisible } ),
 			$videoWrapper = jQuery( '<div>', { 'class': classes.videoWrapper } ),
 			$videoFrame = jQuery( '<iframe>', { src: videoURL } ),
-			$playIcon = $activeSlide.children( '.' + classes.playButton ),
-			$slideImage = $activeSlide.find( '.' + classes.image );
+			$playIcon = $activeSlide.children( '.' + classes.playButton );
 
 		$videoContainer.append( $videoWrapper );
 
@@ -1494,12 +1669,10 @@ LightboxModule = ViewModule.extend( {
 
 		$activeSlide.append( $videoContainer );
 
-		$playIcon.addClass( classes.playing );
-
-		$playIcon.add( $slideImage ).removeClass( classes.hidden );
+		$playIcon.addClass( classes.playing ).removeClass( classes.hidden );
 
 		$videoFrame.on( 'load', function() {
-			$playIcon.add( $slideImage ).addClass( classes.hidden );
+			$playIcon.addClass( classes.hidden );
 
 			$videoContainer.removeClass( classes.invisible );
 		} );
@@ -1533,10 +1706,14 @@ LightboxModule = ViewModule.extend( {
 	},
 
 	openLink: function( event ) {
-		var element = event.currentTarget;
+		var element = event.currentTarget,
+			$target = jQuery( event.target ),
+			editMode = elementorFrontend.isEditMode(),
+			isClickInsideElementor = !! $target.closest( '#elementor' ).length;
 
 		if ( ! this.isLightboxLink( element ) ) {
-			if ( elementorFrontend.isEditMode() ) {
+
+			if ( editMode && isClickInsideElementor ) {
 				event.preventDefault();
 			}
 
@@ -1662,7 +1839,7 @@ LightboxModule = ViewModule.extend( {
 
 module.exports = LightboxModule;
 
-},{"../../utils/view-module":21}],18:[function(require,module,exports){
+},{"../../utils/view-module":24}],20:[function(require,module,exports){
 var ViewModule = require( '../../utils/view-module' );
 
 module.exports = ViewModule.extend( {
@@ -1677,7 +1854,6 @@ module.exports = ViewModule.extend( {
 	},
 
 	getDefaultElements: function() {
-
 		return {
 			$firstScript: jQuery( this.getSettings( 'selectors.firstScript' ) )
 		};
@@ -1713,7 +1889,7 @@ module.exports = ViewModule.extend( {
 	}
 } );
 
-},{"../../utils/view-module":21}],19:[function(require,module,exports){
+},{"../../utils/view-module":24}],21:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1972,7 +2148,59 @@ var EventManager = function() {
 
 module.exports = EventManager;
 
-},{}],20:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
+var HotKeys = function() {
+	var hotKeysHandlers = this.hotKeysHandlers = {};
+
+	var isMac = function() {
+		return -1 !== navigator.userAgent.indexOf( 'Mac OS X' );
+	};
+
+	var applyHotKey = function( event ) {
+		var handlers = hotKeysHandlers[ event.which ];
+
+		if ( ! handlers ) {
+			return;
+		}
+
+		jQuery.each( handlers, function() {
+			var handler = this;
+
+			if ( handler.isWorthHandling && ! handler.isWorthHandling( event ) ) {
+				return;
+			}
+
+			// Fix for some keyboard sources that consider alt key as ctrl key
+			if ( ! handler.allowAltKey && event.altKey ) {
+				return;
+			}
+
+			event.preventDefault();
+
+			handler.handle( event );
+		} );
+	};
+
+	this.isControlEvent = function( event ) {
+		return event[ isMac() ? 'metaKey' : 'ctrlKey' ];
+	};
+
+	this.addHotKeyHandler = function( keyCode, handlerName, handler ) {
+		if ( ! hotKeysHandlers[ keyCode ] ) {
+			hotKeysHandlers[ keyCode ] = {};
+		}
+
+		hotKeysHandlers[ keyCode ][ handlerName ] = handler;
+	};
+
+	this.bindListener = function( $listener ) {
+		$listener.on( 'keydown', applyHotKey );
+	};
+};
+
+module.exports = new HotKeys();
+
+},{}],23:[function(require,module,exports){
 var Module = function() {
 	var $ = jQuery,
 		instanceParams = arguments,
@@ -2111,12 +2339,14 @@ var Module = function() {
 		var callbacks = events[ eventName ];
 
 		if ( ! callbacks ) {
-			return;
+			return self;
 		}
 
 		$.each( callbacks, function( index, callback ) {
 			callback.apply( self, params );
 		} );
+
+		return self;
 	};
 
 	init();
@@ -2164,7 +2394,7 @@ Module.extend = function( properties ) {
 
 module.exports = Module;
 
-},{}],21:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 var Module = require( './module' ),
 	ViewModule;
 
@@ -2190,5 +2420,5 @@ ViewModule = Module.extend( {
 
 module.exports = ViewModule;
 
-},{"./module":20}]},{},[2])
+},{"./module":23}]},{},[2])
 //# sourceMappingURL=frontend.js.map

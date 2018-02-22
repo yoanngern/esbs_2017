@@ -5,28 +5,96 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Elementor image carousel widget.
+ *
+ * Elementor widget that displays a set of images in a rotating carousel or
+ * slider.
+ *
+ * @since 1.0.0
+ */
 class Widget_Image_Carousel extends Widget_Base {
 
+	/**
+	 * Get widget name.
+	 *
+	 * Retrieve image carousel widget name.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget name.
+	 */
 	public function get_name() {
 		return 'image-carousel';
 	}
 
+	/**
+	 * Get widget title.
+	 *
+	 * Retrieve image carousel widget title.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget title.
+	 */
 	public function get_title() {
 		return __( 'Image Carousel', 'elementor' );
 	}
 
+	/**
+	 * Get widget icon.
+	 *
+	 * Retrieve image carousel widget icon.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget icon.
+	 */
 	public function get_icon() {
 		return 'eicon-slider-push';
 	}
 
+	/**
+	 * Get widget categories.
+	 *
+	 * Retrieve the list of categories the image carousel widget belongs to.
+	 *
+	 * Used to determine where to display the widget in the editor.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return array Widget categories.
+	 */
 	public function get_categories() {
 		return [ 'general-elements' ];
 	}
 
+	/**
+	 * Retrieve the list of scripts the image carousel widget depended on.
+	 *
+	 * Used to set scripts dependencies required to run the widget.
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @return array Widget scripts dependencies.
+	 */
 	public function get_script_depends() {
 		return [ 'jquery-slick' ];
 	}
 
+	/**
+	 * Register image carousel widget controls.
+	 *
+	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_image_carousel',
@@ -129,7 +197,7 @@ class Widget_Image_Carousel extends Widget_Base {
 			[
 				'label' => 'Link to',
 				'type' => Controls_Manager::URL,
-				'placeholder' => __( 'http://your-link.com', 'elementor' ),
+				'placeholder' => __( 'https://your-link.com', 'elementor' ),
 				'condition' => [
 					'link_to' => 'custom',
 				],
@@ -548,7 +616,6 @@ class Widget_Image_Carousel extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'caption_typography',
-				'label' => __( 'Typography', 'elementor' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_4,
 				'selector' => '{{WRAPPER}} .elementor-image-carousel-caption',
 			]
@@ -558,6 +625,14 @@ class Widget_Image_Carousel extends Widget_Base {
 
 	}
 
+	/**
+	 * Render image carousel widget output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function render() {
 		$settings = $this->get_settings();
 
@@ -639,6 +714,17 @@ class Widget_Image_Carousel extends Widget_Base {
 		<?php
 	}
 
+	/**
+	 * Retrieve image carousel link URL.
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 *
+	 * @param array $attachment
+	 * @param object $instance
+	 *
+	 * @return array|string|false An array/string containing the attachment URL, or false if no link.
+	 */
 	private function get_link_url( $attachment, $instance ) {
 		if ( 'none' === $instance['link_to'] ) {
 			return false;
@@ -657,6 +743,16 @@ class Widget_Image_Carousel extends Widget_Base {
 		];
 	}
 
+	/**
+	 * Retrieve image carousel caption.
+	 *
+	 * @since 1.2.0
+	 * @access private
+	 *
+	 * @param array $attachment
+	 *
+	 * @return string The caption of the image.
+	 */
 	private function get_image_caption( $attachment ) {
 		$caption_type = $this->get_settings( 'caption_type' );
 

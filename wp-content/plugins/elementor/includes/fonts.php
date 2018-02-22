@@ -5,14 +5,109 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Elementor fonts class.
+ *
+ * Elementor fonts handler class is responsible for registering the supported
+ * fonts used by Elementor.
+ *
+ * @since 1.0.0
+ */
 class Fonts {
 
+	/**
+	 * The system font name.
+	 */
 	const SYSTEM = 'system';
+
+	/**
+	 * The google font name.
+	 */
 	const GOOGLE = 'googlefonts';
+
+	/**
+	 * The google early access font name.
+	 */
 	const EARLYACCESS = 'earlyaccess';
+
+	/**
+	 * The local font name.
+	 */
 	const LOCAL = 'local';
 
+	/**
+	 * Used to hold additional fonts
+	 */
+	private static $additional_fonts =  null;
+
+	/**
+	 * Used to hold font types/groups
+	 */
+	private static $font_groups =  null;
+
+	/**
+	 * Get font Groups.
+	 *
+	 * Retrieve the list of font groups.
+	 *
+	 * @since 1.9.4
+	 * @access public
+	 * @static
+	 *
+	 * @return array Supported font groups/types.
+	 */
+	public static function get_font_groups() {
+		if ( null === self::$font_groups ) {
+			$font_groups = [
+				self::SYSTEM => __( 'System', 'elementor' ),
+				self::GOOGLE => __( 'Google', 'elementor' ),
+				self::EARLYACCESS => __( 'Google Early Access', 'elementor' ),
+			];
+
+			self::$font_groups = apply_filters( 'elementor/fonts/groups', $font_groups );
+		}
+
+		return self::$font_groups;
+	}
+
+	/**
+	 * Get fonts.
+	 *
+	 * Retrieve the list of supported fonts.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @static
+	 *
+	 * @return array Supported fonts.
+	 */
 	public static function get_fonts() {
+		if ( null === self::$additional_fonts ) {
+			/**
+			 * Allows adding additional fonts to elementor
+			 *
+			 * @since 1.9.4
+			 *
+			 * @param array $additional_fonts
+			 */
+			self::$additional_fonts = apply_filters( 'elementor/fonts/additional_fonts', [] );
+		}
+
+		return array_merge( self::get_native_fonts(), self::$additional_fonts );
+	}
+
+	/**
+	 * Get Elementor native fonts.
+	 *
+	 * Retrieve the list of supported fonts.
+	 *
+	 * @since 1.9.4
+	 * @access private
+	 * @static
+	 *
+	 * @return array Supported fonts.
+	 */
+	private static function get_native_fonts() {
 		return [
 			// System fonts.
 			'Arial' => self::SYSTEM,
@@ -23,7 +118,7 @@ class Fonts {
 			'Trebuchet MS' => self::SYSTEM,
 			'Georgia' => self::SYSTEM,
 
-			// Google Fonts (last update: 09/07/2017).
+			// Google Fonts (last update: 19/11/2017).
 			'ABeeZee' => self::GOOGLE,
 			'Abel' => self::GOOGLE,
 			'Abhaya Libre' => self::GOOGLE,
@@ -58,7 +153,6 @@ class Fonts {
 			'Amarante' => self::GOOGLE,
 			'Amaranth' => self::GOOGLE,
 			'Amatic SC' => self::GOOGLE,
-			'Amatica SC' => self::GOOGLE,
 			'Amethysta' => self::GOOGLE,
 			'Amiko' => self::GOOGLE,
 			'Amiri' => self::GOOGLE,
@@ -77,6 +171,7 @@ class Fonts {
 			'Arbutus' => self::GOOGLE,
 			'Arbutus Slab' => self::GOOGLE,
 			'Architects Daughter' => self::GOOGLE,
+			'Archivo' => self::GOOGLE,
 			'Archivo Black' => self::GOOGLE,
 			'Archivo Narrow' => self::GOOGLE,
 			'Aref Ruqaa' => self::GOOGLE,
@@ -89,6 +184,7 @@ class Fonts {
 			'Arvo' => self::GOOGLE,
 			'Arya' => self::GOOGLE,
 			'Asap' => self::GOOGLE,
+			'Asap Condensed' => self::GOOGLE,
 			'Asar' => self::GOOGLE,
 			'Asset' => self::GOOGLE,
 			'Assistant' => self::GOOGLE,
@@ -110,14 +206,19 @@ class Fonts {
 			'Bahiana' => self::GOOGLE,
 			'Baloo' => self::GOOGLE,
 			'Baloo Bhai' => self::GOOGLE,
+			'Baloo Bhaijaan' => self::GOOGLE,
 			'Baloo Bhaina' => self::GOOGLE,
 			'Baloo Chettan' => self::GOOGLE,
 			'Baloo Da' => self::GOOGLE,
 			'Baloo Paaji' => self::GOOGLE,
 			'Baloo Tamma' => self::GOOGLE,
+			'Baloo Tammudu' => self::GOOGLE,
 			'Baloo Thambi' => self::GOOGLE,
 			'Balthazar' => self::GOOGLE,
 			'Bangers' => self::GOOGLE,
+			'Barlow' => self::GOOGLE,
+			'Barlow Condensed' => self::GOOGLE,
+			'Barlow Semi Condensed' => self::GOOGLE,
 			'Barrio' => self::GOOGLE,
 			'Basic' => self::GOOGLE,
 			'Battambang' => self::GOOGLE,
@@ -258,9 +359,6 @@ class Fonts {
 			'Dr Sugiyama' => self::GOOGLE,
 			'Droid Arabic Kufi' => self::EARLYACCESS, // Hack for Google Early Access.
 			'Droid Arabic Naskh' => self::EARLYACCESS, // Hack for Google Early Access.
-			'Droid Sans' => self::GOOGLE,
-			'Droid Sans Mono' => self::GOOGLE,
-			'Droid Serif' => self::GOOGLE,
 			'Duru Sans' => self::GOOGLE,
 			'Dynalight' => self::GOOGLE,
 			'EB Garamond' => self::GOOGLE,
@@ -268,13 +366,17 @@ class Fonts {
 			'Eater' => self::GOOGLE,
 			'Economica' => self::GOOGLE,
 			'Eczar' => self::GOOGLE,
-			'Ek Mukta' => self::GOOGLE,
 			'El Messiri' => self::GOOGLE,
 			'Electrolize' => self::GOOGLE,
 			'Elsie' => self::GOOGLE,
 			'Elsie Swash Caps' => self::GOOGLE,
 			'Emblema One' => self::GOOGLE,
 			'Emilys Candy' => self::GOOGLE,
+			'Encode Sans' => self::GOOGLE,
+			'Encode Sans Condensed' => self::GOOGLE,
+			'Encode Sans Expanded' => self::GOOGLE,
+			'Encode Sans Semi Condensed' => self::GOOGLE,
+			'Encode Sans Semi Expanded' => self::GOOGLE,
 			'Engagement' => self::GOOGLE,
 			'Englebert' => self::GOOGLE,
 			'Enriqueta' => self::GOOGLE,
@@ -292,6 +394,7 @@ class Fonts {
 			'Faster One' => self::GOOGLE,
 			'Fasthand' => self::GOOGLE,
 			'Fauna One' => self::GOOGLE,
+			'Faustina' => self::GOOGLE,
 			'Federant' => self::GOOGLE,
 			'Federo' => self::GOOGLE,
 			'Felipa' => self::GOOGLE,
@@ -452,6 +555,12 @@ class Fonts {
 			'Lekton' => self::GOOGLE,
 			'Lemon' => self::GOOGLE,
 			'Lemonada' => self::GOOGLE,
+			'Libre Barcode 128' => self::GOOGLE,
+			'Libre Barcode 128 Text' => self::GOOGLE,
+			'Libre Barcode 39' => self::GOOGLE,
+			'Libre Barcode 39 Extended' => self::GOOGLE,
+			'Libre Barcode 39 Extended Text' => self::GOOGLE,
+			'Libre Barcode 39 Text' => self::GOOGLE,
 			'Libre Baskerville' => self::GOOGLE,
 			'Libre Franklin' => self::GOOGLE,
 			'Life Savers' => self::GOOGLE,
@@ -481,6 +590,7 @@ class Fonts {
 			'Mako' => self::GOOGLE,
 			'Mallanna' => self::GOOGLE,
 			'Mandali' => self::GOOGLE,
+			'Manuale' => self::GOOGLE,
 			'Marcellus' => self::GOOGLE,
 			'Marcellus SC' => self::GOOGLE,
 			'Marck Script' => self::GOOGLE,
@@ -540,6 +650,9 @@ class Fonts {
 			'Mr De Haviland' => self::GOOGLE,
 			'Mrs Saint Delafield' => self::GOOGLE,
 			'Mrs Sheppards' => self::GOOGLE,
+			'Mukta' => self::GOOGLE,
+			'Mukta Mahee' => self::GOOGLE,
+			'Mukta Malar' => self::GOOGLE,
 			'Mukta Vaani' => self::GOOGLE,
 			'Muli' => self::GOOGLE,
 			'Mystery Quest' => self::GOOGLE,
@@ -713,6 +826,10 @@ class Fonts {
 			'Sacramento' => self::GOOGLE,
 			'Sahitya' => self::GOOGLE,
 			'Sail' => self::GOOGLE,
+			'Saira' => self::GOOGLE,
+			'Saira Condensed' => self::GOOGLE,
+			'Saira Extra Condensed' => self::GOOGLE,
+			'Saira Semi Condensed' => self::GOOGLE,
 			'Salsa' => self::GOOGLE,
 			'Sanchez' => self::GOOGLE,
 			'Sancreek' => self::GOOGLE,
@@ -727,6 +844,8 @@ class Fonts {
 			'Scope One' => self::GOOGLE,
 			'Seaweed Script' => self::GOOGLE,
 			'Secular One' => self::GOOGLE,
+			'Sedgwick Ave' => self::GOOGLE,
+			'Sedgwick Ave Display' => self::GOOGLE,
 			'Sevillana' => self::GOOGLE,
 			'Seymour One' => self::GOOGLE,
 			'Shadows Into Light' => self::GOOGLE,
@@ -765,6 +884,7 @@ class Fonts {
 			'Space Mono' => self::GOOGLE,
 			'Special Elite' => self::GOOGLE,
 			'Spectral' => self::GOOGLE,
+			'Spectral SC' => self::GOOGLE,
 			'Spicy Rice' => self::GOOGLE,
 			'Spinnaker' => self::GOOGLE,
 			'Spirax' => self::GOOGLE,
@@ -835,6 +955,7 @@ class Fonts {
 			'Voces' => self::GOOGLE,
 			'Volkhov' => self::GOOGLE,
 			'Vollkorn' => self::GOOGLE,
+			'Vollkorn SC' => self::GOOGLE,
 			'Voltaire' => self::GOOGLE,
 			'Waiting for the Sunrise' => self::GOOGLE,
 			'Wallpoet' => self::GOOGLE,
@@ -853,9 +974,23 @@ class Fonts {
 			'Yrsa' => self::GOOGLE,
 			'Zeyada' => self::GOOGLE,
 			'Zilla Slab' => self::GOOGLE,
+			'Zilla Slab Highlight' => self::GOOGLE,
 		];
 	}
 
+	/**
+	 * Get font type.
+	 *
+	 * Retrieve the font type for a given font.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @static
+	 *
+	 * @param string $name Font name.
+	 *
+	 * @return string|false Font type, or false if font doesn't exist.
+	 */
 	public static function get_font_type( $name ) {
 		$fonts = self::get_fonts();
 
@@ -866,6 +1001,19 @@ class Fonts {
 		return $fonts[ $name ];
 	}
 
+	/**
+	 * Get fonts by group.
+	 *
+	 * Retrieve all the fonts belong to specific group.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @static
+	 *
+	 * @param array $groups Optional. Font group. Default is an empty array.
+	 *
+	 * @return array Font type, or false if font doesn't exist.
+	 */
 	public static function get_fonts_by_groups( $groups = [] ) {
 		return array_filter( self::get_fonts(), function( $font ) use ( $groups ) {
 			return in_array( $font, $groups );

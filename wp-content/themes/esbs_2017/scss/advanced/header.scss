@@ -31,38 +31,6 @@ body > header {
         margin: 3px 0 0 10px;
     }
 
-    div.button-social {
-        position: absolute;
-        top: 0;
-        right: 0px;
-        margin: 8px 10px;
-
-        a {
-            vertical-align: top;
-            text-decoration: none;
-            display: inline-block;
-            left: 0;
-            top: 0;
-            z-index: 300;
-            fill: $white;
-            fill-opacity: 0.4;
-            margin: 4px 5px;
-            cursor: pointer;
-            -webkit-transition: fill-opacity 300ms;
-            transition: fill-opacity 300ms;
-
-            svg {
-                width: 30px;
-                height: 30px;
-                display: block;
-            }
-
-            &:hover {
-                fill-opacity: 0.8;
-            }
-        }
-    }
-
     div.private-nav {
         width: 100%;
         background-color: darken($black, 5);
@@ -91,20 +59,28 @@ body > header {
     }
 
     div.principal-nav {
+        text-align: center;
 
         div {
-            margin: 0 auto;
-            text-align: center;
+            display: inline-block;
 
             & > ul {
+                margin: 0 auto;
+                text-align: center;
+                display: inline-block;
 
                 & > li {
                     display: inline-block;
 
                     a {
-                        line-height: 55px;
-                        padding: 0 15px;
-                        display: block;
+                        line-height: 45px;
+                        display: inline-block;
+                        font-size: 0.8em;
+                        padding: 0 5px;
+                        margin: 0 0.6vw;
+                        line-break: normal;
+                        word-break: keep-all;
+                        transition: color 300ms ease;
 
                     }
 
@@ -113,6 +89,11 @@ body > header {
 
                         &.icons ul {
                             max-height: 500px;
+
+                            li {
+                                opacity: 1;
+                                transition: all 500ms ease 50ms;
+                            }
                         }
                     }
 
@@ -122,10 +103,10 @@ body > header {
                         left: 0;
                         text-align: center;
                         right: 0;
-                        -webkit-transition: 0.4s ease-in-out;
-                        -o-transition: 0.4s ease-in-out;
-                        -moz-transition: 0.4s ease-in-out;
-                        transition: 0.4s ease-in-out;
+                        -webkit-transition: max-height 0.4s ease;
+                        -o-transition: max-height 0.4s ease;
+                        -moz-transition: max-height 0.4s ease;
+                        transition: max-height 0.4s ease;
                         padding-top: 0;
                         max-height: 0;
                         overflow: hidden;
@@ -136,6 +117,8 @@ body > header {
                             margin: 20px 10px;
                             vertical-align: top;
                             position: relative;
+                            transition: all 500ms ease 50ms;
+                            opacity: 0;
 
                             div.icon {
                                 display: block;
@@ -163,11 +146,12 @@ body > header {
                                     background-position: center;
                                     height: 70px;
                                     margin-bottom: 10px;
+                                    transition: opacity 200ms ease;
                                 }
 
                                 &:hover {
                                     &::before {
-                                        opacity: 0.8;
+                                        opacity: 0.7;
                                     }
                                 }
                             }
@@ -281,26 +265,6 @@ body > header {
                         }
                     }
 
-                    &:last-of-type {
-                        background-color: $gold;
-                        position: absolute;
-                        right: 0;
-
-                        a {
-                            padding: 0 35px;
-                            transition: all 300ms ease;
-                            color: $gray;
-
-                            &.close {
-                                background-color: lighten($gray, 20);
-                            }
-
-                            &:hover {
-                                color: $white;
-                            }
-                        }
-                    }
-
                     &.pll-parent-menu-item {
                         position: absolute;
                         left: 0;
@@ -376,7 +340,7 @@ body > header {
                         text-decoration: none;
                         transition: all 100ms ease;
                         cursor: pointer;
-                        font-size: 0.9em;
+                        font-size: 0.8em;
 
                         &:hover {
                             color: $gold;
@@ -387,6 +351,75 @@ body > header {
 
             }
         }
+
+        div.right {
+            position: absolute;
+            right: 0;
+
+            div {
+                vertical-align: top;
+            }
+        }
+
+        div.button-social {
+            margin: 0 10px;
+
+            a {
+                vertical-align: top;
+                text-decoration: none;
+                display: inline-block;
+                left: 0;
+                top: 0;
+                z-index: 300;
+                fill: $white;
+                fill-opacity: 0.4;
+                margin: 7px 5px;
+                cursor: pointer;
+                -webkit-transition: fill-opacity 300ms;
+                transition: fill-opacity 300ms;
+
+                svg {
+                    width: 30px;
+                    height: 30px;
+                    display: block;
+                }
+
+                &:hover {
+                    fill-opacity: 0.8;
+                }
+            }
+        }
+
+        div.join_link {
+
+            a {
+                padding: 0 35px;
+                color: $gray;
+                line-height: 45px;
+                display: block;
+                text-transform: uppercase;
+                text-decoration: none;
+                letter-spacing: 0.1em;
+                background-color: $gold;
+                transition: all 300ms ease;
+
+
+                &.close {
+                    background-color: lighten($gray, 20);
+
+                    &:hover {
+                        background-color: lighten($gray, 8);
+                        color: lighten($gray, 40);
+                    }
+                }
+
+                &:hover {
+                    color: $black;
+                    background-color: lighten($gold-dark, 10);
+                }
+            }
+        }
+
     }
 
     #burger {
@@ -412,23 +445,12 @@ body > header {
         }
     }
 
-    @media only screen and (max-width: 1300px) {
+    @media only screen and (max-width: 1200px) {
 
-        div.principal-nav div {
-            & > ul {
-                li {
-                    a {
-                        font-size: 0.8em;
-                        line-height: 45px;
-                        padding: 0 12px;
-                    }
-                }
-            }
+        div.principal-nav {
+            text-align: left;
         }
 
-        div.button-social {
-            margin: 3px 10px;
-        }
     }
 
     @media only screen and (max-width: 740px) {
@@ -479,12 +501,6 @@ body > header {
                     text-transform: uppercase;
                 }
             }
-        }
-
-        div.button-social {
-            margin: 5px 0;
-            right: 70px !important;
-
         }
 
         div {

@@ -5,20 +5,65 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Elementor heading widget.
+ *
+ * Elementor widget that displays an eye-catching headlines.
+ *
+ * @since 1.0.0
+ */
 class Widget_Heading extends Widget_Base {
 
+	/**
+	 * Get widget name.
+	 *
+	 * Retrieve heading widget name.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget name.
+	 */
 	public function get_name() {
 		return 'heading';
 	}
 
+	/**
+	 * Get widget title.
+	 *
+	 * Retrieve heading widget title.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget title.
+	 */
 	public function get_title() {
 		return __( 'Heading', 'elementor' );
 	}
 
+	/**
+	 * Get widget icon.
+	 *
+	 * Retrieve heading widget icon.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget icon.
+	 */
 	public function get_icon() {
 		return 'eicon-type-tool';
 	}
 
+	/**
+	 * Register heading widget controls.
+	 *
+	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_title',
@@ -33,7 +78,7 @@ class Widget_Heading extends Widget_Base {
 				'label' => __( 'Title', 'elementor' ),
 				'type' => Controls_Manager::TEXTAREA,
 				'placeholder' => __( 'Enter your title', 'elementor' ),
-				'default' => __( 'This is heading element', 'elementor' ),
+				'default' => __( 'Add Your Heading Text Here', 'elementor' ),
 			]
 		);
 
@@ -42,7 +87,7 @@ class Widget_Heading extends Widget_Base {
 			[
 				'label' => __( 'Link', 'elementor' ),
 				'type' => Controls_Manager::URL,
-				'placeholder' => 'http://your-link.com',
+				'placeholder' => __( 'https://your-link.com', 'elementor' ),
 				'default' => [
 					'url' => '',
 				],
@@ -73,15 +118,15 @@ class Widget_Heading extends Widget_Base {
 				'label' => __( 'HTML Tag', 'elementor' ),
 				'type' => Controls_Manager::SELECT,
 				'options' => [
-					'h1' => __( 'H1', 'elementor' ),
-					'h2' => __( 'H2', 'elementor' ),
-					'h3' => __( 'H3', 'elementor' ),
-					'h4' => __( 'H4', 'elementor' ),
-					'h5' => __( 'H5', 'elementor' ),
-					'h6' => __( 'H6', 'elementor' ),
-					'div' => __( 'div', 'elementor' ),
-					'span' => __( 'span', 'elementor' ),
-					'p' => __( 'p', 'elementor' ),
+					'h1' => 'H1',
+					'h2' => 'H2',
+					'h3' => 'H3',
+					'h4' => 'H4',
+					'h5' => 'H5',
+					'h6' => 'H6',
+					'div' => 'div',
+					'span' => 'span',
+					'p' => 'p',
 				],
 				'default' => 'h2',
 			]
@@ -171,6 +216,14 @@ class Widget_Heading extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Render heading widget output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function render() {
 		$settings = $this->get_settings();
 
@@ -178,11 +231,13 @@ class Widget_Heading extends Widget_Base {
 			return;
 		}
 
-		$this->add_render_attribute( 'heading', 'class', 'elementor-heading-title' );
+		$this->add_render_attribute( 'title', 'class', 'elementor-heading-title' );
 
 		if ( ! empty( $settings['size'] ) ) {
-			$this->add_render_attribute( 'heading', 'class', 'elementor-size-' . $settings['size'] );
+			$this->add_render_attribute( 'title', 'class', 'elementor-size-' . $settings['size'] );
 		}
+
+		$this->add_inline_editing_attributes( 'title' );
 
 		$title = $settings['title'];
 
@@ -200,23 +255,35 @@ class Widget_Heading extends Widget_Base {
 			$title = sprintf( '<a %1$s>%2$s</a>', $this->get_render_attribute_string( 'url' ), $title );
 		}
 
-		$title_html = sprintf( '<%1$s %2$s>%3$s</%1$s>', $settings['header_size'], $this->get_render_attribute_string( 'heading' ), $title );
+		$title_html = sprintf( '<%1$s %2$s>%3$s</%1$s>', $settings['header_size'], $this->get_render_attribute_string( 'title' ), $title );
 
 		echo $title_html;
 	}
 
+	/**
+	 * Render heading widget output in the editor.
+	 *
+	 * Written as a Backbone JavaScript template and used to generate the live preview.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function _content_template() {
 		?>
 		<#
-			var title = settings.title;
+		var title = settings.title;
 
-			if ( '' !== settings.link.url ) {
-				title = '<a href="' + settings.link.url + '">' + title + '</a>';
-			}
+		if ( '' !== settings.link.url ) {
+			title = '<a href="' + settings.link.url + '">' + title + '</a>';
+		}
 
-			var title_html = '<' + settings.header_size  + ' class="elementor-heading-title elementor-size-' + settings.size + '">' + title + '</' + settings.header_size + '>';
+		view.addRenderAttribute( 'title', 'class', [ 'elementor-heading-title', 'elementor-size-' + settings.size ] );
 
-			print( title_html );
+		view.addInlineEditingAttributes( 'title' );
+
+		var title_html = '<' + settings.header_size  + ' ' + view.getRenderAttributeString( 'title' ) + '>' + title + '</' + settings.header_size + '>';
+
+		print( title_html );
 		#>
 		<?php
 	}

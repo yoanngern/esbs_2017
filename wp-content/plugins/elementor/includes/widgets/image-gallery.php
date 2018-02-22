@@ -5,28 +5,97 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Elementor image gallery widget.
+ *
+ * Elementor widget that displays a set of images in an aligned grid.
+ *
+ * @since 1.0.0
+ */
 class Widget_Image_Gallery extends Widget_Base {
 
+	/**
+	 * Get widget name.
+	 *
+	 * Retrieve image gallery widget name.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget name.
+	 */
 	public function get_name() {
 		return 'image-gallery';
 	}
 
+	/**
+	 * Get widget title.
+	 *
+	 * Retrieve image gallery widget title.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget title.
+	 */
 	public function get_title() {
 		return __( 'Image Gallery', 'elementor' );
 	}
 
+	/**
+	 * Get widget icon.
+	 *
+	 * Retrieve image gallery widget icon.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget icon.
+	 */
 	public function get_icon() {
 		return 'eicon-gallery-grid';
 	}
 
+	/**
+	 * Get widget categories.
+	 *
+	 * Retrieve the list of categories the image gallery widget belongs to.
+	 *
+	 * Used to determine where to display the widget in the editor.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return array Widget categories.
+	 */
 	public function get_categories() {
 		return [ 'general-elements' ];
 	}
 
+	/**
+	 * Add lightbox data to image link.
+	 *
+	 * Used to add lightbox data attributes to image link HTML.
+	 *
+	 * @since 1.6.0
+	 * @access public
+	 *
+	 * @param string $link_html Image link HTML.
+	 *
+	 * @return string Image link HTML with lightbox data attributes.
+	 */
 	public function add_lightbox_data_to_image_link( $link_html ) {
 		return preg_replace( '/^<a/', '<a ' . $this->get_render_attribute_string( 'link' ), $link_html );
 	}
 
+	/**
+	 * Register image gallery widget controls.
+	 *
+	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_gallery',
@@ -172,7 +241,6 @@ class Widget_Image_Gallery extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'image_border',
-				'label' => __( 'Image Border', 'elementor' ),
 				'selector' => '{{WRAPPER}} .gallery-item img',
 				'separator' => 'before',
 			]
@@ -268,7 +336,6 @@ class Widget_Image_Gallery extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'typography',
-				'label' => __( 'Typography', 'elementor' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_4,
 				'selector' => '{{WRAPPER}} .gallery-item .gallery-caption',
 				'condition' => [
@@ -280,6 +347,14 @@ class Widget_Image_Gallery extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Render image gallery widget output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function render() {
 		$settings = $this->get_settings();
 
@@ -321,6 +396,4 @@ class Widget_Image_Gallery extends Widget_Base {
 		</div>
 		<?php
 	}
-
-	protected function _content_template() {}
 }

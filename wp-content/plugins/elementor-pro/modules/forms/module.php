@@ -2,27 +2,26 @@
 namespace ElementorPro\Modules\Forms;
 
 use ElementorPro\Base\Module_Base;
-use ElementorPro\Modules\Forms\Actions\Activity_Log;
-use ElementorPro\Modules\Forms\Actions\CF7DB;
-use ElementorPro\Modules\Forms\Actions\Email;
-use ElementorPro\Modules\Forms\Actions\Email2;
-use ElementorPro\Modules\Forms\Actions\Mailchimp;
-use ElementorPro\Modules\Forms\Actions\Mailpoet;
-use ElementorPro\Modules\Forms\Actions\Redirect;
-use ElementorPro\Modules\Forms\Actions\Webhook;
-use ElementorPro\Modules\Forms\Classes\Ajax_Handler;
-use ElementorPro\Modules\Forms\Classes\Honeypot_Handler;
-use ElementorPro\Modules\Forms\Classes\Recaptcha_Handler;
+use ElementorPro\Modules\Forms\Actions;
+use ElementorPro\Modules\Forms\Classes;
+use ElementorPro\Modules\Forms\Fields;
 use ElementorPro\Modules\Forms\Controls\Fields_Map;
+use ElementorPro\Modules\Forms\Widgets\Form;
 use ElementorPro\Plugin;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 class Module extends Module_Base {
 	/**
 	 * @var \ElementorPro\Modules\Forms\Classes\Action_Base[]
 	 */
 	private $form_actions = [];
+	/**
+	 * @var \ElementorPro\Modules\Forms\Fields\Field_Base[]
+	 */
+	public $field_types = [];
 
 	public function get_name() {
 		return 'forms';
@@ -31,7 +30,6 @@ class Module extends Module_Base {
 	public function get_widgets() {
 		return [
 			'Form',
-			//'Subscribe',
 			'Login',
 		];
 	}
@@ -70,9 +68,7 @@ class Module extends Module_Base {
 	}
 
 	public function forms_panel_action_data() {
-		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], 'elementor-editing' ) ) {
-			wp_send_json_error( new \WP_Error( 'token_expired' ) );
-		}
+		Plugin::elementor()->editor->verify_ajax_nonce();
 
 		if ( empty( $_POST['service'] ) ) {
 			wp_send_json_error( new \WP_Error( 'service_required' ) );
@@ -99,6 +95,10 @@ class Module extends Module_Base {
 		}
 	}
 
+	public function add_form_field_type( $type = '', $instance ) {
+		$this->field_types[ $type ] = $instance;
+	}
+
 	public function add_form_action( $id, $instance ) {
 		$this->form_actions[ $id ] = $instance;
 	}
@@ -122,38 +122,55 @@ class Module extends Module_Base {
 		add_action( 'elementor/controls/controls_registered', [ $this, 'register_controls' ] );
 		add_action( 'wp_ajax_elementor_pro_forms_panel_action_data', [ $this, 'forms_panel_action_data' ] );
 
-		$this->add_component( 'recaptcha', new Recaptcha_Handler() );
-		$this->add_component( 'honeypot', new Honeypot_Handler() );
+		//fields
+		$this->add_form_field_type( 'time', new Fields\Time() );
+		$this->add_form_field_type( 'date', new Fields\Date() );
+		$this->add_form_field_type( 'tel', new Fields\Tel() );
+		$this->add_form_field_type( 'number', new Fields\Number() );
+		$this->add_form_field_type( 'acceptance', new Fields\Acceptance() );
+		$this->add_form_field_type( 'upload', new Fields\Upload() );
+
+		$this->add_component( 'recaptcha', new Classes\Recaptcha_Handler() );
+		$this->add_component( 'honeypot', new Classes\Honeypot_Handler() );
 
 		// Actions Handlers
-		$this->add_form_action( 'email', new Email() );
-		$this->add_form_action( 'email2', new Email2() );
-		$this->add_form_action( 'mailchimp', new Mailchimp() );
-		$this->add_form_action( 'redirect', new Redirect() );
-		$this->add_form_action( 'webhook', new Webhook() );
+		$this->add_form_action( 'email', new Actions\Email() );
+		$this->add_form_action( 'email2', new Actions\Email2() );
+		$this->add_form_action( 'mailchimp', new Actions\Mailchimp() );
+		$this->add_form_action( 'redirect', new Actions\Redirect() );
+		$this->add_form_action( 'webhook', new Actions\Webhook() );
+		$this->add_form_action( 'drip', new Actions\Drip() );
+		$this->add_form_action( 'activecampaign', new Actions\Activecampaign() );
+		$this->add_form_action( 'getresponse', new Actions\Getresponse() );
+		$this->add_form_action( 'convertkit', new Actions\Convertkit() );
 
 		// Plugins actions
 
 		// MailPoet
 		if ( class_exists( '\WYSIJA' ) ) {
-			$this->add_form_action( 'mailpoet', new Mailpoet() );
+			$this->add_form_action( 'mailpoet', new Actions\Mailpoet() );
+		}
+
+		// MailPoet
+		if ( class_exists( '\MailPoet\API\API' ) ) {
+			$this->add_form_action( 'mailpoet3', new Actions\Mailpoet3() );
 		}
 
 		// Add Actions as components, that runs manually in the Ajax_Handler
 
 		// Activity Log
 		if ( function_exists( 'aal_insert_log' ) ) {
-			$this->add_component( 'activity_log', new Activity_Log() );
+			$this->add_component( 'activity_log', new Actions\Activity_Log() );
 		}
 
 		// Contact Form to Database
 		if ( function_exists( 'CF7DBPlugin_init' ) ) {
-			$this->add_component( 'cf7db', new CF7DB() );
+			$this->add_component( 'cf7db', new Actions\CF7DB() );
 		}
 
 		// Ajax Handler
-		if ( Ajax_Handler::is_form_submitted() ) {
-			$this->add_component( 'ajax_handler', new Ajax_Handler() );
+		if ( Classes\Ajax_Handler::is_form_submitted() ) {
+			$this->add_component( 'ajax_handler', new Classes\Ajax_Handler() );
 
 			do_action( 'elementor_pro/forms/form_submitted', $this );
 		}

@@ -5,25 +5,90 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Elementor audio widget.
+ *
+ * Elementor widget that displays an audio player.
+ *
+ * @since 1.0.0
+ */
 class Widget_Audio extends Widget_Base {
+
+	/**
+	 * Current instance.
+	 *
+	 * @access protected
+	 *
+	 * @var array
+	 */
 	protected $_current_instance = [];
 
+	/**
+	 * Get widget name.
+	 *
+	 * Retrieve audio widget name.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget name.
+	 */
 	public function get_name() {
 		return 'audio';
 	}
 
+	/**
+	 * Get widget title.
+	 *
+	 * Retrieve audio widget title.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget title.
+	 */
 	public function get_title() {
 		return __( 'SoundCloud', 'elementor' );
 	}
 
+	/**
+	 * Get widget icon.
+	 *
+	 * Retrieve audio widget icon.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget icon.
+	 */
 	public function get_icon() {
 		return 'eicon-headphones';
 	}
 
+	/**
+	 * Get widget categories.
+	 *
+	 * Retrieve the list of categories the audio widget belongs to.
+	 *
+	 * Used to determine where to display the widget in the editor.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return array Widget categories.
+	 */
 	public function get_categories() {
 		return [ 'general-elements' ];
 	}
 
+	/**
+	 * Register audio widget controls.
+	 *
+	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_audio',
@@ -172,6 +237,14 @@ class Widget_Audio extends Widget_Base {
 
 	}
 
+	/**
+	 * Render audio widget output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function render() {
 		$settings = $this->get_settings();
 
@@ -193,6 +266,16 @@ class Widget_Audio extends Widget_Base {
 		endif;
 	}
 
+	/**
+	 * Filter audio widget oEmbed results.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @param string $html The HTML returned by the oEmbed provider.
+	 */
 	public function filter_oembed_result( $html ) {
 		$param_keys = [
 			'auto_play',
@@ -228,5 +311,13 @@ class Widget_Audio extends Widget_Base {
 		return $html;
 	}
 
+	/**
+	 * Render audio widget output in the editor.
+	 *
+	 * Written as a Backbone JavaScript template and used to generate the live preview.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function _content_template() {}
 }

@@ -10,16 +10,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Source_Remote extends Source_Base {
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function get_id() {
 		return 'remote';
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function get_title() {
 		return __( 'Remote', 'elementor' );
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function register_data() {}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function get_items( $args = [] ) {
 		$templates_data = Api::get_templates_data();
 
@@ -39,42 +55,68 @@ class Source_Remote extends Source_Base {
 	}
 
 	/**
+	 * @since 1.0.0
+	 * @access public
 	 * @param array $template_data
 	 *
 	 * @return array
 	 */
 	public function get_item( $template_data ) {
+		$favorite_templates = $this->get_user_meta( 'favorites' );
+
 		return [
 			'template_id' => $template_data['id'],
 			'source' => $this->get_id(),
 			'title' => $template_data['title'],
 			'thumbnail' => $template_data['thumbnail'],
-			'date' => date( get_option( 'date_format' ), $template_data['tmpl_created'] ),
+			'date' => $template_data['tmpl_created'],
 			'author' => $template_data['author'],
-			'categories' => [],
-			'keywords' => [],
+			'tags' => json_decode( $template_data['tags'] ),
 			'isPro' => ( '1' === $template_data['is_pro'] ),
+			'popularityIndex' => (int) $template_data['popularity_index'],
+			'trendIndex' => (int) $template_data['trend_index'],
 			'hasPageSettings' => ( '1' === $template_data['has_page_settings'] ),
 			'url' => $template_data['url'],
+			'favorite' => ! empty( $favorite_templates[ $template_data['id'] ] ),
 		];
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function save_item( $template_data ) {
 		return false;
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function update_item( $new_data ) {
 		return false;
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function delete_template( $template_id ) {
 		return false;
 	}
 
+	/**
+	 * @since 1.0.0
+	 * @access public
+	*/
 	public function export_template( $template_id ) {
 		return false;
 	}
 
+	/**
+	 * @since 1.5.0
+	 * @access public
+	*/
 	public function get_data( array $args, $context = 'display' ) {
 		$data = Api::get_template_content( $args['template_id'] );
 

@@ -5,28 +5,95 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Elementor counter widget.
+ *
+ * Elementor widget that displays stats and numbers in an escalating manner.
+ *
+ * @since 1.0.0
+ */
 class Widget_Counter extends Widget_Base {
 
+	/**
+	 * Get widget name.
+	 *
+	 * Retrieve counter widget name.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget name.
+	 */
 	public function get_name() {
 		return 'counter';
 	}
 
+	/**
+	 * Get widget title.
+	 *
+	 * Retrieve counter widget title.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget title.
+	 */
 	public function get_title() {
 		return __( 'Counter', 'elementor' );
 	}
 
+	/**
+	 * Get widget icon.
+	 *
+	 * Retrieve counter widget icon.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget icon.
+	 */
 	public function get_icon() {
 		return 'eicon-counter';
 	}
 
+	/**
+	 * Get widget categories.
+	 *
+	 * Retrieve the list of categories the counter widget belongs to.
+	 *
+	 * Used to determine where to display the widget in the editor.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return array Widget categories.
+	 */
 	public function get_categories() {
 		return [ 'general-elements' ];
 	}
 
+	/**
+	 * Retrieve the list of scripts the counter widget depended on.
+	 *
+	 * Used to set scripts dependencies required to run the widget.
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @return array Widget scripts dependencies.
+	 */
 	public function get_script_depends() {
 		return [ 'jquery-numerator' ];
 	}
 
+	/**
+	 * Register counter widget controls.
+	 *
+	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_counter',
@@ -186,6 +253,14 @@ class Widget_Counter extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Render counter widget output in the editor.
+	 *
+	 * Written as a Backbone JavaScript template and used to generate the live preview.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function _content_template() {
 		?>
 		<div class="elementor-counter">
@@ -201,7 +276,15 @@ class Widget_Counter extends Widget_Base {
 		<?php
 	}
 
-	public function render() {
+	/**
+	 * Render counter widget output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
+	protected function render() {
 		$settings = $this->get_settings();
 
 		$this->add_render_attribute( 'counter', [

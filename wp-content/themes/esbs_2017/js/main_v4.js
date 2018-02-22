@@ -24,11 +24,8 @@ $(document).ready(function () {
     });
 
 
+    $("iframe.video, iframe.audio").each(function () {
 
-
-
-
-    $("iframe.video").each(function () {
 
         var iframe = $(this);
 
@@ -43,8 +40,10 @@ $(document).ready(function () {
         console.log("width: " + iframe_width);
         console.log("height: " + iframe_height);
 
+        var ratio = 100 * ( parseInt(iframe_height) / parseInt(iframe_width) );
 
-        var container = ' <section class="player" style="max-width: ' + iframe_width + 'px" data-width="' + iframe_width + '"><div class="container"></div></section> ';
+
+        var container = ' <section class="player" style="max-width: ' + iframe_width + 'px" data-width="' + iframe_width + '"><div class="container" style="padding-bottom: ' + ratio + '%"></div></section> ';
 
         $(this).wrapAll(container);
 
@@ -118,11 +117,11 @@ $(document).ready(function () {
     });
 
 
-    button_social();
+
 
     $(window).resize(function () {
 
-        button_social();
+
     });
 
 
@@ -209,23 +208,6 @@ $(document).ready(function () {
 
 });
 
-
-
-function button_social() {
-    $("body > header").each(function () {
-
-
-        var join_button = $("div.principal-nav li.join_link", this);
-
-
-        if(join_button.is(":visible")) {
-            var join_width = join_button.width();
-
-            $("div.button-social", this).css("right", join_width);
-        }
-
-    });
-}
 
 var openSelect = function (selector) {
 

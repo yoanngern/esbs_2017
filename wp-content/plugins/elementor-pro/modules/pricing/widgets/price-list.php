@@ -6,11 +6,11 @@ use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Color;
 use Elementor\Scheme_Typography;
-use Elementor\Widget_Base;
+use ElementorPro\Base\Base_Widget;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class Price_List extends Widget_Base {
+class Price_List extends Base_Widget {
 
 	public function get_name() {
 		return 'price-list';
@@ -136,7 +136,6 @@ class Price_List extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'heading_typography',
-				'label' => __( 'Typography', 'elementor-pro' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .elementor-price-list-header',
 			]
@@ -170,7 +169,6 @@ class Price_List extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'description_typography',
-				'label' => __( 'Typography', 'elementor-pro' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_3,
 				'selector' => '{{WRAPPER}} .elementor-price-list-description',
 			]
@@ -278,7 +276,6 @@ class Price_List extends Widget_Base {
 			Group_Control_Image_Size::get_type(),
 			[
 				'name' => 'image_size',
-				'label' => __( 'Image Size', 'elementor-pro' ),
 				'default' => 'thumbnail',
 			]
 		);
@@ -473,12 +470,12 @@ class Price_List extends Widget_Base {
 							url: item.image.url,
 							size: settings.image_size_size,
 							dimension: settings.image_size_custom_dimension,
-							model: editModel
+							model: view.getEditModel()
 						};
 
 						var image_url = elementor.imagesManager.getImageUrl( image );
 
-						if (  image_url ) { #>
+						if ( image_url ) { #>
 							<div class="elementor-price-list-image"><img src="{{ image_url }}" alt="{{ item.title }}"></div>
 						<# } #>
 

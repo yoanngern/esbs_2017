@@ -5,24 +5,81 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Elementor social icons widget.
+ *
+ * Elementor widget that displays icons to social pages like Facebook and Twitter.
+ *
+ * @since 1.0.0
+ */
 class Widget_Social_Icons extends Widget_Base {
 
+	/**
+	 * Get widget name.
+	 *
+	 * Retrieve social icons widget name.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget name.
+	 */
 	public function get_name() {
 		return 'social-icons';
 	}
 
+	/**
+	 * Get widget title.
+	 *
+	 * Retrieve social icons widget title.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget title.
+	 */
 	public function get_title() {
 		return __( 'Social Icons', 'elementor' );
 	}
 
+	/**
+	 * Get widget icon.
+	 *
+	 * Retrieve social icons widget icon.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget icon.
+	 */
 	public function get_icon() {
 		return 'eicon-social-icons';
 	}
 
+	/**
+	 * Get widget categories.
+	 *
+	 * Retrieve the list of categories the social icons widget belongs to.
+	 *
+	 * Used to determine where to display the widget in the editor.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return array Widget categories.
+	 */
 	public function get_categories() {
 		return [ 'general-elements' ];
 	}
 
+	/**
+	 * Register social icons widget controls.
+	 *
+	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_social_icon',
@@ -73,21 +130,28 @@ class Widget_Social_Icons extends Widget_Base {
 							'fa fa-jsfiddle',
 							'fa fa-linkedin',
 							'fa fa-medium',
+							'fa fa-odnoklassniki',
+							'fa fa-meetup',
 							'fa fa-pinterest',
 							'fa fa-product-hunt',
 							'fa fa-reddit',
+							'fa fa-rss',
 							'fa fa-shopping-cart',
+							'fa fa-skype',
 							'fa fa-slideshare',
 							'fa fa-snapchat',
 							'fa fa-soundcloud',
 							'fa fa-spotify',
 							'fa fa-stack-overflow',
+							'fa fa-telegram',
 							'fa fa-tripadvisor',
 							'fa fa-tumblr',
 							'fa fa-twitch',
 							'fa fa-twitter',
 							'fa fa-vimeo',
 							'fa fa-vk',
+							'fa fa-weibo',
+							'fa fa-weixin',
 							'fa fa-whatsapp',
 							'fa fa-wordpress',
 							'fa fa-xing',
@@ -103,7 +167,7 @@ class Widget_Social_Icons extends Widget_Base {
 						'default' => [
 							'is_external' => 'true',
 						],
-						'placeholder' => __( 'http://your-link.com', 'elementor' ),
+						'placeholder' => __( 'https://your-link.com', 'elementor' ),
 					],
 				],
 				'title_field' => '<i class="{{ social }}"></i> {{{ social.replace( \'fa fa-\', \'\' ).replace( \'-\', \' \' ).replace( /\b\w/g, function( letter ){ return letter.toUpperCase() } ) }}}',
@@ -352,7 +416,7 @@ class Widget_Social_Icons extends Widget_Base {
 		$this->add_control(
 			'hover_animation',
 			[
-				'label' => __( 'Animation', 'elementor' ),
+				'label' => __( 'Hover Animation', 'elementor' ),
 				'type' => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -361,6 +425,14 @@ class Widget_Social_Icons extends Widget_Base {
 
 	}
 
+	/**
+	 * Render social icons widget output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function render() {
 		$settings = $this->get_settings();
 
@@ -388,6 +460,7 @@ class Widget_Social_Icons extends Widget_Base {
 				}
 				?>
 				<a class="elementor-icon elementor-social-icon elementor-social-icon-<?php echo $social . $class_animation; ?>" <?php echo $this->get_render_attribute_string( $link_key ); ?>>
+					<span class="elementor-screen-only"><?php echo ucwords( $social ); ?></span>
 					<i class="<?php echo $item['social']; ?>"></i>
 				</a>
 			<?php } ?>
@@ -395,6 +468,14 @@ class Widget_Social_Icons extends Widget_Base {
 		<?php
 	}
 
+	/**
+	 * Render social icons widget output in the editor.
+	 *
+	 * Written as a Backbone JavaScript template and used to generate the live preview.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function _content_template() {
 		?>
 		<div class="elementor-social-icons-wrapper">
@@ -402,6 +483,7 @@ class Widget_Social_Icons extends Widget_Base {
 				var link = item.link ? item.link.url : '',
 					social = item.social.replace( 'fa fa-', '' ); #>
 				<a class="elementor-icon elementor-social-icon elementor-social-icon-{{ social }} elementor-animation-{{ settings.hover_animation }}" href="{{ link }}">
+					<span class="elementor-screen-only">{{{ social }}}</span>
 					<i class="{{ item.social }}"></i>
 				</a>
 			<# } ); #>

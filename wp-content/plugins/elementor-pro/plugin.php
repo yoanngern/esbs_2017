@@ -18,7 +18,7 @@ class Plugin {
 	/**
 	 * @var Manager
 	 */
-	private $_modules_manager;
+	public $modules_manager;
 
 	private $classes_aliases = [
 		'ElementorPro\Modules\PanelPostsControl\Module' => 'ElementorPro\Modules\QueryControl\Module',
@@ -79,7 +79,7 @@ class Plugin {
 		return self::$_instance;
 	}
 
-	private function _includes() {
+	private function includes() {
 		require ELEMENTOR_PRO_PATH . 'includes/modules-manager.php';
 
 		if ( is_admin() ) {
@@ -149,15 +149,9 @@ class Plugin {
 			true
 		);
 
-		$post = get_post();
-
 		$locale_settings = [
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			'nonce' => wp_create_nonce( 'elementor-pro-frontend' ),
-			// TODO: Temp since 1.3.0
-			'postTitle' => $post->post_title,
-			'postDescription' => $post->post_excerpt,
-			// End temp
 		];
 
 		wp_localize_script(
@@ -208,6 +202,16 @@ class Plugin {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		wp_register_script(
+			'smartmenus',
+			ELEMENTOR_PRO_URL . 'assets/lib/smartmenus/jquery.smartmenus' . $suffix . '.js',
+			[
+				'jquery',
+			],
+			'1.0.1',
+			true
+		);
+
+		wp_register_script(
 			'social-share',
 			ELEMENTOR_PRO_URL . 'assets/lib/social-share/social-share' . $suffix . '.js',
 			[
@@ -225,14 +229,14 @@ class Plugin {
 			'elementor-pro',
 			ELEMENTOR_PRO_URL . 'assets/css/editor' . $suffix . '.css',
 			[
-				'elementor-editor'
+				'elementor-editor',
 			],
 			ELEMENTOR_PRO_VERSION
 		);
 	}
 
 	public function elementor_init() {
-		$this->_modules_manager = new Manager();
+		$this->modules_manager = new Manager();
 
 		$elementor = \Elementor\Plugin::$instance;
 
@@ -269,7 +273,7 @@ class Plugin {
 	private function __construct() {
 		spl_autoload_register( [ $this, 'autoload' ] );
 
-		$this->_includes();
+		$this->includes();
 
 		$this->setup_hooks();
 

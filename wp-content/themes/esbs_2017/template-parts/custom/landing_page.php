@@ -20,7 +20,9 @@ $image    = get_field( 'landing_bg' )['sizes']['fullscreen'];
         <h1><?php echo $title; ?></h1>
         <h2><?php echo $subtitle; ?></h2>
 
-		<?php echo do_shortcode( '[mc4wp_form id="' . $form_id . '"]' ); ?>
+        <div class="small_form">
+			<?php echo do_shortcode( '[mc4wp_form id="' . $form_id . '"]' ); ?>
+        </div>
 
     </article>
 

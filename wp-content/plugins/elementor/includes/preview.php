@@ -5,17 +5,49 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Elementor preview class.
+ *
+ * Elementor preview handler class is responsible for initializing Elementor in
+ * preview mode.
+ *
+ * @since 1.0.0
+ */
 class Preview {
 
 	/**
-	 * Initialize the preview mode. Fired by `init` action.
+	 * Post ID.
+	 *
+	 * Holds the ID of the current post being previewed.
 	 *
 	 * @since 1.0.0
-	 * @return void
+	 * @access private
+	 *
+	 * @var int Post ID.
+	 */
+	private $post_id;
+
+	/**
+	 * Init.
+	 *
+	 * Initialize Elementor preview mode.
+	 *
+	 * Fired by `template_redirect` action.
+	 *
+	 * @since 1.0.0
+	 * @access public
 	 */
 	public function init() {
 		if ( is_admin() || ! $this->is_preview_mode() ) {
 			return;
+		}
+
+		$this->post_id = get_the_ID();
+
+		// Compatibility with Yoast SEO plugin when 'Removes unneeded query variables from the URL' enabled.
+		// TODO: Move this code to `includes/compatibility.php`.
+		if ( class_exists( 'WPSEO_Frontend' ) ) {
+			remove_action( 'template_redirect', [ \WPSEO_Frontend::get_instance(), 'clean_permalink' ], 1 );
 		}
 
 		// Disable the WP admin bar in preview mode.
@@ -30,13 +62,43 @@ class Preview {
 
 		// Tell to WP Cache plugins do not cache this request.
 		Utils::do_not_cache();
+
+		/**
+		 * Preview init.
+		 *
+		 * Fires on Elementor preview init, after Elementor preview has finished
+		 * loading but before any headers are sent.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Preview $this The current preview.
+		 */
+		do_action( 'elementor/preview/init', $this );
 	}
 
 	/**
-	 * Method detect if we are in the preview mode (iFrame).
+	 * Retrieve post ID.
+	 *
+	 * Get the ID of the current post.
+	 *
+	 * @since 1.8.0
+	 * @access public
+	 *
+	 * @return int Post ID.
+	 */
+	public function get_post_id() {
+		return $this->post_id;
+	}
+
+	/**
+	 * Whether preview mode is active.
+	 *
+	 * Used to determine whether we are in the preview mode (iframe).
 	 *
 	 * @since 1.0.0
-	 * @return bool
+	 * @access public
+	 *
+	 * @return bool Whether preview mode is active.
 	 */
 	public function is_preview_mode() {
 		if ( ! User::is_current_user_can_edit() ) {
@@ -51,22 +113,29 @@ class Preview {
 	}
 
 	/**
-	 * Do not show the content from the page. Just print empty start HTML.
-	 * The Javascript will add the content later.
+	 * Builder wrapper.
+	 *
+	 * Used to add an empty HTML wrapper for the builder, the javascript will add
+	 * the content later.
 	 *
 	 * @since 1.0.0
+	 * @access public
 	 *
-	 * @return string
+	 * @return string HTML wrapper for the builder.
 	 */
 	public function builder_wrapper() {
 		return '<div id="elementor" class="elementor elementor-edit-mode"></div>';
 	}
 
 	/**
-	 * Enqueue preview scripts and styles.
+	 * Enqueue preview styles.
+	 *
+	 * Registers all the preview styles and enqueues them.
+	 *
+	 * Fired by `wp_enqueue_scripts` action.
 	 *
 	 * @since 1.0.0
-	 * @return void
+	 * @access private
 	 */
 	private function enqueue_styles() {
 		// Hold-on all jQuery plugins after all HTML markup render.
@@ -87,24 +156,61 @@ class Preview {
 
 		wp_enqueue_style( 'editor-preview' );
 
+		/**
+		 * Preview enqueue styles.
+		 *
+		 * Fires after Elementor preview styles are enqueued.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'elementor/preview/enqueue_styles' );
 	}
 
+	/**
+	 * Enqueue preview scripts.
+	 *
+	 * Registers all the preview scripts and enqueues them.
+	 *
+	 * Fired by `wp_enqueue_scripts` action.
+	 *
+	 * @since 1.5.4
+	 * @access private
+	 */
 	private function enqueue_scripts() {
 		Plugin::$instance->frontend->register_scripts();
 		Plugin::$instance->frontend->enqueue_scripts();
 
 		Plugin::$instance->widgets_manager->enqueue_widgets_scripts();
 
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+		wp_enqueue_script(
+			'elementor-inline-editor',
+			ELEMENTOR_ASSETS_URL . 'lib/inline-editor/js/inline-editor' . $suffix . '.js',
+			[],
+			'',
+			true
+		);
+
+		/**
+		 * Preview enqueue scripts.
+		 *
+		 * Fires after Elementor preview scripts are enqueued.
+		 *
+		 * @since 1.5.4
+		 */
 		do_action( 'elementor/preview/enqueue_scripts' );
 	}
 
 	/**
 	 * Preview constructor.
 	 *
+	 * Initializing Elementor preview.
+	 *
 	 * @since 1.0.0
+	 * @access public
 	 */
 	public function __construct() {
-		add_action( 'template_redirect', [ $this, 'init' ] );
+		add_action( 'template_redirect', [ $this, 'init' ], 0 );
 	}
 }

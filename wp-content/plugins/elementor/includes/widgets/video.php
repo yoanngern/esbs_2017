@@ -5,20 +5,65 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Elementor video widget.
+ *
+ * Elementor widget that displays a video player.
+ *
+ * @since 1.0.0
+ */
 class Widget_Video extends Widget_Base {
 
+	/**
+	 * Get widget name.
+	 *
+	 * Retrieve video widget name.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget name.
+	 */
 	public function get_name() {
 		return 'video';
 	}
 
+	/**
+	 * Get widget title.
+	 *
+	 * Retrieve video widget title.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget title.
+	 */
 	public function get_title() {
 		return __( 'Video', 'elementor' );
 	}
 
+	/**
+	 * Get widget icon.
+	 *
+	 * Retrieve video widget icon.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 *
+	 * @return string Widget icon.
+	 */
 	public function get_icon() {
 		return 'eicon-youtube';
 	}
 
+	/**
+	 * Register video widget controls.
+	 *
+	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_video',
@@ -57,10 +102,10 @@ class Widget_Video extends Widget_Base {
 		$this->add_control(
 			'vimeo_link',
 			[
-				'label' => __( 'Vimeo Link', 'elementor' ),
+				'label' => __( 'Link', 'elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'placeholder' => __( 'Enter your Vimeo link', 'elementor' ),
-				'default' => 'https://vimeo.com/170933924',
+				'default' => 'https://vimeo.com/235215203',
 				'label_block' => true,
 				'condition' => [
 					'video_type' => 'vimeo',
@@ -149,6 +194,18 @@ class Widget_Video extends Widget_Base {
 			[
 				'label' => __( 'Mute', 'elementor' ),
 				'type' => Controls_Manager::SWITCHER,
+				'condition' => [
+					'video_type' => 'youtube',
+				],
+			]
+		);
+
+		$this->add_control(
+			'yt_privacy',
+			[
+				'label' => __( 'Privacy Mode', 'elementor' ),
+				'type' => Controls_Manager::SWITCHER,
+				'description' => __( 'When you turn on privacy mode, YouTube won\'t store information about visitors on your website unless they play the video.', 'elementor' ),
 				'condition' => [
 					'video_type' => 'youtube',
 				],
@@ -422,6 +479,29 @@ class Widget_Video extends Widget_Base {
 		);
 
 		$this->add_control(
+			'lightbox_ui_color',
+			[
+				'label' => __( 'UI Color', 'elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'#elementor-lightbox-{{ID}} .dialog-lightbox-close-button' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'lightbox_ui_color_hover',
+			[
+				'label' => __( 'UI Hover Color', 'elementor' ),
+				'type' => Controls_Manager::COLOR,
+				'selectors' => [
+					'#elementor-lightbox-{{ID}} .dialog-lightbox-close-button:hover' => 'color: {{VALUE}}',
+				],
+				'separator' => 'after',
+			]
+		);
+
+		$this->add_control(
 			'lightbox_video_width',
 			[
 				'label' => __( 'Content Width', 'elementor' ),
@@ -474,6 +554,14 @@ class Widget_Video extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Render video widget output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 */
 	protected function render() {
 		$settings = $this->get_active_settings();
 
@@ -485,7 +573,11 @@ class Widget_Video extends Widget_Base {
 
 		$embed_params = $this->get_embed_params();
 
-		$video_html = Embed::get_embed_html( $video_link, $embed_params );
+		$embed_options = [
+			'privacy' => $settings['yt_privacy'],
+		];
+
+		$video_html = Embed::get_embed_html( $video_link, $embed_params, $embed_options );
 
 		if ( empty( $video_html ) ) {
 			echo esc_url( $video_link );
@@ -496,7 +588,7 @@ class Widget_Video extends Widget_Base {
 		$this->add_render_attribute( 'video-wrapper', 'class', 'elementor-wrapper' );
 
 		if ( ! $settings['lightbox'] ) {
-			$this->add_render_attribute( 'video-wrapper', 'class', 'elementor-video-wrapper' );
+			$this->add_render_attribute( 'video-wrapper', 'class', 'elementor-fit-aspect-ratio' );
 		}
 
 		$this->add_render_attribute( 'video-wrapper', 'class', 'elementor-open-' . ( $settings['lightbox'] ? 'lightbox' : 'inline' ) );
@@ -513,7 +605,7 @@ class Widget_Video extends Widget_Base {
 				if ( $settings['lightbox'] ) {
 					$lightbox_options = [
 						'type' => 'video',
-						'url' => Embed::get_embed_url( $video_link, $embed_params ),
+						'url' => Embed::get_embed_url( $video_link, $embed_params, $embed_options ),
 						'modalOptions' => [
 							'id' => 'elementor-lightbox-' . $this->get_id(),
 							'entranceAnimation' => $settings['lightbox_content_animation'],
@@ -537,7 +629,7 @@ class Widget_Video extends Widget_Base {
 					<?php endif; ?>
 					<?php if ( 'yes' === $settings['show_play_icon'] ) : ?>
 						<div class="elementor-custom-embed-play">
-							<i class="eicon-play"></i>
+							<i class="eicon-play" aria-hidden="true"></i>
 						</div>
 					<?php endif; ?>
 				</div>
@@ -546,6 +638,14 @@ class Widget_Video extends Widget_Base {
 	<?php
 	}
 
+	/**
+	 * Render video widget as plain content.
+	 *
+	 * Override the default behavior, by printing the video URL insted of rendering it.
+	 *
+	 * @since 1.4.5
+	 * @access public
+	 */
 	public function render_plain_content() {
 		$settings = $this->get_active_settings();
 		$url = 'youtube' === $settings['video_type'] ? $settings['link'] : $settings['vimeo_link'];
@@ -553,6 +653,14 @@ class Widget_Video extends Widget_Base {
 		echo esc_url( $url );
 	}
 
+	/**
+	 * Retrieve video widget embed parameters.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 *
+	 * @return array Video embed parameters.
+	 */
 	public function get_embed_params() {
 		$settings = $this->get_settings();
 
@@ -591,6 +699,14 @@ class Widget_Video extends Widget_Base {
 		return $params;
 	}
 
+	/**
+	 * Retrieve video widget hosted parameters.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 *
+	 * @return array Video hosted parameters.
+	 */
 	protected function get_hosted_params() {
 		$settings = $this->get_settings();
 
@@ -615,6 +731,16 @@ class Widget_Video extends Widget_Base {
 		return $params;
 	}
 
+	/**
+	 * Whether the video widget has an overlay image or not.
+	 *
+	 * Used to determine whether an overlay image was set for the video.
+	 *
+	 * @since 1.0.0
+	 * @access protected
+	 *
+	 * @return bool Whether an image overlay was set for the video.
+	 */
 	protected function has_image_overlay() {
 		$settings = $this->get_settings();
 

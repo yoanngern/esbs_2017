@@ -80,7 +80,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			Group_Control_Image_Size::get_type(),
 			[
 				'name' => 'thumbnail_size',
-				'label' => __( 'Thumbnail Size', 'elementor-pro' ),
 				'default' => 'medium',
 				'exclude' => [ 'custom' ],
 				'condition' => [
@@ -214,15 +213,15 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 				'label' => __( 'Title HTML Tag', 'elementor-pro' ),
 				'type' => Controls_Manager::SELECT,
 				'options' => [
-					'h1' => __( 'H1', 'elementor-pro' ),
-					'h2' => __( 'H2', 'elementor-pro' ),
-					'h3' => __( 'H3', 'elementor-pro' ),
-					'h4' => __( 'H4', 'elementor-pro' ),
-					'h5' => __( 'H5', 'elementor-pro' ),
-					'h6' => __( 'H6', 'elementor-pro' ),
-					'div' => __( 'div', 'elementor-pro' ),
-					'span' => __( 'span', 'elementor-pro' ),
-					'p' => __( 'p', 'elementor-pro' ),
+					'h1' => 'H1',
+					'h2' => 'H2',
+					'h3' => 'H3',
+					'h4' => 'H4',
+					'h5' => 'H5',
+					'h6' => 'H6',
+					'div' => 'div',
+					'span' => 'span',
+					'p' => 'p',
 				],
 				'default' => 'h3',
 				'condition' => [
@@ -330,26 +329,26 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			'section_design_layout',
 			[
 				'label' => __( 'Layout', 'elementor-pro' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
+				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_control(
 			'column_gap',
 			[
-				'label'     => __( 'Columns Gap', 'elementor-pro' ),
-				'type'      => Controls_Manager::SLIDER,
-				'default'   => [
+				'label' => __( 'Columns Gap', 'elementor-pro' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
 					'size' => 30,
 				],
-				'range'     => [
+				'range' => [
 					'px' => [
 						'min' => 0,
 						'max' => 100,
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-post'            => 'padding-right: calc( {{SIZE}}{{UNIT}}/2 ); padding-left: calc( {{SIZE}}{{UNIT}}/2 );',
+					'{{WRAPPER}} .elementor-post' => 'padding-right: calc( {{SIZE}}{{UNIT}}/2 ); padding-left: calc( {{SIZE}}{{UNIT}}/2 );',
 					'{{WRAPPER}} .elementor-posts-container' => 'margin-left: calc( -{{SIZE}}{{UNIT}}/2 ); margin-right: calc( -{{SIZE}}{{UNIT}}/2 );',
 				],
 			]
@@ -358,12 +357,12 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->add_control(
 			'row_gap',
 			[
-				'label'     => __( 'Rows Gap', 'elementor-pro' ),
-				'type'      => Controls_Manager::SLIDER,
-				'default'   => [
+				'label' => __( 'Rows Gap', 'elementor-pro' ),
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
 					'size' => 35,
 				],
-				'range'     => [
+				'range' => [
 					'px' => [
 						'min' => 0,
 						'max' => 100,
@@ -378,21 +377,21 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->add_control(
 			'alignment',
 			[
-				'label'        => __( 'Alignment', 'elementor-pro' ),
-				'type'         => Controls_Manager::CHOOSE,
-				'label_block'  => false,
-				'options'      => [
-					'left'   => [
+				'label' => __( 'Alignment', 'elementor-pro' ),
+				'type' => Controls_Manager::CHOOSE,
+				'label_block' => false,
+				'options' => [
+					'left' => [
 						'title' => __( 'Left', 'elementor-pro' ),
-						'icon'  => 'fa fa-align-left',
+						'icon' => 'fa fa-align-left',
 					],
 					'center' => [
 						'title' => __( 'Center', 'elementor-pro' ),
-						'icon'  => 'fa fa-align-center',
+						'icon' => 'fa fa-align-center',
 					],
-					'right'  => [
+					'right' => [
 						'title' => __( 'Right', 'elementor-pro' ),
-						'icon'  => 'fa fa-align-right',
+						'icon' => 'fa fa-align-right',
 					],
 				],
 				'prefix_class' => 'elementor-posts--align-',
@@ -407,7 +406,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			'section_design_image',
 			[
 				'label' => __( 'Image', 'elementor-pro' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
+				'tab' => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					$this->get_control_id( 'thumbnail!' ) => 'none',
 				],
@@ -417,10 +416,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->add_control(
 			'img_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'elementor-pro' ),
-				'type'       => Controls_Manager::DIMENSIONS,
+				'label' => __( 'Border Radius', 'elementor-pro' ),
+				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
-				'selectors'  => [
+				'selectors' => [
 					'{{WRAPPER}} .elementor-post__thumbnail' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition' => [
@@ -432,19 +431,19 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->add_control(
 			'image_spacing',
 			[
-				'label'     => __( 'Spacing', 'elementor-pro' ),
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
+				'label' => __( 'Spacing', 'elementor-pro' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
 					'px' => [
 						'max' => 100,
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}}.elementor-posts--thumbnail-left .elementor-post__thumbnail__link'  => 'margin-right: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}}.elementor-posts--thumbnail-left .elementor-post__thumbnail__link' => 'margin-right: {{SIZE}}{{UNIT}}',
 					'{{WRAPPER}}.elementor-posts--thumbnail-right .elementor-post__thumbnail__link' => 'margin-left: {{SIZE}}{{UNIT}}',
-					'{{WRAPPER}}.elementor-posts--thumbnail-top .elementor-post__thumbnail__link'   => 'margin-bottom: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}}.elementor-posts--thumbnail-top .elementor-post__thumbnail__link' => 'margin-bottom: {{SIZE}}{{UNIT}}',
 				],
-				'default'   => [
+				'default' => [
 					'size' => 20,
 				],
 				'condition' => [
@@ -480,7 +479,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label'     => __( 'Color', 'elementor-pro' ),
+				'label' => __( 'Color', 'elementor-pro' ),
 				'type' => Controls_Manager::COLOR,
 				'scheme' => [
 					'type' => Scheme_Color::get_type(),
@@ -499,7 +498,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'title_typography',
-				'label'    => __( 'Typography', 'elementor-pro' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .elementor-post__title, {{WRAPPER}} .elementor-post__title a',
 				'condition' => [
@@ -511,7 +509,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->add_control(
 			'title_spacing',
 			[
-				'label'     => __( 'Spacing', 'elementor-pro' ),
+				'label' => __( 'Spacing', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -542,7 +540,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->add_control(
 			'meta_color',
 			[
-				'label'     => __( 'Color', 'elementor-pro' ),
+				'label' => __( 'Color', 'elementor-pro' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .elementor-post__meta-data' => 'color: {{VALUE}};',
@@ -571,7 +569,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'meta_typography',
-				'label'    => __( 'Typography', 'elementor-pro' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_2,
 				'selector' => '{{WRAPPER}} .elementor-post__meta-data',
 				'condition' => [
@@ -629,7 +626,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'excerpt_typography',
-				'label'    => __( 'Typography', 'elementor-pro' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_3,
 				'selector' => '{{WRAPPER}} .elementor-post__excerpt p',
 				'condition' => [
@@ -691,7 +687,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'read_more_typography',
-				'label'    => __( 'Typography', 'elementor-pro' ),
 				'selector' => '{{WRAPPER}} .elementor-post__read-more',
 				'scheme' => Scheme_Typography::TYPOGRAPHY_4,
 				'condition' => [
@@ -868,7 +863,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		}
 
 		$page_limit = $this->parent->get_query()->max_num_pages;
-		if ( '' !== $parent_settings['pagination_page_limit']  ) {
+		if ( '' !== $parent_settings['pagination_page_limit'] ) {
 			$page_limit = min( $parent_settings['pagination_page_limit'], $page_limit );
 		}
 
