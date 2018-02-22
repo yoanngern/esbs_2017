@@ -1181,13 +1181,6 @@
 		"oAP": "\/includes\/acf\/adverts.php",
 		"oF": 0
 		},
-	"\/includes\/acf\/blog.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/blog.php",
-		"oF": 0
-		},
 	"\/includes\/acf\/blog_categories.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -1195,11 +1188,25 @@
 		"oAP": "\/includes\/acf\/blog_categories.php",
 		"oF": 0
 		},
+	"\/includes\/acf\/blog_end.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/blog_end.php",
+		"oF": 0
+		},
 	"\/includes\/acf\/blog_home.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/includes\/acf\/blog_home.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/blog_start.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/blog_start.php",
 		"oF": 0
 		},
 	"\/includes\/acf\/custom_page.php": {
@@ -1214,6 +1221,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/includes\/acf\/default_page.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/esbs_settings.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/esbs_settings.php",
 		"oF": 0
 		},
 	"\/includes\/acf\/harvest_cycle.php": {
@@ -4646,6 +4660,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/divers\/action_banner.php",
+		"oF": 0
+		},
+	"\/template-parts\/divers\/facebook_login.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/divers\/facebook_login.php",
 		"oF": 0
 		},
 	"\/template-parts\/divers\/facebook_pixel.php": {

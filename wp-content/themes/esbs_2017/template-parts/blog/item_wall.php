@@ -48,9 +48,7 @@ $link_email = "mailto:?subject=$title&body=$url_encoded";
 
             <figure style="background-image: url('<?php echo get_field( 'thumb', $id )['sizes']['banner'] ?>')">
 
-                <div class="play">
-                    <span>Play</span>
-                </div>
+                <div class="play"></div>
             </figure>
 
             <div class="share">

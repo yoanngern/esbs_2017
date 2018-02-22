@@ -20,6 +20,20 @@ function my_acf_init() {
 
 		) );
 
+
+		/**
+		 * ESBS settings
+		 */
+		acf_add_options_sub_page( array(
+			'page_title'  => __( 'ESBS settings', 'my_text_domain' ),
+			'menu_title'  => __( 'ESBS', 'my_text_domain' ),
+			'parent_slug' => 'options-general.php',
+			'menu_slug'   => 'esbs',
+			'capability'  => 'delete_pages',
+			'autoload'    => true,
+
+		) );
+
 	}
 
 }

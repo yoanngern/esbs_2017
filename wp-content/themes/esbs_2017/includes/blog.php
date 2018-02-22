@@ -14,8 +14,8 @@ function update_post( $post_id ) {
 	}
 
 
-	$content_post = get_post($post_id);
-	$content = $content_post->post_content;
+	$content_post = get_post( $post_id );
+	$content      = $content_post->post_content;
 
 	$type = 'article';
 
@@ -54,6 +54,14 @@ function update_post( $post_id ) {
 			$infos = get_youtube_info( $url );
 
 			$type = 'video';
+
+		}
+
+		if ( get_url_info( $url ) == 'facebook' ) {
+
+			$infos = get_facebook_info( $url );
+
+			$type = 'facebook';
 
 		}
 
@@ -115,6 +123,11 @@ function get_url_info( $url ) {
 	} elseif ( strpos( $url, 'vimeo' ) > 0 ) {
 
 		return 'vimeo';
+
+
+	} elseif ( strpos( $url, 'facebook' ) > 0 ) {
+
+		return 'facebook';
 
 
 	} else {
@@ -183,6 +196,29 @@ function get_vimeo_info( $url ) {
 	$infos['title'] = unserialize( $vimeo['body'] )[0]['title'];
 	$infos['desc']  = unserialize( $vimeo['body'] )[0]['description'];
 	$infos['image'] = $image_url;
+
+	return $infos;
+
+}
+
+
+/**
+ * @param $url
+ *
+ * @return array
+ */
+function get_facebook_info( $url ) {
+
+	$infos = array();
+
+
+	$id = '';
+
+
+	$infos['id']    = "";
+	$infos['title'] = "";
+	$infos['desc']  = "";
+	$infos['image'] = "";
 
 	return $infos;
 

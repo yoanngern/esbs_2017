@@ -18,6 +18,7 @@ add_action( 'wp_enqueue_scripts', 'themeslug_enqueue_style' );
 add_action( 'wp_enqueue_scripts', 'themeslug_enqueue_script' );
 
 
+
 require_once( __DIR__ . '/includes/esbs_harvest-cycle.php' );
 require_once( __DIR__ . '/includes/blog.php' );
 
@@ -440,6 +441,6 @@ function get_api( $name ) {
 		)
 	);
 
-	return $api[$name];
+	return $api[ $name ];
 
 }
