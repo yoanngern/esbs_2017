@@ -1,6 +1,6 @@
 <?php /* Template Name: Harvest Cycle */
 
-get_header(); ?>
+get_header( 'campaign'); ?>
 
     <section id="content" class="harvest-cycle">
 

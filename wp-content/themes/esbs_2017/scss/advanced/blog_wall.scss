@@ -188,4 +188,54 @@ div.blog_wall {
 
     }
 
+    @media only screen and (max-width: 740px) {
+
+        article {
+
+            .box {
+                height: auto;
+                padding-bottom: 0;
+
+                .hide {
+                    position: relative;
+                }
+
+                a.item_link {
+                    padding-top: 35%;
+
+                    .item_content {
+                        position: relative;
+                        width: 100%;
+
+                        .container {
+                            width: auto;
+                            margin: 0 16px 40px;
+
+                            h2 {
+                                margin-top: 20px;
+                            }
+                        }
+                    }
+                }
+
+                figure {
+                    width: 100%;
+                    padding-bottom: 35%;
+                    height: auto;
+                }
+
+                .share {
+                    width: 100%;
+                    bottom: 0;
+
+                    .container {
+                        width: auto;
+                        margin: 0 14px 4px;
+                    }
+                }
+            }
+        }
+
+    }
+
 }
