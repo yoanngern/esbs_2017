@@ -34,10 +34,10 @@
         <article class="title facebook">
 
             <div class="image">
-                <figure style="background-image: url('<?php echo $bg['sizes']['blog_wall']; ?>')"></figure>
+                <figure style="background-image: url('<?php echo $bg['sizes']['full_hd']; ?>')"></figure>
             </div>
 
-            <div class="bg" style="background-image: url('<?php echo $bg['sizes']['blog_wall']; ?>')"></div>
+            <div class="bg" style="background-image: url('<?php echo $bg['sizes']['full_hd']; ?>')"></div>
         </article>
 
 	<?php elseif ( $bg ): ?>
@@ -77,7 +77,7 @@
 
                 <header>
 
-					<?php if ( $video ): ?>
+					<?php if ( $video || $type == "facebook" ): ?>
                         <h1><?php echo $title; ?></h1>
 					<?php endif; ?>
 
