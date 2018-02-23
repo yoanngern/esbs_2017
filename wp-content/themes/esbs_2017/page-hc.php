@@ -32,7 +32,7 @@ get_header( 'campaign' ); ?>
 
         </article>
 
-        <article class="schema">
+        <article class="schema" style="display: none">
             <div class="content">
 
                 <h3>Pray & Declare</h3>
