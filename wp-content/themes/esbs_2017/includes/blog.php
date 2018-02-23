@@ -20,12 +20,14 @@ function update_post( $post_id ) {
 
 	$type = 'article';
 
+	/*
 	if ( !$title ) {
 		$title = "Draft";
 	} else {
 		$title = get_the_title();
 	}
 
+	*/
 
 	$my_post = array(
 		'ID'         => $post_id,
