@@ -16,10 +16,11 @@ function update_post( $post_id ) {
 
 	$content_post = get_post( $post_id );
 	$content      = $content_post->post_content;
+	$title        = $content_post->post_title;
 
 	$type = 'article';
 
-	if ( get_the_title() == "" ) {
+	if ( !$title ) {
 		$title = "Draft";
 	} else {
 		$title = get_the_title();

@@ -113,7 +113,10 @@
 
     </script>
 
-	<?php get_template_part( 'template-parts/divers/facebook_pixel' ); ?>
+
+
+
+    <?php get_template_part( 'template-parts/divers/facebook_pixel' ); ?>
 	<?php get_template_part( 'template-parts/divers/facebook_login' ); ?>
 
 </head>
