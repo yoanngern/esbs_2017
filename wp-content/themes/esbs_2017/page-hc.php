@@ -1,6 +1,6 @@
 <?php /* Template Name: Harvest Cycle */
 
-get_header( 'campaign'); ?>
+get_header( 'campaign' ); ?>
 
     <section id="content" class="harvest-cycle">
 
@@ -84,13 +84,20 @@ get_header( 'campaign'); ?>
 
 				$cat = get_field( 'blog_category' );
 
+				$child_cats = (array) get_term_children( $cat, 'category' );
+
+				$post_in = get_objects_in_term( $cat, 'category' );
+
+				$unwanted_children = get_term_children( $cat, 'category' );
+				$unwanted_post_ids = get_objects_in_term( $unwanted_children, 'category' );
+
 
 				$items = wp_get_recent_posts( array(
-					'numberposts'      => 8,
+					'numberposts'      => 30,
 					'offset'           => 0,
-					'category'         => $cat,
 					'suppress_filters' => true,
-					'exclude'          => $exclude_posts,
+					'post__in'         => $post_in,
+					'post__not_in'     => $unwanted_post_ids,
 
 				), OBJECT );
 
