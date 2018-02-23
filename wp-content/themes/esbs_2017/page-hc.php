@@ -71,50 +71,48 @@ get_header( 'campaign' ); ?>
 
         <article class="blog">
 
-            <div class="content">
-				<?php
+			<?php
 
-				$blog_title = get_field( 'blog_title' );
+			$blog_title = get_field( 'blog_title' );
 
-				?>
+			?>
 
-				<?php
+			<?php
 
-				$cat = get_field( 'blog_category' );
+			$cat = get_field( 'blog_category' );
 
-				$child_cats = (array) get_term_children( $cat, 'category' );
+			$child_cats = (array) get_term_children( $cat, 'category' );
 
-				$post_in = get_objects_in_term( $cat, 'category' );
+			$post_in = get_objects_in_term( $cat, 'category' );
 
-				$unwanted_children = get_term_children( $cat, 'category' );
-				$unwanted_post_ids = get_objects_in_term( $unwanted_children, 'category' );
+			$unwanted_children = get_term_children( $cat, 'category' );
+			$unwanted_post_ids = get_objects_in_term( $unwanted_children, 'category' );
 
 
-				$items = wp_get_recent_posts( array(
-					'numberposts'      => 30,
-					'offset'           => 0,
-					'suppress_filters' => true,
-					'post__in'         => $post_in,
-					'post__not_in'     => $unwanted_post_ids,
+			$items = wp_get_recent_posts( array(
+				'numberposts'      => 30,
+				'offset'           => 0,
+				'suppress_filters' => true,
+				'post__in'         => $post_in,
+				'post__not_in'     => $unwanted_post_ids,
 
-				), OBJECT );
+			), OBJECT );
 
-				if ( $items != null ) : ?>
+			if ( $items != null ) : ?>
 
-                    <div class="blog_wall">
+                <div class="blog_wall">
 
-						<?php foreach ( $items as $item ) :
+					<?php foreach ( $items as $item ) :
 
-							set_query_var( 'item', $item );
-							get_template_part( 'template-parts/blog/item_wall' );
+						set_query_var( 'item', $item );
+						get_template_part( 'template-parts/blog/item_wall' );
 
-						endforeach; ?>
+					endforeach; ?>
 
-                    </div>
+                </div>
 
-				<?php endif; ?>
+			<?php endif; ?>
 
-            </div>
         </article>
 
     </section>
