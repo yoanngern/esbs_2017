@@ -631,7 +631,11 @@ section#content section.related_posts {
             &.video_banner,
             &.facebook {
                 height: auto;
-                min-height: inherit;
+                min-height: initial;
+
+                .bg {
+                    display: none;
+                }
             }
         }
 
