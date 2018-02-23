@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <div class="bg" style="background-image: url('<?php echo $bg['sizes']['banner']; ?>')"></div>
+            <div class="bg" style="background-image: url('<?php echo $bg['sizes']['banner_blur']; ?>')"></div>
         </article>
 
 
@@ -37,7 +37,7 @@
                 <figure style="background-image: url('<?php echo $bg['sizes']['full_hd']; ?>')"></figure>
             </div>
 
-            <div class="bg" style="background-image: url('<?php echo $bg['sizes']['full_hd']; ?>')"></div>
+            <div class="bg" style="background-image: url('<?php echo $bg['sizes']['banner_blur']; ?>')"></div>
         </article>
 
 	<?php elseif ( $bg ): ?>

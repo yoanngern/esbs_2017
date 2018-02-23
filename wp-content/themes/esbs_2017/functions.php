@@ -48,6 +48,7 @@ add_image_size( 'hd', 1280, 720, true );
 add_image_size( 'blog', 328, 244, true );
 add_image_size( 'blog_wall', 640, 360, true );
 add_image_size( 'fullscreen', 1440, 806, true );
+add_image_size( 'banner_blur', 200, 100, true );
 
 add_image_size( 'social', 500, 500, true );
 
