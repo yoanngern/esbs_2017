@@ -22,10 +22,8 @@ section#content section.related_posts {
         background-repeat: no-repeat;
         background-size: cover;
 
-
         &.video_banner {
             overflow: hidden;
-            //min-height: inherit;
             height: auto;
 
             .video_box {
@@ -45,6 +43,46 @@ section#content section.related_posts {
                 background-color: $black;
                 filter: brightness(40%) saturate(1.1) contrast(105%) blur(20px);
                 -webkit-filter: brightness(40%) saturate(1.1) contrast(105%) blur(20px);
+                width: 120%;
+                height: 120%;
+                position: absolute;
+                top: -10%;
+                left: -10%;
+                z-index: 10;
+            }
+        }
+
+        &.facebook {
+            overflow: hidden;
+            height: auto;
+
+            .image {
+                max-width: 800px;
+                position: relative;
+                text-align: center;
+                z-index: 100;
+                margin: 0 auto;
+
+                figure {
+                    width: 100%;
+                    margin: 0 auto;
+                    position: relative;
+                    height: 0;
+                    padding-bottom: 56.2%;
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-color: $black;
+                }
+            }
+
+            .bg {
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-color: $black;
+                filter: brightness(50%) saturate(1.1) contrast(105%) blur(20px);
+                -webkit-filter: brightness(50%) saturate(1.1) contrast(105%) blur(20px);
                 width: 120%;
                 height: 120%;
                 position: absolute;

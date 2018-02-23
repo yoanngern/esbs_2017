@@ -7,6 +7,7 @@
 	$bg       = get_field_or_parent( 'thumb', get_the_ID() );
 	$title    = get_the_title();
 	$video    = get_iframe_video( get_field( 'video', get_the_ID() ) );
+	$type     = get_field( 'type', get_the_ID() );
 	$subtitle = "";
 	$link     = "";
 
@@ -27,6 +28,17 @@
             <div class="bg" style="background-image: url('<?php echo $bg['sizes']['banner']; ?>')"></div>
         </article>
 
+
+	<?php elseif ( $type == "facebook" ): ?>
+
+        <article class="title facebook">
+
+            <div class="image">
+                <figure style="background-image: url('<?php echo $bg['sizes']['blog_wall']; ?>')"></figure>
+            </div>
+
+            <div class="bg" style="background-image: url('<?php echo $bg['sizes']['blog_wall']; ?>')"></div>
+        </article>
 
 	<?php elseif ( $bg ): ?>
 
