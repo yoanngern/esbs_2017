@@ -18,11 +18,16 @@ add_action( 'wp_enqueue_scripts', 'themeslug_enqueue_style' );
 add_action( 'wp_enqueue_scripts', 'themeslug_enqueue_script' );
 
 
+//require_once( __DIR__ . '/options.php' );
+
+//require_once __DIR__ . '/vendor/Facebook/autoload.php'; // change path as needed
+
 
 require_once( __DIR__ . '/includes/esbs_harvest-cycle.php' );
 require_once( __DIR__ . '/includes/blog.php' );
 
-require_once( __DIR__ . '/options.php' );
+
+require_once( __DIR__ . '/acf_options.php' );
 
 flush_rewrite_rules();
 
@@ -41,6 +46,7 @@ add_image_size( 'banner', 1440, 670, true );
 add_image_size( 'full_hd', 1920, 1080, true );
 add_image_size( 'hd', 1280, 720, true );
 add_image_size( 'blog', 328, 244, true );
+add_image_size( 'blog_wall', 640, 360, true );
 add_image_size( 'fullscreen', 1440, 806, true );
 
 add_image_size( 'social', 500, 500, true );
