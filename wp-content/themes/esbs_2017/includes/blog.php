@@ -59,7 +59,7 @@ function update_post( $post_id ) {
 
 		if ( get_url_info( $url ) == 'facebook' ) {
 
-			$infos = get_facebook_info( $url );
+			//$infos = get_facebook_info( $url );
 
 			$type = 'facebook';
 
@@ -206,6 +206,7 @@ function get_vimeo_info( $url ) {
  * @param $url
  *
  * @return array
+ * @throws \Facebook\Exceptions\FacebookSDKException
  */
 function get_facebook_info( $url ) {
 
@@ -214,6 +215,41 @@ function get_facebook_info( $url ) {
 
 	$id = '';
 
+
+	$fb = new Facebook\Facebook( [
+		'app_id'                => get_field( 'facebook_app_id', 'option' ),
+		'app_secret'            => get_field( 'facebook_app_secret', 'option' ),
+		'default_graph_version' => get_field( 'facebook_api_version', 'option' ),
+	] );
+
+	$helper = $fb->getCanvasHelper();
+
+	try {
+		$accessToken = $helper->getAccessToken();
+	} catch ( Facebook\Exceptions\FacebookResponseException $e ) {
+		// When Graph returns an error
+		echo 'Graph returned an error: ' . $e->getMessage();
+		exit;
+	} catch ( Facebook\Exceptions\FacebookSDKException $e ) {
+		// When validation fails or other local issues
+		echo 'Facebook SDK returned an error: ' . $e->getMessage();
+		exit;
+	}
+
+	if ( ! isset( $accessToken ) ) {
+		echo 'No OAuth data could be obtained from the signed request. User has not authorized your app yet.';
+		exit;
+	}
+
+// Logged in
+	echo '<h3>Signed Request</h3>';
+	var_dump( $helper->getSignedRequest() );
+
+	echo '<h3>Access Token</h3>';
+	var_dump( $accessToken->getValue() );
+
+
+	die();
 
 	$infos['id']    = "";
 	$infos['title'] = "";
