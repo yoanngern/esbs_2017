@@ -303,6 +303,10 @@ section#content section.related_posts {
                 figure {
                     width: 100%;
 
+                    a {
+                        display: block;
+                    }
+
                     img {
                         width: 100%;
                         transition: all 100ms ease;
@@ -623,6 +627,12 @@ section#content section.related_posts {
         article.title {
             min-height: 300px;
             height: 60vh;
+
+            &.video_banner,
+            &.facebook {
+                height: auto;
+                min-height: inherit;
+            }
         }
 
         section.title article {
