@@ -78,8 +78,6 @@ get_header( 'campaign' ); ?>
 
 				?>
 
-                <h2><?php echo $blog_title; ?></h2>
-
 				<?php
 
 				$cat = get_field( 'blog_category' );
