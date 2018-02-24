@@ -706,36 +706,55 @@ section#content section.related_posts {
 
             article.post {
 
-                figure {
-                    a {
-                        display: block;
-                        position: relative;
+                a.image {
+                    display: block;
+                    transition: all 100ms ease;
+                    height: 0;
+                    padding-bottom: 56.2%;
+                    position: relative;
 
-                        &:hover {
-                            div.button {
-                                background-color: $gold;
-                                color: $white;
-                            }
+                    figure {
+                        display: block;
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                    }
+
+
+                    div.button {
+                        position: absolute;
+                        top: 50%;
+                        line-height: 40px;
+                        display: block;
+                        margin: -20px auto 0;
+                        font-family: $avenir-blk;
+                        text-transform: uppercase;
+                        letter-spacing: 0.3em;
+                        font-size: 1em;
+                        width: 70%;
+                        left: 15%;
+                        bottom: inherit;
+                        background-color: $gold;
+                        color: $white;
+                        opacity: 0;
+
+                        transition: opacity 300ms ease;
+                    }
+
+
+                    &:hover {
+
+                        div.button {
+                            opacity: 1;
                         }
                     }
+
                 }
 
-                div.button {
-                    position: absolute;
-                    top: 50%;
-                    line-height: 40px;
-                    display: block;
-                    margin: -20px auto 0;
-                    color: $gold;
-                    font-family: $avenir-blk;
-                    text-transform: uppercase;
-                    letter-spacing: 0.3em;
-                    font-size: 1em;
-                    border: 2px solid $gold;
-                    width: 70%;
-                    left: 15%;
-                    bottom: inherit;
-                }
+
 
                 div.box {
                     height: auto;

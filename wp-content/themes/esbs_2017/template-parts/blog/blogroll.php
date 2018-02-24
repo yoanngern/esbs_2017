@@ -33,15 +33,13 @@ if ( $posts != null ) :
                 <article id="post-<?php echo $curr_post->ID; ?>" class="post">
 
                     <div class="box">
-                        <figure>
-                            <a href="<?php echo esc_url( get_the_permalink( $curr_post->ID ) ) ?>">
 
-                                <img src="<?php echo get_field_or_parent( 'thumb', $curr_post->ID )['sizes']['blog'] ?>"
-                                     alt="">
+                        <a class="image" href="<?php echo esc_url( get_the_permalink( $curr_post->ID ) ) ?>">
+                            <figure style="background-image: url('<?php echo get_field_or_parent( 'thumb', get_the_ID() )['sizes']['blog'] ?>')">
 
-                                <div class="button"><?php echo pll_e( 'Read' ); ?></div>
-                            </a>
-                        </figure>
+                            </figure>
+                            <div class="button"><?php echo pll_e( 'Read' ); ?></div>
+                        </a>
 
                         <h2>
                             <a href="<?php echo esc_url( get_the_permalink( $curr_post->ID ) ) ?>"><?php echo get_the_title( $curr_post->ID ); ?></a>
