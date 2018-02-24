@@ -35,7 +35,7 @@ if ( $posts != null ) :
                     <div class="box">
 
                         <a class="image" href="<?php echo esc_url( get_the_permalink( $curr_post->ID ) ) ?>">
-                            <figure style="background-image: url('<?php echo get_field_or_parent( 'thumb', get_the_ID() )['sizes']['blog'] ?>')">
+                            <figure style="background-image: url('<?php echo get_field_or_parent( 'thumb', $curr_post->ID )['sizes']['blog'] ?>')">
 
                             </figure>
                             <div class="button"><?php echo pll_e( 'Read' ); ?></div>
