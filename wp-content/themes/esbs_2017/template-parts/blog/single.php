@@ -14,56 +14,56 @@
 	?>
 
 
-	<?php if ( $video ): ?>
+    <section class="title">
+		<?php if ( $video ): ?>
 
-        <article class="title video_banner">
+            <article class="title video_banner">
 
-            <div class="video_box">
-                <div class="video">
-					<?php echo $video; ?>
+                <div class="video_box">
+                    <div class="video">
+						<?php echo $video; ?>
+                    </div>
                 </div>
-            </div>
 
-            <div class="bg" style="background-image: url('<?php echo $bg['sizes']['banner_blur']; ?>')"></div>
-        </article>
+                <div class="bg" style="background-image: url('<?php echo $bg['sizes']['banner_blur']; ?>')"></div>
+            </article>
 
 
-	<?php elseif ( $type == "facebook" ): ?>
+		<?php elseif ( $type == "facebook" ): ?>
 
-        <article class="title facebook">
+            <article class="title facebook">
 
-            <div class="image">
-                <figure style="background-image: url('<?php echo $bg['sizes']['full_hd']; ?>')"></figure>
-            </div>
+                <div class="image">
+                    <figure style="background-image: url('<?php echo $bg['sizes']['full_hd']; ?>')"></figure>
+                </div>
 
-            <div class="bg" style="background-image: url('<?php echo $bg['sizes']['banner_blur']; ?>')"></div>
-        </article>
+                <div class="bg" style="background-image: url('<?php echo $bg['sizes']['banner_blur']; ?>')"></div>
+            </article>
 
-	<?php elseif ( $bg ): ?>
+		<?php elseif ( $bg ): ?>
 
-        <article class="title"
-                 style="background-image: url('<?php echo $bg['sizes']['banner']; ?>')">
+            <article class="title post"
+                     style="background-image: url('<?php echo $bg['sizes']['banner']; ?>')">
 
-            <div class="dark"></div>
+                <div class="dark"></div>
 
-            <a class="logo" href="<?php echo pll_home_url(); ?>blog"></a>
+                <div class="text">
+                    <h1><?php echo $title; ?></h1>
 
-            <div class="text">
-                <h1><?php echo $title; ?></h1>
+					<?php if ( $subtitle ):
+						echo "<h2>" . $subtitle . "</h2>";
+					endif; ?>
+                </div>
 
-				<?php if ( $subtitle ):
-					echo "<h2>" . $subtitle . "</h2>";
-				endif; ?>
-            </div>
+            </article>
 
-        </article>
+		<?php else: ?>
 
-	<?php else: ?>
+            <div class="spacer"></div>
 
-        <div class="spacer"></div>
+		<?php endif; ?>
 
-	<?php endif; ?>
-
+    </section>
 
     <div class="platter">
 

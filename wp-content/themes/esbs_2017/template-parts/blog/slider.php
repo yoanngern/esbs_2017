@@ -121,21 +121,23 @@ if ( $bg ): ?>
 
 		<?php endforeach; ?>
 
-        <div class="bullets">
+		<?php if ( $recent_posts ): ?>
 
-            <a href="#" class="current" data-slide="1"></a>
+            <div class="bullets">
 
-			<?php foreach ( $recent_posts as $key => $recent ) : ?>
-                <a href="#" data-slide="<?php echo $key + 2 ?>"></a>
+                <a href="#" class="current" data-slide="1"></a>
 
-			<?php endforeach;
+				<?php foreach ( $recent_posts as $key => $recent ) : ?>
+                    <a href="#" data-slide="<?php echo $key + 2 ?>"></a>
 
-			wp_reset_query();
+				<?php endforeach;
 
-			?>
+				wp_reset_query();
 
-        </div>
+				?>
 
+            </div>
+		<?php endif; ?>
     </section>
 
 <?php else: ?>
