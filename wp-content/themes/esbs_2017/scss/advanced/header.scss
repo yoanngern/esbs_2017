@@ -178,6 +178,24 @@ body > header {
                                 background-image: url('images/icon_4_4.png');
                             }
 
+                            &.icon-hc_1 a::before {
+                                background-image: url('images/icon_hc_1.png');
+                            }
+
+                            &.icon-hc_2 a::before {
+                                background-image: url('images/icon_hc_2.png');
+                            }
+
+
+                            &.icon-hc_3 a::before {
+                                background-image: url('images/icon_hc_3.png');
+                            }
+
+
+                            &.icon-hc_4 a::before {
+                                background-image: url('images/icon_hc_4.png');
+                            }
+
                             &.icon-business a::before {
                                 background-image: url('images/icon_business.png');
                             }

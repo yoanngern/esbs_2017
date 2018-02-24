@@ -1,4 +1,4 @@
-<?php get_header( 'campaign'); ?>
+<?php get_header( 'campaign' ); ?>
 
 <?php
 
@@ -15,6 +15,7 @@ $exclude_posts = array();
 	$title    = get_field( 'title' );
 	$subtitle = "";
 	$link     = "";
+	$phase    = get_field( 'phase' );
 
 	?>
 
@@ -24,11 +25,25 @@ $exclude_posts = array();
                  style="background-image: url('<?php echo $bg['sizes']['banner']; ?>')">
 
             <div class="text">
-                <h1><?php echo $title; ?></h1>
 
-				<?php if ( $subtitle ):
-					echo "<h2>" . $subtitle . "</h2>";
-				endif; ?>
+                <div class="container">
+
+					<?php if ( $phase ): ?>
+                        <div class="icon">
+                            <div>
+								<?php echo get_icons( $phase ); ?>
+                            </div>
+                        </div>
+					<?php endif; ?>
+                    <div class="title">
+                        <h1><?php echo $title; ?></h1>
+
+						<?php if ( $subtitle ):
+							echo "<h2>" . $subtitle . "</h2>";
+						endif; ?>
+                    </div>
+                </div>
+
             </div>
 
         </article>

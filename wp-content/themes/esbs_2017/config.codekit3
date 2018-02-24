@@ -866,6 +866,50 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/images\/icon_hc_1.png": {
+		"ft": 32768,
+		"iS": 11447,
+		"oA": 0,
+		"oAP": "\/images\/icon_hc_1.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_hc_2.png": {
+		"ft": 32768,
+		"iS": 11189,
+		"oA": 0,
+		"oAP": "\/images\/icon_hc_2.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_hc_3.png": {
+		"ft": 32768,
+		"iS": 13625,
+		"oA": 0,
+		"oAP": "\/images\/icon_hc_3.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/icon_hc_4.png": {
+		"ft": 32768,
+		"iS": 6573,
+		"oA": 0,
+		"oAP": "\/images\/icon_hc_4.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
 	"\/images\/icon_intercessor.png": {
 		"ft": 32768,
 		"iS": 9669,
@@ -1242,6 +1286,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/includes\/acf\/harvest_cycle.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/hc_phase.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/hc_phase.php",
 		"oF": 0
 		},
 	"\/includes\/acf\/meta_facebook.php": {

@@ -2,6 +2,7 @@
 
 require_once( __DIR__ . '/acf/esbs_settings.php' );
 require_once( __DIR__ . '/acf/harvest_cycle.php' );
+require_once( __DIR__ . '/acf/hc_phase.php' );
 require_once( __DIR__ . '/acf/adverts.php' );
 require_once( __DIR__ . '/acf/blog_start.php' );
 require_once( __DIR__ . '/acf/blog_end.php' );

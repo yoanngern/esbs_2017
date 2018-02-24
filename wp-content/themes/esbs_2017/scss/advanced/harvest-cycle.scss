@@ -103,11 +103,56 @@ section.harvest-cycle {
             transform: translateY(-50%);
             white-space: normal;
             display: block;
+
+            .container {
+                margin: 0 auto;
+                display: inline-block;
+                max-width: 960px;
+
+                width: 100%;
+                position: relative;
+            }
+
+            div.icon {
+                display: inline-block;
+                vertical-align: middle;
+
+                div {
+                    vertical-align: top;
+                    text-decoration: none;
+                    display: inline-block;
+                    left: 0;
+                    top: 0;
+                    z-index: 300;
+                    margin: 10px;
+                    fill: $white;
+
+                    svg {
+                        width: 100px;
+                        height: 100px;
+                        display: block;
+                    }
+                }
+            }
+
+            div.title {
+                vertical-align: middle;
+                text-align: left;
+                display: inline-block;
+
+                h1 {
+                    color: $white;
+                    text-align: center;
+                    margin: 7px 0 0;
+                    line-height: 1.4em;
+                    display: inline-block;
+
+
+                }
+            }
         }
 
-        h1 {
-            color: $white;
-        }
+
 
     }
 
