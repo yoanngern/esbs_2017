@@ -608,38 +608,37 @@ section#content section.related_posts {
 
     @media only screen and (max-width: 414px) {
 
-        article.title,
-        section.title article {
 
-            div.text {
-                width: 94%;
-                margin: 30px 3% 0;
-                top: inherit;
+        section.title {
 
-                h1 {
-                    font-size: 1.5em;
+            &#slider {
+                & > article {
+                    height: 55vh;
                 }
             }
-        }
 
-        article.title {
-            min-height: 300px;
-            height: 60vh;
+            & > article {
+                height: 40vh;
 
-            &.video_banner,
-            &.facebook {
-                height: auto;
-                min-height: initial;
+                &.video_banner,
+                &.facebook {
+                    height: auto;
+                    min-height: initial;
 
-                .bg {
-                    display: none;
+                    .bg {
+                        display: none;
+                    }
+                }
+
+                div.text {
+                    width: 94%;
+                    margin: 0 3%;
+
+                    h1 {
+                        font-size: 1.5em;
+                    }
                 }
             }
-        }
-
-        section.title article {
-            min-height: 300px;
-            height: 70vh;
         }
 
         .platter {
