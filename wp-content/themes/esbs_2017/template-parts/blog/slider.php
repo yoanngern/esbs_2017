@@ -15,7 +15,7 @@ if ( is_category() ):
 	if ( get_field( 'subtitle', get_queried_object() ) ):
 		$subtitle = get_field( 'subtitle', get_queried_object() );
 	else:
-		$subtitle = pll__('Discover this subject');
+		$subtitle = pll__( 'Discover this subject' );
 	endif;
 
 	$link = "";
@@ -24,7 +24,7 @@ if ( is_category() ):
 else:
 
 	$bg       = get_field( 'background', get_option( 'page_for_posts' ) );
-	$title    = pll__('ESBS Blog');
+	$title    = pll__( 'ESBS Blog' );
 	$subtitle = get_field( 'title', get_option( 'page_for_posts' ) );
 	$link     = "";
 
@@ -38,7 +38,6 @@ if ( $bg ): ?>
 
             <div class="dark"></div>
 
-            <a class="logo" href="<?php echo pll_home_url(); ?>blog"></a>
 
             <div class="text">
                 <h1><?php echo $title; ?></h1>
@@ -53,40 +52,68 @@ if ( $bg ): ?>
 
 		<?php
 
+		$query = new WP_Query( array(
+			'posts_per_page' => 3,
+			'orderby'        => 'post_date',
+			'order'          => 'DESC',
+			'post_type'      => 'post',
+			'meta_query'     => array(
+				'relation' => 'AND',
+				array(
+					'key'     => 'type',
+					'compare' => '!=',
+					'value'   => 'video'
+				),
+				array(
+					'key'     => 'type',
+					'compare' => '!=',
+					'value'   => 'facebook'
+				),
+				array(
+					'key'     => 'type',
+					'compare' => '!=',
+					'value'   => 'twitter'
+				),
+				array(
+					'key'     => 'type',
+					'compare' => '!=',
+					'value'   => 'instagram'
+				)
+			),
+		) );
+
+
 		if ( is_category() ):
-			$cat_id = get_queried_object_id();
-		else:
-			$cat_id = 0;
+
+			$query->set( 'tax_query', array(
+				array(
+					'taxonomy' => 'category',
+					'field'    => 'id',
+					'terms'    => get_queried_object_id(),
+				)
+			) );
+
 		endif;
 
-		$recent_posts = wp_get_recent_posts( array(
-			'numberposts'      => 3,
-			'offset'           => 0,
-			'category'         => $cat_id,
-			'orderby'          => 'post_date',
-			'order'            => 'DESC',
-			'post_type'        => 'post',
-			'suppress_filters' => true
-		) );
+
+		$recent_posts = $query->get_posts();
 
 		foreach ( $recent_posts as $key => $recent ) :
 
-			$curr_post = get_post( $recent["ID"] );
 
 			?>
 
             <article data-slide="<?php echo $key + 2 ?>"
-                     style="background-image: url('<?php echo get_field_or_parent( 'thumb', $recent["ID"] )['sizes']['banner']; ?>')">
+                     style="background-image: url('<?php echo get_field_or_parent( 'thumb', $recent->ID )['sizes']['banner']; ?>')">
 
                 <div class="dark"></div>
 
-                <a class="logo" href="<?php echo get_permalink( $recent["ID"] ) ?>"></a>
-
                 <div class="text">
-                    <h1><a href="<?php echo get_permalink( $recent["ID"] ) ?>"><?php echo $recent["post_title"] ?></a>
+                    <h1><a href="<?php echo get_permalink( $recent->ID ) ?>"><?php echo $recent->post_title ?></a>
                     </h1>
 
-                    <a href="<?php echo get_permalink( $recent["ID"] ) ?>" class="button"><?php echo pll_e('Read this'); ?></a>
+                    <a href="<?php echo get_permalink( $recent->ID ) ?>"
+                       class="button"><?php echo pll_e( 'Read this' ); ?></a>
                 </div>
 
 

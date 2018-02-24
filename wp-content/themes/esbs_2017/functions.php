@@ -45,7 +45,7 @@ add_theme_support( 'post-thumbnails' );
 add_image_size( 'banner', 1440, 670, true );
 add_image_size( 'full_hd', 1920, 1080, true );
 add_image_size( 'hd', 1280, 720, true );
-add_image_size( 'blog', 328, 244, true );
+add_image_size( 'blog', 321, 181, true );
 add_image_size( 'blog_wall', 640, 360, true );
 add_image_size( 'fullscreen', 1440, 806, true );
 add_image_size( 'banner_blur', 200, 100, true );

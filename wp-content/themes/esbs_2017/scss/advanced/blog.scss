@@ -1,9 +1,11 @@
 section#content.blog,
 section#content section.related_posts {
 
+
     section.title {
         height: 100%;
         border-bottom: 5px solid $gold;
+        margin-top: 45px;
 
     }
 
@@ -14,13 +16,13 @@ section#content section.related_posts {
     section.title > article,
     article.title {
         text-align: center;
-        padding-top: 45px;
         min-height: 250px;
         position: relative;
         height: 45vh;
         background-position: center 25%;
         background-repeat: no-repeat;
         background-size: cover;
+        top:0;
 
         &.video_banner {
             overflow: hidden;
@@ -111,8 +113,11 @@ section#content section.related_posts {
 
         div.text {
             position: absolute;
-            top: 55%;
             width: 100%;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
 
             @media only screen and (max-height: 700px) {
                 position: relative;
@@ -146,7 +151,7 @@ section#content section.related_posts {
                 letter-spacing: 0.3em;
                 text-align: center;
                 max-width: 600px;
-                margin: 20px auto 70px;
+                margin: 10px auto 3px;
                 line-height: 2.6em;
                 text-transform: uppercase;
             }
@@ -271,9 +276,10 @@ section#content section.related_posts {
         }
 
         .list {
-            display: table;
+            display: flex;
             width: 100%;
             text-align: center;
+            flex-wrap: wrap;
 
             &.nb_1,
             &.nb_2 {
@@ -292,30 +298,37 @@ section#content section.related_posts {
                 vertical-align: top;
                 float: left;
                 text-align: center;
-                margin-bottom: 50px;
+                margin-bottom: 70px;
                 position: relative;
 
                 div.box {
-                    margin: 0 10px;
-                    height: 550px;
+                    margin: 0 10px 55px;
+                    height: 100%;
                 }
 
-                figure {
-                    width: 100%;
+                a.image {
+                    display: block;
+                    transition: all 100ms ease;
+                    height: 0;
+                    padding-bottom: 56.2%;
+                    position: relative;
 
-                    a {
+                    figure {
                         display: block;
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
                     }
 
-                    img {
-                        width: 100%;
-                        transition: all 100ms ease;
-
-                        &:hover {
-                            opacity: 0.95;
-                        }
+                    &:hover {
+                        opacity: 0.95;
                     }
                 }
+
+
 
                 ul {
                     display: block;
@@ -383,12 +396,11 @@ section#content section.related_posts {
                 }
 
                 div.button {
-                    margin-top: 30px;
-                    position: absolute;
-                    bottom: 30px;
                     display: inline-block;
                     width: 100%;
+                    position: absolute;
                     left: 0;
+                    bottom: 0;
 
                     a.button {
                         color: $gold;
