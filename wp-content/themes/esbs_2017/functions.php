@@ -42,7 +42,7 @@ add_action( 'init', 'register_my_menu' );
 
 add_theme_support( 'post-thumbnails' );
 
-add_image_size( 'banner', 1440, 670, true );
+add_image_size( 'banner', 800, 372, true );
 add_image_size( 'full_hd', 1920, 1080, true );
 add_image_size( 'hd', 1280, 720, true );
 add_image_size( 'blog', 321, 181, true );
