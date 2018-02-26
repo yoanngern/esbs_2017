@@ -31,7 +31,9 @@ $exclude_posts = array();
 					<?php if ( $phase ): ?>
                         <div class="icon">
                             <div>
-								<?php echo get_icons( $phase ); ?>
+                                <svg>
+									<?php echo get_icons( $phase ); ?>
+                                </svg>
                             </div>
                         </div>
 					<?php endif; ?>
