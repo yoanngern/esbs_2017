@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     var circle = "#lines .line";
 
-    /*
+
     $(circle).each(function () {
         var speed = $(this).data('speed');
 
@@ -22,7 +22,7 @@ $(document).ready(function () {
             ease: Linear.easeNone
         });
     });
-*/
+
 
     $(".box", schema).mouseenter(function () {
 
@@ -57,8 +57,6 @@ $(document).ready(function () {
     $(window).click(function () {
         closePhase(schema);
     });
-
-    //openPhase($("#hc_2"), schema);
 
 });
 
