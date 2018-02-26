@@ -26,6 +26,30 @@ div.small_form {
                     float: inherit;
                 }
 
+                &.checkbox {
+                    margin: 15px 0 10px;
+
+                    .cell {
+                        padding: 8px 0;
+                    }
+
+                    label {
+                        display: inline-block;
+                        line-height: 1.4em;
+                        cursor: pointer;
+
+                        input[type="checkbox"] {
+                            margin: 0 5px;
+                            display: inline-block;
+                            cursor: pointer;
+                        }
+
+                        span {
+                            font-family: $avenir-med;
+                        }
+                    }
+                }
+
                 .cell {
                     width: 50%;
                     float: left;
@@ -91,6 +115,13 @@ div.small_form {
                     background-color: darken($gold, 15);
                 }
 
+            }
+
+            input[type="checkbox"] {
+                width: auto;
+                -webkit-appearance: checkbox;
+                -moz-appearance: checkbox;
+                appearance: checkbox;
             }
         }
     }

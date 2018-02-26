@@ -1,0 +1,97 @@
+// Colors
+
+$col_pink: #CB8E8E;
+$col_grey: #C6C6C6;
+$col_yellow: #EAD69D;
+$col_turquoise: #79ABB2;
+$col_dark: #474746;
+$col_white: #FFFFFF;
+$col_yellow_dark: #D3B962;
+
+.col_transparent {
+    fill-opacity: 0;
+}
+
+.col_pink {
+    fill: $col_pink;
+}
+
+.col_grey {
+    fill: $col_grey;
+}
+
+.col_yellow {
+    fill: $col_yellow;
+}
+
+.col_turquoise {
+    fill: $col_turquoise;
+}
+
+.col_dark {
+    fill: $col_dark;
+}
+
+.col_white {
+    fill: $col_white;
+}
+
+.col_yellow_dark {
+    fill: $col_yellow_dark;
+}
+
+.stroke_col_pink {
+    stroke: $col_pink;
+}
+
+.stroke_col_grey {
+    stroke: $col_grey;
+}
+
+.stroke_col_yellow {
+    stroke: $col_yellow;
+}
+
+.stroke_col_turquoise {
+    stroke: $col_turquoise;
+}
+
+
+
+#harvest_cycle_schema {
+    width: 100%;
+    height: 100%;
+
+    g.box {
+        //transform: scale(1) translate(0, 0);
+        //-webkit-transform-origin: 50% 50%;
+        //-moz-transform-origin: 50% 50%;
+        //transform-origin: 50% 50%;
+
+    }
+
+    #svg_box {
+        transform: translate(0, 0);
+    }
+
+    .hc_round {
+        cursor: pointer;
+
+        .box {
+            //transition: all 300ms ease;
+        }
+    }
+
+    #lines {
+        position: relative;
+    }
+
+    #center {
+
+        .box {
+            transition: all 300ms ease;
+        }
+    }
+}
+
+

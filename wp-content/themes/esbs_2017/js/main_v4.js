@@ -1,9 +1,13 @@
 // @codekit-prepend "vendor/jquery-2.2.2.js"
+// codekit-prepend "vendor/green-sock/plugins/CSSPlugin.js"
+// codekit-prepend "vendor/green-sock/TweenMax.js"
+
+// @codekit-append "hc_schema.js"
 
 
 $(document).ready(function () {
 
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 
         $('body').addClass("mobile");
 
@@ -40,7 +44,7 @@ $(document).ready(function () {
         console.log("width: " + iframe_width);
         console.log("height: " + iframe_height);
 
-        var ratio = 100 * ( parseInt(iframe_height) / parseInt(iframe_width) );
+        var ratio = 100 * (parseInt(iframe_height) / parseInt(iframe_width));
 
 
         var container = ' <section class="player" style="max-width: ' + iframe_width + 'px" data-width="' + iframe_width + '"><div class="container" style="padding-bottom: ' + ratio + '%"></div></section> ';
@@ -115,8 +119,6 @@ $(document).ready(function () {
         });
 
     });
-
-
 
 
     $(window).resize(function () {
@@ -202,14 +204,14 @@ $(document).ready(function () {
 
     setTimeout(showSlides, 6000);
 
-    $(document).on( 'scroll', function(){
+    $(document).on('scroll', function () {
         scrollEvent();
     });
 
 });
 
 
-var openSelect = function (selector) {
+function openSelect(selector) {
 
     var element = $(selector)[0], worked = false;
     if (document.createEvent) { // all browsers
@@ -232,7 +234,7 @@ function scrollEvent() {
     var bannerH = $("#action_banner").height();
 
 
-    if(scrollPos > bannerH) {
+    if (scrollPos > bannerH) {
         $("body > header").addClass("fixed");
         $("body #mc_embed_signup").addClass("fixed");
 
@@ -241,7 +243,7 @@ function scrollEvent() {
         $("body > header").removeClass("fixed");
         $("body #mc_embed_signup").removeClass("fixed");
 
-        $("body #mc_embed_signup").css("top", bannerH-scrollPos);
+        $("body #mc_embed_signup").css("top", bannerH - scrollPos);
     }
 
 }

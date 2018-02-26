@@ -147,19 +147,60 @@ section.harvest-cycle {
                     line-height: 1.4em;
                     display: inline-block;
 
-
                 }
             }
         }
 
-
-
     }
 
     article.schema {
-        background-color: lighten($gray, 40);
+        background-color: lighten($gray, 65);
         text-align: center;
         padding: 50px 0;
+
+        .container {
+            width: 94%;
+            max-width: 560px;
+            text-align: center;
+            display: inline-block;
+            position: relative;
+
+            & > .box {
+                height: 0;
+                padding-bottom: 100%;
+                display: block;
+                position: relative;
+
+                svg {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            }
+
+            div.hc-text {
+                position: absolute;
+                opacity: 0;
+                top: 50%;
+                margin: 0 auto;
+                left: 15%;
+                width: 70%;
+                text-align: center;
+                z-index: 100;
+                -webkit-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+                transition: all 100ms ease;
+
+                h1 {
+                    font-size: 1.2em;
+                }
+
+                p {
+                    font-size: 1.1em;
+                }
+            }
+        }
     }
 
     article.presentation {

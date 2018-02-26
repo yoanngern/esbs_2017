@@ -7,7 +7,7 @@
 		"uuidString": "35FCC746-D50B-47EC-8292-55E51DFD872E"
 		}
 	],
-"creatorBuild": "26261",
+"creatorBuild": "26268",
 "files": {
 	"\/404.php": {
 		"cB": 0,
@@ -1380,13 +1380,23 @@
 		"sC": 1,
 		"tS": 0
 		},
+	"\/js\/hc_schema.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/js\/min\/hc_schema-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
 	"\/js\/main_v4.js": {
 		"ft": 64,
 		"ma": 0,
 		"mi": 1,
 		"oA": 0,
-		"oAP": "\/js\/min\/main_v4.min.js",
-		"oF": 2,
+		"oAP": "\/js\/main_v4.min.js",
+		"oF": 3,
 		"sC": 0,
 		"tS": 0
 		},
@@ -1406,6 +1416,226 @@
 		"mi": 1,
 		"oA": 0,
 		"oAP": "\/js\/min\/min\/main_v4.min-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/easing\/EasePack.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/easing\/min\/EasePack-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/jquery.gsap.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/min\/jquery.gsap-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/AttrPlugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/AttrPlugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/BezierPlugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/BezierPlugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/ColorPropsPlugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/ColorPropsPlugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/CSSPlugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/CSSPlugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/CSSRulePlugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/CSSRulePlugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/DirectionalRotationPlugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/DirectionalRotationPlugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/EaselPlugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/EaselPlugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/EndArrayPlugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/EndArrayPlugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/ModifiersPlugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/ModifiersPlugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/PixiPlugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/PixiPlugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/RaphaelPlugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/RaphaelPlugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/RoundPropsPlugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/RoundPropsPlugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/ScrollToPlugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/ScrollToPlugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/TEMPLATE_Plugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/TEMPLATE_Plugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/plugins\/TextPlugin.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/plugins\/min\/TextPlugin-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/TimelineLite.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/min\/TimelineLite-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/TimelineMax.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/min\/TimelineMax-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/TweenLite.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/min\/TweenLite-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/TweenMax.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/min\/TweenMax-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/vendor\/green-sock\/utils\/Draggable.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/vendor\/green-sock\/utils\/min\/Draggable-min.js",
 		"oF": 0,
 		"sC": 1,
 		"tS": 0
@@ -4403,6 +4633,19 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/advanced\/hc_schema.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/css\/hc_schema.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/scss\/advanced\/header.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -4732,6 +4975,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/divers\/facebook_pixel.php",
+		"oF": 0
+		},
+	"\/template-parts\/divers\/hc_schema.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/divers\/hc_schema.php",
 		"oF": 0
 		},
 	"\/template-parts\/divers\/head.php": {
@@ -5353,6 +5603,7 @@
 	"animateCSSInjections": 1,
 	"autoBuildNewItems": 1,
 	"autoprefixerBrowserString": "> 1%, last 2 versions, Firefox ESR, Opera 12.1",
+	"autoprefixerEnableIEGrid": 0,
 	"babelAuxiliaryCommentAfter": "",
 	"babelAuxiliaryCommentBefore": "",
 	"babelConfigFileHandlingType": 0,

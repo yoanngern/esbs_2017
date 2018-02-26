@@ -1,6 +1,6 @@
 <?php /* Template Name: Harvest Cycle */
 
-get_header( 'campaign' ); ?>
+get_header(); ?>
 
     <section id="content" class="harvest-cycle">
 
@@ -32,20 +32,10 @@ get_header( 'campaign' ); ?>
 
         </article>
 
-        <article class="schema" style="display: none">
-            <div class="content">
+        <article class="schema">
 
-                <h3>Pray & Declare</h3>
-                <p>Christians will be led into a prayer, fasting and intercession lifestyle for the harvest. Starting in
-                    March</p>
-                <h3>Equip & Send</h3>
-                <p>Christians will be equipped and motivated to develop an evangelistic lifestyle. Starting in May.</p>
-                <h3>Disciple & Plant</h3>
-                <p>Christians will be trained to disciple new believers and to plant new churches. Starting in
-                    August</p>
-                <h3>Celebrate & Worship</h3>
-                <p>Christians will be led in a lifestyle of gratitude and praise. Starting in November.</p>
-            </div>
+			<?php get_template_part( 'template-parts/divers/hc_schema' ); ?>
+
         </article>
 
         <article class="form">
