@@ -1405,10 +1405,10 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 1,
-		"oA": 1,
-		"oAP": "\/js\/min\/hc_schema-min.js",
-		"oF": 0,
-		"sC": 1,
+		"oA": 0,
+		"oAP": "\/js\/hc_schema.min.js",
+		"oF": 2,
+		"sC": 0,
 		"tS": 0
 		},
 	"\/js\/main_v6.js": {
@@ -7450,11 +7450,11 @@
 		},
 	"languageDefaultsJS": {
 		"autoOutputAction": 0,
-		"autoOutputPathFilenamePattern": "*-min.js",
+		"autoOutputPathFilenamePattern": "*.min.js",
 		"autoOutputPathRelativePath": "\/min",
 		"autoOutputPathReplace1": "",
 		"autoOutputPathReplace2": "",
-		"autoOutputPathStyle": 2,
+		"autoOutputPathStyle": 0,
 		"createSourceMap": 0,
 		"minifyOutput": 1,
 		"syntaxCheckerStyle": 1,

@@ -1,8 +1,4 @@
 // @codekit-prepend "vendor/jquery-2.2.2.js"
-// codekit-prepend "vendor/green-sock/plugins/CSSPlugin.js"
-// codekit-prepend "vendor/green-sock/TweenMax.js"
-
-// @codekit-append "hc_schema.js"
 
 
 $(document).ready(function () {

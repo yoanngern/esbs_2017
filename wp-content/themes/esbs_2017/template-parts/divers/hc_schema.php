@@ -58,6 +58,9 @@ $phase = '<path d="M219,219 C98.0496398,219 0,120.95036 0,0 L75.1801106,0 C75.47
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/jquery.gsap.min.js"></script>
 
+<script type="text/javascript"
+        src="<?php echo get_stylesheet_directory_uri(); ?>/js/hc_schema.min.js"></script>
+
 
 <div class="container">
     <div class="box">
