@@ -2,11 +2,11 @@
 
 if( function_exists('acf_add_local_field_group') ):
 
-	acf_add_local_field_group(array (
+	acf_add_local_field_group(array(
 		'key' => 'group_58aeaf0e38599',
 		'title' => 'Meta Facebook',
-		'fields' => array (
-			array (
+		'fields' => array(
+			array(
 				'key' => 'field_58aeaf19b0a22',
 				'label' => 'Facebook Title',
 				'name' => 'fb_title',
@@ -14,7 +14,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'instructions' => '',
 				'required' => 0,
 				'conditional_logic' => 0,
-				'wrapper' => array (
+				'wrapper' => array(
 					'width' => '',
 					'class' => '',
 					'id' => '',
@@ -27,7 +27,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'readonly' => 0,
 				'disabled' => 0,
 			),
-			array (
+			array(
 				'key' => 'field_58aeaf2eb0a23',
 				'label' => 'Facebook description',
 				'name' => 'fb_desc',
@@ -35,7 +35,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'instructions' => '',
 				'required' => 0,
 				'conditional_logic' => 0,
-				'wrapper' => array (
+				'wrapper' => array(
 					'width' => '',
 					'class' => '',
 					'id' => '',
@@ -48,7 +48,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'readonly' => 0,
 				'disabled' => 0,
 			),
-			array (
+			array(
 				'key' => 'field_58aeaf42b0a24',
 				'label' => 'Facebook image',
 				'name' => 'fb_image',
@@ -56,7 +56,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'instructions' => '',
 				'required' => 0,
 				'conditional_logic' => 0,
-				'wrapper' => array (
+				'wrapper' => array(
 					'width' => '',
 					'class' => '',
 					'id' => '',
@@ -73,12 +73,26 @@ if( function_exists('acf_add_local_field_group') ):
 				'mime_types' => '',
 			),
 		),
-		'location' => array (
-			array (
-				array (
+		'location' => array(
+			array(
+				array(
 					'param' => 'post_type',
 					'operator' => '==',
 					'value' => 'page',
+				),
+			),
+			array(
+				array(
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'post',
+				),
+			),
+			array(
+				array(
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'esbs_harvest_cycle',
 				),
 			),
 		),
