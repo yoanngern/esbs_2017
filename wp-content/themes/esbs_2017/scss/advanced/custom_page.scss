@@ -51,19 +51,21 @@ body.page-template-page-custom {
         }
     }
 
-    header div.principal-nav div > ul {
-        background-color: transparent;
+    header div.principal-nav {
+        div > ul {
+            background-color: transparent;
 
-        & > li {
-            &.icons ul {
+            & > li {
+                &.icons ul {
 
-                background-color: rgba(lighten($gray, 70), 0.9);
+                    background-color: rgba(lighten($gray, 70), 0.9);
 
+                }
             }
+        }
 
-            &:last-of-type {
-                display: none;
-            }
+        .join_link {
+            display: none;
         }
     }
 
