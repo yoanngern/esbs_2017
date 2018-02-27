@@ -29,8 +29,123 @@
                 color: $gold;
             }
 
-            p {
+            div.content {
+                margin: 20px auto 20px;
 
+                div.col2 {
+                    margin-bottom: 60px;
+
+                    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+                    -moz-column-count: 2; /* Firefox */
+                    column-count: 2;
+
+                    -webkit-column-gap: 110px; /* Chrome, Safari, Opera */
+                    -moz-column-gap: 110px; /* Firefox */
+                    column-gap: 110px;
+
+                    -webkit-column-span: all; /* Chrome, Safari, Opera */
+                    column-span: all;
+                }
+
+                div.col_fixed {
+                    display: table;
+                    width: 100%;
+
+                    div.col {
+                        display: inline-block;
+                        width: 46%;
+                        vertical-align: top;
+
+                        &:nth-of-type(2n) {
+                            padding-left: 3%;
+                        }
+
+                        &:nth-of-type(2n+1) {
+                            padding-right: 3%;
+                        }
+                    }
+                }
+
+                p {
+                    font-family: $avenir-med;
+                    letter-spacing: 0.1em;
+                    line-height: 1.5em;
+                    margin: 0 0 30px;
+
+                }
+            }
+        }
+
+        article.content-page,
+        article.post {
+
+            div.content,
+            div.entry-content {
+
+                h2, h3 {
+                    font-family: $avenir-blk;
+                    letter-spacing: 0.1em;
+                    line-height: 1.5em;
+                    font-size: 1.2em;
+                    margin: 30px 0 10px;
+                }
+
+                h4 {
+                    font-family: $avenir-blk;
+                    text-transform: uppercase;
+                    letter-spacing: 0.15em;
+                    line-height: 1.5em;
+                    font-size: 0.8em;
+                    margin: 25px 0 10px;
+                }
+
+                ul, ol {
+                    margin-bottom: 30px;
+                    padding-left: 30px;
+
+                    li {
+                        font-family: $avenir-med;
+                        letter-spacing: 0.1em;
+                        line-height: 1.5em;
+                        margin: 0 0 15px;
+                        padding-left: 5px;
+                    }
+                }
+
+                p {
+
+                    a {
+                        color: $gold-dark;
+
+                        &:hover {
+                            color: $gold;
+                        }
+                    }
+
+                    em {
+                        font-family: $avenir-med-i;
+                    }
+
+                }
+
+                hr {
+                    margin: 20px 0 10px;
+                    border-top: none;
+                    border-left: none;
+                    border-right: none;
+                    border-bottom: 0.5px solid $gold_dark;
+                }
+
+                blockquote {
+
+                    p {
+                        color: $gold-dark;
+                        font-family: $dido-i;
+                        max-width: 600px;
+                        margin: 0 auto 30px;
+
+                    }
+                }
             }
 
         }
