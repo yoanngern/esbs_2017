@@ -32,7 +32,13 @@ if ( get_field( 'fb_desc' ) ) {
 
 	if ( $post_type == 'post' ) {
 
-		$meta_fb_desc = wp_trim_words( get_the_content(), 20 );
+		$id = get_the_ID();
+
+		$post = get_post($id);
+
+
+		$meta_fb_desc = wp_trim_words( $post->post_content, 20 );
+
 
 	} else {
 
