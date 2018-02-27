@@ -7,7 +7,7 @@ $exclude_posts = array();
 ?>
 
 
-<section id="content" class="harvest-cycle">
+<section id="content" class="harvest-cycle news-feed">
 
 	<?php
 
@@ -152,7 +152,7 @@ $exclude_posts = array();
 
 
 		$items = wp_get_recent_posts( array(
-			'numberposts'      => 8,
+			'numberposts'      => 30,
 			'offset'           => 0,
 			'category'         => $cat,
 			'suppress_filters' => true,

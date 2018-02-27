@@ -1,8 +1,8 @@
 <?php /* Template Name: Harvest Cycle */
 
-get_header('campaign'); ?>
+get_header( 'campaign' ); ?>
 
-    <section id="content" class="harvest-cycle">
+    <section id="content" class="harvest-cycle news-feed">
 
         <article class="title">
             <div class="content">

@@ -34,6 +34,21 @@ function my_acf_init() {
 
 		) );
 
+
+		/**
+		 * Action banner
+		 */
+		acf_add_options_sub_page( array(
+			'page_title'  => __( 'Action banner', 'my_text_domain' ),
+			'menu_title'  => __( 'Action banner', 'my_text_domain' ),
+			'parent_slug' => 'options-general.php',
+			'menu_slug'   => 'banner',
+			'capability'  => 'delete_pages',
+			'autoload'    => true,
+
+		) );
+
+
 	}
 
 }

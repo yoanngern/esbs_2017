@@ -15,7 +15,9 @@
 
 		<?php if ( $display ): ?>
             <a id="<?php echo $social ?>" target="_blank" href="<?php echo $link; ?>">
-				<?php echo get_icons( $social ); ?>
+				<svg class="icon" viewBox="0 0 30 30">
+                <?php echo get_icons( $social ); ?>
+                </svg>
             </a>
 		<?php endif; ?>
 

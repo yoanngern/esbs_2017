@@ -56,15 +56,21 @@ $link_email = "mailto:?subject=$title&body=$url_encoded";
                 <div class="container">
 
                     <a id="facebook" target="_blank" href="<?php echo $link_facebook; ?>">
-						<?php echo get_icons( 'facebook' ); ?>
+                        <svg class="icon" viewBox="0 0 30 30">
+							<?php echo get_icons( 'facebook' ); ?>
+                        </svg>
                     </a>
 
                     <a id="twitter" target="_blank" href="<?php echo $link_twitter; ?>">
-						<?php echo get_icons( 'twitter' ); ?>
+                        <svg class="icon" viewBox="0 0 30 30">
+							<?php echo get_icons( 'twitter' ); ?>
+                        </svg>
                     </a>
 
                     <a id="email" target="_blank" href="<?php echo $link_email ?>">
-						<?php echo get_icons( 'email' ); ?>
+                        <svg class="icon" viewBox="0 0 30 30">
+							<?php echo get_icons( 'email' ); ?>
+                        </svg>
                     </a>
 
 

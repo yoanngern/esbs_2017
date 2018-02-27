@@ -1,31 +1,48 @@
 <section id="action_banner">
 
+	<?php if ( have_rows( 'banner_buttons', 'option' ) ): ?>
 
-    <div class="buttons">
-        <div class="box">
+        <div class="buttons">
+            <div class="box">
 
-            <article class="blog">
-                <a href="<?php echo pll_home_url() . "blog"; ?>" class="icon"></a>
-                <a href="<?php echo pll_home_url() . "blog"; ?>" class="button">Blog</a>
-            </article>
+				<?php while ( have_rows( 'banner_buttons', 'option' ) ): the_row();
 
-            <article class="video">
-                <a href="<?php echo pll_home_url() . "join/#play"; ?>" class="icon"></a>
-                <a href="<?php echo pll_home_url() . "join/#play"; ?>" class="button">Watch video</a>
-            </article>
+					$text = get_sub_field( 'text' );
+					$link = get_sub_field( 'link' );
+					$type = get_sub_field( 'type' );
 
-            <article class="invite">
-                <a href="<?php echo pll_home_url() . "invite"; ?>" class="icon"></a>
-                <a href="<?php echo pll_home_url() . "invite"; ?>" class="button">Invite</a>
-            </article>
+					?>
+
+					<?php if ( $link ): ?>
+
+                        <article class="<?php echo $type ?>">
+                            <a target="<?php echo $link['target']; ?>" href="<?php echo $link['url']; ?>"
+                               class="icon">
+                                <svg class="col_white" viewBox="0 0 100 100">
+									<?php echo get_icons( $type ) ?>
+                                </svg>
+                            </a>
+                            <a href="<?php echo $link['url']; ?>" class="button"><?php echo $text; ?></a>
+                        </article>
+					<?php endif; ?>
+
+				<?php endwhile; ?>
+
+            </div>
 
         </div>
 
-    </div>
+	<?php endif; ?>
+
+	<?php
+
+	$video = get_field( 'banner_video', 'option' );
+
+	?>
 
     <div class="video">
         <video id="bgvid" autoplay loop>
-            <source src="https://player.vimeo.com/external/231915594.hd.mp4?s=c6d5f089cdfb879b5dee35506698318c8ff1e446&profile_id=174"
+            <source src="<?php echo $video; ?>"
                     type="video/mp4">
         </video>
     </div>
