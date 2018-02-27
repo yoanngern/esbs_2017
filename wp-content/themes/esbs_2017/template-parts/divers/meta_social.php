@@ -37,7 +37,7 @@ if ( get_field( 'fb_desc' ) ) {
 		$post = get_post($id);
 
 
-		$meta_fb_desc = wp_trim_words( $post->post_content, 20 );
+		$meta_fb_desc = wp_trim_words( $post->post_content, 100 );
 
 
 	} else {
