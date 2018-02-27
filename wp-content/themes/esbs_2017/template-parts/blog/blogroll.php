@@ -7,6 +7,7 @@ $posts = wp_get_recent_posts( array(
 	'orderby'          => 'post_date',
 	'order'            => 'DESC',
 	'post_type'        => 'post',
+	'post_status'      => 'publish',
 	'suppress_filters' => true
 ), OBJECT );
 
@@ -60,6 +61,6 @@ if ( $posts != null ) :
 
     </section>
 
-	<?php
+<?php
 endif;
 ?>

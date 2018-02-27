@@ -260,6 +260,7 @@ function get_related_posts( $post, $nb = 3 ) {
 		$args = array(
 			'tag__in'          => $tag_ids,
 			'post__not_in'     => array( $post->ID ),
+			'post_status'      => 'publish',
 			'posts_per_page'   => $nb, // Number of related posts to display.
 			'caller_get_posts' => 1
 		);

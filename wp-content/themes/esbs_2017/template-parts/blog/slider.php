@@ -57,6 +57,7 @@ if ( $bg ): ?>
 			'orderby'        => 'post_date',
 			'order'          => 'DESC',
 			'post_type'      => 'post',
+			'post_status'    => 'publish',
 			'meta_query'     => array(
 				'relation' => 'AND',
 				array(
