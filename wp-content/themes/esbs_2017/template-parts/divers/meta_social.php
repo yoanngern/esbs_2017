@@ -26,11 +26,19 @@ if ( get_field( 'fb_image' ) ) {
 
 } else {
 
-	if ( get_field( 'background' ) ) {
-		$meta_fb_image = get_field( 'background' )['sizes']['full_hd'];
+	if ( get_field( 'thumb' ) ) {
+
+		$meta_fb_image = get_field( 'thumb' )['sizes']['full_hd'];
+
 	} else {
-		$meta_fb_image = "http://esbs.org/wp-content/themes/esbs_2017/images/facebook_default_home.png";
-	}
+		if ( get_field( 'background' ) ) {
+			$meta_fb_image = get_field( 'background' )['sizes']['full_hd'];
+		} else {
+			$meta_fb_image = "http://esbs.org/wp-content/themes/esbs_2017/images/facebook_default_home.png";
+		}
+    }
+
+
 
 }
 
