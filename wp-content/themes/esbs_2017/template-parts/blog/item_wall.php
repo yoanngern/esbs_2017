@@ -73,7 +73,6 @@ $link_email = "mailto:?subject=$title&body=$url_encoded";
                         </svg>
                     </a>
 
-
                 </div>
             </div>
 

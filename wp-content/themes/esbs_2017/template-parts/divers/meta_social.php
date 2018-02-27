@@ -1,12 +1,26 @@
 <?php
 
+$post_type = "";
+
+
+if ( get_queried_object() instanceof WP_Post_Type ) {
+
+	$post_type = get_queried_object()->name;
+
+} else {
+
+	$post_type = get_post_type( $_POST );
+
+}
+
+
 if ( get_field( 'fb_title' ) ) {
 
 	$meta_fb_title = get_field( 'fb_title' );
 
 } else {
 
-	$meta_fb_title = "Europe Shall Be Saved";
+	$meta_fb_title = get_the_title();
 
 }
 
@@ -16,7 +30,15 @@ if ( get_field( 'fb_desc' ) ) {
 
 } else {
 
-	$meta_fb_desc = "Together for 100 millions souls. One movement of people from all backgrounds to see the Gospel of Jesus-Christ change Europe.";
+	if ( $post_type == 'post' ) {
+
+		$meta_fb_desc = wp_trim_words( get_the_content(), 20 );
+
+	} else {
+
+		$meta_fb_desc = "Together for 100 millions souls. One movement of people from all backgrounds to see the Gospel of Jesus-Christ change Europe.";
+
+	}
 
 }
 
@@ -36,8 +58,7 @@ if ( get_field( 'fb_image' ) ) {
 		} else {
 			$meta_fb_image = "http://esbs.org/wp-content/themes/esbs_2017/images/facebook_default_home.png";
 		}
-    }
-
+	}
 
 
 }
