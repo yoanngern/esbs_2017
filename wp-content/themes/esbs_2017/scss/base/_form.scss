@@ -47,6 +47,8 @@ div.small_form {
                         display: inline-block;
                         line-height: 1.4em;
                         cursor: pointer;
+                        overflow: hidden;
+                        max-width: 100%;
 
                         input[type="checkbox"] {
                             margin: 0 5px;
