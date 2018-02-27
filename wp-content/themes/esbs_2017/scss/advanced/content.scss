@@ -75,10 +75,15 @@
                 }
 
                 ul, ol {
+                    margin-bottom: 30px;
+                    padding-left: 30px;
 
                     li {
                         font-family: $avenir-med;
                         letter-spacing: 0.1em;
+                        line-height: 1.5em;
+                        margin: 0 0 15px;
+                        padding-left: 5px;
                     }
                 }
             }
