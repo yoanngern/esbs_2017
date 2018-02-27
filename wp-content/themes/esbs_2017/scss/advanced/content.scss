@@ -72,6 +72,10 @@
                     line-height: 1.5em;
                     margin: 0 0 30px;
 
+                    em {
+                        font-family: $avenir-med-i;
+                    }
+
                 }
 
                 ul, ol {
@@ -122,10 +126,6 @@
                         &:hover {
                             color: $gold;
                         }
-                    }
-
-                    em {
-                        font-family: $avenir-med-i;
                     }
 
                 }

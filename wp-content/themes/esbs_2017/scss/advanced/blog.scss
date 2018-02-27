@@ -449,9 +449,14 @@ section#content section.related_posts {
             }
 
             p {
+                font-family: $avenir;
                 font-size: 1.1em;
                 line-height: 1.35em;
                 padding: 10px 0 10px 0;
+
+                em {
+                    font-family: $avenir-i;
+                }
             }
 
             .entry-content {
@@ -608,7 +613,6 @@ section#content section.related_posts {
 
     @media only screen and (max-width: 414px) {
 
-
         section.title {
 
             &#slider {
@@ -727,7 +731,6 @@ section#content section.related_posts {
                         background-size: cover;
                     }
 
-
                     div.button {
                         position: absolute;
                         top: 50%;
@@ -748,7 +751,6 @@ section#content section.related_posts {
                         transition: opacity 300ms ease;
                     }
 
-
                     &:hover {
 
                         div.button {
@@ -757,8 +759,6 @@ section#content section.related_posts {
                     }
 
                 }
-
-
 
                 div.box {
                     height: auto;

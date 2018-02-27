@@ -56,29 +56,7 @@
           content="<?php echo get_stylesheet_directory_uri(); ?>/images/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
-	<?php if ( get_field( 'fb_title' ) ):
-		$meta_fb_title = get_field( 'fb_title' );
-	else:
-		$meta_fb_title = "Europe Shall Be Saved";
-	endif; ?>
-
-	<?php if ( get_field( 'fb_desc' ) ):
-		$meta_fb_desc = get_field( 'fb_desc' );
-	else:
-		$meta_fb_desc = "Together for 100 millions souls. One movement of people from all backgrounds to see the Gospel of Jesus-Christ change Europe.";
-	endif; ?>
-
-	<?php if ( get_field( 'fb_image' ) ):
-		$meta_fb_image = get_field( 'fb_image' )['sizes']['full_hd'];;
-	else:
-		$meta_fb_image = "http://esbs.org/wp-content/themes/esbs_2017/images/facebook_default_home.png";
-	endif; ?>
-
-    <meta property="og:title" content="<?php echo $meta_fb_title; ?>"/>
-    <meta property="og:description"
-          content="<?php echo $meta_fb_desc; ?>"/>
-    <meta property="og:image"
-          content="<?php echo $meta_fb_image; ?>"/>
+	<?php get_template_part( 'template-parts/divers/meta_social' ); ?>
 
 
 	<?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>

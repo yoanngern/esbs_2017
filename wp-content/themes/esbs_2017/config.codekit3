@@ -5039,6 +5039,13 @@
 		"oAP": "\/template-parts\/divers\/header_nav.php",
 		"oF": 0
 		},
+	"\/template-parts\/divers\/meta_social.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/divers\/meta_social.php",
+		"oF": 0
+		},
 	"\/template-parts\/divers\/social_networks.php": {
 		"cB": 0,
 		"ft": 8192,
