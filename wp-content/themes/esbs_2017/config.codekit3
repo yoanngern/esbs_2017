@@ -1421,22 +1421,22 @@
 		"sC": 1,
 		"tS": 0
 		},
-	"\/js\/main_v6.js": {
+	"\/js\/main_v6_1.js": {
 		"ft": 64,
 		"ma": 0,
 		"mi": 1,
 		"oA": 0,
-		"oAP": "\/js\/main_v6.min.js",
+		"oAP": "\/js\/main_v6_1.min.js",
 		"oF": 3,
 		"sC": 0,
 		"tS": 0
 		},
-	"\/js\/main_v6.min.js": {
+	"\/js\/main_v6_1.min.js": {
 		"ft": 64,
 		"ma": 0,
 		"mi": 1,
 		"oA": 0,
-		"oAP": "\/js\/min\/main_v6.min-min.js",
+		"oAP": "\/js\/main_v6_1.min.min.js",
 		"oF": 0,
 		"sC": 1,
 		"tS": 0

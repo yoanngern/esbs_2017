@@ -8,7 +8,7 @@ function themeslug_enqueue_style() {
 }
 
 function themeslug_enqueue_script() {
-	wp_enqueue_script( 'my-js', get_template_directory_uri() . '/js/main_v6.min.js', false );
+	wp_enqueue_script( 'my-js', get_template_directory_uri() . '/js/main_v6_1.min.js', false );
 
 	wp_enqueue_script( 'elementor-slider', get_template_directory_uri() . '/js/elementor_slider.min.js', false );
 }
