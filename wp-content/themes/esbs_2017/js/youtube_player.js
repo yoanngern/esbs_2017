@@ -8,11 +8,20 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 // 3. This function creates an <iframe> (and YouTube player)
 //    after the API code downloads.
 var player;
+
 function onYouTubeIframeAPIReady() {
+
+    var videoId = document.getElementById("video_id");
+
+    var id = videoId.getAttribute("data-video");
+    var end = videoId.getAttribute("data-end");
+
+    console.log(id);
+
     player = new YT.Player('player', {
         height: '100%',
         width: '100%',
-        videoId: 'hx5TYjlu14A',
+        videoId: id,
         events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
@@ -24,17 +33,16 @@ function onYouTubeIframeAPIReady() {
             'modestbranding': 1,
             'rel': 0,
             'showinfo': 0,
-            'end': 132,
+            'end': end,
         }
 
     });
 
     var url = window.location.href;
 
-    var hash = url.substring(url.indexOf("#")+1);
-    console.log(hash);
+    var hash = url.substring(url.indexOf("#") + 1);
 
-    if(hash == 'play') {
+    if (hash == 'play') {
         $("body").addClass("show_full_video");
 
         player.playVideo();
@@ -61,14 +69,13 @@ function onPlayerStateChange(event) {
 
 
 }
+
 function stopVideo() {
     player.stopVideo();
 }
 
 
-
-
-$("section.join div.video_full").on("click", "a.close", function (event) {
+$("section div.video_full").on("click", "a.close", function (event) {
     event.preventDefault()
 
     player.stopVideo();
@@ -77,7 +84,7 @@ $("section.join div.video_full").on("click", "a.close", function (event) {
 
 });
 
-$("section.join").on("click", "a.play", function (event) {
+$("section").on("click", "a.play", function (event) {
     event.preventDefault();
 
 
@@ -86,3 +93,4 @@ $("section.join").on("click", "a.play", function (event) {
     player.playVideo();
 
 });
+
