@@ -157,6 +157,7 @@ $exclude_posts = array();
 			'category'         => $cat,
 			'suppress_filters' => true,
 			'exclude'          => $exclude_posts,
+			'post_status'      => 'publish',
 
 		), OBJECT );
 

@@ -85,6 +85,7 @@ get_header( 'campaign' ); ?>
 				'suppress_filters' => true,
 				'post__in'         => $post_in,
 				'post__not_in'     => $unwanted_post_ids,
+				'post_status'      => 'publish',
 
 			), OBJECT );
 

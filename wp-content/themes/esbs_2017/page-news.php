@@ -78,6 +78,7 @@ $exclude_posts = array();
 			'post_type'        => 'post',
 			'suppress_filters' => true,
 			'post__not_in'     => $exclude_posts,
+			'post_status'      => 'publish',
 			'meta_query'       => array(
 				'relation' => 'AND',
 				array(
