@@ -23,8 +23,10 @@ div.small_form {
                 white-space: nowrap;
 
                 h4 {
-                    font-family: $avenir-med;
+                    font-family: $avenir-blk;
                     text-align: left;
+                    text-transform: uppercase;
+                    letter-spacing: 0.01em;
                     max-width: 100%;
 
                 }
