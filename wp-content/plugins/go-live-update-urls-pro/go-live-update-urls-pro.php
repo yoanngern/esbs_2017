@@ -5,13 +5,13 @@ Plugin URI: https://matlipe.com/go-live-update-urls-pro/
 Description: Make Go Live Update URLS smarter and easier to use.
 Author: Mat Lipe
 Author URI: https://matlipe.com/
-Version: 2.1.1
+Version: 2.2.1
 Text Domain: go-live-update-urls
 */
 
-define( 'GO_LIVE_UPDATE_URLS_PRO_VERSION', '2.1.1' );
-define( 'GO_LIVE_UPDATE_URLS_LAST_VERSION', '2.1.0' );
-define( 'GO_LIVE_UPDATE_URLS_REQUIRED_BASIC_VERSION', '5.0.0' );
+define( 'GO_LIVE_UPDATE_URLS_PRO_VERSION', '2.2.1' );
+define( 'GO_LIVE_UPDATE_URLS_LAST_VERSION', '2.2.0' );
+define( 'GO_LIVE_UPDATE_URLS_REQUIRED_BASIC_VERSION', '5.0.1' );
 
 function go_live_update_urls_pro_load() {
 	if ( ! defined( 'WP_TESTS_DIR' ) && ! is_admin() ) {
@@ -27,8 +27,10 @@ function go_live_update_urls_pro_load() {
 	}
 
 	Go_Live_Update_URLS_Pro_Styles::init();
+	Go_Live_Update_URLS_Pro__History__Ajax::init();
+	Go_Live_Update_URLS_Pro__History__Tracking::init();
 	Go_Live_Update_URLS_Pro_Tests_Ajax::init();
-	Go_Live_Update_URLS_Pro_Factory::init();
+	Go_Live_Update_URLS_Pro_Core::init();
 	Go_Live_Update_URLS_Pro_Update::init();
 }
 
@@ -46,10 +48,14 @@ function go_live_update_urls_pro_autoload( $class ) {
 	$classes = array(
 		//core
 		'Go_Live_Update_URLS_Pro_Checkboxes'           => 'Checkboxes.php',
-		'Go_Live_Update_URLS_Pro_Factory'              => 'Factory.php',
+		'Go_Live_Update_URLS_Pro_Core'                 => 'Core.php',
 		'Go_Live_Update_URLS_Pro_Serialized_Tables'    => 'Serialized_Tables.php',
 		'Go_Live_Update_URLS_Pro_Styles'               => 'Styles.php',
 		'Go_Live_Update_URLS_Pro_Update'               => 'Update.php',
+
+		//history
+		'Go_Live_Update_URLS_Pro__History__Ajax'       => 'History/Ajax.php',
+		'Go_Live_Update_URLS_Pro__History__Tracking'   => 'History/Tracking.php',
 
 		//tests
 		'Go_Live_Update_URLS_Pro_Tests_Abstract'       => 'Tests/Abstract.php',
@@ -58,6 +64,7 @@ function go_live_update_urls_pro_autoload( $class ) {
 		'Go_Live_Update_URLS_Pro_Tests_Repo'           => 'Tests/Repo.php',
 		'Go_Live_Update_URLS_Pro_Tests_Scheme'         => 'Tests/Scheme.php',
 		'Go_Live_Update_URLS_Pro_Tests_Trailing_Slash' => 'Tests/Trailing_Slash.php',
+
 	);
 	if ( isset( $classes[ $class ] ) ) {
 		require dirname( __FILE__ ) . '/src/' . $classes[ $class ];

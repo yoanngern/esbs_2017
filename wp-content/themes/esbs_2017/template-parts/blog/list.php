@@ -61,6 +61,17 @@
 
 		<?php
 
+
+		set_query_var( 'meta_query', array(
+				'relation' => 'AND',
+				array(
+					'key'     => 'type',
+					'compare' => '!=',
+					'value'   => 'testimony'
+				),
+			)
+		);
+
 		if ( have_posts() ) :
 
 			echo '<div class=list>';

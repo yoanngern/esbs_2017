@@ -34,7 +34,7 @@ endif;
 if ( $bg ): ?>
     <section class="title" id="slider">
 
-        <article class="current" data-slide="1" style="background-image: url('<?php echo $bg['sizes']['banner']; ?>')">
+        <article class="current title" data-slide="1">
 
             <div class="dark"></div>
 
@@ -46,6 +46,8 @@ if ( $bg ): ?>
 					echo "<h2>" . $subtitle . "</h2>";
 				endif; ?>
             </div>
+
+            <div class="bg" style="background-image: url('<?php echo $bg['sizes']['banner']; ?>')"></div>
 
         </article>
 
@@ -79,6 +81,11 @@ if ( $bg ): ?>
 					'key'     => 'type',
 					'compare' => '!=',
 					'value'   => 'instagram'
+				),
+				array(
+					'key'     => 'type',
+					'compare' => '!=',
+					'value'   => 'testimony'
 				)
 			),
 		) );
@@ -104,8 +111,7 @@ if ( $bg ): ?>
 
 			?>
 
-            <article data-slide="<?php echo $key + 2 ?>"
-                     style="background-image: url('<?php echo get_field_or_parent( 'thumb', $recent->ID )['sizes']['banner']; ?>')">
+            <article class="title" data-slide="<?php echo $key + 2 ?>">
 
                 <div class="dark"></div>
 
@@ -116,6 +122,9 @@ if ( $bg ): ?>
                     <a href="<?php echo get_permalink( $recent->ID ) ?>"
                        class="button"><?php echo pll_e( 'Read this' ); ?></a>
                 </div>
+
+                <div class="bg"
+                     style="background-image: url('<?php echo get_field_or_parent( 'thumb', $recent->ID )['sizes']['banner']; ?>')"></div>
 
 
             </article>

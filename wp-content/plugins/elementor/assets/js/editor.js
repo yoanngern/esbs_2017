@@ -1,4 +1,4 @@
-/*! elementor - v1.9.5 - 14-02-2018 */
+/*! elementor - v1.9.8 - 12-03-2018 */
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports = Marionette.Behavior.extend( {
 	previewWindow: null,
@@ -35,7 +35,7 @@ module.exports = Marionette.Behavior.extend( {
 	},
 
 	activateSaveButtons: function( hasChanges ) {
-		var hasChanges = hasChanges || 'draft' === elementor.settings.page.model.get( 'post_status' );
+		hasChanges = hasChanges || 'draft' === elementor.settings.page.model.get( 'post_status' );
 
 		this.ui.buttonPublish.add( this.ui.menuSaveDraft ).toggleClass( 'elementor-saver-disabled', ! hasChanges );
 		this.ui.buttonSaveOptions.toggleClass( 'elementor-saver-disabled', ! hasChanges );
@@ -124,7 +124,7 @@ module.exports = Marionette.Behavior.extend( {
 	onClickButtonPublish: function() {
 		var postStatus = elementor.settings.page.model.get( 'post_status' );
 
-		if ( ! elementor.saver.isEditorChanged() && 'draft' !== postStatus ) {
+		if ( this.ui.buttonPublish.hasClass( 'elementor-saver-disabled' ) ) {
 			return;
 		}
 
@@ -162,6 +162,11 @@ module.exports = Marionette.Behavior.extend( {
 			case 'publish':
 			case 'private':
 				publishLabel = 'update';
+
+				if ( elementor.config.current_revision_id !== elementor.config.post_id ) {
+					this.activateSaveButtons( true );
+				}
+
 				break;
 			case 'draft':
 				if ( ! elementor.config.current_user_can_publish ) {
@@ -402,7 +407,9 @@ module.exports = Module.extend( {
 
 				var message;
 
-				if ( data.statusText ) {
+				if ( _.isString( data ) ) {
+					message = data;
+				} else if ( data.statusText ) {
 					message = elementor.ajax.createErrorMessage( data );
 
 					if ( 0 === data.readyState ) {
@@ -1278,7 +1285,7 @@ module.exports = Marionette.ItemView.extend( {
 		elementor.templates.requestLibraryData( function() {
 			self.ui.sync.removeClass( 'eicon-animation-spin' );
 
-			elementor.templates.showTemplates();
+			elementor.templates.setTemplatesSource( elementor.templates.getFilter( 'source' ) );
 		}, true, true );
 	},
 
@@ -9001,6 +9008,10 @@ Ajax = {
 				};
 			} else {
 				ajaxParams.error = function( XMLHttpRequest ) {
+					if ( 0 === XMLHttpRequest.readyState && 'abort' === XMLHttpRequest.statusText ) {
+						return;
+					}
+
 					var message = self.createErrorMessage( XMLHttpRequest );
 
 					elementor.notifications.showToast( {

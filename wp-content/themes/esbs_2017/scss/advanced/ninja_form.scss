@@ -1,0 +1,143 @@
+.nf-form-cont {
+
+    .nf-form-title {
+
+    }
+
+    .nf-form-wrap {
+
+        .nf-form-layout {
+
+            .nf-before-form-content {
+                margin: 10px 0 20px;
+                color: lighten($gray, 20);
+            }
+
+            .nf-form-content {
+
+                .nf-mp-body {
+
+                }
+            }
+        }
+
+    }
+
+    .ninja-forms-req-symbol,
+    .nf-error-msg {
+        color: $red;
+        font-family: $avenir-med;
+    }
+
+    .nf-error-msg {
+        font-size: 0.9em;
+    }
+}
+
+.nf-multi-cell {
+    div.nf-cell {
+        padding: 0 4% 0 0;
+    }
+}
+
+.nf-row {
+    .nf-cell {
+
+        .donation {
+            .nf-field-label {
+                width: auto;
+            }
+
+            .nf-field-element {
+                width: 70px;
+
+                input {
+                    text-align: right;
+                }
+            }
+
+            .nf-field-description {
+                margin-left: 10px;
+                width: auto;
+                display: inline-block;
+                line-height: 36px;
+
+                span {
+                    line-height: 100%;
+                    margin: 0;
+                    font-size: 1.2em;
+                    font-family: $avenir-med;
+                }
+            }
+        }
+
+        .nf-field-container {
+            label {
+                font-family: $avenir-blk;
+                font-weight: normal;
+                text-transform: uppercase;
+                font-size: 0.7em;
+                letter-spacing: 0.1em;
+            }
+
+            .nf-field-label {
+                padding-left: 0;
+            }
+
+            input,
+            textarea {
+                display: inline-block;
+                outline: none;
+                border: 1px solid lighten($gray, 60);
+                padding: 4px;
+                margin: 1px;
+                font-size: 1em;
+
+                &:focus {
+                    border: 2px solid lighten($gray, 40);
+                    margin: 0;
+                }
+
+                &[type="button"] {
+                    background-color: #d3b963;
+                    margin-top: 20px;
+                    border: none;
+                    outline: none;
+                    color: #fff;
+                    padding: 8px 20px 7px;
+                    font-family: $avenir-blk;
+                    text-transform: uppercase;
+                    letter-spacing: 0.2em;
+                    cursor: pointer;
+                    line-height: 25px;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    transition: color 300ms ease;
+
+                    &:hover {
+                        color: $black;
+                    }
+                }
+
+                &[type="checkbox"] {
+                    cursor: pointer;
+                }
+            }
+
+            .listcheckbox-wrap,
+            .listradio-wrap {
+                ul li {
+                    label {
+                        font-family: $avenir;
+                        font-weight: normal;
+                        text-transform: none;
+                        font-size: 1em;
+                        padding: 0;
+                    }
+                }
+            }
+
+        }
+    }
+}

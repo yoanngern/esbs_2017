@@ -801,9 +801,6 @@ class Form extends Form_Base {
 				'label' => __( 'Label', 'elementor-pro' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
-				'condition' => [
-					'show_labels!' => '',
-				],
 			]
 		);
 
@@ -829,9 +826,6 @@ class Form extends Form_Base {
 					'body {{WRAPPER}} .elementor-labels-above .elementor-field-group > label' => 'padding-bottom: {{SIZE}}{{UNIT}};',
 					// for the label position = above option
 				],
-				'condition' => [
-					'show_labels!' => '',
-				],
 			]
 		);
 
@@ -847,9 +841,6 @@ class Form extends Form_Base {
 					'type' => Scheme_Color::get_type(),
 					'value' => Scheme_Color::COLOR_3,
 				],
-				'condition' => [
-					'show_labels!' => '',
-				],
 			]
 		);
 
@@ -863,7 +854,6 @@ class Form extends Form_Base {
 					'{{WRAPPER}} .elementor-mark-required .elementor-field-label:after' => 'color: {{COLOR}};',
 				],
 				'condition' => [
-					'show_labels!' => '',
 					'mark_required' => 'yes',
 				],
 			]
@@ -875,9 +865,6 @@ class Form extends Form_Base {
 				'name' => 'label_typography',
 				'selector' => '{{WRAPPER}} .elementor-field-group > label',
 				'scheme' => Scheme_Typography::TYPOGRAPHY_3,
-				'condition' => [
-					'show_labels!' => '',
-				],
 			]
 		);
 

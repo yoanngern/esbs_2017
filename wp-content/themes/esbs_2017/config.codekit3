@@ -7,7 +7,7 @@
 		"uuidString": "35FCC746-D50B-47EC-8292-55E51DFD872E"
 		}
 	],
-"creatorBuild": "26268",
+"creatorBuild": "26330",
 "files": {
 	"\/404.php": {
 		"cB": 0,
@@ -965,6 +965,17 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/images\/icon_post.png": {
+		"ft": 32768,
+		"iS": 3439,
+		"oA": 0,
+		"oAP": "\/images\/icon_post.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"\/images\/icon_prayer.png": {
 		"ft": 32768,
 		"iS": 7729,
@@ -1314,6 +1325,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/includes\/acf\/news_page.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/stories_page.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/stories_page.php",
 		"oF": 0
 		},
 	"\/includes\/acf_fields.php": {
@@ -4154,6 +4172,13 @@
 		"oAP": "\/page-news.php",
 		"oF": 0
 		},
+	"\/page-stories.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/page-stories.php",
+		"oF": 0
+		},
 	"\/page.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -4719,6 +4744,19 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/scss\/css\/news-feed.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/advanced\/ninja_form.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/css\/ninja_form.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1

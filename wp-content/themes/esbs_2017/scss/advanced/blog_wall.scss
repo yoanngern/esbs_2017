@@ -39,7 +39,6 @@ div.blog_wall {
 
                     span {
                         background-color: $white;
-                        //display: inline-block;
                         display: none;
                         line-height: 1.3em;
                         font-size: 1.2em;
@@ -47,28 +46,6 @@ div.blog_wall {
                         font-family: $avenir-blk;
                         letter-spacing: 0.1em;
                         text-transform: uppercase;
-                    }
-                }
-            }
-        }
-
-        &:hover {
-            margin: 0;
-            padding: 8px;
-            transition: all 200ms ease;
-            box-shadow: 0px 30px 60px 20px rgba(black, 0.07);
-
-            .box {
-
-                .share a {
-                    opacity: 1;
-                }
-            }
-
-            &.video {
-                figure {
-                    .play {
-                        opacity: 1;
                     }
                 }
             }
@@ -117,7 +94,6 @@ div.blog_wall {
                                 text-transform: uppercase;
                                 font-size: 0.8em;
                                 letter-spacing: 0.25em;
-                                //color: lighten($black, 30);
                                 color: $gold_dark;
 
                             }
@@ -130,7 +106,6 @@ div.blog_wall {
                         }
 
                         p {
-                            //font-family: $avenir-med;
                             font-size: 0.9em;
                         }
                     }
@@ -153,11 +128,10 @@ div.blog_wall {
 
             .share {
                 z-index: 300;
-                display: block;
+                display: none;
                 position: absolute;
                 bottom: 0;
                 left: 0;
-                //background-color: $white;
                 width: 33.333%;
                 height: auto;
 
@@ -201,6 +175,197 @@ div.blog_wall {
 
                         &:hover {
                             fill: $gold-dark;
+                        }
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            margin: 0;
+            padding: 8px;
+            transition: all 200ms ease;
+            box-shadow: 0 30px 60px 20px rgba(black, 0.07);
+
+            .box {
+
+                a.hide {
+                    background-color: rgba(black, 0.3);
+                }
+
+                .share {
+                    display: block;
+
+                    a {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            &.video {
+                figure {
+                    .play {
+                        opacity: 1;
+                    }
+                }
+            }
+
+        }
+
+        &.testimony {
+            width: calc(33% - 16px);
+
+            @mixin bg-gradient($color: $gold) {
+
+                $dark: darken($color, 8);
+                $light: lighten($color, 1);
+
+                @include gradient($color, $dark, $light);
+
+                .box {
+                    a.item_link .item_content .container span.date {
+                        color: darken($color, 20);
+                    }
+
+                    .share a svg.icon:hover {
+                        fill: darken($color, 10);
+                    }
+                }
+            }
+
+            &.color-1 {
+                @include bg-gradient(#9687BE);
+            }
+
+            &.color-2 {
+                @include bg-gradient(#B9817F);
+            }
+
+            &.color-3 {
+                @include bg-gradient(#D3B963);
+            }
+
+            &.color-4 {
+                @include bg-gradient(#C48C53);
+            }
+
+            &.color-5 {
+                @include bg-gradient(#7AA16F);
+            }
+
+            &.color-6 {
+                @include bg-gradient(#6F9FA1);
+            }
+
+            &.image {
+                .box {
+                    a.item_link {
+                        background-color: rgba(black, 0.35);
+
+                        .item_content {
+                            .container {
+                                span.date {
+                                    color: $white;
+                                    opacity: 0.85;
+                                }
+                            }
+                        }
+                    }
+
+                    .share a svg.icon:hover {
+                        fill: rgba($white, 0.7);
+                    }
+                }
+            }
+
+            &:hover {
+                .box {
+
+
+                    a.item_link {
+                        background-color: rgba(black, 0.45);
+
+                        .item_content {
+                            .container {
+                                span.date,
+                                h2,
+                                p {
+                                    opacity: 0.8;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .box {
+                padding-bottom: 125%;
+
+                a.item_link {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    transition: background-color 400ms ease;
+
+                    .item_content {
+                        width: 80%;
+                        margin: 10%;
+                        height: 83%;
+
+                        .container {
+                            height: 100%;
+                            width: 100%;
+                            margin: 0;
+
+                            span.date,
+                            h2,
+                            p {
+                                color: $white;
+                            }
+
+                            p {
+                                font-family: $dido-i;
+                                font-size: 1.1em;
+                                letter-spacing: 0em;
+                            }
+
+                            .text {
+                                position: absolute;
+                                bottom: 0;
+                                width: 100%;
+                                left: 0;
+                            }
+                        }
+                    }
+                }
+
+                figure {
+                    width: 100%;
+                }
+
+                .share {
+                    top: 50%;
+                    position: absolute;
+                    height: auto;
+                    width: inherit;
+                    bottom: inherit;
+                    -webkit-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    transform: translateY(-50%);
+
+                    .container {
+                        text-align: center;
+                        margin: 0 auto;
+                        width: auto;
+                    }
+
+                    a {
+                        svg.icon {
+                            fill: $white;
+
+                            &:hover {
+                                fill: $gray;
+                            }
                         }
                     }
                 }

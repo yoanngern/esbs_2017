@@ -196,6 +196,10 @@ body > header {
                                 background-image: url('images/icon_hc_4.png');
                             }
 
+                            &.icon-post a::before {
+                                background-image: url('images/icon_post.png');
+                            }
+
                             &.icon-business a::before {
                                 background-image: url('images/icon_business.png');
                             }

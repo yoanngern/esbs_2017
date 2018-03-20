@@ -51,6 +51,8 @@ add_image_size( 'blog_wall', 640, 360, true );
 add_image_size( 'fullscreen', 1440, 806, true );
 add_image_size( 'banner_blur', 200, 100, true );
 
+add_image_size( 'blog_story', 317, 392, true );
+
 add_image_size( 'social', 500, 500, true );
 
 
@@ -403,8 +405,6 @@ function print_buttons( $acf_selector, $post, $style = 'button' ) {
 }
 
 
-
-
 function get_api( $name ) {
 
 	$api = array(
@@ -417,3 +417,4 @@ function get_api( $name ) {
 	return $api[ $name ];
 
 }
+

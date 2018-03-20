@@ -8,53 +8,103 @@
 	$title    = get_the_title();
 	$video    = get_iframe_video( get_field( 'video', get_the_ID() ) );
 	$type     = get_field( 'type', get_the_ID() );
-	$subtitle = "";
+	$subtitle = get_field('subtitle', get_the_ID());
 	$link     = "";
+
+
+	switch ( $type ) {
+		case "testimony":
+
+			$id = get_the_ID();
+
+			$color_index = 1;
+
+			$nb_color = 6;
+
+			for ( $i = $id; $i > 0; $i -- ) {
+				$color_index ++;
+
+				if ( $color_index == $nb_color ) {
+					$color_index = 1;
+				}
+			}
+
+			$header_title = $title;
+			$class        = "story color-" . $color_index;
+
+			$bg = get_field( 'thumb', $id );
+
+			if ( $bg ) {
+				$class .= " image";
+			}
+
+			break;
+		case "video":
+
+			$class = "video_banner";
+
+			break;
+		case "facebook":
+		case "tweet":
+		case "instagram":
+
+			$class   = "facebook";
+			$picture = $bg['sizes']['full_hd'];
+
+			break;
+		case "article":
+		default;
+
+			$header_title = $title;
+			$class        = "post";
+
+			break;
+	}
 
 	?>
 
 
     <section class="title">
-		<?php if ( $video ): ?>
-
-            <article class="title video_banner">
-
-                <div class="video_box">
-                    <div class="video">
-						<?php echo $video; ?>
-                    </div>
-                </div>
-
-                <div class="bg" style="background-image: url('<?php echo $bg['sizes']['banner_blur']; ?>')"></div>
-            </article>
 
 
-		<?php elseif ( $type == "facebook" ): ?>
+		<?php if ( $bg || $type == "testimony" ): ?>
 
-            <article class="title facebook">
-
-                <div class="image">
-                    <figure style="background-image: url('<?php echo $bg['sizes']['full_hd']; ?>')"></figure>
-                </div>
-
-                <div class="bg" style="background-image: url('<?php echo $bg['sizes']['banner_blur']; ?>')"></div>
-            </article>
-
-		<?php elseif ( $bg ): ?>
-
-            <article class="title post"
-                     style="background-image: url('<?php echo $bg['sizes']['banner']; ?>')">
+            <article class="title <?php echo $class ?>">
 
                 <div class="dark"></div>
 
-                <div class="text">
-                    <h1><?php echo $title; ?></h1>
+				<?php if ( $picture ): ?>
+                    <div class="image">
+                        <figure style="background-image: url('<?php echo $picture ?>')"></figure>
+                    </div>
+				<?php endif; ?>
 
-					<?php if ( $subtitle ):
-						echo "<h2>" . $subtitle . "</h2>";
-					endif; ?>
-                </div>
+				<?php if ( $video ): ?>
+                    <div class="video_box">
+                        <div class="video">
+							<?php echo $video; ?>
+                        </div>
+                    </div>
+				<?php endif; ?>
 
+				<?php if ( $header_title ): ?>
+                    <div class="text">
+                        <h1><?php echo $header_title; ?></h1>
+
+						<?php if ( $subtitle ):
+							echo "<h2>" . $subtitle . "</h2>";
+						endif; ?>
+                    </div>
+				<?php endif; ?>
+
+                <div class="bg_color"></div>
+
+				<?php if ( $bg ): ?>
+                    <div class="bg_blur"
+                         style="background-image: url('<?php echo $bg['sizes']['banner_blur']; ?>')"></div>
+
+                    <div class="bg" style="background-image: url('<?php echo $bg['sizes']['banner']; ?>')"></div>
+				<?php endif; ?>
             </article>
 
 		<?php else: ?>

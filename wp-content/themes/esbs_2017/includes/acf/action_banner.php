@@ -77,6 +77,8 @@ if( function_exists('acf_add_local_field_group') ):
 							'video' => 'Video',
 							'invite' => 'Invite',
 							'latest_news' => 'Latest news',
+							'comment' => 'Comment',
+							'post' => 'Post',
 						),
 						'default_value' => array(
 						),
