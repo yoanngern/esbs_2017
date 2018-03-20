@@ -16,9 +16,12 @@ $exclude_posts = array();
 
 	$button = get_field( 'header_button' );
 
-	$button_title  = $button['title'];
-	$button_url    = $button['url'];
-	$button_target = $button['target'];
+	if ( $button ) {
+		$button_title  = $button['title'];
+		$button_url    = $button['url'];
+		$button_target = $button['target'];
+	}
+
 
 	?>
 
@@ -33,10 +36,12 @@ $exclude_posts = array();
 
                     <div class="title">
                         <h1><?php echo $title; ?></h1>
-                        <div class="button">
-                            <a class="button" target="<?php echo $button_target; ?>"
-                               href="<?php echo $button_url; ?>"><?php echo $button_title; ?></a>
-                        </div>
+						<?php if ( $button ): ?>
+                            <div class="button">
+                                <a class="button" target="<?php echo $button_target; ?>"
+                                   href="<?php echo $button_url; ?>"><?php echo $button_title; ?></a>
+                            </div>
+						<?php endif; ?>
                     </div>
                 </div>
 
