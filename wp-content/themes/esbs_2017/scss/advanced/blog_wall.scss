@@ -213,7 +213,7 @@ div.blog_wall {
         }
 
         &.testimony {
-            width: calc(33% - 16px);
+            width: calc(33.333% - 16px);
 
             @mixin bg-gradient($color: $gold) {
 

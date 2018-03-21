@@ -162,6 +162,18 @@ section.news-feed {
 
         background-color: lighten($gray, 76);
 
+        &.starting-posts {
+            .blog_wall {
+                padding-bottom: 0;
+            }
+        }
+
+        &.ending-posts {
+            .blog_wall {
+                padding-top: 0;
+            }
+        }
+
         &#zone2 {
 
         }

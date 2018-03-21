@@ -57,6 +57,51 @@ $exclude_posts = array();
 
 	<?php endif; ?>
 
+    <article class="blog starting-posts">
+
+		<?php
+
+
+		$query = new WP_Query( array(
+			'posts_per_page'   => 3,
+			'orderby'          => 'post_date',
+			'order'            => 'DESC',
+			'post_type'        => 'post',
+			'suppress_filters' => true,
+			'post_status'      => 'publish',
+			'meta_query'       => array(
+				'relation' => 'AND',
+				array(
+					'key'     => 'type',
+					'compare' => '=',
+					'value'   => 'testimony'
+				),
+			),
+		) );
+
+		$items = $query->get_posts();
+
+		$exclude_posts = array();
+
+		if ( $items != null ) : ?>
+
+            <div class="blog_wall">
+
+				<?php foreach ( $items as $item ) :
+
+					set_query_var( 'item', $item );
+					get_template_part( 'template-parts/blog/item_wall' );
+
+					$exclude_posts[] = $item->ID;
+
+				endforeach; ?>
+
+            </div>
+
+		<?php endif; ?>
+
+    </article>
+
     <article class="blog" id="zone1">
 
 		<?php
@@ -82,7 +127,7 @@ $exclude_posts = array();
 
     </article>
 
-    <article class="blog">
+    <article class="blog ending-posts">
 
 		<?php
 
