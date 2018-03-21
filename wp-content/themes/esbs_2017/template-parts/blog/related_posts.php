@@ -43,7 +43,7 @@ if ( $posts ) :
 					switch ( $type ) {
 						case "testimony":
 
-							if(get_field( 'subtitle' )) {
+							if(get_field( 'subtitle', $id )) {
 								$title = get_field( 'subtitle' );
 							} else {
 								$title = get_the_title($id);
