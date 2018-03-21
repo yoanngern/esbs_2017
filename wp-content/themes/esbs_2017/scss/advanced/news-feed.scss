@@ -139,16 +139,16 @@ section.news-feed {
                         text-align: center;
                         display: inline-block;
                         margin: 30px 0 0;
+                        background-color: $gold;
                         font-size: 1em;
                         line-height: 1.2em;
                         padding: 9px 15px 8px;
                         border-width: 2px;
                         letter-spacing: 0.15em;
                         font-family: $avenir-blk;
-                        transition: all 100ms ease;
+                        transition: color 100ms ease;
 
                         &:hover {
-                            background-color: $gold;
                             color: $gray;
                         }
 
