@@ -446,8 +446,34 @@ div.blog_wall {
                     }
                 }
             }
+
+            &.testimony {
+                width: calc(50% - 16px);
+
+                .box {
+                    .hide {
+                        position: absolute;
+                    }
+
+                    a.item_link {
+                        padding-top: 0;
+                    }
+
+                    figure {
+                        padding-bottom: 0;
+                        height: 100%;
+                    }
+                }
+            }
         }
 
     }
 
+    @media only screen and (max-width: 450px) {
+        article {
+            &.testimony {
+                width: calc(100% - 16px);
+            }
+        }
+    }
 }
