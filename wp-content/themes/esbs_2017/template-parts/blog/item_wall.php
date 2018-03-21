@@ -43,7 +43,12 @@ switch ( $type ) {
 		$img      = $thumb['sizes']['blog_story'];
 		$subtitle = get_field('subtitle', $id);
 		break;
+	case "video":
+	case "facebook":
+	case "tweet":
+	case "instagram":
 	case "article":
+	default;
 		$img      = $thumb['sizes']['blog_wall'];
 		$subtitle = wp_trim_words( $text, 20 );
 		break;
