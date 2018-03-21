@@ -44,7 +44,7 @@ if ( $posts ) :
 						case "testimony":
 
 							if(get_field( 'subtitle', $id )) {
-								$title = get_field( 'subtitle' );
+								$title = get_field( 'subtitle', $id );
 							} else {
 								$title = get_the_title($id);
 							}
