@@ -30,6 +30,8 @@ $exclude_posts = array();
         <article class="title-bg"
                  style="background-image: url('<?php echo $bg['sizes']['banner']; ?>')">
 
+            <div class="dark"></div>
+
             <div class="text">
 
                 <div class="container">
