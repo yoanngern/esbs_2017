@@ -416,6 +416,10 @@ section#content section.related_posts {
                         display: block;
                         position: absolute;
 
+                    }
+
+                    figure,
+                    div.bg_color {
                         h2 {
                             color: $white;
                             position: absolute;
