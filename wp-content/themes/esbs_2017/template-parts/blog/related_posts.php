@@ -46,7 +46,7 @@ if ( $posts ) :
 							if(get_field( 'subtitle' )) {
 								$title = get_field( 'subtitle' );
 							} else {
-								$title = get_the_title();
+								$title = get_the_title($id);
 							}
 
 							break;
@@ -57,7 +57,7 @@ if ( $posts ) :
 						case "article":
 						default;
 
-							$title    = get_the_title();
+							$title    = get_the_title($id);
 
 							break;
 					}
@@ -75,13 +75,13 @@ if ( $posts ) :
 
 			                            <?php if ( $type == 'testimony' ): ?>
                                             <div class="dark"></div>
-                                            <h2><?php echo get_the_title() ?></h2>
+                                            <h2><?php echo get_the_title($id) ?></h2>
 			                            <?php endif; ?>
 
                                     </figure>
 	                            <?php else: ?>
                                     <div class="bg_color">
-                                        <h2><?php echo get_the_title() ?></h2>
+                                        <h2><?php echo get_the_title($id) ?></h2>
                                     </div>
 	                            <?php endif; ?>
 
