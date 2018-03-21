@@ -2,6 +2,8 @@
 
 $id = get_the_ID();
 
+$type = get_field( 'type', $id );
+
 $color_index = 1;
 
 $nb_color = 6;
@@ -14,29 +16,53 @@ for ( $i = $id; $i > 0; $i -- ) {
 	}
 }
 
+$link = esc_url( get_permalink() );
+$img  = get_field_or_parent( 'thumb', get_the_ID() )['sizes']['blog'];
+
+
 $class = "color-" . $color_index;
+
+switch ( $type ) {
+	case "testimony":
+
+		$title = pll__( 'Story' );
+
+		break;
+	case "video":
+	case "facebook":
+	case "tweet":
+	case "instagram":
+	case "article":
+	default;
+
+		$title = get_the_title();
+
+		break;
+}
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class($class); ?>>
+<article id="post-<?php echo $id; ?>" <?php post_class( $class ); ?>>
 
     <div class="box">
 
-        <a class="image" href="<?php echo esc_url( get_permalink() ) ?>">
-			<?php if ( get_field( 'thumb', get_the_ID() ) ): ?>
-                <figure style="background-image: url('<?php echo get_field_or_parent( 'thumb', get_the_ID() )['sizes']['blog'] ?>')"></figure>
-	        <?php else: ?>
-            <div class="bg_color"></div>
-            <?php endif; ?>
+        <a class="image" href="<?php echo $link ?>">
+			<?php if ( get_field( 'thumb', $id ) ): ?>
+                <figure style="background-image: url('<?php echo $img ?>')"></figure>
+			<?php else: ?>
+                <div class="bg_color">
+                    <h2><?php echo get_the_title() ?></h2>
+                </div>
+			<?php endif; ?>
         </a>
         <span><?php the_category() ?></span>
 
-		<?php the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
+        <h2 class="entry-title"><a href="<?php echo $link; ?>" rel="bookmark"><?php echo $title; ?></a></h2>
 
 		<?php the_excerpt() ?>
 
         <div class="button"><a href="<?php echo esc_url( get_permalink() ) ?>"
-                               class="button"><?php echo pll_e( 'Read' ); ?></a></div>
+                               class="button"><?php pll_e( 'Read' ); ?></a></div>
 
     </div>
 

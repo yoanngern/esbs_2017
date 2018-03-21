@@ -415,6 +415,21 @@ section#content section.related_posts {
                         background-color: red;
                         display: block;
                         position: absolute;
+
+                        h2 {
+                            color: $white;
+                            position: absolute;
+                            width: 84%;
+                            top: 50%;
+                            -webkit-transform: translateY(-50%);
+                            -ms-transform: translateY(-50%);
+                            transform: translateY(-50%);
+                            margin: 0 8%;
+                            padding: 0;
+                            font-size: 1.2em;
+                            letter-spacing: 0.05em;
+                            line-height: 1.3em;
+                        }
                     }
 
                     &:hover {
