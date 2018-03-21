@@ -19,6 +19,8 @@ if ( $posts ) :
 
 					$id = $curr_post->ID;
 
+					$type = get_field( 'type', $id );
+
 					$color_index = 1;
 
 					$nb_color = 6;
@@ -31,30 +33,62 @@ if ( $posts ) :
 						}
 					}
 
+					$link = esc_url( get_permalink($id) );
+					$img  = get_field_or_parent( 'thumb', $id )['sizes']['blog'];
+
+
 					$class = "color-" . $color_index;
 
-                    ?>
+
+					switch ( $type ) {
+						case "testimony":
+
+							if(get_field( 'subtitle' )) {
+								$title = get_field( 'subtitle' );
+							} else {
+								$title = get_the_title();
+							}
+
+							break;
+						case "video":
+						case "facebook":
+						case "tweet":
+						case "instagram":
+						case "article":
+						default;
+
+							$title    = get_the_title();
+
+							break;
+					}
+
+					?>
 
                     <article id="post-<?php echo $id; ?>" class="post <?php echo $class ?>">
 
                         <div class="box">
 
-                            <a class="image" href="<?php echo esc_url( get_the_permalink( $id ) ) ?>">
+                            <a class="image" href="<?php echo $link; ?>">
 
 	                            <?php if ( get_field( 'thumb', $id ) ): ?>
-                                    <figure style="background-image: url('<?php echo get_field_or_parent( 'thumb', $id )['sizes']['blog'] ?>')"></figure>
+                                    <figure style="background-image: url('<?php echo $img ?>')">
+
+			                            <?php if ( $type == 'testimony' ): ?>
+                                            <div class="dark"></div>
+                                            <h2><?php echo get_the_title() ?></h2>
+			                            <?php endif; ?>
+
+                                    </figure>
 	                            <?php else: ?>
-                                    <div class="bg_color"></div>
+                                    <div class="bg_color">
+                                        <h2><?php echo get_the_title() ?></h2>
+                                    </div>
 	                            <?php endif; ?>
-
-
 
                                 <div class="button"><?php echo pll_e( 'Read' ); ?></div>
                             </a>
 
-                            <h2>
-                                <a href="<?php echo esc_url( get_the_permalink( $id ) ) ?>"><?php echo get_the_title( $id ); ?></a>
-                            </h2>
+                            <h2 class="entry-title"><a href="<?php echo $link; ?>" rel="bookmark"><?php echo $title; ?></a></h2>
 
                         </div>
 

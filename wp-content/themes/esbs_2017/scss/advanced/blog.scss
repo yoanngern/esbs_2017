@@ -834,10 +834,6 @@ section#content section.related_posts {
             article.post {
                 margin-bottom: 0;
 
-                div.box {
-                    margin-bottom: 30px;
-                }
-
                 a.image {
                     display: block;
                     transition: all 100ms ease;
@@ -886,16 +882,17 @@ section#content section.related_posts {
 
                 div.box {
                     height: auto;
-                }
+                    margin-bottom: 30px;
 
-                h2 {
-                    &::after {
-                        height: 1px;
-                        width: 80px;
-                        content: " ";
-                        margin: 15px auto 0;
-                        display: block;
-                        background-color: lighten($black, 39.1);
+                    & > h2 {
+                        &::after {
+                            height: 1px;
+                            width: 80px;
+                            content: " ";
+                            margin: 15px auto 0;
+                            display: block;
+                            background-color: lighten($black, 39.1);
+                        }
                     }
                 }
             }
