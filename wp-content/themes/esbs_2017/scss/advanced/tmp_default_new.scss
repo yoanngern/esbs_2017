@@ -1,0 +1,195 @@
+body.page-template-page-default {
+
+    #content {
+
+        article.title {
+            min-height: 40vh;
+            height: 100%;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding-top: 55px;
+            text-align: center;
+            position: relative;
+            border-bottom: 5px solid $gold;
+
+            div.title {
+                position: absolute;
+                left: 0;
+                width: 100%;
+                margin: 0 auto;
+                z-index: 0;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+                white-space: normal;
+                display: block;
+            }
+
+            h1 {
+                color: $white;
+                font-family: $avenir-blk;
+                font-size: 1.7em;
+                letter-spacing: 0.3em;
+                text-align: center;
+                max-width: 600px;
+                margin: 40px auto 20px;
+                line-height: 2.6em;
+                text-transform: uppercase;
+
+            }
+
+            div.button {
+                margin-bottom: 30px;
+
+                a.button {
+                    color: $white;
+                    text-align: center;
+                    display: inline-block;
+                    margin-top: 20px;
+                    font-family: $dido-i;
+                    font-size: 1.5em;
+                    line-height: 1.6em;
+                    padding: 15px 30px 8px;
+                    border-width: 2px;
+                    letter-spacing: 0.15em;
+                    transition: all 100ms ease;
+                    margin-right: 0;
+
+                    &:hover {
+                        background-color: $gold;
+                        color: $gray;
+                    }
+
+                }
+            }
+
+            @media only screen and (max-height: 700px) {
+                div.title {
+                    top: inherit;
+                    position: relative;
+                    -webkit-transform: translateY(0);
+                    -ms-transform: translateY(0);
+                    transform: translateY(0);
+                    margin-top: 20px;
+                }
+            }
+
+        }
+
+        div.spacer {
+            padding-top: 60px;
+            background-color: $white;
+            display: block;
+        }
+
+        div.platter {
+
+            article.content-page {
+                margin-bottom: 60px;
+
+
+
+                div.lead {
+                    text-align: center;
+                    max-width: 640px;
+                    margin: 40px auto 60px;
+                    width: 50%;
+
+                    p {
+                        font-family: $avenir-blk;
+                        letter-spacing: 0.18em;
+                        line-height: 1.8em;
+                    }
+                }
+
+
+
+            }
+
+        }
+
+    }
+
+    @media only screen and (max-width: 870px) {
+        #content {
+            div.platter {
+                article.content-page {
+                    div.lead {
+                        width: 70%;
+                    }
+
+                    div.content div.col2 {
+
+                        -webkit-column-gap: 50px; /* Chrome, Safari, Opera */
+                        -moz-column-gap: 50px; /* Firefox */
+                        column-gap: 50px;
+                    }
+                }
+            }
+
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        #content {
+
+            article.title {
+                h1 {
+                    font-size: 1.2em;
+                    line-height: 2.2em;
+                    width: 90%;
+
+                }
+            }
+
+            div.platter {
+                article.content-page {
+                    padding-top: 0;
+                    padding-bottom: 20px;
+                    margin-bottom: 20px;
+
+                    h1 {
+                        padding-top: 80px;
+                        margin-bottom: 0;
+                    }
+
+                    div.lead {
+                        width: 100%;
+                    }
+
+                    div.content {
+                        margin-top: 0;
+
+                        div.col2 {
+                            -webkit-column-count: 1; /* Chrome, Safari, Opera */
+                            -moz-column-count: 1; /* Firefox */
+                            column-count: 1;
+                        }
+
+                        div.col_fixed {
+                            display: block;
+                            width: auto;
+
+                            div.col {
+                                display: block;
+                                width: 100%;
+
+                                &:nth-of-type(2n) {
+                                    padding-left: 0;
+                                }
+
+                                &:nth-of-type(2n+1) {
+                                    padding-right: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+}

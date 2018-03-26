@@ -59,9 +59,23 @@
 				<?php get_template_part( 'template-parts/divers/social_networks' ); ?>
             </div>
 
-            <div class="join_link">
-                <a href="#join">Join</a>
-            </div>
+			<?php
+			$action_button = get_field( 'action_button', 'option' );
+
+			if ( $action_button ):
+
+
+				$link = $action_button['url'];
+				$name      = $action_button['title'];
+				$target    = $action_button['target'];
+
+				?>
+
+                <div class="action-header">
+                    <a target="<?php echo $target; ?>" href="<?php echo $link; ?>"><?php echo $name; ?></a>
+                </div>
+
+			<?php endif; ?>
 
         </div>
 

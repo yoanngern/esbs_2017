@@ -1292,6 +1292,13 @@
 		"oAP": "\/includes\/acf\/default_page.php",
 		"oF": 0
 		},
+	"\/includes\/acf\/default_page_new.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/default_page_new.php",
+		"oF": 0
+		},
 	"\/includes\/acf\/esbs_settings.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -1325,6 +1332,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/includes\/acf\/news_page.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/social_networks.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/social_networks.php",
 		"oF": 0
 		},
 	"\/includes\/acf\/stories_page.php": {
@@ -4151,6 +4165,13 @@
 		"oAP": "\/page-custom.php",
 		"oF": 0
 		},
+	"\/page-default.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/page-default.php",
+		"oF": 0
+		},
 	"\/page-elementor.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -4787,6 +4808,19 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/advanced\/tmp_default_new.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/css\/tmp_default_new.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/scss\/base\/_admin.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -4926,6 +4960,26 @@
 		"oF": 2,
 		"oS": 3,
 		"uL": 1
+		},
+	"\/style.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/style-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"\/style_v7.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/style_v7-min.css",
+		"oF": 0,
+		"oS": 3
 		},
 	"\/template-parts\/blog\/blogroll.php": {
 		"cB": 0,
@@ -7066,7 +7120,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http:\/\/esbs.org",
+	"externalServerAddress": "http:\/\/summit.esbs.org",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",

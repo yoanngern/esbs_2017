@@ -7,6 +7,37 @@ if( function_exists('acf_add_local_field_group') ):
 		'title' => 'ESBS Settings',
 		'fields' => array(
 			array(
+				'key' => 'field_5ab911c7e41e5',
+				'label' => 'Header',
+				'name' => '',
+				'type' => 'tab',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'placement' => 'top',
+				'endpoint' => 0,
+			),
+			array(
+				'key' => 'field_5ab911f346f8e',
+				'label' => 'Action button',
+				'name' => 'action_button',
+				'type' => 'link',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'return_format' => 'array',
+			),
+			array(
 				'key' => 'field_5a8ede54a900f',
 				'label' => 'Facebook',
 				'name' => '',

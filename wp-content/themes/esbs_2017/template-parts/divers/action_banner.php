@@ -1,6 +1,10 @@
-<section id="action_banner">
+<?php if ( have_rows( 'banner_buttons', 'option' ) ):
 
-	<?php if ( have_rows( 'banner_buttons', 'option' ) ): ?>
+	$video = get_field( 'banner_video', 'option' );
+
+	?>
+
+    <section id="action_banner">
 
         <div class="buttons">
             <div class="box">
@@ -32,19 +36,16 @@
 
         </div>
 
-	<?php endif; ?>
+        <div class="video">
+            <video id="bgvid" autoplay loop>
+                <source src="<?php echo $video; ?>"
+                        type="video/mp4">
+            </video>
+        </div>
 
-	<?php
+    </section>
 
-	$video = get_field( 'banner_video', 'option' );
+<?php endif; ?>
 
-	?>
 
-    <div class="video">
-        <video id="bgvid" autoplay loop>
-            <source src="<?php echo $video; ?>"
-                    type="video/mp4">
-        </video>
-    </div>
 
-</section>
