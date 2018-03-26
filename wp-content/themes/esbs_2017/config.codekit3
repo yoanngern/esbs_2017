@@ -4948,7 +4948,7 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/style_v7.scss": {
+	"\/scss\/style_v8.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -4956,9 +4956,9 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "\/style_v7.css",
+		"oAP": "\/style_v8.css",
 		"oF": 2,
-		"oS": 3,
+		"oS": 0,
 		"uL": 1
 		},
 	"\/style.css": {
@@ -7633,7 +7633,7 @@
 	"languageDefaultsSASS": {
 		"autoOutputAction": 0,
 		"autoOutputPathFilenamePattern": "*.css",
-		"autoOutputPathRelativePath": "..\/css",
+		"autoOutputPathRelativePath": "\/",
 		"autoOutputPathReplace1": "sass",
 		"autoOutputPathReplace2": "css",
 		"autoOutputPathStyle": 2,
