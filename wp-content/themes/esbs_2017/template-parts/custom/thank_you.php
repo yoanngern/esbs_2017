@@ -9,11 +9,18 @@ $list_id = get_field( 'thank_you_list_id' );
 $email = $_GET['email'];
 
 if ( $list_id != null && $email != null ) {
-	$contact = mc4wp_get_api_v3()->get_list_member( $list_id, $email );
 
+	try {
+		$contact = mc4wp_get_api_v3()->get_list_member( $list_id, $email );
+	} catch ( Exception $e ) {
+		$contact = null;
+	}
+}
+
+
+if ( $contact ) {
 	$interests = $contact->interests;
 	$status    = $contact->status;
-
 } else {
 	$interests = array();
 	$status    = 'pending';
