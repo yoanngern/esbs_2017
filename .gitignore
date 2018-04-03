@@ -8,8 +8,6 @@ wp-content/cache/
 wp-content/upgrade/
 wp-content/uploads/
 wp-content/wp-cache-config.php
-wp-content/plugins/
-wp-content/languages/
 
 /.htaccess
 /license.txt
@@ -17,5 +15,6 @@ wp-content/languages/
 /sitemap.xml
 /sitemap.xml.gz
 
-/.idea
+.DS_Store
 
+/.idea
