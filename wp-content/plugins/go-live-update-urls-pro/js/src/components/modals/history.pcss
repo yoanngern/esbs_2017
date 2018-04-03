@@ -1,0 +1,56 @@
+@import '../../globals/variables.pcss';
+@import '../../globals/media.pcss';
+
+
+.wrap {
+	display: table;
+	width: 100%
+}
+
+.empty{
+	width: 90%;
+	margin: 30px;
+}
+
+.old,.new, .date, .action{
+	display: table-cell;
+	padding: 5px 10px 10px;
+	width: 30%;
+}
+
+.action{
+	width: 15%;
+}
+
+.old {
+	@media( --mobile-width ) {
+		display: none;
+	}
+
+}
+
+.new {
+
+}
+
+.date {
+	width: 30%;
+	@media( --mobile-width ) {
+		display: none;
+	}
+}
+
+.header{
+	font-weight: bold;
+	font-size: 18px;
+	border-bottom: 2px solid var(--color-dark-grey) !important;
+	display: table-row;
+}
+
+.button{
+	margin: 20px auto 0 30px !important;
+}
+
+.loading{
+	composes: loading from './test-results.pcss';
+}

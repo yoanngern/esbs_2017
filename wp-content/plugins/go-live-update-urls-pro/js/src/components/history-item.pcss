@@ -1,0 +1,29 @@
+@import '../globals/variables.pcss';
+
+.wrap{
+	border-bottom: 1px solid var( --color-dark-grey );
+	&:nth-child(odd){
+		background: #f4f2f1;
+	}
+	&:nth-child(even){
+		background: white;
+	}
+	display: table-row;
+	width: 100%;
+}
+
+.old {
+composes : old from './modals/history.pcss'
+}
+
+.new {
+	composes : new from './modals/history.pcss'
+}
+
+.date {
+	composes : date from './modals/history.pcss'
+}
+
+.action{
+	composes : action from './modals/history.pcss'
+}

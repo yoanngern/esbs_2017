@@ -1,0 +1,37 @@
+@import "../globals/mixins.pcss";
+@import "../globals/media.pcss";
+.wrap{
+
+	th{
+		width: 100px;
+	}
+}
+
+.history{
+	position: relative;
+	@media( --third-breakpoint ){
+		text-align: center;
+	}
+	span, button{
+		float: none !important;
+		display: block;
+		width: 30px;
+		padding: 0 5px 5px !important;
+		font-size: 20px !important;
+		height: 30px !important;
+	}
+}
+
+.test{
+	composes : history;
+	.tooltip{
+		top: -57px;
+		@media( --third-breakpoint ){
+			top: -68px;
+		}
+	}
+}
+
+.tooltip{
+  @mixin flag #46b450;
+}

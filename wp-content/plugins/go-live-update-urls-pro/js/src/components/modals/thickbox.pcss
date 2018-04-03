@@ -1,0 +1,85 @@
+@import "../../globals/media.pcss";
+
+:root {
+	--title-height : 40px;
+}
+
+.overlay {
+	background : #000000;
+	opacity    : 0.7;
+	filter     : alpha(opacity=70);
+	position   : fixed;
+	top        : 0;
+	right      : 0;
+	bottom     : 0;
+	left       : 0;
+	z-index    : 100050;
+}
+
+.title {
+	background-color : transparent;
+	text-align       : center;
+	padding          : 7px;
+	height           : var( --title-height );
+	border-bottom    : 1px solid #dfdfdf;
+}
+
+.window {
+	position           : fixed;
+	background-color   : #ffffff;
+	z-index            : 100050;
+	visibility         : visible;
+	text-align         : center;
+	top                : 50%;
+	left               : 50%;
+	box-shadow         : 0 3px 6px rgba(0, 0, 0, 0.3);
+	border-radius      : 2px;
+	max-width: 100%;
+	@media( --second-breakpoint ){
+		width: 90% !important;
+		left: 5%;
+		top: 5%;
+		margin: 0 !important;
+	}
+}
+
+.window_title {
+	font-weight   : 600;
+	line-height   : 29px;
+	overflow      : hidden;
+	text-overflow : ellipsis;
+	white-space   : nowrap;
+	width         : calc(100% - 39px);
+	padding       : 0;
+	float         : none;
+	display       : inline-block;
+	font-size     : 1.5rem;
+}
+
+.close_icon {
+	color       : #666666;
+	text-align  : center;
+	line-height : 29px;
+	width       : 29px;
+	height      : 29px;
+	position    : absolute;
+	top         : 5px;
+	right       : 5px;
+	background  : none;
+}
+
+.close {
+	float : right;
+	a {
+		text-decoration : none;
+	}
+}
+
+.content {
+	width       : 100% !important;
+	padding     : 0;
+	overflow    : auto;
+	text-align  : left;
+	line-height : 1.4em;
+	height      : calc(100% - ( 5 + var( --title-height ) ));
+}

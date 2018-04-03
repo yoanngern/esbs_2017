@@ -1,0 +1,54 @@
+@import '../globals/media.pcss';
+.wrap{
+	margin: 5% 0;
+	font-size: 20px;
+	font-weight: bold;
+	position: relative;
+	line-height: 25px;
+	width: calc( 100% - 60px);
+	@media( --mobile-width ) {
+		font-size: 15px;
+		line-height: 18px;
+	}
+}
+
+.icon{
+	font-size: 50px;
+	top: 0;
+	right: -60px;
+	width: 50px;
+	height: 50px;
+	position: absolute;
+}
+
+.loading{
+	composes : loading from './modals/test-results.pcss';
+	composes : icon;
+	margin : 0;
+}
+
+.fix{
+	padding: 0 10px 1px !important;
+	font-weight: normal;
+	line-height: 20px !important;
+	height: 22px !important;
+	margin: 3px 0 0 10px !important;
+}
+
+.message{
+	@media( --mobile-width ) {
+		font-size: 10px !important;
+	}
+}
+
+.fail{
+	composes: warning from './elements/dashicons.pcss';
+}
+
+.pass{
+	color: green !important;
+}
+
+.unknown{
+	composes: editor-help from './elements/dashicons.pcss';
+}

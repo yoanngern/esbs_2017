@@ -1,0 +1,38 @@
+@import "../globals/media.pcss";
+
+@define-mixin flag $color {
+	background: #fff;
+	position: absolute;
+	padding: 8px 10px;
+	z-index: 99;
+	border-left: 4px solid #46b450;
+	border-right: 4px solid #46b450;
+	box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
+	left: -94px;
+	width: 210px;
+	top: -42px;
+	font-size: 12px;
+	@media( --third-breakpoint ){
+		margin-left: auto;
+		margin-right: auto;
+		left: -8px;
+		right: 0;
+		top: -52px;
+	}
+
+	&::after {
+		content      : "";
+		font-size    : 0;
+		line-height  : 0;
+		width        : 0;
+		display      : block;
+		border-right : 8px solid transparent;
+		border-left  : 8px solid transparent;
+		border-top   : 8px solid $color;
+		color        : $color;
+		position     : absolute;
+		bottom       : -7px;
+		left         : 50%;
+		margin-left  : -8px;
+	}
+}

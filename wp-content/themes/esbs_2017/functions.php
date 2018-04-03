@@ -18,9 +18,6 @@ add_action( 'wp_enqueue_scripts', 'themeslug_enqueue_style' );
 add_action( 'wp_enqueue_scripts', 'themeslug_enqueue_script' );
 
 
-//require_once( __DIR__ . '/options.php' );
-
-//require_once __DIR__ . '/vendor/Facebook/autoload.php'; // change path as needed
 
 
 require_once( __DIR__ . '/includes/esbs_harvest-cycle.php' );
