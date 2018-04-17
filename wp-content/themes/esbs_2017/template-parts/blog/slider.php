@@ -15,7 +15,7 @@ if ( is_category() ):
 	if ( get_field( 'subtitle', get_queried_object() ) ):
 		$subtitle = get_field( 'subtitle', get_queried_object() );
 	else:
-		$subtitle = pll__( 'Discover this subject' );
+		$subtitle = __( 'Discover this subject' );
 	endif;
 
 	$link = "";
@@ -24,7 +24,7 @@ if ( is_category() ):
 else:
 
 	$bg       = get_field( 'background', get_option( 'page_for_posts' ) );
-	$title    = pll__( 'ESBS Blog' );
+	$title    = __( 'ESBS Blog' );
 	$subtitle = get_field( 'title', get_option( 'page_for_posts' ) );
 	$link     = "";
 
@@ -120,7 +120,7 @@ if ( $bg ): ?>
                     </h1>
 
                     <a href="<?php echo get_permalink( $recent->ID ) ?>"
-                       class="button"><?php echo pll_e( 'Read this' ); ?></a>
+                       class="button"><?php echo __( 'Read this' ); ?></a>
                 </div>
 
                 <div class="bg"

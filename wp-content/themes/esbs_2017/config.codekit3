@@ -7,7 +7,7 @@
 		"uuidString": "35FCC746-D50B-47EC-8292-55E51DFD872E"
 		}
 	],
-"creatorBuild": "26330",
+"creatorBuild": "26680",
 "files": {
 	"\/404.php": {
 		"cB": 0,
@@ -593,6 +593,7 @@
 	"\/images\/bg_video.jpg": {
 		"ft": 16384,
 		"iS": 194224,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/images\/bg_video.jpg",
 		"oF": 0,
@@ -603,6 +604,7 @@
 	"\/images\/bg_video_2.jpg": {
 		"ft": 16384,
 		"iS": 144295,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/images\/bg_video_2.jpg",
 		"oF": 0,
@@ -1229,6 +1231,7 @@
 	"\/images\/share.jpg": {
 		"ft": 16384,
 		"iS": 103450,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/images\/share.jpg",
 		"oF": 0,
@@ -4151,13 +4154,6 @@
 		"sC": 1,
 		"tS": 0
 		},
-	"\/options.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/options.php",
-		"oF": 0
-		},
 	"\/page-custom.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -4925,16 +4921,6 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/css\/blog_wall.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/scss\/css\/blog_wall-min.css",
-		"oF": 0,
-		"oS": 3
-		},
 	"\/scss\/elementor\/slider.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -5173,545 +5159,6 @@
 		"oAP": "\/template-parts\/harvest-cycle\/single.php",
 		"oF": 0
 		},
-	"\/vendor\/Facebook\/Authentication\/AccessToken.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Authentication\/AccessToken.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Authentication\/AccessTokenMetadata.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Authentication\/AccessTokenMetadata.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Authentication\/OAuth2Client.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Authentication\/OAuth2Client.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/autoload.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/autoload.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Exceptions\/FacebookAuthenticationException.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Exceptions\/FacebookAuthenticationException.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Exceptions\/FacebookAuthorizationException.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Exceptions\/FacebookAuthorizationException.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Exceptions\/FacebookClientException.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Exceptions\/FacebookClientException.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Exceptions\/FacebookOtherException.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Exceptions\/FacebookOtherException.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Exceptions\/FacebookResponseException.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Exceptions\/FacebookResponseException.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Exceptions\/FacebookResumableUploadException.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Exceptions\/FacebookResumableUploadException.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Exceptions\/FacebookSDKException.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Exceptions\/FacebookSDKException.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Exceptions\/FacebookServerException.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Exceptions\/FacebookServerException.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Exceptions\/FacebookThrottleException.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Exceptions\/FacebookThrottleException.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Facebook.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Facebook.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/FacebookApp.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/FacebookApp.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/FacebookBatchRequest.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/FacebookBatchRequest.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/FacebookBatchResponse.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/FacebookBatchResponse.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/FacebookClient.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/FacebookClient.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/FacebookRequest.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/FacebookRequest.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/FacebookResponse.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/FacebookResponse.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/FileUpload\/FacebookFile.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/FileUpload\/FacebookFile.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/FileUpload\/FacebookResumableUploader.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/FileUpload\/FacebookResumableUploader.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/FileUpload\/FacebookTransferChunk.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/FileUpload\/FacebookTransferChunk.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/FileUpload\/FacebookVideo.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/FileUpload\/FacebookVideo.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/FileUpload\/Mimetypes.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/FileUpload\/Mimetypes.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/Birthday.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/Birthday.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/Collection.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/Collection.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphAchievement.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphAchievement.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphAlbum.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphAlbum.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphApplication.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphApplication.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphCoverPhoto.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphCoverPhoto.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphEdge.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphEdge.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphEvent.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphEvent.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphGroup.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphGroup.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphList.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphList.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphLocation.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphLocation.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphNode.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphNode.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphNodeFactory.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphNodeFactory.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphObject.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphObject.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphObjectFactory.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphObjectFactory.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphPage.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphPage.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphPicture.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphPicture.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphSessionInfo.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphSessionInfo.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/GraphNodes\/GraphUser.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/GraphNodes\/GraphUser.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Helpers\/FacebookCanvasHelper.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Helpers\/FacebookCanvasHelper.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Helpers\/FacebookJavaScriptHelper.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Helpers\/FacebookJavaScriptHelper.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Helpers\/FacebookPageTabHelper.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Helpers\/FacebookPageTabHelper.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Helpers\/FacebookRedirectLoginHelper.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Helpers\/FacebookRedirectLoginHelper.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Helpers\/FacebookSignedRequestFromInputHelper.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Helpers\/FacebookSignedRequestFromInputHelper.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Http\/GraphRawResponse.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Http\/GraphRawResponse.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Http\/RequestBodyInterface.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Http\/RequestBodyInterface.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Http\/RequestBodyMultipart.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Http\/RequestBodyMultipart.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Http\/RequestBodyUrlEncoded.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Http\/RequestBodyUrlEncoded.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/HttpClients\/certs\/DigiCertHighAssuranceEVRootCA.pem": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/HttpClients\/certs\/DigiCertHighAssuranceEVRootCA.pem",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/HttpClients\/FacebookCurl.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/HttpClients\/FacebookCurl.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/HttpClients\/FacebookCurlHttpClient.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/HttpClients\/FacebookCurlHttpClient.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/HttpClients\/FacebookGuzzleHttpClient.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/HttpClients\/FacebookGuzzleHttpClient.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/HttpClients\/FacebookHttpClientInterface.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/HttpClients\/FacebookHttpClientInterface.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/HttpClients\/FacebookStream.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/HttpClients\/FacebookStream.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/HttpClients\/FacebookStreamHttpClient.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/HttpClients\/FacebookStreamHttpClient.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/HttpClients\/HttpClientsFactory.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/HttpClients\/HttpClientsFactory.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/PersistentData\/FacebookMemoryPersistentDataHandler.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/PersistentData\/FacebookMemoryPersistentDataHandler.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/PersistentData\/FacebookSessionPersistentDataHandler.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/PersistentData\/FacebookSessionPersistentDataHandler.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/PersistentData\/PersistentDataFactory.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/PersistentData\/PersistentDataFactory.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/PersistentData\/PersistentDataInterface.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/PersistentData\/PersistentDataInterface.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/polyfills.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/polyfills.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/PseudoRandomString\/McryptPseudoRandomStringGenerator.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/PseudoRandomString\/McryptPseudoRandomStringGenerator.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/PseudoRandomString\/OpenSslPseudoRandomStringGenerator.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/PseudoRandomString\/OpenSslPseudoRandomStringGenerator.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/PseudoRandomString\/PseudoRandomStringGeneratorFactory.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/PseudoRandomString\/PseudoRandomStringGeneratorFactory.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/PseudoRandomString\/PseudoRandomStringGeneratorInterface.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/PseudoRandomString\/PseudoRandomStringGeneratorInterface.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/PseudoRandomString\/PseudoRandomStringGeneratorTrait.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/PseudoRandomString\/PseudoRandomStringGeneratorTrait.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/PseudoRandomString\/RandomBytesPseudoRandomStringGenerator.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/PseudoRandomString\/RandomBytesPseudoRandomStringGenerator.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/PseudoRandomString\/UrandomPseudoRandomStringGenerator.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/PseudoRandomString\/UrandomPseudoRandomStringGenerator.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/SignedRequest.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/SignedRequest.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Url\/FacebookUrlDetectionHandler.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Url\/FacebookUrlDetectionHandler.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Url\/FacebookUrlManipulator.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Url\/FacebookUrlManipulator.php",
-		"oF": 0
-		},
-	"\/vendor\/Facebook\/Url\/UrlDetectionInterface.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/vendor\/Facebook\/Url\/UrlDetectionInterface.php",
-		"oF": 0
-		},
 	"\/widgets\/complex-carousel.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -5735,7 +5182,8 @@
 	"creationDate": 508953428,
 	"displayValue": "ESBS 2017",
 	"displayValueWasSetByUser": 1,
-	"iconImageName": "meme-ive"
+	"iconImageName": "meme-ive",
+	"iconImageWasSetByUser": 0
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
@@ -7130,7 +6578,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http:\/\/summit.esbs.org",
+	"externalServerAddress": "http:\/\/esbs.org",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",
@@ -7538,6 +6986,7 @@
 		"autoOutputPathReplace1": "",
 		"autoOutputPathReplace2": "",
 		"autoOutputPathStyle": 0,
+		"outputFormat": 0,
 		"quality": 100
 		},
 	"languageDefaultsJS": {

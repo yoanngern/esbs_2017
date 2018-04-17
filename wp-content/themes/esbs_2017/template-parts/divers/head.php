@@ -69,8 +69,7 @@
     </script>
 	<?php wp_head(); ?>
 
-    <script type="text/javascript">window.liveSettings={api_key:"dfd7d9dcf27f46a38f7663ef99a997ff"}</script>
-    <script type="text/javascript" src="//cdn.transifex.com/live.js"></script>
+
 
 
     <script>

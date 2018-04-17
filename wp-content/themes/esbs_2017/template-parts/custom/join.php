@@ -41,7 +41,7 @@ $form_id  = get_field( 'join_form', $_POST );
 
     </article>
 
-    <a href="<?php echo pll_home_url(); ?>" class="home"><?php echo $button; ?></a>
+    <a href="<?php echo home_url(); ?>" class="home"><?php echo $button; ?></a>
 
     <div class="video">
         <video id="bgvid" autoplay loop muted plays-inline>

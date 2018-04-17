@@ -11,7 +11,7 @@ if ( $posts ) :
     <section class="related_posts">
 
         <div class="platter">
-            <h1><?php echo pll_e('You may also like'); ?></h1>
+            <h1><?php echo __('You may also like'); ?></h1>
 
             <div class="list">
 
@@ -85,7 +85,7 @@ if ( $posts ) :
                                     </div>
 	                            <?php endif; ?>
 
-                                <div class="button"><?php echo pll_e( 'Read' ); ?></div>
+                                <div class="button"><?php echo __( 'Read' ); ?></div>
                             </a>
 
                             <h2 class="entry-title"><a href="<?php echo $link; ?>" rel="bookmark"><?php echo $title; ?></a></h2>

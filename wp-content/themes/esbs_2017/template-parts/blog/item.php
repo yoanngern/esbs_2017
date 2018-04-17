@@ -74,7 +74,7 @@ switch ( $type ) {
 		<?php the_excerpt() ?>
 
         <div class="button"><a href="<?php echo esc_url( get_permalink() ) ?>"
-                               class="button"><?php pll_e( 'Read' ); ?></a></div>
+                               class="button"><?php echo __( 'Read' ); ?></a></div>
 
     </div>
 

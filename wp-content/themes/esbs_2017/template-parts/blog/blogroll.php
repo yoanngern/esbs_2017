@@ -18,7 +18,7 @@ if ( $posts != null ) :
     <section class="related_posts">
 
         <div class="platter">
-            <h1><?php echo pll_e( 'See more about this theme' ); ?></h1>
+            <h1><?php echo __( 'See more about this theme' ); ?></h1>
 
 
 			<?php
@@ -39,7 +39,7 @@ if ( $posts != null ) :
                             <figure style="background-image: url('<?php echo get_field_or_parent( 'thumb', $curr_post->ID )['sizes']['blog'] ?>')">
 
                             </figure>
-                            <div class="button"><?php echo pll_e( 'Read' ); ?></div>
+                            <div class="button"><?php echo __( 'Read' ); ?></div>
                         </a>
 
                         <h2>

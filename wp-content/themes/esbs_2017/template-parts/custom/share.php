@@ -4,9 +4,9 @@
 
     <article class="center">
 
-        <h1><?php echo pll_e('Spread the word'); ?></h1>
-        <h2><?php echo pll_e('Want to tell your friends about ESBS?'); ?></h2>
-        <h3><?php echo pll_e('Use these social images to spread the word on Facebook.'); ?></h3>
+        <h1><?php echo __('Spread the word'); ?></h1>
+        <h2><?php echo __('Want to tell your friends about ESBS?'); ?></h2>
+        <h3><?php echo __('Use these social images to spread the word on Facebook.'); ?></h3>
 
 
 		<?php if ( have_rows( 'posts' ) ): ?>
@@ -21,7 +21,7 @@
                            id="post_c"
                            target="_blank"
                            style="background-image: url('<?php echo get_sub_field( 'image' )['sizes']['hd']; ?>')">
-                            <span><?php echo pll_e('share'); ?></span>
+                            <span><?php echo __('share'); ?></span>
                             <div class="black"></div>
                         </a>
                     </div>

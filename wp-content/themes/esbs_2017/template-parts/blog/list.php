@@ -14,13 +14,13 @@
 
                 <div id="categories">
                     <div class="box">
-                        <span><?php pll_e( 'Latest from' ); ?></span>
-                        <span data-url="<?php echo pll_home_url(); ?>"
-                              id="current_act"><?php pll_e( 'All categories' ); ?></span>
+                        <span><?php echo __( 'Latest from' ); ?></span>
+                        <span data-url="<?php echo home_url(); ?>"
+                              id="current_act"><?php echo __( 'All categories' ); ?></span>
 						<?php
 
 						wp_dropdown_categories( array(
-							'show_option_all' => pll__( 'All categories' ),
+							'show_option_all' => __( 'All categories' ),
 							'value_field'     => 'slug',
 						) ); ?>
                     </div>
@@ -31,12 +31,12 @@
 
                 <div id="categories">
                     <div class="box">
-                        <span><?php pll_e( 'Latest from' ); ?></span>
-                        <span data-url="<?php echo pll_home_url(); ?>"
+                        <span><?php __( 'Latest from' ); ?></span>
+                        <span data-url="<?php echo home_url(); ?>"
                               id="current_act"><?php echo get_the_archive_title(); ?></span>
 						<?php
 						wp_dropdown_categories( array(
-							'show_option_all' => pll__( 'All categories' ),
+							'show_option_all' => __( 'All categories' ),
 							'value_field'     => 'slug',
 							'selected'        => get_queried_object()->slug
 						) ); ?>
@@ -49,8 +49,8 @@
                 <div class="outliner">
                     <div class="box">
                         <div class="icon"></div>
-                        <input data-url="<?php echo pll_home_url(); ?>" type="text" id="search_input"
-                               placeholder="<?php pll_e( 'Search in the blog' ); ?>"
+                        <input data-url="<?php echo home_url(); ?>" type="text" id="search_input"
+                               placeholder="<?php echo __( 'Search in the blog' ); ?>"
                                value="<?php echo get_search_query() ?>">
                     </div>
                 </div>

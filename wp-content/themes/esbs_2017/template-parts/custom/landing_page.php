@@ -53,7 +53,7 @@ if ( preg_match( "#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+|(?<=v=)[^&\n]+|(?<=
 
     </article>
 
-    <a href="<?php echo pll_home_url(); ?>" class="home"><?php echo $button; ?></a>
+    <a href="<?php echo home_url(); ?>" class="home"><?php echo $button; ?></a>
 
 	<?php if ( $video_bg ): ?>
 
