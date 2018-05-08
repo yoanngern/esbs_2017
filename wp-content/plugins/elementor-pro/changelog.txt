@@ -1,5 +1,20 @@
 # Elementor Pro - by Elementor.com
 
+#### 1.15.6 - 2018-03-28
+* Fix: Removed duplicate Custom CSS section ([#3938](https://github.com/pojome/elementor/issues/3938))
+* Fix: `box-shadow` issue with cards skin ([#3940](https://github.com/pojome/elementor/issues/3940))
+
+#### 1.15.5 - 2018-03-27
+* Fix: Added global widget compatibility for Elementor v2.0
+* Fix: Reduced API request for some servers
+
+#### 1.15.4 - 2018-03-26
+* Tweak: Allow brackets in phone field
+* Tweak: Added compatibility with Yoast 7.0.+
+* Tweak: Added compatibility for the future release of Elementor v2.0
+* Fix: Support for multiple carousel setting in editor
+* Fix: `on_export` issue in forms widget ([#3890](https://github.com/pojome/elementor/issues/3890))
+
 #### 1.15.3 - 2018-03-07
 * Tweak: Added unique class to field group div ([#3595](https://github.com/pojome/elementor/issues/3595))
 * Fix: Screen Options missing when Pro is active ([#3622](https://github.com/pojome/elementor/issues/3622))

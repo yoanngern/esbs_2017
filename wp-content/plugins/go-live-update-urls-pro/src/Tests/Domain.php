@@ -25,7 +25,7 @@ class Go_Live_Update_URLS_Pro_Tests_Domain extends Go_Live_Update_URLS_Pro_Tests
 		$this->result = true;
 
 		$site_url = site_url();
-		$parts = parse_url( $site_url );
+		$parts = wp_parse_url( $site_url );
 		//site_url() will not have a slash
 		$new_url = untrailingslashit( $this->new_url );
 		$old_url = untrailingslashit( $this->old_url );

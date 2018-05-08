@@ -3,9 +3,9 @@ Contributors: Mat Lipe
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40lipeimagination%2einfo&lc=US&item_name=Go%20Live%20Update%20Urls&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: Go Live, Urls, Domain Changes 
 Requires at least: 4.7.0
-Tested up to: 4.9.4
+Tested up to: 4.9.5
 Requires PHP: 5.2.4
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 
 == Description ==
 Go Live Update URLS Pro works along side the Go Live Update URLS plugin to add additional features and enhancements. If you live Go Live Update URLS, you'll LOVE Go Live Update URLS Pro.

@@ -1,4 +1,4 @@
-/*! elementor-pro - v1.15.3 - 07-03-2018 */
+/*! elementor-pro - v1.15.6 - 29-03-2018 */
 @charset "UTF-8";
 .elementor-bg-transform .elementor-bg {
   will-change: transform; }
@@ -679,8 +679,9 @@
 .elementor ul li.elementor-portfolio__filter {
   list-style-type: none; }
 
-.elementor-widget-posts .elementor-widget-container {
-  overflow: hidden; }
+@media (max-width: 767px) {
+  .elementor-widget-posts .elementor-widget-container {
+    overflow: hidden; } }
 
 .elementor-field-type-hidden {
   display: none; }
@@ -4174,10 +4175,6 @@ ul.elementor-nav-menu--dropdown a, ul.elementor-nav-menu--dropdown a:hover, ul.e
       font-family: inherit;
       opacity: 0.6; }
     .elementor-search-form__input:-ms-input-placeholder {
-      color: inherit;
-      font-family: inherit;
-      opacity: 0.6; }
-    .elementor-search-form__input::-moz-placeholder {
       color: inherit;
       font-family: inherit;
       opacity: 0.6; }

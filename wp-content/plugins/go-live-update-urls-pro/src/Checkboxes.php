@@ -40,7 +40,7 @@ class Go_Live_Update_URLS_Pro_Checkboxes {
 	/**
 	 * Retrieve the list of tables to update based on
 	 * which types are checked.
-	 * We we have no matching sections is it assumed we have an
+	 * If we have no matching sections is it assumed we have an
 	 * array of tables not sections and therefor return what we
 	 * started with.
 	 *

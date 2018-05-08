@@ -58,22 +58,6 @@ class Widget_Image_Carousel extends Widget_Base {
 	}
 
 	/**
-	 * Get widget categories.
-	 *
-	 * Retrieve the list of categories the image carousel widget belongs to.
-	 *
-	 * Used to determine where to display the widget in the editor.
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 *
-	 * @return array Widget categories.
-	 */
-	public function get_categories() {
-		return [ 'general-elements' ];
-	}
-
-	/**
 	 * Retrieve the list of scripts the image carousel widget depended on.
 	 *
 	 * Used to set scripts dependencies required to run the widget.
@@ -109,13 +93,15 @@ class Widget_Image_Carousel extends Widget_Base {
 				'label' => __( 'Add Images', 'elementor' ),
 				'type' => Controls_Manager::GALLERY,
 				'default' => [],
+				'show_label' => false,
 			]
 		);
 
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
-				'name' => 'thumbnail',
+				'name' => 'thumbnail', // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `thumbnail_size` and `thumbnail_custom_dimension`.
+				'separator' => 'none',
 			]
 		);
 
@@ -376,7 +362,7 @@ class Widget_Image_Carousel extends Widget_Base {
 		$this->add_control(
 			'arrows_position',
 			[
-				'label' => __( 'Arrows Position', 'elementor' ),
+				'label' => __( 'Position', 'elementor' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'inside',
 				'options' => [
@@ -392,7 +378,7 @@ class Widget_Image_Carousel extends Widget_Base {
 		$this->add_control(
 			'arrows_size',
 			[
-				'label' => __( 'Arrows Size', 'elementor' ),
+				'label' => __( 'Size', 'elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -412,7 +398,7 @@ class Widget_Image_Carousel extends Widget_Base {
 		$this->add_control(
 			'arrows_color',
 			[
-				'label' => __( 'Arrows Color', 'elementor' ),
+				'label' => __( 'Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .elementor-image-carousel-wrapper .slick-slider .slick-prev:before, {{WRAPPER}} .elementor-image-carousel-wrapper .slick-slider .slick-next:before' => 'color: {{VALUE}};',
@@ -438,7 +424,7 @@ class Widget_Image_Carousel extends Widget_Base {
 		$this->add_control(
 			'dots_position',
 			[
-				'label' => __( 'Dots Position', 'elementor' ),
+				'label' => __( 'Position', 'elementor' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'outside',
 				'options' => [
@@ -454,7 +440,7 @@ class Widget_Image_Carousel extends Widget_Base {
 		$this->add_control(
 			'dots_size',
 			[
-				'label' => __( 'Dots Size', 'elementor' ),
+				'label' => __( 'Size', 'elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -474,7 +460,7 @@ class Widget_Image_Carousel extends Widget_Base {
 		$this->add_control(
 			'dots_color',
 			[
-				'label' => __( 'Dots Color', 'elementor' ),
+				'label' => __( 'Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .elementor-image-carousel-wrapper .elementor-image-carousel .slick-dots li button:before' => 'color: {{VALUE}};',
@@ -634,7 +620,7 @@ class Widget_Image_Carousel extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings = $this->get_settings();
+		$settings = $this->get_settings_for_display();
 
 		if ( empty( $settings['carousel'] ) ) {
 			return;
@@ -654,11 +640,16 @@ class Widget_Image_Carousel extends Widget_Base {
 
 				$this->add_render_attribute( $link_key, [
 					'href' => $link['url'],
-					'class' => 'elementor-clickable',
 					'data-elementor-open-lightbox' => $settings['open_lightbox'],
 					'data-elementor-lightbox-slideshow' => $this->get_id(),
 					'data-elementor-lightbox-index' => $index,
 				] );
+
+				if ( Plugin::$instance->editor->is_edit_mode() ) {
+					$this->add_render_attribute( $link_key, [
+						'class' => 'elementor-clickable',
+					] );
+				}
 
 				if ( ! empty( $link['is_external'] ) ) {
 					$this->add_render_attribute( $link_key, 'target', '_blank' );
@@ -754,7 +745,7 @@ class Widget_Image_Carousel extends Widget_Base {
 	 * @return string The caption of the image.
 	 */
 	private function get_image_caption( $attachment ) {
-		$caption_type = $this->get_settings( 'caption_type' );
+		$caption_type = $this->get_settings_for_display( 'caption_type' );
 
 		if ( empty( $caption_type ) ) {
 			return '';
